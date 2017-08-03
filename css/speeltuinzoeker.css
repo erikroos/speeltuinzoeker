@@ -1,0 +1,36 @@
+body { 
+	padding-top: 70px;
+}
+
+#map-div-edit {
+	height: 300px;
+	width: 300px;
+}
+
+div.checkbox {
+	margin-bottom: 20px;
+}
+
+#place-marker {
+	margin-bottom: 20px;
+}
+
+.photobar {
+	/*height: 50px;*/
+}
+.photobar img {
+	/*float: left;*/
+	max-height: 50px;
+}
+
+.buttonbar {
+	margin-bottom: 100px;
+}
+
+.error {
+	color: red;
+}
+
+p.notice {
+	background: yellow; /* TODO */
+}
