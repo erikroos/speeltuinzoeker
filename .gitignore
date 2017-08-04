@@ -1,3 +1,5 @@
 # Ignored files
 cfg/config.php
 /.project
+/.settings
+/.buildpath
