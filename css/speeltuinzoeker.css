@@ -4,8 +4,17 @@ body {
 
 /* Kaart op home */
 #map-div {
+	clear: both;
 	height: 600px;
 	width: 100%;
+}
+#searchbar #locatie_omschrijving {
+	width: 80%;
+	float: left;
+}
+#searchbar #place-marker {
+	width: 20%;
+	float: left;
 }
 
 /* Kaart op editscherm */
