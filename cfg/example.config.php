@@ -22,3 +22,5 @@ $adminMail = "admin@admin.nl";
 
 define("MAX_NR_OF_PHOTOS", 3);
 define("MAX_PHOTO_DIM", 600);
+
+define("MAPS_API_KEY", "MyKey");
