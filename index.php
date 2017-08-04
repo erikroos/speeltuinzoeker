@@ -37,7 +37,7 @@
 	</nav>
 	
     <div class="container">
-		<h1>Speeltuinzoeker.nl</h1>
+        <h1>Speeltuinzoeker.nl</h1>
 		<h2>Laat ze spelen!</h2>
 		<p>Hier komt <strong>speeltuinzoeker.nl</strong><br>
 		dé (mobiele) website om snel en makkelijk een speeltuin in de buurt te kunnen vinden.</p>
@@ -48,6 +48,11 @@
 			<li>staan de gebruikers centraal: voor elkaar, door elkaar</li>
 		</ul>
 	</div>
+
+    <div id="map-div"></div>
+    <label for="omschrijving">Zoek</label>
+    <textarea id="locatie_omschrijving" name="locatie_omschrijving" rows="1" maxlength="1000" class="form-control"></textarea>
+    <button id="place-marker" value="Zet marker op omschreven locatie" class="btn btn-default">Zet marker op omschreven locatie</button>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -63,5 +68,90 @@
 		r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
 		ga('create','UA-102474826-1','auto');ga('send','pageview');
 	</script>
+
+    <!-- Map -->
+    <script>
+        var map;
+        var marker;
+
+        function initMap() {
+            var infoWindow;
+
+            map = new google.maps.Map(document.getElementById('map-div'), {
+                zoom: 15
+            });
+
+            marker = new google.maps.Marker({
+                map: map,
+                draggable: true
+            });
+
+            marker.addListener('dragend', function() {
+                var lat = marker.getPosition().lat();
+                var lng = marker.getPosition().lng();
+                //$('#lat').val(lat);
+                //$('#lon').val(lng);
+            });
+
+            //map.addListener('bounds_changed', function() {
+            //	var newBounds = map.getBounds();
+            //	var NE = newBounds.getNorthEast();
+            //	var SW = newBounds.getSouthWest();
+            //	document.getElementById('map-info').innerHTML = "Bounding box: NE " + NE.toString() + " SW " + SW.toString();
+            //});
+
+            infoWindow = new google.maps.InfoWindow;
+
+            // In eerste instantie op huidige locatie zetten. Try HTML5 geolocation.
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(currentPosition) {
+                    var pos = {
+                        lat: currentPosition.coords.latitude,
+                        lng: currentPosition.coords.longitude
+                    };
+                    //infoWindow.setPosition(pos);
+                    //infoWindow.setContent('Locatie gevonden.');
+                    //infoWindow.open(map);
+                    map.setCenter(pos);
+                    marker.setPosition(pos);
+                    //$('#lat').val(currentPosition.coords.latitude);
+                    //$('#lon').val(currentPosition.coords.longitude);
+                }, function() {
+                    handleLocationError(true, infoWindow, map.getCenter());
+                });
+            } else {
+                // Browser doesn't support Geolocation
+                handleLocationError(false, infoWindow, map.getCenter());
+            }
+        }
+
+        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+            infoWindow.setPosition(pos);
+            infoWindow.setContent(browserHasGeolocation ?
+                'Fout: Geolocatie is mislukt.' :
+                'Fout: Uw browser ondersteunt geen geolocatie.');
+            infoWindow.open(map);
+        }
+
+        $('#place-marker').click(function() {
+            event.preventDefault();
+            $.get(
+                "https://maps.googleapis.com/maps/api/geocode/json?address=" + $('#locatie_omschrijving').val() + "&key=AIzaSyCXVNGEew5BT-iv9th2jqc4-QejCJxhoRk",
+                function(data) {
+                    var lat = data.results[0].geometry.location.lat;
+                    var lng = data.results[0].geometry.location.lng;
+                    var pos = {
+                        lat: lat,
+                        lng: lng
+                    };
+                    map.setCenter(pos);
+                    marker.setPosition(pos);
+                    //$('#lat').val(lat);
+                    //$('#lon').val(lng);
+                }
+            );
+        });
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=<?php echo MAPS_API_KEY; ?>&callback=initMap"></script>
   </body>
 </html>

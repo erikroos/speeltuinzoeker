@@ -213,7 +213,7 @@ include_once "./inc/header.php";
 	});
     
 </script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCXVNGEew5BT-iv9th2jqc4-QejCJxhoRk&callback=initMap"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=<?php echo MAPS_API_KEY; ?>&callback=initMap"></script>
 
 <?php
 include_once "./inc/footer.php";

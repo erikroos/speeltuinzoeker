@@ -2,6 +2,13 @@ body {
 	padding-top: 70px;
 }
 
+/* Kaart op home */
+#map-div {
+	height: 600px;
+	width: 100%;
+}
+
+/* Kaart op editscherm */
 #map-div-edit {
 	height: 300px;
 	width: 300px;
