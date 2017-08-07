@@ -1,4 +1,4 @@
-body { 
+body {
 	padding-top: 70px;
 }
 
@@ -8,10 +8,12 @@ body {
 	height: 600px;
 	width: 100%;
 }
+
 #searchbar #locatie_omschrijving {
 	width: 80%;
 	float: left;
 }
+
 #searchbar #place-marker {
 	width: 20%;
 	float: left;
@@ -33,7 +35,9 @@ div.checkbox {
 
 .photobar {
 	/*height: 50px;*/
+	
 }
+
 .photobar img {
 	/*float: left;*/
 	max-height: 50px;
@@ -49,4 +53,14 @@ div.checkbox {
 
 p.notice {
 	background: yellow; /* TODO */
+}
+
+.detail-photobar img {
+	/*float: left;*/
+	max-height: 300px;
+}
+
+#mini-map {
+	height: 300px;
+	width: 300px;
 }

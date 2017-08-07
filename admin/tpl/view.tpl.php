@@ -1,4 +1,4 @@
-<?php 
+<?php
 $title = "Mijn Speeltuinzoeker - bekijk en beheer";
 include_once "./inc/header.php";
 ?>
@@ -10,18 +10,22 @@ include_once "./inc/header.php";
 </p>
 
 <?php if (isset($_SESSION["feedback"])): ?>
-	<p class="notice"><?php echo $_SESSION["feedback"]; ?></p>
-	<?php unset($_SESSION["feedback"]); ?>
+<p class="notice"><?php echo $_SESSION["feedback"]; ?></p>
+<?php unset($_SESSION["feedback"]); ?>
 <?php endif; ?>
 
 <div>
 	<span class="pager">
 		<ul>
-			<li><a href="view.php?<?php echo $isUser ? "user" : "status=" . $status; ?>&start=0&size=<?php echo $size; ?>">Eerste <?php echo $size; ?></a></li>
-			<li><a href="view.php?<?php echo $isUser ? "user" : "status=" . $status; ?>&start=<?php echo max(0, ($start - $size)); ?>&size=<?php echo $size; ?>">&lt;</a></li>
+			<li><a
+				href="view.php?<?php echo $isUser ? "user" : "status=" . $status; ?>&start=0&size=<?php echo $size; ?>">Eerste <?php echo $size; ?></a></li>
+			<li><a
+				href="view.php?<?php echo $isUser ? "user" : "status=" . $status; ?>&start=<?php echo max(0, ($start - $size)); ?>&size=<?php echo $size; ?>">&lt;</a></li>
 			<li><?php echo $start + 1; ?> - <?php echo min($totalSize, ($start + $size)); ?> van <?php echo $totalSize; ?></a></li>
-			<li><a href="view.php?<?php echo $isUser ? "user" : "status=" . $status; ?>&start=<?php $newStart = min($totalSize, ($start + $size)); echo ($newStart - ($newStart % $size)); ?>&size=<?php echo $size; ?>">&gt;</a></li>
-			<li><a href="view.php?<?php echo $isUser ? "user" : "status=" . $status; ?>&start=<?php $newStart = ($totalSize - $size); echo ($newStart - ($newStart % $size)); ?>&size=<?php echo $size; ?>">Laatste <?php echo $size; ?></a></li>
+			<li><a
+				href="view.php?<?php echo $isUser ? "user" : "status=" . $status; ?>&start=<?php $newStart = min($totalSize, ($start + $size)); echo ($newStart - ($newStart % $size)); ?>&size=<?php echo $size; ?>">&gt;</a></li>
+			<li><a
+				href="view.php?<?php echo $isUser ? "user" : "status=" . $status; ?>&start=<?php $newStart = ($totalSize - $size); echo ($newStart - ($newStart % $size)); ?>&size=<?php echo $size; ?>">Laatste <?php echo $size; ?></a></li>
 		</ul>
 	</span>
 </div>
@@ -63,9 +67,13 @@ include_once "./inc/header.php";
 							<a href="./edit.php?id=<?php echo $row["id"]; ?>">Bekijk</a>
 						<?php endif; ?>
 					<?php endif; ?>
+				
+				
 				<td>
 				<?php if ($isUser): ?>
-					<td><a href="photo.php?id=<?php echo $row["id"]; ?>">Foto's</a></td>
+					
+				
+				<td><a href="photo.php?id=<?php echo $row["id"]; ?>">Foto's</a></td>
 				<?php endif; ?>
 			</tr>
 		<?php endforeach; ?>

@@ -7,8 +7,8 @@ $email = "";
 $password = "";
 $showForm = true;
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
+if ($_SERVER ['REQUEST_METHOD'] == 'POST') {
+	
 	$db = new Db();
 	$db->connect();
 	$auth = new Auth($db);
@@ -18,24 +18,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$password = get_request_value("password", "");
 	
 	if (!empty($name) && !empty($email) && !empty($password)) {
-		
 		// TODO validiteit van variabelen controleren
-		
-		if (!$auth->userExists($email)) {
-			
-			$auth->createNewAccount($name, $email, $password, $salt);
-		
+		if (!$auth->userExists ($email)) {
+			$auth->createNewAccount ($name, $email, $password);
 			$feedback = "Aanmelden gelukt! Je ontvangt nu een e-mail met instructies om je aanmelding te activeren.";
 			$showForm = false;
-		
 		} else {
 			$feedback = "Er is al een gebruiker met dit e-mailadres.";
 		}
-		
 	} else {
 		$feedback = "Vul alle velden in.";
 	}
-	
 }
-	
+
 include "tpl/register.tpl.php";

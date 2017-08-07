@@ -2,15 +2,15 @@
 require_once "../cfg/config.php";
 require_once "./inc/functions.php";
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER ['REQUEST_METHOD'] == 'POST') {
 	
 	$db = new Db();
 	$db->connect();
 	$auth = new Auth($db);
 	
-	if ($auth->login($_POST["login"], $_POST["password"], $salt)) {
-		header("Location: index.php");
-		exit;
+	if ($auth->login($_POST["login"], $_POST["password"])) {
+		header ( "Location: index.php" );
+		exit ();
 	}
 	
 	$feedback = "Ongeldige inloggegevens.";

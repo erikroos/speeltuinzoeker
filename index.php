@@ -1,60 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Speeltuinzoeker.nl - Laat ze spelen!</title>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>Speeltuinzoeker.nl - Laat ze spelen!</title>
 
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-	
-	<link href="css/speeltuinzoeker.css" rel="stylesheet">
+<!-- Bootstrap -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+<link href="css/speeltuinzoeker.css" rel="stylesheet">
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-	
-	<!-- AdSense ACTIVATE WHEN READY -->
-	<!--script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+<!-- AdSense ACTIVATE WHEN READY -->
+<!--script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 	<script>
 	  (adsbygoogle = window.adsbygoogle || []).push({
 		google_ad_client: "ca-pub-6261352840965150",
 		enable_page_level_ads: true
 	  });
 	</script-->
-	
-  </head>
-  <body>
-	<nav class="navbar navbar-default navbar-fixed-top">
-		<div class="container-fluid">
-			<a href="./index.php">Home</a>
-			<a href="./admin/index.php">Mijn Speeltuinzoeker</a>
-			<a href="./about.php">Over Speeltuinzoeker</a>
-		</div>
-	</nav>
+
+</head>
+<body>
+	<?php include "tpl/topbar.tpl.php"; ?>
 	
     <div class="container">
-        <h1>Speeltuinzoeker.nl</h1>
+		<h1>Speeltuinzoeker.nl</h1>
 		<h2>Laat ze spelen!</h2>
 
 		<div id="searchbar">
-    		<textarea id="locatie_omschrijving" name="locatie_omschrijving" rows="1" maxlength="1000" class="form-control"></textarea>
-    		<button id="place-marker" value="Zet marker op omschreven locatie" class="btn btn-default">Zoek locatie</button>
+			<textarea id="locatie_omschrijving" name="locatie_omschrijving"
+				rows="1" maxlength="1000" class="form-control"></textarea>
+			<button id="place-marker" value="Zet marker op omschreven locatie"
+				class="btn btn-default">Zoek locatie</button>
 		</div>
-		
+
 		<div id="map-div"></div>
 	</div>
-	
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
-	
+
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="js/bootstrap.min.js"></script>
+
 	<!-- Google Analytics -->
 	<script>
 		(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
@@ -65,8 +61,9 @@
 		ga('create','UA-102474826-1','auto');ga('send','pageview');
 	</script>
 
-    <!-- Map -->
-    <script>
+	<!-- Map -->
+	<?php include_once "./_map.php"; ?>
+	<script>
         var map;
         
         function initMap() {
@@ -76,7 +73,6 @@
                 zoom: 15
             });
 
-            <?php include_once "./_map.php"; ?>
             <?php $markerNr = 0; ?>
             <?php foreach ($speeltuinen as $speeltuin): ?>
 	            var marker<?php echo $markerNr; ?> = new google.maps.Marker({
@@ -87,7 +83,9 @@
 	                    lng: <?php echo $speeltuin["lon"]; ?>
 	                };
 	            marker<?php echo $markerNr; ?>.setPosition(pos<?php echo $markerNr; ?>);
-	            var contentString<?php echo $markerNr; ?> = "<?php echo $speeltuin["naam"]; // TODO ?>";
+	            var contentString<?php echo $markerNr; ?> = "<h4><?php echo $speeltuin["naam"]; ?></h4>" +
+	    	            "<p><?php echo $speeltuin["omschrijving"]; ?></p>" +
+	    	            "<p><a href='detail.php?speeltuin=<?php echo $speeltuin["id"]; ?>'>Meer</a>";
 	            var infowindow<?php echo $markerNr; ?> = new google.maps.InfoWindow({
 	                content: contentString<?php echo $markerNr; ?>
 	            });
@@ -106,29 +104,43 @@
 
             infoWindow = new google.maps.InfoWindow;
 
-            // In eerste instantie op huidige locatie zetten. Try HTML5 geolocation.
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(currentPosition) {
-                    var pos = {
-                        lat: currentPosition.coords.latitude,
-                        lng: currentPosition.coords.longitude
-                    };
-                    map.setCenter(pos);
-                }, function() {
-                    handleLocationError(true, infoWindow, map.getCenter());
-                });
-            } else {
-                // Browser doesn't support Geolocation
-                handleLocationError(false, infoWindow, map.getCenter());
-            }
+            <?php if ($fromSpeeltuin): ?>
+	            var fromPos = {
+	                    lat: <?php echo $lat; ?>,
+	                    lng: <?php echo $lon; ?>
+	            };
+	            map.setCenter(fromPos);
+            <?php else: ?>
+	            // In eerste instantie op huidige locatie zetten. Try HTML5 geolocation.
+	            if (navigator.geolocation) {
+	                navigator.geolocation.getCurrentPosition(function(currentPosition) {
+	                    var pos = {
+	                        lat: currentPosition.coords.latitude,
+	                        lng: currentPosition.coords.longitude
+	                    };
+	                    map.setCenter(pos);
+	                }, function() {
+	                    handleLocationError(true, infoWindow, map.getCenter());
+	                });
+	            } else {
+	                // Browser doesn't support Geolocation
+	                handleLocationError(false, infoWindow, map.getCenter());
+	            }
+            <?php endif; ?>
         }
 
         function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-            infoWindow.setPosition(pos);
-            infoWindow.setContent(browserHasGeolocation ?
-                'Fout: geolocatie is mislukt.' :
-                'Fout: uw browser ondersteunt geen geolocatie.');
-            infoWindow.open(map);
+//             infoWindow.setPosition(pos);
+//             infoWindow.setContent(browserHasGeolocation ?
+//                 'Fout: geolocatie is mislukt.' :
+//                 'Fout: uw browser ondersteunt geen geolocatie.');
+//             infoWindow.open(map);
+			// Silent decay
+        	var backupPos = { // Grote Markt Grunnen
+                    lat: 53.218721,
+                    lng: 6.567633
+            };
+            map.setCenter(backupPos);
         }
 
         $('#place-marker').click(function() {
@@ -145,7 +157,8 @@
             );
         });
     </script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=<?php echo MAPS_API_KEY; ?>&callback=initMap"></script>
-  
-  </body>
+	<script async defer
+		src="https://maps.googleapis.com/maps/api/js?key=<?php echo MAPS_API_KEY; ?>&callback=initMap"></script>
+
+</body>
 </html>

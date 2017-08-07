@@ -1,26 +1,10 @@
 <?php
 class Db {
-	private $dbHost = null;
-	private $dbUser = null;
-	private $dbPass = null;
-	private $dbName = null;
 	private $link = null;
 	
 	public function connect() {
 		if ($this->link == null) {
-			if (gethostname() == 'Eriks_DellXPS') {
-				$this->dbHost = 'localhost';
-				$this->dbUser = 'root';
-				$this->dbPass = '';
-				$this->dbName = 'speeltuinzoeker';
-			} else {
-				// TODO!
-				$this->dbHost = 'localhost';
-				$this->dbUser = '';
-				$this->dbPass = '';
-				$this->dbName = 'speeltuinzoeker';
-			}
-			$this->link = mysqli_connect($this->dbHost, $this->dbUser, $this->dbPass, $this->dbName);
+			$this->link = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 		}
 		return $this->link;
 	}

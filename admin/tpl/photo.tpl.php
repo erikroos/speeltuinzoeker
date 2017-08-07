@@ -28,9 +28,7 @@ include_once "./inc/header.php";
 
 <form method="post" action="photo.php" enctype="multipart/form-data">
 
-	<input type="hidden" id="id" name="id" value="<?php echo $id; ?>" />
-	
-	<label>Spelregels</label>
+	<input type="hidden" id="id" name="id" value="<?php echo $id; ?>" /> <label>Spelregels</label>
 	<ul>
 		<li>Bestandsformaat JP(E)G of PNG.</li>
 		<li>Foto's worden tijdens het uploaden indien nodig verkleind totdat de langste kant <?php echo MAX_PHOTO_DIM; ?> pixels is.</li>
@@ -40,20 +38,20 @@ include_once "./inc/header.php";
 	</ul>
 
 	<label>Bestaande foto's</label>
-	<div class="photobar" id="photobar">
-	</div>
-	
+	<div class="photobar" id="photobar"></div>
+
 	<div class="form-group">
-		<label for="fotos">Upload foto('s)</label>
-		<input id="fotos" name="fotos[]" type="file" multiple class="file-loading" />
+		<label for="fotos">Upload foto('s)</label> <input id="fotos"
+			name="fotos[]" type="file" multiple class="file-loading" />
 	</div>
-	
+
 	<hr>
 	<div class="buttonbar">
-		<input type="submit" name="Submit" value="Opslaan" class="btn btn-default" />
-		<input id="cancel" type="button" value="Terug" class="btn btn-default" />
+		<input type="submit" name="Submit" value="Opslaan"
+			class="btn btn-default" /> <input id="cancel" type="button"
+			value="Terug" class="btn btn-default" />
 	</div>
-	
+
 </form>
 
 <script>
