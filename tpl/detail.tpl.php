@@ -28,16 +28,14 @@
 		<h1>Speeltuinzoeker.nl</h1>
 		<h2>Laat ze spelen!</h2>
 
-		<span class="back-btn"><a
-			href="index.php?speeltuin=<?php echo $id; ?>">Terug</a></span>
+		<span class="back-btn"><a href="index.php?speeltuin=<?php echo $id; ?>">Terug</a></span>
 		<h3><?php echo $speeltuin->getName(); ?></h3>
 		<p><?php echo $speeltuin->getDescription(); ?></p>
 
-		<div class="detail-photobar"
+		<div class="detail-photobar">
 			<?php foreach ($speeltuin->getPhotos() as $photo): ?>
-			
-			<img src="<?php echo $photo; ?>" alt="Foto van deze speeltuin" />
-		<?php endforeach; ?>
+			    <img src="<?php echo $photo; ?>" alt="Foto van deze speeltuin" />
+		    <?php endforeach; ?>
 		</div>
 
 		<div class="voorzieningen">

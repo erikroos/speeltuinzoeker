@@ -1,12 +1,58 @@
 <?php
-class Speeltuin {
-	private $db;
-	private $id;
-	
-	function __construct($db = null, $id = 0) {
-		$this->db = $db;
-		$this->id = $id;
-	}
+class Speeltuin
+{
+    private $db;
+    private $id;
+
+    function __construct($db = null, $id = 0)
+    {
+        $this->db = $db;
+        $this->id = $id;
+    }
+
+    // Functions that don't need ID:
+
+    public function getAllSpeeltuinen() {
+        $allSpeeltuinen = [];
+        $res = $this->db->query("SELECT * FROM speeltuin WHERE status_id = 1");
+        while ($row = $res->fetch_assoc()) {
+            $allSpeeltuinen[] = $row;
+        }
+        return $allSpeeltuinen;
+    }
+
+    public function getAllVoorzieningen() {
+        $allVoorzieningen = [];
+        $res = $this->db->query("SELECT id, naam FROM voorziening ORDER BY naam");
+        if ($res !== false) {
+            while ($row = $res->fetch_assoc()) {
+                $allVoorzieningen[$row["id"]] = $row["naam"];
+            }
+        }
+        return $allVoorzieningen;
+    }
+
+    public function getTotalNr() {
+	    $res = $this->db->query("SELECT COUNT(*) AS totNr FROM speeltuin WHERE status_id = 1");
+        if ($res !== false) {
+            if ($row = $res->fetch_assoc()) {
+                return $row["totNr"];
+            }
+        }
+	    return 0;
+    }
+
+    public function getLatestEntry() {
+        $res = $this->db->query("SELECT * FROM speeltuin ORDER BY id DESC LIMIT 1");
+        if ($res !== false) {
+            if ($row = $res->fetch_assoc()) {
+                return $row;
+            }
+        }
+        return null;
+    }
+
+    // Instance functions:
 	
 	public function getId() {
 		return $this->id;
@@ -27,6 +73,7 @@ class Speeltuin {
 		}
 		return "";
 	}
+
 	public function getLatitude() {
 		$res = $this->db->query ( sprintf ( "SELECT lat FROM speeltuin WHERE id = %d", $this->id ) );
 		if ($row = $res->fetch_assoc ()) {
@@ -34,6 +81,7 @@ class Speeltuin {
 		}
 		return "";
 	}
+
 	public function getLongitude() {
 		$res = $this->db->query ( sprintf ( "SELECT lon FROM speeltuin WHERE id = %d", $this->id ) );
 		if ($row = $res->fetch_assoc ()) {
@@ -41,6 +89,7 @@ class Speeltuin {
 		}
 		return "";
 	}
+
 	public function getLocationDescription() {
 		$res = $this->db->query ( sprintf ( "SELECT locatie_omschrijving FROM speeltuin WHERE id = %d", $this->id ) );
 		if ($row = $res->fetch_assoc ()) {
@@ -48,6 +97,7 @@ class Speeltuin {
 		}
 		return "";
 	}
+
 	public function getAuthor() {
 		$res = $this->db->query ( sprintf ( "SELECT author_id FROM speeltuin WHERE id = %d", $this->id ) );
 		if ($res !== false) {
@@ -57,22 +107,15 @@ class Speeltuin {
 		}
 		return 0;
 	}
-	public function getAllVoorzieningen() {
-		$allVoorzieningen = array ();
-		$res = $this->db->query ( "SELECT id, naam FROM voorziening ORDER BY naam" );
-		if ($res !== false) {
-			while ( $row = $res->fetch_assoc () ) {
-				$allVoorzieningen [$row ["id"]] = $row ["naam"];
-			}
-		}
-		return $allVoorzieningen;
-	}
+
 	public function activate() {
 		$this->db->query ( sprintf ( "UPDATE speeltuin SET status_id = 1 WHERE id = %d", $this->id ) );
 	}
+
 	public function deactivate() {
 		$this->db->query ( sprintf ( "UPDATE speeltuin SET status_id = 2 WHERE id = %d", $this->id ) );
 	}
+
 	public function insertOrUpdate($name, $omschrijving, $locatieOmschrijving, $lat, $lon) {
 		if ($this->id == 0) {
 			$this->db->query ( sprintf ( "INSERT INTO speeltuin (naam, omschrijving, locatie_omschrijving, lat, lon, status_id, author_id)
@@ -85,6 +128,7 @@ class Speeltuin {
 		}
 		return $this->id;
 	}
+
 	public function getVoorzieningen() {
 		$selectedVoorzieningen = [ ];
 		$res = $this->db->query ( sprintf ( "SELECT voorziening_id FROM speeltuin_voorziening WHERE speeltuin_id = %d", $this->id ) );
@@ -95,6 +139,7 @@ class Speeltuin {
 		}
 		return $selectedVoorzieningen;
 	}
+
 	public function setVoorzieningen($postVars) {
 		$this->db->query ( sprintf ( "DELETE FROM speeltuin_voorziening WHERE speeltuin_id = %d", $this->id ) );
 		foreach ( $this->getAllVoorzieningen () as $voorzieningId => $voorzieningNaam ) {
@@ -104,6 +149,7 @@ class Speeltuin {
 			}
 		}
 	}
+
 	public function getFields() {
 		$res = $this->db->query ( sprintf ( "SELECT * FROM speeltuin WHERE id = %d", $this->id ) );
 		if ($res !== false) {
@@ -127,6 +173,7 @@ class Speeltuin {
 				0 
 		);
 	}
+
 	public function getPhotos() {
 		$photos = [ ];
 		$res = $this->db->query ( sprintf ( "SELECT url FROM bestand
@@ -137,6 +184,7 @@ class Speeltuin {
 		}
 		return $photos;
 	}
+
 	public function addPhoto($photoName) {
 		$this->db->query ( sprintf ( "INSERT INTO bestand (naam, full_path, url, extensie)
 									VALUES (\"%s\", \"%s\", \"%s\", \"png\")", $photoName, MEDIA_PATH . $photoName, MEDIA_URL . $photoName ) );
@@ -144,6 +192,7 @@ class Speeltuin {
 		$this->db->query ( sprintf ( "INSERT INTO speeltuin_bestand (speeltuin_id, bestand_id)
 									VALUES (%d, %d)", $this->id, $bestandId ) );
 	}
+
 	public function removePhoto($photoName) {
 		$res = $this->db->query ( sprintf ( "SELECT id FROM bestand WHERE naam = \"%s\"", $photoName ) );
 		if ($res !== false) {
@@ -153,6 +202,7 @@ class Speeltuin {
 			}
 		}
 	}
+
 	public function setStatus($statusId) {
 		$this->db->query ( sprintf ( "UPDATE speeltuin SET status_id = %d WHERE id = %d", $statusId, $this->id ) );
 	}

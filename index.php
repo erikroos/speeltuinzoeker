@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-<title>Speeltuinzoeker.nl - Laat ze spelen!</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Speeltuinzoeker.nl - Laat ze spelen!</title>
 
-<!-- Bootstrap -->
-<link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
-<link href="css/speeltuinzoeker.css" rel="stylesheet">
+    <link href="css/speeltuinzoeker.css" rel="stylesheet">
 
-<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-<!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+          <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
 
-<!-- AdSense ACTIVATE WHEN READY -->
-<!--script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- AdSense ACTIVATE WHEN READY -->
+    <!--script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 	<script>
 	  (adsbygoogle = window.adsbygoogle || []).push({
 		google_ad_client: "ca-pub-6261352840965150",
@@ -35,6 +35,18 @@
     <div class="container">
 		<h1>Speeltuinzoeker.nl</h1>
 		<h2>Laat ze spelen!</h2>
+
+        <?php include "_latest.php"; ?>
+        <div id="latestbox">
+            <p>Er zijn al <?php echo $totalNr; ?> speeltuinen!</p>
+            <?php if ($latestSpeeltuin != null): ?>
+                <p>
+                    De nieuwste: <?php echo $latestSpeeltuin["naam"]; ?><br>
+                    <?php echo $latestSpeeltuin["locatie_omschrijving"]; ?><br>
+                    <a href="detail.php?speeltuin=<?php echo $latestSpeeltuin["id"]; ?>">Meer</a>
+                </p>
+            <?php endif; ?>
+        </div>
 
 		<div id="searchbar">
 			<textarea id="locatie_omschrijving" name="locatie_omschrijving"
@@ -104,10 +116,10 @@
 
             infoWindow = new google.maps.InfoWindow;
 
-            <?php if ($fromSpeeltuin): ?>
+            <?php if ($fromSpeeltuin != null): ?>
 	            var fromPos = {
-	                    lat: <?php echo $lat; ?>,
-	                    lng: <?php echo $lon; ?>
+	                lat: <?php echo $fromSpeeltuin->getLatitude(); ?>,
+                    lng: <?php echo $fromSpeeltuin->getLongitude(); ?>
 	            };
 	            map.setCenter(fromPos);
             <?php else: ?>
