@@ -33,8 +33,10 @@
 	<?php include "tpl/topbar.tpl.php"; ?>
 	
     <div class="container">
-		<h1>Speeltuinzoeker.nl</h1>
-		<h2>Laat ze spelen!</h2>
+    	<div class="logo">
+			<h1>Speeltuinzoeker.nl</h1>
+			<h2>Laat ze spelen!</h2>
+		</div>
 
         <?php include "_latest.php"; ?>
         <div id="latestbox">
@@ -42,7 +44,7 @@
             <?php if ($latestSpeeltuin != null): ?>
                 <p>
                     De nieuwste: <?php echo $latestSpeeltuin["naam"]; ?><br>
-                    <?php echo $latestSpeeltuin["locatie_omschrijving"]; ?><br>
+                    <?php if (!empty($latestSpeeltuin["locatie_omschrijving"])) echo $latestSpeeltuin["locatie_omschrijving"] . "<br>"; ?>
                     <a href="detail.php?speeltuin=<?php echo $latestSpeeltuin["id"]; ?>">Meer</a>
                 </p>
             <?php endif; ?>

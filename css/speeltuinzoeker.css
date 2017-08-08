@@ -9,6 +9,10 @@ body {
 	width: 100%;
 }
 
+#searchbar {
+	clear: both;
+}
+
 #searchbar #locatie_omschrijving {
 	width: 80%;
 	float: left;
@@ -55,6 +59,10 @@ p.notice {
 	background: yellow; /* TODO */
 }
 
+.detail-photobar {
+	margin-bottom: 20px;
+}
+
 .detail-photobar img {
 	/*float: left;*/
 	max-height: 300px;
@@ -63,4 +71,25 @@ p.notice {
 #mini-map {
 	height: 300px;
 	width: 300px;
+}
+
+.logo {
+	float: left;
+}
+
+#latestbox {
+	float: right;
+}
+
+#details {
+	clear: both;
+}
+
+.voorzieningen {
+	float: left;
+}
+
+.locatie {
+	float: left;
+	margin-left: 40px;
 }
