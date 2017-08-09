@@ -47,13 +47,13 @@ if ($_SERVER ['REQUEST_METHOD'] == 'POST') {
 		exit ();
 	} else {
 		
-		$name = get_request_value ( "naam", "" );
-		$omschrijving = get_request_value ( "omschrijving", "" );
-		$locatieOmschrijving = get_request_value ( "locatie_omschrijving", "" );
-		$lat = get_request_value ( "lat", 0.0 );
-		$lon = get_request_value ( "lon", 0.0 );
+		$name = get_request_value("naam", "");
+		$omschrijving = get_request_value("omschrijving", "");
+		$locatieOmschrijving = get_request_value("locatie_omschrijving", "");
+		$lat = get_request_value ("lat", 0.0);
+		$lon = get_request_value ("lon", 0.0);
 		
-		$speeltuin->insertOrUpdate ( $name, $omschrijving, $locatieOmschrijving, $lat, $lon, $id );
+		$speeltuin->insertOrUpdate ($name, $omschrijving, $locatieOmschrijving, $lat, $lon, $id);
 		
 		if ($id == 0) {
 			$id = $speeltuin->getId();
@@ -61,13 +61,13 @@ if ($_SERVER ['REQUEST_METHOD'] == 'POST') {
 					De speeltuin staat op inactief en is nog niet zichtbaar tot deze gecontroleerd is. 
 					We streven ernaar dit binnen 24 uur te doen.";
 			$message = "<p>Gebruiker " . $_SESSION["user_name"] . " heeft een nieuwe speeltuin toegevoegd.</p>" . "<p><a href='" . BASE_URL . "admin/edit.php?id=" . $id . "'>Controleer deze speeltuin</a></p>";
-			Mail::sendMail(ADMIN_MAIL, "Nieuwe speeltuin", $message);
+			Mail::sendMail(ADMIN_MAIL, "Nieuwe speeltuin " . $name, $message);
 		} else {
 			$_SESSION ["feedback"] = "Speeltuin aanpassen gelukt!<br>
 					De speeltuin staat nu tijdelijk op inactief en is niet zichtbaar tot deze gecontroleerd is. 
 					We streven ernaar dit binnen 24 uur te doen.";
 			$message = "<p>Gebruiker " . $_SESSION["user_name"] . " heeft de speeltuin \"" . $name . "\" bewerkt.</p>" . "<p><a href='" . BASE_URL . "admin/edit.php?id=" . $id . "'>Controleer deze speeltuin</a></p>";
-			Mail::sendMail (ADMIN_MAIL, "Bewerkte speeltuin", $message);
+			Mail::sendMail(ADMIN_MAIL, "Speeltuin " . $name . " bewerkt", $message);
 		}
 		
 		$speeltuin->setVoorzieningen($_POST);

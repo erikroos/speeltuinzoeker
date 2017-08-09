@@ -28,17 +28,19 @@
 			<h2>Laat ze spelen!</h2>
 		</div>
 		
-		<p>
-			Dit is <strong>speeltuinzoeker.nl</strong><br> dé (mobiele)
-			website om snel en makkelijk een speeltuin in de buurt te kunnen
-			vinden.
-		</p>
-		<p>Bij speeltuinzoeker.nl:</p>
-		<ul>
-			<li>zoek je makkelijk op de kaart</li>
-			<li>werkt alles snel</li>
-			<li>staan de gebruikers centraal: voor elkaar, door elkaar</li>
-		</ul>
+		<div id="details">
+			<p>
+				Dit is <strong>speeltuinzoeker.nl</strong><br> d&eacute; (mobiele)
+				website om snel en makkelijk een speeltuin in de buurt te kunnen
+				vinden.
+			</p>
+			<p>Bij speeltuinzoeker.nl:</p>
+			<ul>
+				<li>zoek je makkelijk op de kaart</li>
+				<li>werkt alles snel</li>
+				<li>staan de gebruikers centraal: voor elkaar, door elkaar</li>
+			</ul>
+		</div>
 	</div>
 
 </body>
