@@ -10,7 +10,7 @@ if (gethostname() == 'MyPC') {
 	define('DB_PASS', '');
 	define('DB_NAME', 'speeltuinzoeker');
 } else {
-	define('BASE_PATH', "/domains/speeltuinzoeker.nl/public_html/");
+	define('BASE_PATH', "/home/deb56875n2/domains/speeltuinzoeker.nl/public_html/");
 	define('BASE_URL', "http://www.speeltuinzoeker.nl/");
 	// DB
 	define('DB_HOST', 'localhost');
@@ -20,7 +20,12 @@ if (gethostname() == 'MyPC') {
 }
 
 spl_autoload_register(function ($class) {
-	include BASE_PATH . 'lib/' . strtolower($class) . '.class.php';
+	$classFile = BASE_PATH . 'lib/' . strtolower($class) . '.class.php';
+	if (file_exists($classFile)) {
+		include_once $classFile;
+	} else {
+		echo "Kan " . $classFile . " niet laden<br>";
+	}
 });
 
 define("MEDIA_PATH", BASE_PATH . "media/");

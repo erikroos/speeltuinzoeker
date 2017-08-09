@@ -20,24 +20,30 @@ class Auth {
 		
 		return false;
 	}
+	
 	public function userExists($email) {
-		$res = $this->db->query ( sprintf ( "SELECT * FROM user WHERE email = \"%s\"", $email ) );
-		if ($row = $res->fetch_assoc ()) {
+		$res = $this->db->query(sprintf("SELECT * FROM user WHERE email = \"%s\"", $email));
+		if ($row = $res->fetch_assoc()) {
 			return true;
 		}
 		return false;
 	}
-	public function createNewAccount($name, $email, $password, $salt) {
-		$activationCode = uniqid ();
+	
+	public function createNewAccount($name, $email, $password) {
+		$activationCode = uniqid();
 		
-		$this->db->query ( sprintf ( "INSERT INTO user 
+		$res = $this->db->query(sprintf("INSERT INTO user 
 				(naam, email, password, admin, active, activation_code) 
-				VALUES (\"%s\", \"%s\", \"%s\", 0, 0, \"%s\");", $this->db->realEscapeString($name), $this->db->realEscapeString($email), $this->hashPassword($password), $activationCode ) );
+				VALUES (\"%s\", \"%s\", \"%s\", 0, 0, \"%s\");", $this->db->realEscapeString($name), $this->db->realEscapeString($email), $this->hashPassword($password), $activationCode));
 		
-		$message = "<p>Beste " . $name . ",</p>" . "<p>Je hebt je aangemeld voor een account bij Speeltuinzoeker.nl. Welkom!<br>" . "Je hoeft alleen nog even op " . "<a href='" . BASE_URL . "admin/activate.php?code=" . $activationCode . "'>deze link</a>" . " te klikken om je account te activeren." . "Daarna kun je direct inloggen en beginnen met het invoeren en beoordelen van speeltuinen!</p>" . "<p>Met vriendelijke groeten,<br>" . "Het team van Speeltuinzoeker.nl</p>" . "<p>PS: werkt de link niet? Voer dan dit webadres in in de adresbalk van je browser:<br>" . BASE_URL . "admin/activate.php?code=" . $activationCode . "</p>";
+		if ($res == true) {
+			$message = "<p>Beste " . $name . ",</p>" . "<p>Je hebt je aangemeld voor een account bij Speeltuinzoeker.nl. Welkom!<br>" . "Je hoeft alleen nog even op " . "<a href='" . BASE_URL . "admin/activate.php?code=" . $activationCode . "'>deze link</a>" . " te klikken om je account te activeren." . "Daarna kun je direct inloggen en beginnen met het invoeren en beoordelen van speeltuinen!</p>" . "<p>Met vriendelijke groeten,<br>" . "Het team van Speeltuinzoeker.nl</p>" . "<p>PS: werkt de link niet? Voer dan dit webadres in in de adresbalk van je browser:<br>" . BASE_URL . "admin/activate.php?code=" . $activationCode . "</p>";
+			Mail::sendMail($email, "Activeer je aanmelding bij Speeltuinzoeker.nl", $message);
+		}
 		
-		Mail::sendMail($email, "Activeer je aanmelding bij Speeltuinzoeker.nl", $message);
+		return $res;
 	}
+	
 	public function activateAccount($code) {
 		$res = $this->db->query ( sprintf ( "SELECT id FROM user WHERE active = 0 AND activation_code = \"%s\"", $this->db->realEscapeString($code)));
 		if ($row = $res->fetch_assoc ()) {

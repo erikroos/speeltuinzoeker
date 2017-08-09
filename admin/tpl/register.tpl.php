@@ -24,8 +24,17 @@ include_once "./inc/header.php";
 
 	<div class="form-group">
 		<label for="password">Wachtwoord</label> <input type="password"
-			id="password" name="password" value="<?php echo $password; ?>"
-			class="form-control" />
+			id="password" name="password" value="" class="form-control" />
+	</div>
+	
+	<div class="form-group">
+		<label for="password">Wachtwoord (herhaal)</label> <input type="password"
+			id="password2" name="password2" value="" class="form-control" />
+	</div>
+	
+	<div class="form-group">
+		<label for="password">Anti-spamvraag: 1 + 1 =</label> <input type="text"
+			id="antispam" name="antispam" value="" class="form-control" />
 	</div>
 
 	<hr>

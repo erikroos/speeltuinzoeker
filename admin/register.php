@@ -7,7 +7,9 @@ $email = "";
 $password = "";
 $showForm = true;
 
-if ($_SERVER ['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+	
+	$feedback = null;
 	
 	$db = new Db();
 	$db->connect();
@@ -16,18 +18,34 @@ if ($_SERVER ['REQUEST_METHOD'] == 'POST') {
 	$name = get_request_value("naam", "");
 	$email = get_request_value("email", "");
 	$password = get_request_value("password", "");
+	$password2 = get_request_value("password2", "");
+	$antispam = get_request_value("antispam", 0);
 	
-	if (!empty($name) && !empty($email) && !empty($password)) {
-		// TODO validiteit van variabelen controleren
-		if (!$auth->userExists ($email)) {
-			$auth->createNewAccount ($name, $email, $password);
-			$feedback = "Aanmelden gelukt! Je ontvangt nu een e-mail met instructies om je aanmelding te activeren.";
-			$showForm = false;
+	if ($antispam != 2) {
+		$feedback = "Het antwoord op de anti-spamvraag is niet correct.";
+	}
+	
+	if ($feedback == null && $password != $password2) {
+		$feedback = "De wachtwoorden komen niet overeen.";
+	}
+	
+	if ($feedback == null && (empty($name) || empty($email) || empty($password) || empty($password2))) {
+		$feedback = "Vul alle velden in.";
+	}
+	
+	// TODO validiteit van variabelen, m.n. email, controleren
+	
+	if ($feedback == null) {
+		if (!$auth->userExists($email)) {
+			if ($auth->createNewAccount($name, $email, $password)) {
+				$feedback = "Aanmelden gelukt! Je ontvangt nu een e-mail met instructies om je aanmelding te activeren.";
+				$showForm = false;
+			} else {
+				$feedback = "Aanmelden mislukt...";
+			}
 		} else {
 			$feedback = "Er is al een gebruiker met dit e-mailadres.";
 		}
-	} else {
-		$feedback = "Vul alle velden in.";
 	}
 }
 
