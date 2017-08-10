@@ -10,7 +10,7 @@ $db->connect ();
 
 $isUser = false;
 $isAdmin = false;
-if (isset ( $_GET ["user"] )) {
+if (isset($_GET ["user"])) {
 	$isUser = true;
 	$pageTitle = "Mijn speeltuinen";
 } else if (isset ( $_GET ["status"] ) && is_numeric ( $_GET ["status"] ) && $_SESSION ["admin"] == 1) {

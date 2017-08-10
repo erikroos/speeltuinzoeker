@@ -39,12 +39,16 @@ div.checkbox {
 
 .photobar {
 	/*height: 50px;*/
-	
 }
 
 .photobar img {
 	/*float: left;*/
 	max-height: 300px;
+}
+
+.photobar ul {
+	padding: 0;
+	list-style-type: none;
 }
 
 .buttonbar {
@@ -96,4 +100,11 @@ p.notice {
 
 .navbar-fixed-top a {
 	margin-right: 20px;
+}
+
+div.logo {
+	width: 265px;
+	height: 150px;
+	background-image: url('../img/logo_compleet.png');
+	margin-bottom: 10px;
 }

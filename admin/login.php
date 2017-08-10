@@ -9,8 +9,12 @@ if ($_SERVER ['REQUEST_METHOD'] == 'POST') {
 	$auth = new Auth($db);
 	
 	if ($auth->login($_POST["login"], $_POST["password"])) {
-		header ( "Location: index.php" );
-		exit ();
+		if ($_SESSION["admin"] == 1) {
+			header("Location: index.php");
+		} else {
+			header("Location: view.php?user");
+		}
+		exit();
 	}
 	
 	$feedback = "Ongeldige inloggegevens.";

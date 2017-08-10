@@ -33,10 +33,7 @@
 	<?php include "tpl/topbar.tpl.php"; ?>
 	
     <div class="container">
-    	<div class="logo">
-			<h1>Speeltuinzoeker.nl</h1>
-			<h2>Laat ze spelen!</h2>
-		</div>
+    	<div class="logo"></div>
 
         <?php include "_latest.php"; ?>
         <div id="latestbox">
@@ -54,7 +51,7 @@
 			<textarea id="locatie_omschrijving" name="locatie_omschrijving"
 				rows="1" maxlength="1000" class="form-control"></textarea>
 			<button id="place-marker" value="Zet marker op omschreven locatie"
-				class="btn btn-default">Zoek locatie</button>
+				class="btn btn-default">Zoek</button>
 		</div>
 
 		<div id="map-div"></div>

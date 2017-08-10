@@ -23,10 +23,7 @@
 	<?php include "tpl/topbar.tpl.php"; ?>
 
 	<div class="container">
-		<div class="logo">
-			<h1>Speeltuinzoeker.nl</h1>
-			<h2>Laat ze spelen!</h2>
-		</div>
+		<div class="logo"></div>
 		
 		<div id="details">
 			<p>

@@ -5,13 +5,17 @@ include_once "./inc/header.php";
 
 <h1><?php echo $pageTitle; ?></h1>
 
-<p>
-	<a href="./index.php">Terug</a>
-</p>
+<?php if ($isAdmin): ?>
+<p><a href="./index.php">Terug</a></p>
+<?php endif; ?>
 
 <?php if (isset($_SESSION["feedback"])): ?>
 <p class="notice"><?php echo $_SESSION["feedback"]; ?></p>
 <?php unset($_SESSION["feedback"]); ?>
+<?php endif; ?>
+
+<?php if ($isUser): ?>
+<p><a href="edit.php?id=0">Voeg speeltuin toe</a></p>
 <?php endif; ?>
 
 <div>

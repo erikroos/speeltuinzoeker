@@ -43,6 +43,7 @@ include_once "./inc/header.php";
 	<div class="form-group">
 		<label for="fotos">Upload foto('s)</label> <input id="fotos"
 			name="fotos[]" type="file" multiple class="file-loading" />
+		<p>Foto's kunnen in de preview gekanteld lijken. Dit wordt tijdens het uploaden gecorrigeerd.</p>
 	</div>
 
 	<hr>
@@ -66,7 +67,7 @@ $(document).on('ready', function() {
 		showUpload: false,
 		maxFileCount: 3,
 		mainClass: "input-group-lg",
-        autoOrientImage: false
+		allowedFileExtensions: ["jpg", "jpeg", "png"]
 	});
 
 	$("#cancel").click(function() {

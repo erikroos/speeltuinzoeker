@@ -25,10 +25,7 @@
 	<?php include "tpl/topbar.tpl.php"; ?>
 	
     <div class="container">
-    	<div class="logo">
-			<h1>Speeltuinzoeker.nl</h1>
-			<h2>Laat ze spelen!</h2>
-		</div>
+    	<div class="logo"></div>
 
 		<div id="details">
 			<span class="back-btn"><a href="index.php?speeltuin=<?php echo $id; ?>">Terug</a></span>
@@ -43,7 +40,7 @@
 		</div>
 
 		<div class="voorzieningen">
-			<h4>Voorzieningen</h4>
+			<h4>Wat is hier te doen?</h4>
 			<ul>
 			<?php foreach ($speeltuin->getVoorzieningen() as $voorziening): ?>
 				<li><?php echo $alleVoorzieningen[$voorziening]; ?></li>
@@ -52,7 +49,7 @@
 		</div>
 
 		<div class="locatie">
-			<h4>Locatie</h4>
+			<h4>Waar is het precies?</h4>
 			<p><?php echo $speeltuin->getLocationDescription(); ?></p>
 			<div id="mini-map"></div>
 		</div>
