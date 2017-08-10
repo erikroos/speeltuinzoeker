@@ -43,7 +43,7 @@ class Speeltuin
     }
 
     public function getLatestEntry() {
-        $res = $this->db->query("SELECT * FROM speeltuin ORDER BY id DESC LIMIT 1");
+        $res = $this->db->query("SELECT * FROM speeltuin WHERE status_id = 1 ORDER BY id DESC LIMIT 1");
         if ($res !== false) {
             if ($row = $res->fetch_assoc()) {
                 return $row;
