@@ -65,7 +65,8 @@ $(document).on('ready', function() {
 		language: "nl",
 		showUpload: false,
 		maxFileCount: 3,
-		mainClass: "input-group-lg"
+		mainClass: "input-group-lg",
+        autoOrientImage: false
 	});
 
 	$("#cancel").click(function() {
