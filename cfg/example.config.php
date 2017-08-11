@@ -1,7 +1,7 @@
 <?php
-define("DIR_NAME", "speeltuinzoeker");
 
 if (gethostname() == 'MyPC') {
+    define("DIR_NAME", "speeltuinzoeker");
 	define('BASE_PATH', "C:/xampp/htdocs/" . DIR_NAME . "/");
 	define('BASE_URL', "http://localhost/" . DIR_NAME . "/");
 	// DB

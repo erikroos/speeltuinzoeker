@@ -7,6 +7,8 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Speeltuinzoeker.nl - Laat ze spelen!</title>
 
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
