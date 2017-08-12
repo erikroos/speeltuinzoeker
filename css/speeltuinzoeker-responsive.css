@@ -8,6 +8,15 @@
     }
 
     /* TODO: logo kleiner, iconen ipv tekst in bovenbalk */
+    
+    .navbar-fixed-top a {
+    	float: none;
+    	display: block;
+    }
+    .navbar-fixed-top a.admin {
+		float: none;
+		display: block;
+	}
 
     .voorzieningen {
         clear: both;

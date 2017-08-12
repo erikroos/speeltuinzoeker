@@ -15,22 +15,28 @@ include_once "./inc/header.php";
 	<?php endif; ?>
 
 	<div class="form-group">
-		<label for="name">Naam</label> <input type="text" id="naam"
-			name="naam" value="<?php echo $name; ?>" class="form-control" />
+		<label for="name">Naam</label>
+		<input type="text" id="naam" name="naam" value="<?php echo $name; ?>" class="form-control" />
+	</div>
+	
+	<div class="form-group">
+		<label for="public">Toegankelijkheid</label>
+		<select id="public" name="public" class="form-control">
+			<!--option value="0" <?php //if ($public == 0) echo "selected=\"selected\""; ?>>Betaald</option-->
+			<option value="1" <?php if ($public == 1) echo "selected=\"selected\""; ?>>Gratis en altijd toegankelijk</option>
+			<option value="2" <?php if ($public == 2) echo "selected=\"selected\""; ?>>Gratis maar beperkt toegankelijk</option>
+		</select>
 	</div>
 
 	<div class="form-group">
-		<label for="omschrijving">Korte omschrijving van de speeltuin (max.
-			1000 tekens)</label>
-		<textarea id="omschrijving" name="omschrijving" rows="3"
-			maxlength="1000" class="form-control"><?php echo $omschrijving; ?></textarea>
+		<label for="omschrijving">Korte omschrijving van de speeltuin (max. 1000 tekens)</label>
+		<textarea id="omschrijving" name="omschrijving" rows="3" maxlength="1000" class="form-control"><?php echo $omschrijving; ?></textarea>
 	</div>
 
 	<h2>Locatie op de kaart</h2>
 
 	<div class="form-group">
-		<label for="omschrijving">Omschrijving van de locatie (bijv.
-			Fazantweg, Paterswolde)</label>
+		<label for="omschrijving">Omschrijving van de locatie (bijv. Fazantweg, Paterswolde)</label>
 		<textarea id="locatie_omschrijving" name="locatie_omschrijving"
 			rows="1" maxlength="1000" class="form-control"><?php echo $locatieOmschrijving; ?></textarea>
 	</div>

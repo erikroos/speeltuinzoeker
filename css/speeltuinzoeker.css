@@ -61,7 +61,9 @@ div.checkbox {
 }
 
 p.notice {
-	background: yellow; /* TODO */
+	background-color: #88CE00;
+	border-radius: 4px;
+	padding: 10px;
 }
 
 .detail-photobar {

@@ -99,32 +99,73 @@ class Speeltuin
 	}
 
 	public function getAuthor() {
-		$res = $this->db->query ( sprintf ( "SELECT author_id FROM speeltuin WHERE id = %d", $this->id ) );
+		$res = $this->db->query(sprintf("SELECT author_id FROM speeltuin WHERE id = %d", $this->id));
 		if ($res !== false) {
-			if ($row = $res->fetch_assoc ()) {
-				return $row ["author_id"];
+			if ($row = $res->fetch_assoc()) {
+				return $row["author_id"];
 			}
 		}
 		return 0;
 	}
+	
+	public function getAuthorName() {
+		$authorId = $this->getAuthor();
+		$res = $this->db->query(sprintf("SELECT name FROM user WHERE id = %d", $authorId));
+		if ($res !== false) {
+			if ($row = $res->fetch_assoc()) {
+				return $row["name"];
+			}
+		}
+		return "Onbekend";
+	}
+	
+	public function getLastModified() {
+		$res = $this->db->query(sprintf("SELECT modified_on FROM speeltuin WHERE id = %d", $this->id));
+		if ($res !== false) {
+			if ($row = $res->fetch_assoc()) {
+				setlocale(LC_TIME, "nl_NL");
+				return strftime("%A %#d %B %Y om %H:%M", strtotime($row["modified_on"]));
+			}
+		}
+		return "-";
+	}
+	
+	public function getPublic() {
+		$res = $this->db->query(sprintf("SELECT public FROM speeltuin WHERE id = %d", $this->id));
+		if ($res !== false) {
+			if ($row = $res->fetch_assoc()) {
+				switch ($row["public"]) {
+					case 0:
+						return "Betaald";
+					case 1:
+						return "Gratis en altijd toegankelijk";
+					case 2:
+						return "Gratis maar beperkt toegankelijk";
+					default:
+						return "Onbekend";
+				}
+			}
+		}
+		return "Onbekend";
+	}
 
 	public function activate() {
-		$this->db->query ( sprintf ( "UPDATE speeltuin SET status_id = 1 WHERE id = %d", $this->id ) );
+		$this->db->query(sprintf("UPDATE speeltuin SET status_id = 1 WHERE id = %d", $this->id));
 	}
 
 	public function deactivate() {
-		$this->db->query ( sprintf ( "UPDATE speeltuin SET status_id = 2 WHERE id = %d", $this->id ) );
+		$this->db->query(sprintf("UPDATE speeltuin SET status_id = 2 WHERE id = %d", $this->id));
 	}
 
-	public function insertOrUpdate($name, $omschrijving, $locatieOmschrijving, $lat, $lon) {
+	public function insertOrUpdate($name, $omschrijving, $locatieOmschrijving, $lat, $lon, $public = 1) {
 		if ($this->id == 0) {
-			$this->db->query ( sprintf ( "INSERT INTO speeltuin (naam, omschrijving, locatie_omschrijving, lat, lon, status_id, author_id)
-					VALUES (\"%s\", \"%s\", \"%s\", %f, %f, 0, %d)", $name, $omschrijving, $locatieOmschrijving, $lat, $lon, $_SESSION ["user_id"] ) );
+			$this->db->query(sprintf("INSERT INTO speeltuin (naam, omschrijving, locatie_omschrijving, lat, lon, status_id, author_id, public, modified_on)
+					VALUES (\"%s\", \"%s\", \"%s\", %f, %f, 0, %d, %d, NOW())", $name, $omschrijving, $locatieOmschrijving, $lat, $lon, $_SESSION["user_id"], $public));
 			$this->id = $this->db->getLatestId ();
 		} else {
-			$this->db->query ( sprintf ( "UPDATE speeltuin
-				SET naam = \"%s\", omschrijving = \"%s\", locatie_omschrijving = \"%s\", lat = %f, lon = %f, status_id = 0
-				WHERE id = %d", $name, $omschrijving, $locatieOmschrijving, $lat, $lon, $this->id ) );
+			$this->db->query(sprintf("UPDATE speeltuin
+				SET naam = \"%s\", omschrijving = \"%s\", locatie_omschrijving = \"%s\", lat = %f, lon = %f, status_id = 0, public = %d, modified_on = NOW()
+				WHERE id = %d", $name, $omschrijving, $locatieOmschrijving, $lat, $lon, $public, $this->id));
 		}
 		return $this->id;
 	}
@@ -151,16 +192,17 @@ class Speeltuin
 	}
 
 	public function getFields() {
-		$res = $this->db->query ( sprintf ( "SELECT * FROM speeltuin WHERE id = %d", $this->id ) );
+		$res = $this->db->query(sprintf("SELECT * FROM speeltuin WHERE id = %d", $this->id));
 		if ($res !== false) {
-			if ($row = $res->fetch_assoc ()) {
+			if ($row = $res->fetch_assoc()) {
 				return array (
-						$row ["naam"],
-						$row ["omschrijving"],
-						$row ["locatie_omschrijving"],
-						$row ["lat"],
-						$row ["lon"],
-						$row ["status_id"] 
+						$row["naam"],
+						$row["omschrijving"],
+						$row["locatie_omschrijving"],
+						$row["lat"],
+						$row["lon"],
+						$row["status_id"],
+						$row["public"]
 				);
 			}
 		}
@@ -170,7 +212,8 @@ class Speeltuin
 				"",
 				"",
 				"",
-				0 
+				0,
+				1
 		);
 	}
 

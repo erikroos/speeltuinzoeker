@@ -45,16 +45,22 @@ class Auth {
 	}
 	
 	public function activateAccount($code) {
-		$res = $this->db->query ( sprintf ( "SELECT id FROM user WHERE active = 0 AND activation_code = \"%s\"", $this->db->realEscapeString($code)));
-		if ($row = $res->fetch_assoc ()) {
-			$this->db->query ( sprintf ( "UPDATE user SET active = 1, activation_code = \"\" WHERE id = %d", $row["id"]));
+		$res = $this->db->query(sprintf("SELECT id, name, email FROM user WHERE active = 0 AND activation_code = \"%s\"", $this->db->realEscapeString($code)));
+		if ($row = $res->fetch_assoc()) {
+			$this->db->query(sprintf("UPDATE user SET active = 1, activation_code = \"\" WHERE id = %d", $row["id"]));
+			
+			$message = "<p>Gebruiker " . $name . " (e-mail: " . $email . ") heeft zijn/haar account geactiveerd.</p>";
+			Mail::sendMail(ADMIN_MAIL, "Gebruiker " . $name . " geactiveerd", $message);
+			
 			return true;
 		}
 		return false;
 	}
+	
 	public function logout() {
 		session_unset ();
 	}
+	
 	private function hashPassword($password) {
 		return md5($password . SALT);
 	}

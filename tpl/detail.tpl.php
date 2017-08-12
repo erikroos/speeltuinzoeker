@@ -3,6 +3,8 @@
     <div id="details">
         <span class="back-btn"><a href="index.php?speeltuin=<?php echo $id; ?>">Terug</a></span>
         <h3><?php echo $speeltuin->getName(); ?></h3>
+        <p>Aangemaakt door <?php echo $speeltuin->getAuthorName(); ?>, laatst bewerkt: <?php echo $speeltuin->getLastModified(); ?></p>
+        <p><?php echo $speeltuin->getPublic(); ?></p>
         <p><?php echo $speeltuin->getDescription(); ?></p>
     </div>
 

@@ -39,6 +39,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		if (!$auth->userExists($email)) {
 			if ($auth->createNewAccount($name, $email, $password)) {
 				$feedback = "Aanmelden gelukt! Je ontvangt nu een e-mail met instructies om je aanmelding te activeren.";
+				
+				$message = "<p>Gebruiker " . $name . " (e-mail: " . $email . ") heeft een account aangemaakt.</p>";
+				Mail::sendMail(ADMIN_MAIL, "Gebruiker " . $name . " aangemaakt", $message);
+				
 				$showForm = false;
 			} else {
 				$feedback = "Aanmelden mislukt...";
