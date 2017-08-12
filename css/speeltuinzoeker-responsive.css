@@ -1,0 +1,20 @@
+@media (min-width: 1px) and (max-width: 600px) {
+    nav.navbar-fixed-bottom {
+        display: none;
+    }
+
+    #latestbox {
+        display: none;
+    }
+
+    /* TODO: logo kleiner, iconen ipv tekst in bovenbalk */
+
+    .voorzieningen {
+        clear: both;
+    }
+
+    .locatie {
+        clear: both;
+        margin-left: 0px;
+    }
+}

@@ -86,4 +86,4 @@ include_once "./inc/header.php";
 </div>
 
 <?php
-include_once "./inc/footer.php";
+//include_once "./inc/footer.php";

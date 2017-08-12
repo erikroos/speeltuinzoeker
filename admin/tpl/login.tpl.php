@@ -30,9 +30,9 @@ include_once "./inc/header.php";
 </form>
 
 <p>
-	<a href="register.php">Ik heb nog geen account en wil er graag een
-		aanmaken.</a>
+	<a href="register.php">Ik heb nog geen account en wil er graag een aanmaken.</a><br>
+    <!--TODO <a href="forgot.php">Ik ben mijn wachtwoord vergeten.</a>-->
 </p>
 
 <?php
-include_once "./inc/footer.php";
+//include_once "./inc/footer.php";

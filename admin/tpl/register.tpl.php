@@ -47,4 +47,4 @@ include_once "./inc/header.php";
 <?php endif; ?>
 
 <?php
-include_once "./inc/footer.php";
+//include_once "./inc/footer.php";

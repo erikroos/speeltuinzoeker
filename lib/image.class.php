@@ -1,31 +1,10 @@
 <?php
 class Image {
 	public static function resizeAndConvertToPng($fileName) {
+
+        $exif = exif_read_data($fileName);
 		
-		// 1. rotate if needed
-		$image = null;
-		$exif = exif_read_data($fileName);
-		if (!empty($exif['Orientation'])) {
-			$imageResource = imagecreatefromstring(file_get_contents($fileName));
-			switch ($exif['Orientation']) {
-				case 3:
-					$image = imagerotate($imageResource, 180, 0);
-					break;
-				case 6:
-					$image = imagerotate($imageResource, -90, 0);
-					break;
-				case 8:
-					$image = imagerotate($imageResource, 90, 0);
-					break;
-			}
-		}
-		if ($image != null) {
-			imagedestroy($imageResource);
-			imagepng($image, $fileName, 5);
-			imagedestroy($image);
-		}
-		
-		// 2. resize + to PNG
+		// 1. resize + to PNG
 		list ($width, $height, $type, $attr) = getimagesize($fileName);
 		if ($width > MAX_PHOTO_DIM || $height > MAX_PHOTO_DIM) {
 			$ratio = $width / $height;
@@ -46,6 +25,40 @@ class Image {
 		imagedestroy($src);
 		imagepng($dst, $fileName, 5);
 		imagedestroy($dst);
+
+        // 2. rotate if needed (can only be done on small images (otherwise 500 error) so we have to do it AFTER step 1)
+        $dst = null;
+        if (!empty($exif['Orientation'])) {
+            $src = imagecreatefromstring(file_get_contents($fileName));
+            switch ($exif['Orientation']) {
+                case 3:
+                    try {
+                        $dst = imagerotate($src, 180, 0);
+                    } catch (Exception $e) {
+                        // prevent 500 error
+                    }
+                    break;
+                case 6:
+                    try {
+                        $dst = imagerotate($src, -90, 0);
+                    } catch (Exception $e) {
+                        // prevent 500 error
+                    }
+                    break;
+                case 8:
+                    try {
+                        $dst = imagerotate($src, 90, 0);
+                    } catch (Exception $e) {
+                        // prevent 500 error
+                    }
+                    break;
+            }
+        }
+        if ($dst != null) {
+            imagedestroy($src);
+            imagepng($dst, $fileName, 5);
+            imagedestroy($dst);
+        }
 		
 	}
 }

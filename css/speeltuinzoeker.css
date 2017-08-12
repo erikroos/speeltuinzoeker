@@ -1,5 +1,6 @@
 body {
 	padding-top: 70px;
+	padding-bottom: 70px;
 }
 
 /* Kaart op home */
@@ -83,6 +84,9 @@ p.notice {
 
 #latestbox {
 	float: right;
+	background-color: #88CE00;
+	border-radius: 4px;
+	padding: 10px;
 }
 
 #details {
@@ -102,8 +106,12 @@ p.notice {
 	margin-right: 20px;
 }
 
+.navbar-fixed-top a.admin {
+	float: right;
+}
+
 div.logo {
-	width: 265px;
+	width: 267px;
 	height: 150px;
 	background-image: url('../img/logo_compleet.png');
 	margin-bottom: 10px;
