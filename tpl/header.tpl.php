@@ -9,8 +9,9 @@
 
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 
-    <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    
+    <link href="font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
     <link href="css/speeltuinzoeker.css" rel="stylesheet">
     <link href="css/speeltuinzoeker-responsive.css" rel="stylesheet">
@@ -33,14 +34,37 @@
 
 </head>
 <body>
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-        <a href="./index.php">Home</a>
-        <a href="./about.php">Over Speeltuinzoeker</a>
-        <a href="./contact.php">Contact</a>
-        <a href="./admin/index.php" class="admin">Mijn Speeltuinzoeker</a>
-    </div>
-</nav>
 
 <div class="container">
+
+	<nav>
+	  <div class="navWide">
+	  	<div class="wideDiv">
+		  	<a href="./index.php"><i class="fa fa-home" aria-hidden="true"></i>&nbsp; Home</a>
+		    <a href="./about.php">Info</a>
+		    <a href="./join.php">Meedoen</a>
+		    <a href="./contact.php">Contact</a>
+		    <a href="./admin/index.php" class="admin">Mijn Speeltuinzoeker</a>
+		  </div>
+	  </div>
+	  <div class="navNarrow">
+	  	<i class="fa fa-bars fa-2x"></i>
+	    <div class="narrowLinks hidden">
+	    	<a href="./index.php"><i class="fa fa-home" aria-hidden="true"></i>&nbsp; Home</a>
+	    	<a href="./about.php">Info</a>
+	        <a href="./join.php">Meedoen</a>
+	        <a href="./contact.php">Contact</a>
+	        <a href="./admin/index.php" class="admin">Mijn Speeltuinzoeker</a>
+	    </div>
+	  </div>
+	</nav>
+	<script type="text/javascript">
+		navLinks = document.querySelector('.navNarrow');
+		narrowLinks = document.querySelector('.narrowLinks');
+		navLinks.addEventListener('click', toggle);
+		function toggle() {
+		    narrowLinks.classList.toggle('hidden');
+		};
+	</script>
+
     <div class="logo"></div>

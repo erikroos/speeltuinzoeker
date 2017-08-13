@@ -1,22 +1,7 @@
 @media (min-width: 1px) and (max-width: 600px) {
-    nav.navbar-fixed-bottom {
-        display: none;
-    }
-
     #latestbox {
         display: none;
     }
-
-    /* TODO: logo kleiner, iconen ipv tekst in bovenbalk */
-    
-    .navbar-fixed-top a {
-    	float: none;
-    	display: block;
-    }
-    .navbar-fixed-top a.admin {
-		float: none;
-		display: block;
-	}
 
     .voorzieningen {
         clear: both;
@@ -25,5 +10,18 @@
     .locatie {
         clear: both;
         margin-left: 0px;
+    }
+    
+    nav .navWide .wideDiv a.admin {
+		float: left;
+	}
+}
+
+@media (min-width: 601px) {
+    nav .navWide {
+        display: block;
+    }
+    nav .navNarrow {
+        display: none;
     }
 }

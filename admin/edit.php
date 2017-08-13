@@ -2,9 +2,9 @@
 require_once "../cfg/config.php";
 require_once "./inc/functions.php";
 
-$id = get_request_value ( "id", 0 );
+$id = get_request_value("id", 0);
 
-$db = new Db ();
+$db = new Db();
 $db->connect();
 
 $speeltuin = new Speeltuin($db, $id);

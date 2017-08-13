@@ -32,8 +32,8 @@ class Speeltuin
         return $allVoorzieningen;
     }
 
-    public function getTotalNr() {
-	    $res = $this->db->query("SELECT COUNT(*) AS totNr FROM speeltuin WHERE status_id = 1");
+    public function getTotalNr($status = 1) {
+	    $res = $this->db->query(sprintf("SELECT COUNT(*) AS totNr FROM speeltuin WHERE status_id = %d", $status));
         if ($res !== false) {
             if ($row = $res->fetch_assoc()) {
                 return $row["totNr"];
@@ -110,10 +110,10 @@ class Speeltuin
 	
 	public function getAuthorName() {
 		$authorId = $this->getAuthor();
-		$res = $this->db->query(sprintf("SELECT name FROM user WHERE id = %d", $authorId));
+		$res = $this->db->query(sprintf("SELECT naam FROM user WHERE id = %d", $authorId));
 		if ($res !== false) {
 			if ($row = $res->fetch_assoc()) {
-				return $row["name"];
+				return $row["naam"];
 			}
 		}
 		return "Onbekend";

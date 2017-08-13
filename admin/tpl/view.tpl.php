@@ -22,14 +22,14 @@ include_once "./inc/header.php";
 	<span class="pager">
 		<ul>
 			<li><a
-				href="view.php?<?php echo $isUser ? "user" : "status=" . $status; ?>&start=0&size=<?php echo $size; ?>">Eerste <?php echo $size; ?></a></li>
+				href="view.php?<?php echo $isUser ? "user" : "status=" . $status; ?>&start=0&size=<?php echo $size; ?>">&lt;&lt;</a></li>
 			<li><a
 				href="view.php?<?php echo $isUser ? "user" : "status=" . $status; ?>&start=<?php echo max(0, ($start - $size)); ?>&size=<?php echo $size; ?>">&lt;</a></li>
 			<li><?php echo $start + 1; ?> - <?php echo min($totalSize, ($start + $size)); ?> van <?php echo $totalSize; ?></a></li>
 			<li><a
 				href="view.php?<?php echo $isUser ? "user" : "status=" . $status; ?>&start=<?php $newStart = min($totalSize, ($start + $size)); echo ($newStart - ($newStart % $size)); ?>&size=<?php echo $size; ?>">&gt;</a></li>
 			<li><a
-				href="view.php?<?php echo $isUser ? "user" : "status=" . $status; ?>&start=<?php $newStart = ($totalSize - $size); echo ($newStart - ($newStart % $size)); ?>&size=<?php echo $size; ?>">Laatste <?php echo $size; ?></a></li>
+				href="view.php?<?php echo $isUser ? "user" : "status=" . $status; ?>&start=<?php $newStart = ($totalSize - $size); echo ($newStart - ($newStart % $size)); ?>&size=<?php echo $size; ?>">&gt;&gt;</a></li>
 		</ul>
 	</span>
 </div>

@@ -1,8 +1,3 @@
-body {
-	padding-top: 70px;
-	padding-bottom: 70px;
-}
-
 /* Kaart op home */
 #map-div {
 	clear: both;
@@ -13,12 +8,10 @@ body {
 #searchbar {
 	clear: both;
 }
-
 #searchbar #locatie_omschrijving {
 	width: 80%;
 	float: left;
 }
-
 #searchbar #place-marker {
 	width: 20%;
 	float: left;
@@ -69,7 +62,6 @@ p.notice {
 .detail-photobar {
 	margin-bottom: 20px;
 }
-
 .detail-photobar img {
 	/*float: left;*/
 	max-height: 300px;
@@ -78,10 +70,6 @@ p.notice {
 #mini-map {
 	height: 300px;
 	width: 300px;
-}
-
-.logo {
-	float: left;
 }
 
 #latestbox {
@@ -104,17 +92,40 @@ p.notice {
 	margin-left: 40px;
 }
 
-.navbar-fixed-top a {
-	margin-right: 20px;
+.logo {
+	float: left;
 }
-
-.navbar-fixed-top a.admin {
-	float: right;
-}
-
 div.logo {
 	width: 267px;
 	height: 150px;
 	background-image: url('../img/logo_compleet.png');
 	margin-bottom: 10px;
+}
+
+nav {
+    overflow: hidden;
+    padding: 10px 0 20px 0;
+}
+nav .navWide {
+    display: none;
+    margin: 0 auto;
+}
+nav .navWide .wideDiv a {
+    display: inline-block;
+    padding-right: 10px;
+}
+nav .navWide .wideDiv a.admin {
+	float: right;
+}
+nav .navNarrow i {
+    float: left;
+}
+.hidden {
+    display: none;
+}
+nav .navNarrow .narrowLinks a {
+    display: block;
+    float: left;
+    clear: left;
+    padding: 0.5em 0;
 }
