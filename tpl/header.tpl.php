@@ -40,21 +40,21 @@
 	<nav>
 	  <div class="navWide">
 	  	<div class="wideDiv">
-		  	<a href="./index.php"><i class="fa fa-home" aria-hidden="true"></i>&nbsp; Home</a>
-		    <a href="./about.php">Info</a>
-		    <a href="./join.php">Meedoen</a>
-		    <a href="./contact.php">Contact</a>
-		    <a href="./admin/index.php" class="admin">Mijn Speeltuinzoeker</a>
+		  	<a href="./index.php"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;Home</a>
+		    <a href="./about.php"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;Info</a>
+		    <a href="./join.php"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;Meedoen</a>
+		    <a href="./contact.php"><i class="fa fa-comments" aria-hidden="true"></i>&nbsp;Contact</a>
+		    <a href="./admin/index.php" class="admin"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;Mijn Speeltuinzoeker</a>
 		  </div>
 	  </div>
 	  <div class="navNarrow">
 	  	<i class="fa fa-bars fa-2x"></i>
 	    <div class="narrowLinks hidden">
-	    	<a href="./index.php"><i class="fa fa-home" aria-hidden="true"></i>&nbsp; Home</a>
-	    	<a href="./about.php">Info</a>
-	        <a href="./join.php">Meedoen</a>
-	        <a href="./contact.php">Contact</a>
-	        <a href="./admin/index.php" class="admin">Mijn Speeltuinzoeker</a>
+	    	<a href="./index.php"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;Home</a>
+		    <a href="./about.php"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;Info</a>
+		    <a href="./join.php"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;Meedoen</a>
+		    <a href="./contact.php"><i class="fa fa-comments" aria-hidden="true"></i>&nbsp;Contact</a>
+		    <a href="./admin/index.php" class="admin"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;Mijn Speeltuinzoeker</a>
 	    </div>
 	  </div>
 	</nav>

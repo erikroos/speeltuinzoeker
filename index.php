@@ -17,4 +17,6 @@ if (isset($_GET["speeltuin"])) {
     }
 }
 
+$defaultLocationString = "Bijv.: Fazantweg, Paterswolde";
+
 include "tpl/index.tpl.php";

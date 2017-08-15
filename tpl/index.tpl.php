@@ -13,8 +13,8 @@
     </div>
 
     <div id="searchbar">
-        <textarea id="locatie_omschrijving" name="locatie_omschrijving" rows="1" maxlength="1000" class="form-control"></textarea>
-        <button id="place-marker" value="Zet marker op omschreven locatie" class="btn btn-default">Zoek</button>
+        <textarea id="locatie_omschrijving" name="locatie_omschrijving" rows="1" maxlength="1000" class="form-control"><?php echo $defaultLocationString; ?></textarea>
+        <button id="place-marker" value="Zet marker op omschreven locatie" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i>&nbsp;Zoek</button>
     </div>
 
     <div id="map-div"></div>
@@ -129,6 +129,12 @@
                 map.setCenter(pos);
             }
         );
+    });
+
+    $('#locatie_omschrijving').click(function() {
+        if ($('#locatie_omschrijving').val() == "<?php echo $defaultLocationString; ?>") {
+    		$('#locatie_omschrijving').val("");
+        }
     });
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=<?php echo MAPS_API_KEY; ?>&callback=initMap"></script>

@@ -16,6 +16,11 @@
 	width: 20%;
 	float: left;
 }
+#searchbar #place-marker:hover {
+	color: #88CE00;
+	background-color: white;
+	/*font-weight: bold;*/
+}
 
 /* Kaart op editscherm */
 #map-div-edit {
@@ -112,7 +117,7 @@ nav .navWide {
 }
 nav .navWide .wideDiv a {
     display: inline-block;
-    padding-right: 10px;
+    padding-right: 20px;
 }
 nav .navWide .wideDiv a.admin {
 	float: right;
@@ -128,4 +133,17 @@ nav .navNarrow .narrowLinks a {
     float: left;
     clear: left;
     padding: 0.5em 0;
+}
+
+a {
+	color: black;
+	text-decoration: none;
+}
+a:hover {
+	color: #88CE00;
+	text-decoration: none;
+}
+
+th {
+	color: #88CE00;
 }

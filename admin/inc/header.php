@@ -6,10 +6,12 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 	<title><?php echo $title; ?></title>
+	
+	<link rel="icon" type="image/x-icon" href="../favicon.ico">
 
 	<link href="../css/bootstrap.min.css" rel="stylesheet">
 	
-	<link href="font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="../font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
 	
 	<link href="../css/speeltuinzoeker.css" rel="stylesheet">
 	<link href="../css/speeltuinzoeker-responsive.css" rel="stylesheet">
@@ -28,18 +30,18 @@
 		<nav>
 		  <div class="navWide">
 		  	<div class="wideDiv">
-			  	<a href="../index.php">Home</a>
+			  	<a href="../index.php"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;Home</a>
 				<?php if (isset($_SESSION["user_id"])): ?>
-					<a href="logout.php">Log uit</a>
+					<a href="logout.php"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;Log uit</a>
 				<?php endif; ?>
 			  </div>
 		  </div>
 		  <div class="navNarrow">
 		  	<i class="fa fa-bars fa-2x"></i>
 		    <div class="narrowLinks hidden">
-		    	<a href="../index.php">Home</a>
+		    	<a href="../index.php"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;Home</a>
 				<?php if (isset($_SESSION["user_id"])): ?>
-					<a href="logout.php">Log uit</a>
+					<a href="logout.php"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;Log uit</a>
 				<?php endif; ?>
 		    </div>
 		  </div>
