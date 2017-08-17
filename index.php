@@ -17,6 +17,9 @@ if (isset($_GET["speeltuin"])) {
     }
 }
 
+$totalNr = $speeltuin->getTotalNr();
+$latestSpeeltuin = $speeltuin->getLatestEntry();
+
 $defaultLocationString = "Bijv.: Fazantweg, Paterswolde";
 
 include "tpl/index.tpl.php";

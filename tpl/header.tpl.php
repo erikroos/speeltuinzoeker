@@ -12,6 +12,9 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     
     <link href="font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" type="text/css" href="slick/slick.css">
+    <link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
 
     <link href="css/speeltuinzoeker.css" rel="stylesheet">
     <link href="css/speeltuinzoeker-responsive.css" rel="stylesheet">
@@ -67,4 +70,9 @@
 		};
 	</script>
 
-    <div class="logo"></div>
+    <div class="logo">
+    	<img src="img/logo_compleet.png" />
+    </div>
+    <div class="logo-resp">
+    	<img src="img/logo_klein.png" />
+    </div>

@@ -1,12 +1,12 @@
 <?php
-$title = "Mijn Speeltuinzoeker - bekijk en beheer";
+$title = "Mijn Speeltuinzoeker - bekijk en beheer speeltuinen";
 include_once "./inc/header.php";
 ?>
 
 <h1><?php echo $pageTitle; ?></h1>
 
 <?php if ($isAdmin): ?>
-<p><a href="./index.php">Terug</a></p>
+<p><a href="./index.php"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i>&nbsp;Terug</a></p>
 <?php endif; ?>
 
 <?php if (isset($_SESSION["feedback"])): ?>
@@ -21,15 +21,11 @@ include_once "./inc/header.php";
 <div>
 	<span class="pager">
 		<ul>
-			<li><a
-				href="view.php?<?php echo $isUser ? "user" : "status=" . $status; ?>&start=0&size=<?php echo $size; ?>">&lt;&lt;</a></li>
-			<li><a
-				href="view.php?<?php echo $isUser ? "user" : "status=" . $status; ?>&start=<?php echo max(0, ($start - $size)); ?>&size=<?php echo $size; ?>">&lt;</a></li>
+			<li><a href="view.php?<?php echo $isUser ? "user" : "status=" . $status; ?>&start=0&size=<?php echo $size; ?>">&lt;&lt;</a></li>
+			<li><a href="view.php?<?php echo $isUser ? "user" : "status=" . $status; ?>&start=<?php echo max(0, ($start - $size)); ?>&size=<?php echo $size; ?>">&lt;</a></li>
 			<li><?php echo $start + 1; ?> - <?php echo min($totalSize, ($start + $size)); ?> van <?php echo $totalSize; ?></a></li>
-			<li><a
-				href="view.php?<?php echo $isUser ? "user" : "status=" . $status; ?>&start=<?php $newStart = min($totalSize, ($start + $size)); echo ($newStart - ($newStart % $size)); ?>&size=<?php echo $size; ?>">&gt;</a></li>
-			<li><a
-				href="view.php?<?php echo $isUser ? "user" : "status=" . $status; ?>&start=<?php $newStart = ($totalSize - $size); echo ($newStart - ($newStart % $size)); ?>&size=<?php echo $size; ?>">&gt;&gt;</a></li>
+			<li><a href="view.php?<?php echo $isUser ? "user" : "status=" . $status; ?>&start=<?php $newStart = min($totalSize, ($start + $size)); echo ($newStart - ($newStart % $size)); ?>&size=<?php echo $size; ?>">&gt;</a></li>
+			<li><a href="view.php?<?php echo $isUser ? "user" : "status=" . $status; ?>&start=<?php $newStart = ($totalSize - $size); echo ($newStart - ($newStart % $size)); ?>&size=<?php echo $size; ?>">&gt;&gt;</a></li>
 		</ul>
 	</span>
 </div>
@@ -46,7 +42,7 @@ include_once "./inc/header.php";
 				<th>Status</th>
 				<th></th>
 				<?php if ($isUser): ?>
-					<th></th>
+				<th></th>
 				<?php endif; ?>
 			</tr>
 		</thead>
@@ -71,12 +67,8 @@ include_once "./inc/header.php";
 							<a href="./edit.php?id=<?php echo $row["id"]; ?>">Bekijk</a>
 						<?php endif; ?>
 					<?php endif; ?>
-				
-				
-				<td>
+				</td>
 				<?php if ($isUser): ?>
-					
-				
 				<td><a href="photo.php?id=<?php echo $row["id"]; ?>">Foto's</a></td>
 				<?php endif; ?>
 			</tr>

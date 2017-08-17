@@ -1,6 +1,5 @@
 <?php include "header.tpl.php"; ?>
 
-    <?php include "_latest.php"; ?>
     <div id="latestbox">
         <p>Er zijn al <strong><?php echo $totalNr; ?></strong> speeltuinen!</p>
         <?php if ($latestSpeeltuin != null): ?>

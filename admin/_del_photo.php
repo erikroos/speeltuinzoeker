@@ -15,12 +15,12 @@ if ($speeltuin->getAuthor() != $_SESSION["user_id"]) {
 	exit ();
 }
 
-// Delete photo
+// Delete photo, only if requested
 if (!empty($photoNr)) {
 	$speeltuin->removePhoto("speeltuin" . $id . "_" . $photoNr . ".png");
 }
 
-// Re-render bar
+// (Re-)render bar
 $html = "";
 $existingPhotos = $speeltuin->getPhotos();
 if (sizeof($existingPhotos) > 0) {
@@ -32,12 +32,14 @@ if (sizeof($existingPhotos) > 0) {
 	    $extension = end($photoNameParts);
 		$extension = strtolower($extension);
 		list ($width, $height, $type, $attr) = getimagesize($photo);
-		$size = filesize(str_replace(MEDIA_URL,MEDIA_PATH, $photo));
+		$size = filesize(str_replace(MEDIA_URL, MEDIA_PATH, $photo));
 		
 		$html .= "<li>";
 		$html .= "<img src='" . $photo . "' alt='Foto van deze speeltuin' title='Foto van deze speeltuin' />";
-		$html .= "<span>" . strtoupper($extension) . ", " . $width . "x" . $height . " px, " . humanFileSize($size) . "</span>";
+		$html .= "<div class='photo-meta'>";
+		$html .= "<span>" . strtoupper($extension) . "<br>" . $width . "x" . $height . " px<br>" . humanFileSize($size) . "</span><br>";
 		$html .= "<input id='del_photo_" . $photoNr . "' type='button' value='Verwijder' class='btn btn-default del_photo_btn' onclick='deletePhoto(this.id); return false;' />";
+		$html .= "</div>";
 		$html .= "</li>";
 		$photoNr ++;
 	}

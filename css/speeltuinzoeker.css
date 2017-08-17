@@ -1,8 +1,32 @@
+.betweenbar {
+	clear: left;
+	height: 10px;
+}
+
 /* Kaart op home */
 #map-div {
 	clear: both;
 	height: 600px;
-	width: 100%;
+}
+
+.btn-default {
+	color: #3E9FFF;
+}
+.btn-default:hover {
+	color: #88CE00;
+	background-color: white;
+}
+.btn-file {
+	color: #3E9FFF;
+	font-weight: normal;
+	background-color: white;
+	border-color: #ccc;
+}
+.btn-file:hover {
+	color: #88CE00;
+	font-weight: normal;
+	background-color: white;
+	border-color: #adadad;
 }
 
 #searchbar {
@@ -15,11 +39,6 @@
 #searchbar #place-marker {
 	width: 20%;
 	float: left;
-}
-#searchbar #place-marker:hover {
-	color: #88CE00;
-	background-color: white;
-	/*font-weight: bold;*/
 }
 
 /* Kaart op editscherm */
@@ -37,17 +56,23 @@ div.checkbox {
 }
 
 .photobar {
-	/*height: 50px;*/
+	height: 110px;
 }
-
-.photobar img {
-	/*float: left;*/
-	max-height: 300px;
-}
-
 .photobar ul {
 	padding: 0;
 	list-style-type: none;
+}
+.photobar li {
+	clear: left;
+	height: 110px;
+}
+.photobar img {
+	height: 100px;
+	float: left;
+	margin-right: 20px;
+}
+.photo-meta {
+	float: left;
 }
 
 .buttonbar {
@@ -68,20 +93,16 @@ p.notice {
 	margin-bottom: 20px;
 }
 .detail-photobar img {
-	/*float: left;*/
 	max-height: 300px;
+}
+
+#photo-info {
+	clear: left;
 }
 
 #mini-map {
 	height: 300px;
 	width: 300px;
-}
-
-#latestbox {
-	float: right;
-	background-color: #88CE00;
-	border-radius: 4px;
-	padding: 10px;
 }
 
 #details {
@@ -99,12 +120,14 @@ p.notice {
 
 .logo {
 	float: left;
-}
-div.logo {
-	width: 267px;
-	height: 150px;
-	background-image: url('../img/logo_compleet.png');
 	margin-bottom: 10px;
+	display: block;
+}
+.logo-resp {
+	float: left;
+	margin-bottom: 10px;
+	padding-right: 10px;
+	display: none;
 }
 
 nav {
@@ -121,6 +144,7 @@ nav .navWide .wideDiv a {
 }
 nav .navWide .wideDiv a.admin {
 	float: right;
+	padding-right: 0px;
 }
 nav .navNarrow i {
     float: left;
@@ -136,7 +160,7 @@ nav .navNarrow .narrowLinks a {
 }
 
 a {
-	color: black;
+	color: #3E9FFF;
 	text-decoration: none;
 }
 a:hover {
@@ -146,4 +170,17 @@ a:hover {
 
 th {
 	color: #88CE00;
+}
+
+#latestbox {
+	float: right;
+	background-color: #88CE00;
+	border-radius: 4px;
+	padding: 10px;
+}
+#latestbox a {
+	color: #FF0025;
+}
+#latestbox a:hover {
+	color: #FF4200;
 }

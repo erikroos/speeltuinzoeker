@@ -8,6 +8,7 @@ $db = new Db ();
 $db->connect ();
 
 $speeltuin = new Speeltuin($db, $id);
+$photos = $speeltuin->getPhotos();
 
 $alleVoorzieningen = $speeltuin->getAllVoorzieningen();
 

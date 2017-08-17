@@ -67,12 +67,10 @@ include_once "./inc/header.php";
 	<div class="form-group">
 		<?php foreach ($allVoorzieningen as $voorzieningId => $voorzieningNaam): ?>
 			<div class="checkbox">
-			<label> <input type="checkbox" id="v<?php echo $voorzieningId; ?>"
-				name="v<?php echo $voorzieningId; ?>" value="1" class="form-control"
-				<?php if (in_array($voorzieningId, $selectedVoorzieningen)) echo "checked=\"checked\""; ?>>
-					<?php echo $voorzieningNaam; ?>
-				</label>
-		</div>
+			<label>
+				<input type="checkbox" id="v<?php echo $voorzieningId; ?>" name="v<?php echo $voorzieningId; ?>" value="1" class="form-control" <?php if (in_array($voorzieningId, $selectedVoorzieningen)) echo "checked=\"checked\""; ?>><?php echo $voorzieningNaam; ?>
+			</label>
+			</div>
 		<?php endforeach; ?>
 	</div>
 
@@ -80,14 +78,12 @@ include_once "./inc/header.php";
 	<?php if (isset($photos) && sizeof($photos) > 0): ?>
 		<div class="photobar">
 			<?php foreach ($photos as $photo): ?>
-				<img src="<?php echo $photo; ?>" alt="Foto van deze speeltuin"
-			title="Foto van deze speeltuin" />
+				<img src="<?php echo $photo; ?>" alt="Foto van deze speeltuin" title="Foto van deze speeltuin" />
 			<?php endforeach; ?>
 		</div>
-	<p>Je kunt foto's toevoegen en verwijderen vanuit het overzicht van je
-		speeltuinen.</p>
+		<p id="photo-info">Je kunt foto's toevoegen en verwijderen vanuit het overzicht van je speeltuinen.</p>
 	<?php else: ?>
-		<p>Er zijn nog geen foto's.
+		<p id="photo-info">Er zijn nog geen foto's.
 		<?php if ($isUser): ?>
 			Je kunt deze <?php if ($id ==0): ?>na het opslaan<?php endif; ?> vanuit het overzicht van je speeltuinen toevoegen.</p>
 		<?php endif; ?>

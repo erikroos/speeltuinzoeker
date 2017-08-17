@@ -4,8 +4,7 @@ class Speeltuin
     private $db;
     private $id;
 
-    function __construct($db = null, $id = 0)
-    {
+    function __construct($db = null, $id = 0) {
         $this->db = $db;
         $this->id = $id;
     }
@@ -218,12 +217,12 @@ class Speeltuin
 	}
 
 	public function getPhotos() {
-		$photos = [ ];
-		$res = $this->db->query ( sprintf ( "SELECT url FROM bestand
+		$photos = [];
+		$res = $this->db->query(sprintf("SELECT url FROM bestand
 				JOIN speeltuin_bestand ON bestand.id = speeltuin_bestand.bestand_id
-				WHERE speeltuin_bestand.speeltuin_id = %d", $this->id ) );
-		while ( $row = $res->fetch_assoc () ) {
-			$photos [] = $row ["url"];
+				WHERE speeltuin_bestand.speeltuin_id = %d", $this->id));
+		while ($row = $res->fetch_assoc()) {
+			$photos[] = $row["url"];
 		}
 		return $photos;
 	}
