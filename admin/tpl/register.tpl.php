@@ -13,34 +13,33 @@ include_once "./inc/header.php";
 <form method="post" action="register.php">
 
 	<div class="form-group">
-		<label for="naam">Naam</label> <input type="text" id="naam"
-			name="naam" value="<?php echo $name; ?>" class="form-control" />
+		<label for="naam">Naam</label>
+		<input type="text" id="naam" name="naam" value="<?php echo $name; ?>" class="form-control" />
 	</div>
 
 	<div class="form-group">
-		<label for="email">E-mail</label> <input type="text" id="email"
-			name="email" value="<?php echo $email; ?>" class="form-control" />
+		<label for="email">E-mail</label>
+		<input type="text" id="email" name="email" value="<?php echo $email; ?>" class="form-control" />
 	</div>
 
 	<div class="form-group">
-		<label for="password">Wachtwoord</label> <input type="password"
-			id="password" name="password" value="" class="form-control" />
+		<label for="password">Wachtwoord</label>
+		<input type="password" id="password" name="password" value="" class="form-control" />
 	</div>
 	
 	<div class="form-group">
-		<label for="password">Wachtwoord (herhaal)</label> <input type="password"
-			id="password2" name="password2" value="" class="form-control" />
+		<label for="password">Wachtwoord (herhaal)</label>
+		<input type="password" id="password2" name="password2" value="" class="form-control" />
 	</div>
 	
 	<div class="form-group">
-		<label for="password">Anti-spamvraag: 1 + 1 =</label> <input type="text"
-			id="antispam" name="antispam" value="" class="form-control" />
+		<label for="password">Anti-spamvraag: 1 + 1 =</label>
+		<input type="text" id="antispam" name="antispam" value="" class="form-control" />
 	</div>
 
 	<hr>
 	<div class="buttonbar">
-		<input type="submit" name="Submit" value="Aanmaken"
-			class="btn btn-default" />
+		<input type="submit" name="Submit" value="Aanmaken" class="btn btn-default" />
 	</div>
 
 </form>
