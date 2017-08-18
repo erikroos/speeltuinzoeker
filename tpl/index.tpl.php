@@ -12,8 +12,11 @@
     </div>
 
     <div id="searchbar">
-        <textarea id="locatie_omschrijving" name="locatie_omschrijving" rows="1" maxlength="1000" class="form-control"><?php echo $defaultLocationString; ?></textarea>
-        <button id="place-marker" value="Zet marker op omschreven locatie" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i>&nbsp;Zoek</button>
+    	<form id="searchform">
+        	<input type="text" id="locatie_omschrijving" name="locatie_omschrijving" class="form-control" value="<?php echo $defaultLocationString; ?>" />
+        	<button id="place-marker" value="Zet marker op omschreven locatie" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i>&nbsp;Zoek</button>
+    		<input type="submit" style="display: none" />
+    	</form>
     </div>
 
     <div id="map-div"></div>
@@ -116,18 +119,27 @@
         map.setCenter(backupPos);
     }
 
-    $('#place-marker').click(function() {
-        event.preventDefault();
-        $.get(
+    var searchForPlace = function() {
+    	$.get(
             "https://maps.googleapis.com/maps/api/geocode/json?address=" + $('#locatie_omschrijving').val() + "&key=AIzaSyCXVNGEew5BT-iv9th2jqc4-QejCJxhoRk",
             function(data) {
                 var pos = {
                     lat: data.results[0].geometry.location.lat,
-                    lng: data.results[0].geometry.location.lng
+                	lng: data.results[0].geometry.location.lng
                 };
-                map.setCenter(pos);
-            }
-        );
+            	map.setCenter(pos);
+        	}
+    	);
+    }
+
+    $('#place-marker').click(function() {
+        event.preventDefault();
+        searchForPlace();
+    });
+
+    $('#searchform').submit(function() {
+        event.preventDefault();
+        searchForPlace();
     });
 
     $('#locatie_omschrijving').click(function() {

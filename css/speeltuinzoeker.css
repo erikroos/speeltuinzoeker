@@ -95,6 +95,22 @@ p.notice {
 .detail-photobar img {
 	max-height: 300px;
 }
+/* the arrows */
+.slick-prev {
+	z-index: 1000;
+}
+.slick-prev:before, .slick-next:before {
+    color: #3E9FFF;
+    font-weight: bold;
+}
+/* the slides */
+.slick-slide {
+	/*margin: 0 27px;*/
+}
+/* the parent */
+.slick-list {
+	/*margin: 0 -27px;*/
+}
 
 #photo-info {
 	clear: left;
@@ -124,10 +140,15 @@ p.notice {
 	display: block;
 }
 .logo-resp {
-	float: left;
+	width: 100%;
+	margin: 0 auto;
 	margin-bottom: 10px;
 	padding-right: 10px;
 	display: none;
+}
+.logo-resp img {
+	margin-left: auto;
+	margin-right: auto;
 }
 
 nav {

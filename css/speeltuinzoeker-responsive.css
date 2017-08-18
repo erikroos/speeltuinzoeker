@@ -17,7 +17,7 @@
 	}
 	
 	.logo-resp {
-		display: inline;
+		display: block;
 	}
 	.logo {
 		display: none;

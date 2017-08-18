@@ -39,22 +39,26 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$('.detail-photobar').slick({
-			  dots: true,
-			  arrows: true,
-			  infinite: false,
-			  slidesToShow: <?php echo sizeof($photos); ?>,
-			  slidesToScroll: <?php echo sizeof($photos); ?>,
-			  responsive: [
-			    {
-			      breakpoint: 600,
-			      settings: {
-			        slidesToShow: 1,
-			        slidesToScroll: 1
-			      }
-			    }
-			    // You can unslick at a given breakpoint now by adding:
-			    // settings: "unslick"
-			    // instead of a settings object
+				centerMode: true,
+				variableWidth: true,
+				dots: true,
+				arrows: true,
+				infinite: true,
+				slidesToShow: 1<?php //echo sizeof($photos); ?>,
+				slidesToScroll: 1<?php //echo sizeof($photos); ?>,
+				responsive: [
+				    {
+				    	breakpoint: 800,
+				    	settings: {
+					    	centerMode: false,
+					    	arrows: false,
+				      		slidesToShow: 1,
+				      		slidesToScroll: 1
+				    	}
+				    }
+				    // You can unslick at a given breakpoint now by adding:
+				    // settings: "unslick"
+				    // instead of a settings object
 			  ]
 	  		});
 		});
