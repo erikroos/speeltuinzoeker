@@ -118,6 +118,17 @@ class Speeltuin
 		return "Onbekend";
 	}
 	
+	public function getAuthorEmail() {
+		$authorId = $this->getAuthor();
+		$res = $this->db->query(sprintf("SELECT email FROM user WHERE id = %d", $authorId));
+		if ($res !== false) {
+			if ($row = $res->fetch_assoc()) {
+				return $row["email"];
+			}
+		}
+		return null;
+	}
+	
 	public function getLastModified() {
 		$res = $this->db->query(sprintf("SELECT modified_on FROM speeltuin WHERE id = %d", $this->id));
 		if ($res !== false) {

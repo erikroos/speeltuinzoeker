@@ -37,7 +37,15 @@ class Auth {
 				VALUES (\"%s\", \"%s\", \"%s\", 0, 0, \"%s\");", $this->db->realEscapeString($name), $this->db->realEscapeString($email), $this->hashPassword($password), $activationCode));
 		
 		if ($res == true) {
-			$message = "<p>Beste " . $name . ",</p>" . "<p>Je hebt je aangemeld voor een account bij Speeltuinzoeker.nl. Welkom!<br>" . "Je hoeft alleen nog even op " . "<a href='" . BASE_URL . "admin/activate.php?code=" . $activationCode . "'>deze link</a>" . " te klikken om je account te activeren." . "Daarna kun je direct inloggen en beginnen met het invoeren en beoordelen van speeltuinen!</p>" . "<p>Met vriendelijke groeten,<br>" . "Het team van Speeltuinzoeker.nl</p>" . "<p>PS: werkt de link niet? Voer dan dit webadres in in de adresbalk van je browser:<br>" . BASE_URL . "admin/activate.php?code=" . $activationCode . "</p>";
+			$message = "<p>Beste " . $name . ",</p>" . 
+				"<p>Je hebt je aangemeld voor een account bij Speeltuinzoeker.nl. Welkom!<br>" . 
+				"Je hoeft alleen nog even op " . 
+				"<a href='" . BASE_URL . "admin/activate.php?code=" . $activationCode . "'>deze link</a>" . 
+				" te klikken om je account te activeren." . 
+				"Daarna kun je direct inloggen en beginnen met het invoeren en beoordelen van speeltuinen!</p>" . 
+				"<p>Met vriendelijke groeten,<br>" . 
+				"Het team van Speeltuinzoeker.nl</p>" . 
+				"<p>PS: werkt de link niet? Voer dan dit webadres in in de adresbalk van je browser:<br>" . BASE_URL . "admin/activate.php?code=" . $activationCode . "</p>";
 			Mail::sendMail($email, "Activeer je aanmelding bij Speeltuinzoeker.nl", $message);
 		}
 		
@@ -58,10 +66,21 @@ class Auth {
 	}
 	
 	public function logout() {
-		session_unset ();
+		session_unset();
 	}
 	
-	private function hashPassword($password) {
+	public function hashPassword($password) {
 		return md5($password . SALT);
+	}
+	
+	public function randomPassword() {
+	    $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+	    $pass = [];
+	    $alphaLength = strlen($alphabet) - 1;
+	    for ($i = 0; $i < 8; $i++) {
+	        $n = rand(0, $alphaLength);
+	        $pass[] = $alphabet[$n];
+	    }
+	    return implode($pass);
 	}
 }

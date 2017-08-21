@@ -3,6 +3,7 @@ require_once "../cfg/config.php";
 require_once "./inc/functions.php";
 
 $id = get_request_value("id", 0);
+$start = get_request_value("start", 0);
 
 $db = new Db();
 $db->connect();
@@ -25,25 +26,41 @@ if ($_SESSION["admin"] == 1) {
 	$isUser = true;
 }
 
-if ($_SERVER ['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	
-	if ($_POST ["Submit"] == "Keur goed") {
+	if ($_POST["Submit"] == "Keur goed") {
 		
 		$speeltuin->activate();
 		
-		// TODO mail sturen aan author
+		$userEmail = $speeltuin->getAuthorEmail();
+		if ($userEmail != null) {
+			$message = "<p>Beste " . $speeltuin->getAuthorName() . ",</p>" . 
+				"<p>Je speeltuin \"" . $speeltuin->getName() . "\" is goedgekeurd!</p>" . 
+				"<p>Hij is nu <a href='" . BASE_URL . "index.php?speeltuin=" . $speeltuin->getId() . "'>zichtbaar</a> op de site.</p>" . 
+				"<p>Met vriendelijke groeten,<br>" . 
+				"Het team van Speeltuinzoeker.nl</p>";
+			Mail::sendMail($userEmail, "Speeltuin " . $speeltuin->getName() . " geactiveerd", $message);
+		}
 		
 		$_SESSION["feedback"] = "Speeltuin goedgekeurd.";
-		header("Location: view.php?status=1");
+		header("Location: view.php?status=1&start=" . $start);
 		exit();
-	} else if ($_POST ["Submit"] == "Keur af") {
+	} else if ($_POST["Submit"] == "Keur af") {
 		
 		$speeltuin->deactivate();
 		
-		// TODO mail sturen aan author met reden $_POST["afkeur_reden"]
+		$userEmail = $speeltuin->getAuthorEmail();
+		if ($userEmail != null) {
+			$message = "<p>Beste " . $speeltuin->getAuthorName() . ",</p>" .
+					"<p>Je speeltuin \"" . $speeltuin->getName() . "\" is helaas afgekeurd.</p>" .
+					"<p>De reden hiervan is: " . $_POST["afkeur_reden"] . "</p>" .
+					"<p>Met vriendelijke groeten,<br>" .
+					"Het team van Speeltuinzoeker.nl</p>";
+			Mail::sendMail($userEmail, "Speeltuin " . $speeltuin->getName() . " geactiveerd", $message);
+		}
 		
 		$_SESSION["feedback"] = "Speeltuin afgekeurd.";
-		header("Location: view.php?status=2");
+		header("Location: view.php?status=2&start=" . $start);
 		exit();
 	} else {
 		
@@ -73,7 +90,7 @@ if ($_SERVER ['REQUEST_METHOD'] == 'POST') {
 		
 		$speeltuin->setVoorzieningen($_POST);
 		
-		header("Location: view.php?user");
+		header("Location: view.php?user&start=" . $start);
 		exit();
 	}
 } else {

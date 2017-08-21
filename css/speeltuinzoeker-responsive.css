@@ -2,6 +2,9 @@
     #latestbox {
         display: none;
     }
+    #latestbox-resp {
+        display: block;
+    }
 
     .voorzieningen {
         clear: both;

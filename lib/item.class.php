@@ -41,4 +41,18 @@ class Item
 		}
 		return "Onbekend";
 	}
+	
+	public function insertOrUpdate($name) {
+		if ($this->id == 0) {
+			$this->db->query(sprintf("INSERT INTO voorziening (naam) VALUES (\"%s\")", $name));
+			$this->id = $this->db->getLatestId();
+		} else {
+			$this->db->query(sprintf("UPDATE voorziening SET naam = \"%s\" WHERE id = %d", $name, $this->id));
+		}
+		return $this->id;
+	}
+	
+	public function delete() {
+		$this->db->query(sprintf("DELETE FROM voorziening WHERE id = %d", $this->id));
+	}
 }

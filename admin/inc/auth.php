@@ -1,17 +1,18 @@
 <?php
 // included via .htaccess auto prepend
-session_start ();
+session_start();
 
 $pagesWithoutAuth = [ 
 		"login.php",
 		"logout.php",
 		"register.php",
-		"activate.php" 
+		"activate.php",
+		"forgot.php"
 ];
 
-$uriParts = explode ( "/", $_SERVER ["SCRIPT_NAME"] );
+$uriParts = explode("/", $_SERVER["SCRIPT_NAME"]);
 
-if (! in_array ( end ( $uriParts ), $pagesWithoutAuth ) && ! isset ( $_SESSION ["user_id"] )) {
-	header ( "Location: login.php" );
-	exit ();
+if (!in_array(end($uriParts), $pagesWithoutAuth ) && !isset($_SESSION ["user_id"])) {
+	header("Location: login.php");
+	exit();
 }

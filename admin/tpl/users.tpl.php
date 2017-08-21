@@ -9,9 +9,9 @@ include_once "./inc/header.php";
 
 <p>
 <?php if ($active == 1): ?>
-	<a href="users.php?active=0">Schakel over naar <strong>inactieve</strong> gebruikers</a>
+	<a href="users.php?active=0"><i class="fa fa-refresh" aria-hidden="true"></i>&nbsp;Schakel over naar <strong>inactieve</strong> gebruikers</a>
 <?php else: ?>
-	<a href="users.php?active=1">Schakel over naar <strong>actieve</strong> gebruikers</a>
+	<a href="users.php?active=1"><i class="fa fa-refresh" aria-hidden="true"></i>&nbsp;Schakel over naar <strong>actieve</strong> gebruikers</a>
 <?php endif; ?>
 </p>
 
@@ -33,8 +33,7 @@ include_once "./inc/header.php";
 			<tr>
 				<th>Naam</th>
 				<th>E-mail</th>
-				<th></th>
-				<th></th>
+				<?php if ($active == 1): ?><th></th><?php endif; ?>
 			</tr>
 		</thead>
 		<tbody>
@@ -42,8 +41,7 @@ include_once "./inc/header.php";
 			<tr>
 				<td><?php echo $row["naam"]; ?></td>
 				<td><?php echo $row["email"]; ?></td>
-				<td></td>
-				<td></td>
+				<?php if ($active == 1): ?><td><a href="deactivate.php?id=<?php echo $row["id"]; ?>">Deactiveer</a></td><?php endif; ?>
 			</tr>
 		<?php endforeach; ?>
 		</tbody>

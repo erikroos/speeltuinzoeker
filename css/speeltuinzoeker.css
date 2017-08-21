@@ -47,8 +47,14 @@
 	width: 300px;
 }
 
-div.checkbox {
+.checkbox {
 	margin-bottom: 20px;
+}
+input[type=checkbox].form-control {
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    vertical-align: -8px;
 }
 
 #place-marker {
@@ -70,6 +76,7 @@ div.checkbox {
 	height: 100px;
 	float: left;
 	margin-right: 20px;
+	margin-bottom: 10px;
 }
 .photo-meta {
 	float: left;
@@ -204,4 +211,22 @@ th {
 }
 #latestbox a:hover {
 	color: #FF4200;
+}
+#latestbox-resp {
+	display: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: #88CE00;
+	border-radius: 4px;
+    padding: 5px;
+}
+#latestbox-resp a {
+	color: #FF0025;
+}
+#latestbox-resp a:hover {
+	color: #FF4200;
+}
+
+#missing-item {
+	margin-bottom: 20px;
 }

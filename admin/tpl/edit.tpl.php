@@ -8,6 +8,7 @@ include_once "./inc/header.php";
 <form method="post" action="edit.php">
 
 	<input type="hidden" id="id" name="id" value="<?php echo $id; ?>" />
+	<input type="hidden" id="start" name="start" value="<?php echo $start; ?>" />
 	
 	<?php if ($id > 0): ?>
 	<p>
@@ -63,13 +64,18 @@ include_once "./inc/header.php";
 	</div>
 
 	<h2>Voorzieningen</h2>
+	
+	<p id="missing-item"><em>Mist er een voorziening?</em>
+	Stuur een mailtje met uitleg aan <a href="mailto:info@speeltuinzoeker.nl">info@speeltuinzoeker.nl</a>
+	om een voorziening toe te laten voegen.</p>
 
 	<div class="form-group">
 		<?php foreach ($allVoorzieningen as $voorzieningId => $voorzieningNaam): ?>
 			<div class="checkbox">
-			<label>
-				<input type="checkbox" id="v<?php echo $voorzieningId; ?>" name="v<?php echo $voorzieningId; ?>" value="1" class="form-control" <?php if (in_array($voorzieningId, $selectedVoorzieningen)) echo "checked=\"checked\""; ?>><?php echo $voorzieningNaam; ?>
-			</label>
+				<label>
+					<input type="checkbox" id="v<?php echo $voorzieningId; ?>" name="v<?php echo $voorzieningId; ?>" value="1" class="form-control" <?php if (in_array($voorzieningId, $selectedVoorzieningen)) echo "checked=\"checked\""; ?>>
+					<?php echo $voorzieningNaam; ?>
+				</label>
 			</div>
 		<?php endforeach; ?>
 	</div>

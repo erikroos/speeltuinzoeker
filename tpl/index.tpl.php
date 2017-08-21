@@ -20,6 +20,17 @@
     </div>
 
     <div id="map-div"></div>
+    
+    <div id="latestbox-resp">
+        <p>Er zijn al <strong><?php echo $totalNr; ?></strong> speeltuinen!</p>
+        <?php if ($latestSpeeltuin != null): ?>
+            <p>
+                De nieuwste: <strong><?php echo $latestSpeeltuin["naam"]; ?></strong><br>
+                <?php if (!empty($latestSpeeltuin["locatie_omschrijving"])) echo $latestSpeeltuin["locatie_omschrijving"] . "<br>"; ?>
+                <a href="detail.php?speeltuin=<?php echo $latestSpeeltuin["id"]; ?>">Meer</a>
+            </p>
+        <?php endif; ?>
+    </div>
 
 <?php include "footer.tpl.php"; ?>
 
@@ -135,11 +146,13 @@
     $('#place-marker').click(function() {
         event.preventDefault();
         searchForPlace();
+        $('#locatie_omschrijving').blur();
     });
 
     $('#searchform').submit(function() {
         event.preventDefault();
         searchForPlace();
+        $('#locatie_omschrijving').blur();
     });
 
     $('#locatie_omschrijving').click(function() {

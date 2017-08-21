@@ -40,6 +40,7 @@
 		$(document).ready(function(){
 			$('.detail-photobar').slick({
 				centerMode: true,
+				centerPadding: '60px',
 				variableWidth: true,
 				dots: true,
 				arrows: true,

@@ -15,13 +15,19 @@ $item = new Item($db, $id);
 $del = get_request_value("del", 0);
 
 if ($del == 1) {
-	// TODO verwijderen
+	
+	$item->delete();
+	
 	header("Location: items.php");
 	exit;
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	// TODO opslaan/bewerken
+	
+	$name = get_request_value("naam", "");
+	
+	$item->insertOrUpdate($name);
+	
 	header("Location: items.php");
 	exit;
 }

@@ -5,7 +5,9 @@ include_once "./inc/header.php";
 
 <h1><?php echo $pageTitle; ?></h1>
 
-<p><a href="./index.php"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i>&nbsp;Terug</a></p>
+<p><a href="index.php"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i>&nbsp;Terug</a></p>
+
+<p><a href="item.php?id=0"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;Voeg toe</a></p>
 
 <div class="table-responsive">
 	<table class="table">

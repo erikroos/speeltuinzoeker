@@ -15,7 +15,7 @@ include_once "./inc/header.php";
 <?php endif; ?>
 
 <?php if ($isUser): ?>
-<p><a href="edit.php?id=0">Voeg speeltuin toe</a></p>
+<p><a href="edit.php?id=0&start=<?php echo $start; ?>">Voeg speeltuin toe</a></p>
 <?php endif; ?>
 
 <div>
@@ -57,14 +57,14 @@ include_once "./inc/header.php";
 				<td><?php echo $row["status"]; ?></td>
 				<td>
 					<?php if ($isUser): ?>
-						<a href="./edit.php?id=<?php echo $row["id"]; ?>">Bewerk</a>
+						<a href="./edit.php?id=<?php echo $row["id"]; ?>&start=<?php echo $start; ?>">Bewerk</a>
 					<?php elseif ($isAdmin): ?>
 						<?php if ($status == 0): ?>
-							<a href="./edit.php?id=<?php echo $row["id"]; ?>">Keur goed of af</a>
+							<a href="./edit.php?id=<?php echo $row["id"]; ?>&start=<?php echo $start; ?>">Keur goed of af</a>
 						<?php elseif ($status == 1): ?>
-							<a href="./edit.php?id=<?php echo $row["id"]; ?>">Bekijk</a>
+							<a href="./edit.php?id=<?php echo $row["id"]; ?>&start=<?php echo $start; ?>">Bekijk</a>
 						<?php elseif ($status == 2): ?>
-							<a href="./edit.php?id=<?php echo $row["id"]; ?>">Bekijk</a>
+							<a href="./edit.php?id=<?php echo $row["id"]; ?>&start=<?php echo $start; ?>">Bekijk</a>
 						<?php endif; ?>
 					<?php endif; ?>
 				</td>

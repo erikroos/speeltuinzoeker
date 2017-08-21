@@ -30,6 +30,45 @@ class User
 		return 0;
 	}
 	
+	public function getByEmail($email) {
+		$res = $this->db->query(sprintf("SELECT id FROM user WHERE email = \"%s\"", $email));
+		if ($res !== false) {
+			if ($row = $res->fetch_assoc()) {
+				$this->id = $row["id"];
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	// Instance functions:
 	
+	public function getName() {
+		$res = $this->db->query(sprintf("SELECT naam FROM user WHERE id = %d", $this->id));
+		if ($res !== false) {
+			if ($row = $res->fetch_assoc()) {
+				return $row["naam"];
+			}
+		}
+		return "Onbekend";
+	}
+	
+	public function getEmail() {
+		$res = $this->db->query(sprintf("SELECT email FROM user WHERE id = %d", $this->id));
+		if ($res !== false) {
+			if ($row = $res->fetch_assoc()) {
+				return $row["email"];
+			}
+		}
+		return null;
+	}
+	
+	public function setPassword(Auth $auth, $password) {
+		$password = $auth->hashPassword($password);
+		$this->db->query(sprintf("UPDATE user SET password = \"%s\" WHERE id = %d", $password, $this->id));
+	}
+	
+	public function deactivate() {
+		$this->db->query(sprintf("UPDATE user SET active = 0 WHERE id = %d", $this->id));
+	}
 }
