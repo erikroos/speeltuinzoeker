@@ -14,6 +14,11 @@ include_once "./inc/header.php";
 <?php unset($_SESSION["feedback"]); ?>
 <?php endif; ?>
 
+<?php if ($_SESSION["password_generated"] == 1): ?>
+<p class="notice">Je gebruikt een automatisch gegenereerd wachtwoord.
+We raden je aan (weer) een <a href="account.php">eigen wachtwoord in te stellen</a>.</p>
+<?php endif; ?>
+
 <?php if ($isUser): ?>
 <p><a href="edit.php?id=0&start=<?php echo $start; ?>"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;Voeg speeltuin toe</a></p>
 <?php endif; ?>

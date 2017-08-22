@@ -17,8 +17,8 @@ include_once "./inc/header.php";
 <?php else: ?>
 <h1>Welkom <?php echo $_SESSION["user_name"]; ?></h1>
 <p>
-	<a href="edit.php?id=0">Voeg speeltuin toe</a><br>
-	<a href="view.php?user">Bekijk mijn speeltuinen</a>
+	<a href="edit.php?id=0"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;Voeg speeltuin toe</a><br>
+	<a href="view.php?user"><i class="fa fa-list" aria-hidden="true"></i>&nbsp;Bekijk mijn speeltuinen</a>
 </p>
 <?php endif; ?>
 

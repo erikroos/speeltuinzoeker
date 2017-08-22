@@ -15,6 +15,7 @@ class Auth {
 			$_SESSION["user_id"] = $row["id"];
 			$_SESSION["user_name"] = $row["naam"];
 			$_SESSION["admin"] = $row["admin"];
+			$_SESSION["password_generated"] = $row["password_generated"];
 			
 			$this->db->query(sprintf("UPDATE user SET last_login = NOW(), nr_of_logins = nr_of_logins + 1 WHERE id = %d", $row["id"]));
 			
@@ -85,5 +86,9 @@ class Auth {
 	        $pass[] = $alphabet[$n];
 	    }
 	    return implode($pass);
+	}
+	
+	public function getLoggedInUser() {
+		return new User($this->db, $_SESSION["user_id"]);
 	}
 }

@@ -234,3 +234,10 @@ th {
 #nonPopItems {
 	display: none;
 }
+
+.notice a {
+	color: #FF0025;
+}
+.notice a:hover {
+	color: #FF4200;
+}

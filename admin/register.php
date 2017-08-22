@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$feedback = "Vul alle velden in.";
 	}
 	
-	// TODO validiteit van variabelen, m.n. email, controleren
+	// TODO validiteit van variabelen, m.n. email, controleren + kwaliteit van password
 	
 	if ($feedback == null) {
 		if (!$auth->userExists($email)) {

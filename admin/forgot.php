@@ -20,6 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$newPass = $auth->randomPassword();
 		
 		$user->setPassword($auth, $newPass);
+		$user->setPasswordGenerated(1);
 		
 		$message = "<p>Beste " . $user->getName() . ",</p>" . 
 				"<p>Je hebt een nieuw wachtwoord aangevraagd voor Speeltuinzoeker.nl.</p>" .

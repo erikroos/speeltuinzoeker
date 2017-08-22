@@ -63,9 +63,17 @@ class User
 		return null;
 	}
 	
+	public function setName($name) {
+		$this->db->query(sprintf("UPDATE user SET naam = \"%s\" WHERE id = %d", $name, $this->id));
+	}
+	
 	public function setPassword(Auth $auth, $password) {
 		$password = $auth->hashPassword($password);
 		$this->db->query(sprintf("UPDATE user SET password = \"%s\" WHERE id = %d", $password, $this->id));
+	}
+	
+	public function setPasswordGenerated($value) {
+		$this->db->query(sprintf("UPDATE user SET password_generated = %d WHERE id = %d", $value, $this->id));
 	}
 	
 	public function deactivate() {

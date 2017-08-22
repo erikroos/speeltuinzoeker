@@ -28,7 +28,7 @@ include_once "./inc/header.php";
 	</div>
 	
 	<div class="form-group">
-		<label for="password">Wachtwoord (herhaal)</label>
+		<label for="password2">Wachtwoord (herhaal)</label>
 		<input type="password" id="password2" name="password2" value="" class="form-control" />
 	</div>
 	
