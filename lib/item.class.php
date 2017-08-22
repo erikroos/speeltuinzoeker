@@ -42,12 +42,24 @@ class Item
 		return "Onbekend";
 	}
 	
-	public function insertOrUpdate($name) {
+	public function getPopular() {
+		$res = $this->db->query(sprintf("SELECT popular FROM voorziening WHERE id = %d", $this->id));
+		if ($res !== false) {
+			if ($row = $res->fetch_assoc()) {
+				return $row["popular"];
+			}
+		}
+		return 0;
+	}
+	
+	public function insertOrUpdate($name, $popular) {
 		if ($this->id == 0) {
-			$this->db->query(sprintf("INSERT INTO voorziening (naam) VALUES (\"%s\")", $name));
+			$this->db->query(sprintf("INSERT INTO voorziening (naam, popular) VALUES (\"%s\", %d)", 
+					$name, $popular));
 			$this->id = $this->db->getLatestId();
 		} else {
-			$this->db->query(sprintf("UPDATE voorziening SET naam = \"%s\" WHERE id = %d", $name, $this->id));
+			$this->db->query(sprintf("UPDATE voorziening SET naam = \"%s\", popular = %d WHERE id = %d", 
+					$name, $popular, $this->id));
 		}
 		return $this->id;
 	}

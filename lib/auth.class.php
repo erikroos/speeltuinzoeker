@@ -15,6 +15,9 @@ class Auth {
 			$_SESSION["user_id"] = $row["id"];
 			$_SESSION["user_name"] = $row["naam"];
 			$_SESSION["admin"] = $row["admin"];
+			
+			$this->db->query(sprintf("UPDATE user SET last_login = NOW(), nr_of_logins = nr_of_logins + 1 WHERE id = %d", $row["id"]));
+			
 			return true;
 		}
 		

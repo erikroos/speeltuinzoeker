@@ -25,8 +25,11 @@ if ($del == 1) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	
 	$name = get_request_value("naam", "");
-	
-	$item->insertOrUpdate($name);
+	$popular = 0;
+	if (isset($_POST["popular"])) {
+		$popular = 1;
+	}
+	$item->insertOrUpdate($name, $popular);
 	
 	header("Location: items.php");
 	exit;
@@ -34,10 +37,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 if ($id == 0) {
 	$name = "";
+	$popular = 0;
 	$pageTitle = "Nieuwe voorziening";
 } else {
 	$name = $item->getName();
-	$pageTitle = "Voorziening " . $name;
+	$popular = $item->getPopular();
+	$pageTitle = "Voorziening '" . $name . "'";
 }
 
 include "tpl/item.tpl.php";

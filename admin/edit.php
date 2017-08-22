@@ -103,13 +103,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$status_id = 0;
 	$public = 1;
 	
-	$allVoorzieningen = $speeltuin->getAllVoorzieningen();
+	$allVoorzieningenPop = $speeltuin->getAllVoorzieningen(1);
+	$allVoorzieningenNonPop = $speeltuin->getAllVoorzieningen(0);
 	$selectedVoorzieningen = [];
 	$photos = [];
 	
 	if ($id > 0) { // bestaand
-		list ($name, $omschrijving, $locatieOmschrijving, $lat, $lon, $status_id, $public) = $speeltuin->getFields();
+		list($name, $omschrijving, $locatieOmschrijving, $lat, $lon, $status_id, $public) = $speeltuin->getFields();
+		
 		$selectedVoorzieningen = $speeltuin->getVoorzieningen();
+		$selectedVoorzieningIds = array_keys($selectedVoorzieningen);
+		foreach ($allVoorzieningenPop as $voorzieningId => $voorzieningNaam) {
+			if (in_array($voorzieningId, $selectedVoorzieningIds)) {
+				unset($allVoorzieningenPop[$voorzieningId]);
+			}
+		}
+		foreach ($allVoorzieningenNonPop as $voorzieningId => $voorzieningNaam) {
+			if (in_array($voorzieningId, $selectedVoorzieningIds)) {
+				unset($allVoorzieningenNonPop[$voorzieningId]);
+			}
+		}
+		
 		$photos = $speeltuin->getPhotos();
 	}
 }

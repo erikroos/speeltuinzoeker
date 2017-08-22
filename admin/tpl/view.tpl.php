@@ -15,7 +15,7 @@ include_once "./inc/header.php";
 <?php endif; ?>
 
 <?php if ($isUser): ?>
-<p><a href="edit.php?id=0&start=<?php echo $start; ?>">Voeg speeltuin toe</a></p>
+<p><a href="edit.php?id=0&start=<?php echo $start; ?>"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;Voeg speeltuin toe</a></p>
 <?php endif; ?>
 
 <div>

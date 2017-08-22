@@ -70,14 +70,35 @@ include_once "./inc/header.php";
 	om een voorziening toe te laten voegen.</p>
 
 	<div class="form-group">
-		<?php foreach ($allVoorzieningen as $voorzieningId => $voorzieningNaam): ?>
+		<?php foreach ($selectedVoorzieningen as $voorzieningId => $voorzieningNaam): ?>
 			<div class="checkbox">
 				<label>
-					<input type="checkbox" id="v<?php echo $voorzieningId; ?>" name="v<?php echo $voorzieningId; ?>" value="1" class="form-control" <?php if (in_array($voorzieningId, $selectedVoorzieningen)) echo "checked=\"checked\""; ?>>
+					<input type="checkbox" id="v<?php echo $voorzieningId; ?>" name="v<?php echo $voorzieningId; ?>" value="1" class="form-control" checked="checked" />
 					<?php echo $voorzieningNaam; ?>
 				</label>
 			</div>
 		<?php endforeach; ?>
+		<?php foreach ($allVoorzieningenPop as $voorzieningId => $voorzieningNaam): ?>
+			<div class="checkbox">
+				<label>
+					<input type="checkbox" id="v<?php echo $voorzieningId; ?>" name="v<?php echo $voorzieningId; ?>" value="1" class="form-control" />
+					<?php echo $voorzieningNaam; ?>
+				</label>
+			</div>
+		<?php endforeach; ?>
+		<?php if (sizeof($allVoorzieningenNonPop) > 0): ?>
+			<a href="#" id="expand_items"><i class="fa fa-chevron-circle-down" aria-hidden="true"></i>&nbsp;Meer</a>
+			<div id="nonPopItems">
+			<?php foreach ($allVoorzieningenNonPop as $voorzieningId => $voorzieningNaam): ?>
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" id="v<?php echo $voorzieningId; ?>" name="v<?php echo $voorzieningId; ?>" value="1" class="form-control" />
+						<?php echo $voorzieningNaam; ?>
+					</label>
+				</div>
+			<?php endforeach; ?>
+		<?php endif; ?>
+		</div>
 	</div>
 
 	<h2>Foto's</h2>
@@ -231,6 +252,12 @@ include_once "./inc/header.php";
 			<?php else: // admin ?>
 				window.location = './view.php?status=<?php echo $status_id; ?>';
 			<?php endif; ?>
+		});
+
+		$("#expand_items").click(function() {
+			event.preventDefault();
+			$("#nonPopItems").show();
+			$("#expand_items").hide();
 		});
 	});
     

@@ -1,9 +1,9 @@
 <?php
 function get_request_value($name, $default) {
-	if (isset ( $_POST [$name] )) {
-		return $_POST [$name];
-	} else if (isset ( $_GET [$name] )) {
-		return $_GET [$name];
+	if (isset($_POST[$name])) {
+		return $_POST[$name];
+	} else if (isset($_GET[$name])) {
+		return $_GET[$name];
 	} else {
 		return $default;
 	}

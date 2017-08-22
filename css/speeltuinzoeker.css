@@ -230,3 +230,7 @@ th {
 #missing-item {
 	margin-bottom: 20px;
 }
+
+#nonPopItems {
+	display: none;
+}

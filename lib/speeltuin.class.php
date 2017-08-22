@@ -20,9 +20,15 @@ class Speeltuin
         return $allSpeeltuinen;
     }
 
-    public function getAllVoorzieningen() {
+    public function getAllVoorzieningen($showPopular = 2) {
         $allVoorzieningen = [];
-        $res = $this->db->query("SELECT id, naam FROM voorziening ORDER BY naam");
+        
+        $whereClause = "";
+        if ($showPopular == 0 || $showPopular == 1) {
+        	$whereClause = " WHERE popular = " . $showPopular;
+        }
+        
+        $res = $this->db->query(sprintf("SELECT id, naam FROM voorziening%s ORDER BY naam", $whereClause));
         if ($res !== false) {
             while ($row = $res->fetch_assoc()) {
                 $allVoorzieningen[$row["id"]] = $row["naam"];
@@ -181,11 +187,14 @@ class Speeltuin
 	}
 
 	public function getVoorzieningen() {
-		$selectedVoorzieningen = [ ];
-		$res = $this->db->query ( sprintf ( "SELECT voorziening_id FROM speeltuin_voorziening WHERE speeltuin_id = %d", $this->id ) );
+		$selectedVoorzieningen = [];
+		$res = $this->db->query(sprintf("SELECT voorziening_id, voorziening.naam
+				FROM speeltuin_voorziening
+				JOIN voorziening ON speeltuin_voorziening.voorziening_id = voorziening.id
+				WHERE speeltuin_id = %d", $this->id));
 		if ($res !== false) {
-			while ( $row = $res->fetch_assoc () ) {
-				$selectedVoorzieningen [] = $row ["voorziening_id"];
+			while ($row = $res->fetch_assoc()) {
+				$selectedVoorzieningen[$row["voorziening_id"]] = $row["naam"];
 			}
 		}
 		return $selectedVoorzieningen;

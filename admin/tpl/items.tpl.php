@@ -14,6 +14,7 @@ include_once "./inc/header.php";
 		<thead>
 			<tr>
 				<th>Naam</th>
+				<th>Populair</th>
 				<th></th>
 				<th></th>
 			</tr>
@@ -22,6 +23,7 @@ include_once "./inc/header.php";
 		<?php foreach ($rows as $row): ?>
 			<tr>
 				<td><?php echo $row["naam"]; ?></td>
+				<td><?php echo $row["popular"] == 1 ? "Ja" : "Nee"; ?></td>
 				<td><a href="item.php?id=<?php echo $row["id"]; ?>">Bewerk</a></td>
 				<td><a href="item.php?del=1&id=<?php echo $row["id"]; ?>">Verwijder</a></td>
 			</tr>
