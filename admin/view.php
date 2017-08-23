@@ -4,6 +4,7 @@ require_once "./inc/functions.php";
 
 $start = get_request_value("start", 0);
 $size = get_request_value("size", 10);
+$q = get_request_value("q", "");
 
 $db = new Db();
 $db->connect();
@@ -13,7 +14,7 @@ $isAdmin = false;
 if (isset($_GET["user"])) {
 	$isUser = true;
 	$pageTitle = "Mijn speeltuinen";
-} else if (isset ($_GET["status"]) && is_numeric($_GET["status"]) && $_SESSION["admin"] == 1) {
+} else if (isset($_GET["status"]) && is_numeric($_GET["status"]) && $_SESSION["admin"] == 1) {
 	$isAdmin = true;
 	$status = $_GET["status"];
 	switch ($status) {
@@ -39,6 +40,13 @@ if ($isUser) {
 } else {
 	$whereClause = "WHERE status_id = " . $status;
 }
+$limitClause = "LIMIT " . $start . "," . $size;
+
+if (!empty($q)) {
+	$whereClause .= " AND (speeltuin.naam LIKE \"%" . $q . "%\" OR speeltuin.omschrijving LIKE \"%" . $q . "%\" OR speeltuin.locatie_omschrijving LIKE \"%" . $q . "%\")";
+	$limitClause = "";
+}
+
 $res = $db->query(sprintf("SELECT COUNT(id) AS totalSize FROM speeltuin %s", $whereClause));
 if ($res !== false) {
 	if ($row = $res->fetch_assoc()) {
@@ -46,30 +54,30 @@ if ($res !== false) {
 	}
 }
 
-$res = $db->query ( sprintf ( "SELECT speeltuin.id, speeltuin.naam, locatie_omschrijving,
+$res = $db->query(sprintf("SELECT speeltuin.id, speeltuin.naam, locatie_omschrijving, omschrijving,
 			user.naam AS userNaam, status_id
 			FROM speeltuin
 			LEFT JOIN user ON speeltuin.author_id = user.id
 			%s
 			GROUP BY speeltuin.id
-			LIMIT %d, %d", $whereClause, $start, $size ) );
+			%s", $whereClause, $limitClause));
 $rows = array ();
 if ($res !== false) {
-	while ( $row = $res->fetch_assoc () ) {
+	while ($row = $res->fetch_assoc()) {
 		// aantal voorzieningen
-		$row ["aantalVoorzieningen"] = 0;
-		$res2 = $db->query ( sprintf ( "SELECT COUNT(*) AS aantalVoorzieningen FROM speeltuin_voorziening WHERE speeltuin_id = %d", $row ["id"] ) );
+		$row["aantalVoorzieningen"] = 0;
+		$res2 = $db->query(sprintf("SELECT COUNT(*) AS aantalVoorzieningen FROM speeltuin_voorziening WHERE speeltuin_id = %d", $row["id"]));
 		if ($res2 !== false) {
-			if ($row2 = $res2->fetch_assoc ()) {
-				$row ["aantalVoorzieningen"] = $row2 ["aantalVoorzieningen"];
+			if ($row2 = $res2->fetch_assoc()) {
+				$row["aantalVoorzieningen"] = $row2["aantalVoorzieningen"];
 			}
 		}
 		// aantal foto's
 		$row ["aantalBestanden"] = 0;
-		$res2 = $db->query ( sprintf ( "SELECT COUNT(*) AS aantalBestanden FROM speeltuin_bestand WHERE speeltuin_id = %d", $row ["id"] ) );
+		$res2 = $db->query(sprintf("SELECT COUNT(*) AS aantalBestanden FROM speeltuin_bestand WHERE speeltuin_id = %d", $row["id"]));
 		if ($res2 !== false) {
-			if ($row2 = $res2->fetch_assoc ()) {
-				$row ["aantalBestanden"] = $row2 ["aantalBestanden"];
+			if ($row2 = $res2->fetch_assoc()) {
+				$row ["aantalBestanden"] = $row2["aantalBestanden"];
 			}
 		}
 		// status

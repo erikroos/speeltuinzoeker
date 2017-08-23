@@ -18,7 +18,7 @@
         <h4>Wat is hier te doen?</h4>
         <ul>
         <?php foreach ($speeltuin->getVoorzieningen() as $voorziening): ?>
-            <li><?php echo $alleVoorzieningen[$voorziening]; ?></li>
+            <li><?php echo $voorziening; ?></li>
         <?php endforeach; ?>
         </ul>
     </div>

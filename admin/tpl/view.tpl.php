@@ -23,7 +23,25 @@ We raden je aan (weer) een <a href="account.php">eigen wachtwoord in te stellen<
 <p><a href="edit.php?id=0&start=<?php echo $start; ?>"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;Voeg speeltuin toe</a></p>
 <?php endif; ?>
 
-<div>
+<div class="search">
+	<form method="get" action="view.php">
+		<input type="hidden" id="start" name="start" value="<?php echo $start; ?>" />
+		<input type="hidden" id="size" name="size" value="<?php echo $size; ?>" />
+		<?php if (isset($_GET["user"])): ?>
+			<input type="hidden" id="user" name="user" value="1" />
+		<?php endif; ?>
+		<?php if (isset($_GET["status"])): ?>
+			<input type="hidden" id="status" name="status" value="<?php echo $status; ?>" />
+		<?php endif; ?>
+		<input type="text" id="q" name="q" value="<?php echo $q; ?>" class="form-control" />
+		<button id="search-btn" value="Zoek" class="btn btn-default"><i class='fa fa-search' aria-hidden='true'></i>&nbsp;Zoek</button>
+		<button id="clear-search-btn" value="Maak leeg" class="btn btn-default"><i class='fa fa-ban' aria-hidden='true'></i>&nbsp;Maak leeg</button>
+	</form>
+</div>
+<div class="betweenbar"></div>
+
+<?php if (empty($q)): ?>
+<div id="pager">
 	<span class="pager">
 		<ul>
 			<li><a href="view.php?<?php echo $isUser ? "user" : "status=" . $status; ?>&start=0&size=<?php echo $size; ?>">&lt;&lt;</a></li>
@@ -34,12 +52,14 @@ We raden je aan (weer) een <a href="account.php">eigen wachtwoord in te stellen<
 		</ul>
 	</span>
 </div>
+<?php endif; ?>
 
 <div class="table-responsive">
 	<table class="table">
 		<thead>
 			<tr>
 				<th>Naam</th>
+				<th>Omschrijving</th>
 				<th>Locatieomschrijving</th>
 				<th>Aantal voorzieningen</th>
 				<th>Aantal foto's</th>
@@ -55,6 +75,7 @@ We raden je aan (weer) een <a href="account.php">eigen wachtwoord in te stellen<
 		<?php foreach ($rows as $row): ?>
 			<tr>
 				<td><?php echo $row["naam"]; ?></td>
+				<td><?php echo strlen($row["omschrijving"]) > 50 ? substr($row["omschrijving"], 0, 50) . "..." : $row["omschrijving"]; ?></td>
 				<td><?php echo $row["locatie_omschrijving"]; ?></td>
 				<td><?php echo $row["aantalVoorzieningen"]; ?></td>
 				<td><?php echo $row["aantalBestanden"]; ?></td>
@@ -81,6 +102,14 @@ We raden je aan (weer) een <a href="account.php">eigen wachtwoord in te stellen<
 		</tbody>
 	</table>
 </div>
+
+<script type="text/javascript">
+$(document).on('ready', function() {
+	$("#clear-search-btn").click(function() {
+		$("#q").val("");
+	});
+});
+</script>
 
 <?php
 //include_once "./inc/footer.php";

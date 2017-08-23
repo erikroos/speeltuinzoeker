@@ -241,3 +241,14 @@ th {
 .notice a:hover {
 	color: #FF4200;
 }
+
+.search input#q {
+	float: left;
+	width: 300px;
+}
+.search button#search-btn {
+	float: left;
+}
+.search button#clear-search-btn {
+	float: left;
+}

@@ -6,6 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Speeltuinzoeker.nl - Laat ze spelen!</title>
+    
+    <meta name="description" content="De (mobiele) website om snel en makkelijk een speeltuin in jouw buurt te vinden. Speeltuinzoeker laat kinderen spelen!">
+	<meta name="keywords" content="speeltuin,speelplein,speelplaats,gratis,zoeken,vinden,kind,kinderen,spelen">
+	<meta name="author" content="Erik Roos">
+	
+	<meta name="og:title" content="Speeltuinzoeker.nl - Laat ze spelen!">
+	<meta name="og:description" content="De (mobiele) website om snel en makkelijk een speeltuin in jouw buurt te vinden. Speeltuinzoeker laat kinderen spelen!">
+	<meta name="og:image" content="https://www.speeltuinzoeker.nl/img/logo_compleet.png">
 
     <link rel="icon" type="image/x-icon" href="favicon.ico">
 
@@ -43,21 +51,21 @@
 	<nav>
 	  <div class="navWide">
 	  	<div class="wideDiv">
-		  	<a href="./index.php"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;Home</a>
+		  	<a href="./index.php"><i class="fa fa-globe" aria-hidden="true"></i>&nbsp;Home</a>
 		    <a href="./about.php"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;Info</a>
 		    <a href="./join.php"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;Meedoen</a>
 		    <a href="./contact.php"><i class="fa fa-comments" aria-hidden="true"></i>&nbsp;Contact</a>
-		    <a href="./admin/index.php" class="admin"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;Mijn Speeltuinzoeker</a>
+		    <a href="./admin/<?php echo (!isset($_SESSION["user_id"]) ? "index.php" : ($_SESSION["admin"] == 1 ? "index.php" : "view.php?user")); ?>" class="admin"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;Mijn Speeltuinzoeker</a>
 		  </div>
 	  </div>
 	  <div class="navNarrow">
 	  	<i class="fa fa-bars fa-2x"></i>
 	    <div class="narrowLinks hidden">
-	    	<a href="./index.php"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;Home</a>
+	    	<a href="./index.php"><i class="fa fa-globe" aria-hidden="true"></i>&nbsp;Home</a>
 		    <a href="./about.php"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;Info</a>
 		    <a href="./join.php"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;Meedoen</a>
 		    <a href="./contact.php"><i class="fa fa-comments" aria-hidden="true"></i>&nbsp;Contact</a>
-		    <a href="./admin/index.php" class="admin"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;Mijn Speeltuinzoeker</a>
+		    <a href="./admin/<?php echo (!isset($_SESSION["user_id"]) ? "index.php" : ($_SESSION["admin"] == 1 ? "index.php" : "view.php?user")); ?>" class="admin"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;Mijn Speeltuinzoeker</a>
 	    </div>
 	  </div>
 	</nav>
