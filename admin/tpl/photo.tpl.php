@@ -29,6 +29,7 @@ include_once "./inc/header.php";
 <form method="post" action="photo.php" enctype="multipart/form-data">
 
 	<input type="hidden" id="id" name="id" value="<?php echo $id; ?>" />
+	<input type="hidden" id="start" name="start" value="<?php echo $start; ?>" />
 
 	<label>Bestaande foto's</label>
 	<div class="photobar" id="photobar"></div>

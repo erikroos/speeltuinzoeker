@@ -62,24 +62,25 @@
 
         <?php $markerNr = 0; ?>
         <?php foreach ($speeltuinen as $speeltuin): ?>
-        var marker<?php echo $markerNr; ?> = new google.maps.Marker({
-            map: map
-        });
-        var pos<?php echo $markerNr; ?> = {
-            lat: <?php echo $speeltuin["lat"]; ?>,
-            lng: <?php echo $speeltuin["lon"]; ?>
-        };
-        marker<?php echo $markerNr; ?>.setPosition(pos<?php echo $markerNr; ?>);
-        var contentString<?php echo $markerNr; ?> = "<h4><?php echo $speeltuin["naam"]; ?></h4>" +
-            "<p><?php echo $speeltuin["omschrijving"]; ?></p>" +
-            "<p><a href='detail.php?speeltuin=<?php echo $speeltuin["id"]; ?>'>Meer</a>";
-        var infowindow<?php echo $markerNr; ?> = new google.maps.InfoWindow({
-            content: contentString<?php echo $markerNr; ?>
-        });
-        marker<?php echo $markerNr; ?>.addListener('click', function() {
-            infowindow<?php echo $markerNr; ?>.open(map, marker<?php echo $markerNr; ?>);
-        });
-        <?php $markerNr++; ?>
+	        var marker<?php echo $markerNr; ?> = new google.maps.Marker({
+	            map: map,
+	            icon: "<?php echo BASE_URL . "img/marker_" . ($speeltuin["public"] == 0 ? "blue" : ($speeltuin["public"] == 1 ? "red" : "yellow")) . ".png"; ?>"
+	        });
+	        var pos<?php echo $markerNr; ?> = {
+	            lat: <?php echo $speeltuin["lat"]; ?>,
+	            lng: <?php echo $speeltuin["lon"]; ?>
+	        };
+	        marker<?php echo $markerNr; ?>.setPosition(pos<?php echo $markerNr; ?>);
+	        var contentString<?php echo $markerNr; ?> = "<h4><?php echo $speeltuin["naam"]; ?></h4>" +
+	            "<p><?php echo $speeltuin["omschrijving"]; ?></p>" +
+	            "<p><a href='detail.php?speeltuin=<?php echo $speeltuin["id"]; ?>'>Meer</a>";
+	        var infowindow<?php echo $markerNr; ?> = new google.maps.InfoWindow({
+	            content: contentString<?php echo $markerNr; ?>
+	        });
+	        marker<?php echo $markerNr; ?>.addListener('click', function() {
+	            infowindow<?php echo $markerNr; ?>.open(map, marker<?php echo $markerNr; ?>);
+	        });
+	        <?php $markerNr++; ?>
         <?php endforeach; ?>
 
         //map.addListener('bounds_changed', function() {

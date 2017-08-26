@@ -3,6 +3,7 @@ require_once "../cfg/config.php";
 require_once "./inc/functions.php";
 
 $id = get_request_value("id", 0);
+$start = get_request_value("start", 0);
 
 $db = new Db();
 $db->connect();
@@ -11,8 +12,8 @@ $speeltuin = new Speeltuin($db, $id);
 
 // Stap 1: check of auteur van deze speeltuin, anders heb je hier niets te zoeken
 if ($speeltuin->getAuthor() != $_SESSION ["user_id"]) {
-	$_SESSION ["feedback"] = "Bekijken van deze speeltuin niet toegestaan.";
-	header("Location: index.php");
+	$_SESSION ["feedback"] = "Bekijken van (de foto's van) deze speeltuin niet toegestaan.";
+	header("Location: view.php?user&start=" . $start);
 	exit();
 }
 
@@ -30,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	foreach ($existingPhotos as $photo) {
 		if (preg_match ( "/.*\/speeltuin\d+_(\d+)\.\w+/", $photo, $matches) == 1) {
 			if ($matches [1] > $photoNr) {
-				$photoNr = $matches [1];
+				$photoNr = $matches[1];
 			}
 		}
 	}
@@ -103,7 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		}
 	}
 	
-	header("Location: view.php?user");
+	header("Location: view.php?user&start=" . $start);
 	exit();
 }
 

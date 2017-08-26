@@ -4,6 +4,13 @@
         <a href="index.php?speeltuin=<?php echo $id; ?>"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i>&nbsp;Terug</a>
         <h3><?php echo $speeltuin->getName(); ?></h3>
         <p>Aangemaakt door <?php echo $speeltuin->getAuthorName(); ?>, laatst bewerkt: <?php echo $speeltuin->getLastModified(); ?></p>
+        <p class="request">Klopt er iets niet?
+        <?php if (isset($_SESSION["user_id"])): ?>
+        	Vraag een <a href="request_change.php?id=<?php echo $id; ?>">wijziging</a> aan bij de aanmaker van deze speeltuin.
+        <?php else: ?>
+        	<a href="admin/login.php">Log in</a> om een wijziging aan te vragen bij de aanmaker van deze speeltuin.
+        <?php endif; ?>
+        </p>
         <p><?php echo $speeltuin->getPublic(); ?></p>
         <p><?php echo $speeltuin->getDescription(); ?></p>
     </div>

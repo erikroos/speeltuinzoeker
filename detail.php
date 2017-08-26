@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require_once "./cfg/config.php";
 require_once "./admin/inc/functions.php";
 

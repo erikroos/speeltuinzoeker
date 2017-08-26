@@ -11,17 +11,31 @@ class User
 
 	// Functions that don't need ID:
 	
-	public function getAllUsers($active = 1, $start = 0, $size = 10) {
+	public function getAllUsers($active = 1, $start = 0, $size = 10, $q = "") {
 		$allUsers = [];
-		$res = $this->db->query(sprintf("SELECT * FROM user WHERE active = %d LIMIT %d, %d", $active, $start, $size));
+		
+		$whereClause = "";
+		$limitClause = "LIMIT " . $start . "," . $size;
+		if (!empty($q)) {
+			$whereClause = " AND (user.naam LIKE \"%" . $q . "%\" OR user.email LIKE \"%" . $q . "%\")";
+			$limitClause = "";
+		}
+		
+		$res = $this->db->query(sprintf("SELECT * FROM user WHERE active = %d%s %s", $active, $whereClause, $limitClause));
 		while ($row = $res->fetch_assoc()) {
 			$allUsers[] = $row;
 		}
 		return $allUsers;
 	}
 	
-	public function getTotalNr($active = 1) {
-		$res = $this->db->query(sprintf("SELECT COUNT(*) AS totNr FROM user WHERE active = %d", $active));
+	public function getTotalNr($active = 1, $q = "") {
+		
+		$whereClause = "";
+		if (!empty($q)) {
+			$whereClause = " AND (user.naam LIKE \"%" . $q . "%\" OR user.email LIKE \"%" . $q . "%\")";
+		}
+		
+		$res = $this->db->query(sprintf("SELECT COUNT(*) AS totNr FROM user WHERE active = %d%s", $active, $whereClause));
 		if ($res !== false) {
 			if ($row = $res->fetch_assoc()) {
 				return $row["totNr"];

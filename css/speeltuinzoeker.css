@@ -112,7 +112,7 @@ p.notice {
 }
 /* the slides */
 .slick-slide {
-	/*margin: 0 27px;*/
+	margin: 0 27px;
 }
 /* the parent */
 .slick-list {
@@ -251,4 +251,9 @@ th {
 }
 .search button#clear-search-btn {
 	float: left;
+}
+
+.request {
+	font-size: 80%;
+	font-style: italic;
 }

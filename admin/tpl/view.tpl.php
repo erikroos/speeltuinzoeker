@@ -48,7 +48,7 @@ We raden je aan (weer) een <a href="account.php">eigen wachtwoord in te stellen<
 			<li><a href="view.php?<?php echo $isUser ? "user" : "status=" . $status; ?>&start=<?php echo max(0, ($start - $size)); ?>&size=<?php echo $size; ?>">&lt;</a></li>
 			<li><?php echo $start + 1; ?> - <?php echo min($totalSize, ($start + $size)); ?> van <?php echo $totalSize; ?></a></li>
 			<li><a href="view.php?<?php echo $isUser ? "user" : "status=" . $status; ?>&start=<?php $newStart = min($totalSize, ($start + $size)); echo ($newStart - ($newStart % $size)); ?>&size=<?php echo $size; ?>">&gt;</a></li>
-			<li><a href="view.php?<?php echo $isUser ? "user" : "status=" . $status; ?>&start=<?php $newStart = ($totalSize - $size); echo ($newStart - ($newStart % $size)); ?>&size=<?php echo $size; ?>">&gt;&gt;</a></li>
+			<li><a href="view.php?<?php echo $isUser ? "user" : "status=" . $status; ?>&start=<?php echo ($totalSize - ($totalSize % $size)); ?>&size=<?php echo $size; ?>">&gt;&gt;</a></li>
 		</ul>
 	</span>
 </div>
@@ -74,7 +74,7 @@ We raden je aan (weer) een <a href="account.php">eigen wachtwoord in te stellen<
 		<tbody>
 		<?php foreach ($rows as $row): ?>
 			<tr>
-				<td><?php echo $row["naam"]; ?></td>
+				<td><a href="./edit.php?id=<?php echo $row["id"]; ?>&start=<?php echo $start; ?>"><?php echo $row["naam"]; ?></a></td>
 				<td><?php echo strlen($row["omschrijving"]) > 50 ? substr($row["omschrijving"], 0, 50) . "..." : $row["omschrijving"]; ?></td>
 				<td><?php echo $row["locatie_omschrijving"]; ?></td>
 				<td><?php echo $row["aantalVoorzieningen"]; ?></td>
@@ -82,20 +82,20 @@ We raden je aan (weer) een <a href="account.php">eigen wachtwoord in te stellen<
 				<td><?php echo $row["userNaam"]; ?></td>
 				<td><?php echo $row["status"]; ?></td>
 				<td>
+					<a href="./edit.php?id=<?php echo $row["id"]; ?>&start=<?php echo $start; ?>">
 					<?php if ($isUser): ?>
-						<a href="./edit.php?id=<?php echo $row["id"]; ?>&start=<?php echo $start; ?>">Bewerk</a>
+						Bewerk
 					<?php elseif ($isAdmin): ?>
-						<?php if ($status == 0): ?>
-							<a href="./edit.php?id=<?php echo $row["id"]; ?>&start=<?php echo $start; ?>">Keur goed of af</a>
-						<?php elseif ($status == 1): ?>
-							<a href="./edit.php?id=<?php echo $row["id"]; ?>&start=<?php echo $start; ?>">Bekijk</a>
-						<?php elseif ($status == 2): ?>
-							<a href="./edit.php?id=<?php echo $row["id"]; ?>&start=<?php echo $start; ?>">Bekijk</a>
+						<?php if ($status == 0): // nieuw ?>
+							Keur goed of af
+						<?php else: // goed- of afgekeurd ?>
+							Bekijk
 						<?php endif; ?>
 					<?php endif; ?>
+					</a>
 				</td>
 				<?php if ($isUser): ?>
-				<td><a href="photo.php?id=<?php echo $row["id"]; ?>">Foto's</a></td>
+				<td><a href="photo.php?id=<?php echo $row["id"]; ?>&start=<?php echo $start; ?>">Foto's</a></td>
 				<?php endif; ?>
 			</tr>
 		<?php endforeach; ?>

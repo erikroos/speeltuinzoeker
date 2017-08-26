@@ -15,17 +15,31 @@ include_once "./inc/header.php";
 <?php endif; ?>
 </p>
 
-<div>
+<div class="search">
+	<form method="get" action="users.php">
+		<input type="hidden" id="start" name="start" value="<?php echo $start; ?>" />
+		<input type="hidden" id="size" name="size" value="<?php echo $size; ?>" />
+		<input type="hidden" id="active" name="active" value="<?php echo $active; ?>" />
+		<input type="text" id="q" name="q" value="<?php echo $q; ?>" class="form-control" />
+		<button id="search-btn" value="Zoek" class="btn btn-default"><i class='fa fa-search' aria-hidden='true'></i>&nbsp;Zoek</button>
+		<button id="clear-search-btn" value="Maak leeg" class="btn btn-default"><i class='fa fa-ban' aria-hidden='true'></i>&nbsp;Maak leeg</button>
+	</form>
+</div>
+<div class="betweenbar"></div>
+
+<?php if (empty($q)): ?>
+<div id="pager">
 	<span class="pager">
 		<ul>
 			<li><a href="users.php?active=<?php echo $active; ?>&start=0&size=<?php echo $size; ?>">&lt;&lt;</a></li>
 			<li><a href="users.php?active=<?php echo $active; ?>&start=<?php echo max(0, ($start - $size)); ?>&size=<?php echo $size; ?>">&lt;</a></li>
 			<li><?php echo $start + 1; ?> - <?php echo min($totalSize, ($start + $size)); ?> van <?php echo $totalSize; ?></a></li>
 			<li><a href="users.php?active=<?php echo $active; ?>&start=<?php $newStart = min($totalSize, ($start + $size)); echo ($newStart - ($newStart % $size)); ?>&size=<?php echo $size; ?>">&gt;</a></li>
-			<li><a href="users.php?active=<?php echo $active; ?>&start=<?php $newStart = ($totalSize - $size); echo ($newStart - ($newStart % $size)); ?>&size=<?php echo $size; ?>">&gt;&gt;</a></li>
+			<li><a href="users.php?active=<?php echo $active; ?>&start=<?php echo ($totalSize - ($totalSize % $size)); ?>&size=<?php echo $size; ?>">&gt;&gt;</a></li>
 		</ul>
 	</span>
 </div>
+<?php endif; ?>
 
 <div class="table-responsive">
 	<table class="table">
@@ -51,6 +65,14 @@ include_once "./inc/header.php";
 		</tbody>
 	</table>
 </div>
+
+<script type="text/javascript">
+$(document).on('ready', function() {
+	$("#clear-search-btn").click(function() {
+		$("#q").val("");
+	});
+});
+</script>
 
 <?php
 //include_once "./inc/footer.php";
