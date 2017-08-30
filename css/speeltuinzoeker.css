@@ -90,7 +90,7 @@ input[type=checkbox].form-control {
 	color: red;
 }
 
-p.notice {
+.notice {
 	background-color: #88CE00;
 	border-radius: 4px;
 	padding: 10px;
@@ -256,4 +256,10 @@ th {
 .request {
 	font-size: 80%;
 	font-style: italic;
+}
+#requestChangeForm {
+	display: none;
+	background-color: #88CE00;
+	border-radius: 4px;
+	padding: 10px;
 }

@@ -64,9 +64,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		exit();
 	} else {
 		
-		$name = get_request_value("naam", "");
-		$omschrijving = get_request_value("omschrijving", "");
-		$locatieOmschrijving = get_request_value("locatie_omschrijving", "");
+		$name = sanitizeInput(get_request_value("naam", ""));
+		$omschrijving = sanitizeInput(get_request_value("omschrijving", ""));
+		$locatieOmschrijving = sanitizeInput(get_request_value("locatie_omschrijving", ""));
 		$lat = get_request_value("lat", 0.0);
 		$lon = get_request_value("lon", 0.0);
 		$public = get_request_value("public", 1);

@@ -4,13 +4,31 @@
         <a href="index.php?speeltuin=<?php echo $id; ?>"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i>&nbsp;Terug</a>
         <h3><?php echo $speeltuin->getName(); ?></h3>
         <p>Aangemaakt door <?php echo $speeltuin->getAuthorName(); ?>, laatst bewerkt: <?php echo $speeltuin->getLastModified(); ?></p>
-        <p class="request">Klopt er iets niet?
-        <?php if (isset($_SESSION["user_id"])): ?>
-        	Vraag een <a href="request_change.php?id=<?php echo $id; ?>">wijziging</a> aan bij de aanmaker van deze speeltuin.
+        
+        <?php if (isset($sent)): ?>
+        	<?php if ($sent): ?>
+        		<p class="notice">Verzoek succesvol verstuurd! Er staat een kopie (cc) in je mailbox.</p>
+        	<?php else: ?>
+        		<p class="error">Verzoek versturen mislukt! Niet (correct) ingelogd.</p>
+        	<?php endif; ?>
         <?php else: ?>
-        	<a href="admin/login.php">Log in</a> om een wijziging aan te vragen bij de aanmaker van deze speeltuin.
+	        <p class="request">Klopt er iets niet?
+	        <?php if (isset($_SESSION["user_id"])): ?>
+	        	Vraag een <a id="requestChange" href="#">wijziging</a> aan bij de aanmaker van deze speeltuin (met een kopie aan jezelf en de beheerder van deze site).</p>
+	        	<form id="requestChangeForm" method="post" action="detail.php">
+	        		<input type="hidden" id="speeltuin" name="speeltuin" value="<?php echo $id; ?>" />
+	        		<input type="hidden" id="userId" name="userId" value="<?php echo $_SESSION["user_id"]; ?>" />
+	        		<div class="form-group">
+						<label for="comment">Opmerking(en)</label>
+	        			<textarea id="comment" name="comment" class="form-control" rows="4"></textarea>
+	        		</div>
+	        		<input type="submit" value="Verstuur" class="btn btn-default" />
+	        	</form>
+	        <?php else: ?>
+	        	<a href="admin/login.php">Log in</a> om een wijziging aan te vragen bij de aanmaker van deze speeltuin.</p>
+	        <?php endif; ?>
         <?php endif; ?>
-        </p>
+        
         <p><?php echo $speeltuin->getPublic(); ?></p>
         <p><?php echo $speeltuin->getDescription(); ?></p>
     </div>
@@ -69,6 +87,10 @@
 				    // instead of a settings object
 			  ]
 	  		});
+
+	  		$("#requestChange").click(function(){
+	  			$("#requestChangeForm").show();
+		  	});
 		});
 	</script>
 

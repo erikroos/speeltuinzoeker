@@ -119,28 +119,22 @@ include_once "./inc/header.php";
 	<hr>
 	<div class="buttonbar">
 		<?php if ($isUser): ?>
-			<input type="submit" name="Submit" value="Opslaan"
-			class="btn btn-default" /> <input id="cancel" type="button"
-			value="Annuleren" class="btn btn-default" />
+			<input type="submit" name="Submit" value="Opslaan" class="btn btn-default" />
+			<input id="cancel" type="button" value="Annuleren" class="btn btn-default" />
 		<?php else: // admin ?>
 			<?php if ($status_id == 0): // voorgesteld ?>
 				<div class="form-group">
-			<input type="submit" name="Submit" value="Keur goed"
-				class="btn btn-default" />
-		</div>
-		<div class="form-group">
-			<input type="submit" name="Submit" value="Keur af"
-				class="btn btn-default" /> met reden:
-			<textarea id="afkeur_reden" name="afkeur_reden" rows="1"
-				maxlength="1000" class="form-control"></textarea>
-		</div>
-		<div class="form-group">
-			<input id="cancel" type="button" value="Terug"
-				class="btn btn-default" />
-		</div>
+					<input type="submit" name="Submit" value="Keur goed" class="btn btn-default" />
+				</div>
+				<div class="form-group">
+					<input type="submit" name="Submit" value="Keur af" class="btn btn-default" /> met reden:
+					<textarea id="afkeur_reden" name="afkeur_reden" rows="1" maxlength="1000" class="form-control"></textarea>
+				</div>
+				<div class="form-group">
+					<input id="cancel" type="button" value="Terug" class="btn btn-default" />
+				</div>
 			<?php else: ?>
-				<input id="cancel" type="button" value="Terug"
-			class="btn btn-default" />
+				<input id="cancel" type="button" value="Terug" class="btn btn-default" />
 			<?php endif; ?>
 		<?php endif; ?>
 	</div>
