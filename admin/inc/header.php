@@ -30,23 +30,23 @@
 		<nav>
 		  <div class="navWide">
 		  	<div class="wideDiv">
-			  	<a href="../index.php"><i class="fa fa-globe" aria-hidden="true"></i>&nbsp;Speeltuinzoeker.nl</a>
-		    	<a href="<?php if ($_SESSION["admin"]): ?>index.php<?php else: ?>view.php?user<?php endif; ?>"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;Home</a>
+			  	<a href="<?php if ($_SESSION["admin"]): ?>index.php<?php else: ?>view.php?user<?php endif; ?>"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;Home</a>
 				<?php if (isset($_SESSION["user_id"])): ?>
 					<a href="account.php"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;Mijn account</a>
 					<a href="logout.php"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;Uitloggen</a>
 				<?php endif; ?>
+				<a href="../index.php" class="admin"><i class="fa fa-globe" aria-hidden="true"></i>&nbsp;Speeltuinzoeker.nl</a>
 			  </div>
 		  </div>
 		  <div class="navNarrow">
 		  	<i class="fa fa-bars fa-2x"></i>
 		    <div class="narrowLinks hidden">
-		    	<a href="../index.php"><i class="fa fa-globe" aria-hidden="true"></i>&nbsp;Speeltuinzoeker.nl</a>
 		    	<a href="<?php if ($_SESSION["admin"]): ?>index.php<?php else: ?>view.php?user<?php endif; ?>"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;Home</a>
 				<?php if (isset($_SESSION["user_id"])): ?>
 					<a href="account.php"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;Mijn account</a>
 					<a href="logout.php"><i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;Uitloggen</a>
 				<?php endif; ?>
+				<a href="../index.php" class="admin"><i class="fa fa-globe" aria-hidden="true"></i>&nbsp;Speeltuinzoeker.nl</a>
 		    </div>
 		  </div>
 		</nav>

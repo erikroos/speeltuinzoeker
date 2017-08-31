@@ -110,7 +110,8 @@
         };
         map.setCenter(pos);
         var marker = new google.maps.Marker({
-            map: map
+            map: map,
+            icon: "<?php echo BASE_URL; ?>img/marker_green.png"
         });
         marker.setPosition(pos);
     }

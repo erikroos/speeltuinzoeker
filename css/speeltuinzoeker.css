@@ -102,7 +102,6 @@ input[type=checkbox].form-control {
 .detail-photobar img {
 	max-height: 300px;
 }
-/* the arrows */
 .slick-prev {
 	z-index: 1000;
 }
@@ -110,13 +109,8 @@ input[type=checkbox].form-control {
     color: #3E9FFF;
     font-weight: bold;
 }
-/* the slides */
 .slick-slide {
-	margin: 0 27px;
-}
-/* the parent */
-.slick-list {
-	/*margin: 0 -27px;*/
+	margin-right: 20px;
 }
 
 #photo-info {

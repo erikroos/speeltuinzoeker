@@ -155,7 +155,8 @@ include_once "./inc/header.php";
 		
 		marker = new google.maps.Marker({
 		  map: map,
-		  draggable: true
+		  draggable: true,
+		  icon: "<?php echo BASE_URL; ?>img/marker_green.png"
 		});
 
 		marker.addListener('dragend', function() {
@@ -165,55 +166,55 @@ include_once "./inc/header.php";
 			$('#lon').val(lng);
 		});
 		
-		//map.addListener('bounds_changed', function() {
-		//	var newBounds = map.getBounds();
-		//	var NE = newBounds.getNorthEast();
-		//	var SW = newBounds.getSouthWest();
-		//	document.getElementById('map-info').innerHTML = "Bounding box: NE " + NE.toString() + " SW " + SW.toString();
-		//});
+		map.addListener('bounds_changed', function() {
+			var newBounds = map.getBounds();
+			var NE = newBounds.getNorthEast();
+			var SW = newBounds.getSouthWest();
+			$.get("_markers.php?ne=" + NE.toString() + "&sw=" + SW.toString(), function(data) {
+				// TODO markers aan kaart toevoegen
+		    });
+		});
 		
 		infoWindow = new google.maps.InfoWindow;
 
 		<?php if ($id == 0 && $lat == 0.0 && $lon == 0.0): // Nieuw? Dan in eerste instantie op huidige locatie zetten ?>
-        // Try HTML5 geolocation.
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(function(currentPosition) {
-            var pos = {
-              lat: currentPosition.coords.latitude,
-              lng: currentPosition.coords.longitude
-            };
-            //infoWindow.setPosition(pos);
-            //infoWindow.setContent('Locatie gevonden.');
-            //infoWindow.open(map);
-            map.setCenter(pos);
-			marker.setPosition(pos);
-			$('#lat').val(currentPosition.coords.latitude);
-			$('#lon').val(currentPosition.coords.longitude);
-          }, function() {
-            handleLocationError(true, infoWindow, map.getCenter());
-          });
-        } else {
-          // Browser doesn't support Geolocation
-          handleLocationError(false, infoWindow, map.getCenter());
-        }
+	        // Try HTML5 geolocation.
+	        if (navigator.geolocation) {
+	        	navigator.geolocation.getCurrentPosition(function(currentPosition) {
+	        		var pos = {
+	            		lat: currentPosition.coords.latitude,
+	            		lng: currentPosition.coords.longitude
+	            	};
+	            	map.setCenter(pos);
+					marker.setPosition(pos);
+					$('#lat').val(currentPosition.coords.latitude);
+					$('#lon').val(currentPosition.coords.longitude);
+	          	}, function() {
+	            	handleLocationError(true, infoWindow, map.getCenter());
+	          	});
+	        } else {
+	          // Browser doesn't support Geolocation
+	          handleLocationError(false, infoWindow, map.getCenter());
+	        }
 		<?php else: ?>
-		var pos = {
-              lat: <?php echo $lat; ?>,
-              lng: <?php echo $lon; ?>
-        };
-		map.setCenter(pos);
-		marker.setPosition(pos);
-		$('#lat').val(<?php echo $lat; ?>);
-		$('#lon').val(<?php echo $lon; ?>);
+			var pos = {
+	              lat: <?php echo $lat; ?>,
+	              lng: <?php echo $lon; ?>
+	        };
+			map.setCenter(pos);
+			marker.setPosition(pos);
+			$('#lat').val(<?php echo $lat; ?>);
+			$('#lon').val(<?php echo $lon; ?>);
 		<?php endif; ?>
 	}
 	
 	function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-        infoWindow.setPosition(pos);
-        infoWindow.setContent(browserHasGeolocation ?
-                              'Fout: Geolocatie is mislukt.' :
-                              'Fout: Uw browser ondersteunt geen geolocatie.');
-        infoWindow.open(map);
+		 // Silent decay
+		 var backupPos = { // Grote Markt Grunnen
+		     lat: 53.218721,
+		     lng: 6.567633
+		 };
+		 map.setCenter(backupPos);
     }
 
 	$('#place-marker').click(function() {
