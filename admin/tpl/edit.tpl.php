@@ -34,33 +34,31 @@ include_once "./inc/header.php";
 		<textarea id="omschrijving" name="omschrijving" rows="3" maxlength="1000" class="form-control"><?php echo $omschrijving; ?></textarea>
 	</div>
 
-	<h2>Locatie op de kaart</h2>
+	<h2>Locatie</h2>
 
 	<div class="form-group">
 		<label for="omschrijving">Omschrijving van de locatie (bijv. Fazantweg, Paterswolde)</label>
-		<textarea id="locatie_omschrijving" name="locatie_omschrijving"
-			rows="1" maxlength="1000" class="form-control"><?php echo $locatieOmschrijving; ?></textarea>
+		<textarea id="locatie_omschrijving" name="locatie_omschrijving" rows="1" maxlength="1000" class="form-control"><?php echo $locatieOmschrijving; ?></textarea>
 	</div>
 	
 	<?php if ($isUser): ?>
-		<button id="place-marker" value="Zet marker op omschreven locatie"
-		class="btn btn-default">Zet marker op omschreven locatie</button>
+		<button id="place-marker" value="Zet marker op hierboven omschreven locatie" class="btn btn-default">Zet marker op hierboven omschreven locatie</button>
 	<?php endif; ?>
 	
 	<div id="map-div-edit"></div>
 	
 	<?php if ($isUser): ?>
-		<p>Staat de marker nog niet op de goede plaats? Sleep hem er dan heen.</p>
+		<p><em>Staat de marker nog niet op de goede plaats?</em> Sleep hem er dan heen.</p>
 	<?php endif; ?>
 	
 	<div class="form-group">
-		<label for="lat">Breedtegraad</label> <input type="text" id="lat"
-			name="lat" value="<?php echo $lat; ?>" />
+		<label for="lat">Breedtegraad</label>
+		<input type="text" id="lat" name="lat" value="<?php echo $lat; ?>" class="form-control" />
 	</div>
 
 	<div class="form-group">
-		<label for="lon">Lengtegraad</label> <input type="text" id="lon"
-			name="lon" value="<?php echo $lon; ?>" />
+		<label for="lon">Lengtegraad</label>
+		<input type="text" id="lon" name="lon" value="<?php echo $lon; ?>" class="form-control" />
 	</div>
 
 	<h2>Voorzieningen</h2>
@@ -89,16 +87,16 @@ include_once "./inc/header.php";
 		<?php if (sizeof($allVoorzieningenNonPop) > 0): ?>
 			<a href="#" id="expand_items"><i class="fa fa-chevron-circle-down" aria-hidden="true"></i>&nbsp;Meer</a>
 			<div id="nonPopItems">
-			<?php foreach ($allVoorzieningenNonPop as $voorzieningId => $voorzieningNaam): ?>
-				<div class="checkbox">
-					<label>
-						<input type="checkbox" id="v<?php echo $voorzieningId; ?>" name="v<?php echo $voorzieningId; ?>" value="1" class="form-control" />
-						<?php echo $voorzieningNaam; ?>
-					</label>
-				</div>
-			<?php endforeach; ?>
+				<?php foreach ($allVoorzieningenNonPop as $voorzieningId => $voorzieningNaam): ?>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" id="v<?php echo $voorzieningId; ?>" name="v<?php echo $voorzieningId; ?>" value="1" class="form-control" />
+							<?php echo $voorzieningNaam; ?>
+						</label>
+					</div>
+				<?php endforeach; ?>
+			</div>
 		<?php endif; ?>
-		</div>
 	</div>
 
 	<h2>Foto's</h2>
@@ -147,16 +145,14 @@ include_once "./inc/header.php";
 	var marker;
 
 	function initMap() {
-		var infoWindow;
-		
 		map = new google.maps.Map(document.getElementById('map-div-edit'), {
 		  zoom: 15
 		});
 		
 		marker = new google.maps.Marker({
-		  map: map,
-		  draggable: true,
-		  icon: "<?php echo BASE_URL; ?>img/marker_green.png"
+			map: map,
+			draggable: true,
+			icon: "<?php echo BASE_URL; ?>img/marker_green.png"
 		});
 
 		marker.addListener('dragend', function() {
@@ -175,7 +171,7 @@ include_once "./inc/header.php";
 		    });
 		});
 		
-		infoWindow = new google.maps.InfoWindow;
+		setDefaultPos();
 
 		<?php if ($id == 0 && $lat == 0.0 && $lon == 0.0): // Nieuw? Dan in eerste instantie op huidige locatie zetten ?>
 	        // Try HTML5 geolocation.
@@ -190,11 +186,10 @@ include_once "./inc/header.php";
 					$('#lat').val(currentPosition.coords.latitude);
 					$('#lon').val(currentPosition.coords.longitude);
 	          	}, function() {
-	            	handleLocationError(true, infoWindow, map.getCenter());
+	          		setDefaultPos();
 	          	});
 	        } else {
-	          // Browser doesn't support Geolocation
-	          handleLocationError(false, infoWindow, map.getCenter());
+	          // Browser doesn't support Geolocation, leave on defaultpos
 	        }
 		<?php else: ?>
 			var pos = {
@@ -208,36 +203,14 @@ include_once "./inc/header.php";
 		<?php endif; ?>
 	}
 	
-	function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-		 // Silent decay
-		 var backupPos = { // Grote Markt Grunnen
-		     lat: 53.218721,
-		     lng: 6.567633
-		 };
-		 map.setCenter(backupPos);
+	function setDefaultPos() {
+        var backupPos = { // Grote Markt Grunnen
+            lat: 53.218721,
+            lng: 6.567633
+        };
+        map.setCenter(backupPos);
+        marker.setPosition(backupPos);
     }
-
-	$('#place-marker').click(function() {
-		event.preventDefault();
-		$.get(
-			"https://maps.googleapis.com/maps/api/geocode/json?address=" + $('#locatie_omschrijving').val() + "&key=AIzaSyCXVNGEew5BT-iv9th2jqc4-QejCJxhoRk",
-			function(data) {
-				var lat = data.results[0].geometry.location.lat;
-				var lng = data.results[0].geometry.location.lng;
-
-				var pos = {
-	              lat: lat,
-	              lng: lng
-	            };
-
-				map.setCenter(pos);
-				marker.setPosition(pos);
-				
-				$('#lat').val(lat);
-				$('#lon').val(lng);
-			}
-		);
-	});
 
 	$(document).on('ready', function() {
 	    $("#cancel").click(function() {
@@ -253,6 +226,30 @@ include_once "./inc/header.php";
 			event.preventDefault();
 			$("#nonPopItems").show();
 			$("#expand_items").hide();
+		});
+
+		$('#place-marker').click(function() {
+			event.preventDefault();
+
+			if ($('#locatie_omschrijving').val() == "") {
+	            return;
+	        }
+			
+			$.get(
+				"https://maps.googleapis.com/maps/api/geocode/json?address=" + $('#locatie_omschrijving').val() + "&key=AIzaSyCXVNGEew5BT-iv9th2jqc4-QejCJxhoRk",
+				function(data) {
+					var lat = data.results[0].geometry.location.lat;
+					var lng = data.results[0].geometry.location.lng;
+					var pos = {
+		            	lat: lat,
+		            	lng: lng
+		            };
+					map.setCenter(pos);
+					marker.setPosition(pos);
+					$('#lat').val(lat);
+					$('#lon').val(lng);
+				}
+			);
 		});
 	});
     

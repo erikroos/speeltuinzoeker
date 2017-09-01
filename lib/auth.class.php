@@ -57,12 +57,12 @@ class Auth {
 	}
 	
 	public function activateAccount($code) {
-		$res = $this->db->query(sprintf("SELECT id, name, email FROM user WHERE active = 0 AND activation_code = \"%s\"", $this->db->realEscapeString($code)));
+		$res = $this->db->query(sprintf("SELECT id, naam, email FROM user WHERE active = 0 AND activation_code = \"%s\"", $this->db->realEscapeString($code)));
 		if ($row = $res->fetch_assoc()) {
 			$this->db->query(sprintf("UPDATE user SET active = 1, activation_code = \"\" WHERE id = %d", $row["id"]));
 			
-			$message = "<p>Gebruiker " . $name . " (e-mail: " . $email . ") heeft zijn/haar account geactiveerd.</p>";
-			Mail::sendMail(ADMIN_MAIL, "Gebruiker " . $name . " geactiveerd", $message);
+			$message = "<p>Gebruiker " . $row["naam"] . " (e-mail: " . $row["email"] . ") heeft zijn/haar account geactiveerd.</p>";
+			Mail::sendMail(ADMIN_MAIL, "Gebruiker " . $row["naam"] . " geactiveerd", $message);
 			
 			return true;
 		}

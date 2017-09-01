@@ -79,13 +79,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 					De speeltuin staat op inactief en is nog niet zichtbaar tot deze gecontroleerd is. 
 					We streven ernaar dit binnen 24 uur te doen.";
 			$message = "<p>Gebruiker " . $_SESSION["user_name"] . " heeft een nieuwe speeltuin toegevoegd.</p>" . "<p><a href='" . BASE_URL . "admin/edit.php?id=" . $id . "'>Controleer deze speeltuin</a></p>";
-			Mail::sendMail(ADMIN_MAIL, "Nieuwe speeltuin " . $name, $message);
+			Mail::sendMail(ADMIN_MAIL, "Nieuwe speeltuin " . (empty($name) ? "zonder naam" : $name), $message);
 		} else {
 			$_SESSION["feedback"] = "Speeltuin aanpassen gelukt!<br>
 					De speeltuin staat nu tijdelijk op inactief en is niet zichtbaar tot deze gecontroleerd is. 
 					We streven ernaar dit binnen 24 uur te doen.";
 			$message = "<p>Gebruiker " . $_SESSION["user_name"] . " heeft de speeltuin \"" . $name . "\" bewerkt.</p>" . "<p><a href='" . BASE_URL . "admin/edit.php?id=" . $id . "'>Controleer deze speeltuin</a></p>";
-			Mail::sendMail(ADMIN_MAIL, "Speeltuin " . $name . " bewerkt", $message);
+			Mail::sendMail(ADMIN_MAIL, "Speeltuin " . (empty($name) ? "zonder naam" : $name) . " bewerkt", $message);
 		}
 		
 		$speeltuin->setVoorzieningen($_POST);

@@ -54,8 +54,6 @@
     var map;
 
     function initMap() {
-        var infoWindow;
-
         map = new google.maps.Map(document.getElementById('map-div'), {
             zoom: 15
         });
@@ -90,40 +88,34 @@
         //	document.getElementById('map-info').innerHTML = "Bounding box: NE " + NE.toString() + " SW " + SW.toString();
         //});
 
-        infoWindow = new google.maps.InfoWindow;
+        setDefaultPos();
 
         <?php if ($fromSpeeltuin != null): ?>
-        var fromPos = {
-            lat: <?php echo $fromSpeeltuin->getLatitude(); ?>,
-            lng: <?php echo $fromSpeeltuin->getLongitude(); ?>
-        };
-        map.setCenter(fromPos);
+        	// Terug van speeltuin? Dan daarop centreren
+	        var fromPos = {
+	            lat: <?php echo $fromSpeeltuin->getLatitude(); ?>,
+	            lng: <?php echo $fromSpeeltuin->getLongitude(); ?>
+	        };
+	        map.setCenter(fromPos);
         <?php else: ?>
-        // In eerste instantie op huidige locatie zetten. Try HTML5 geolocation.
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(currentPosition) {
-                var pos = {
-                    lat: currentPosition.coords.latitude,
-                    lng: currentPosition.coords.longitude
-                };
-                map.setCenter(pos);
-            }, function() {
-                handleLocationError(true, infoWindow, map.getCenter());
-            });
-        } else {
-            // Browser doesn't support Geolocation
-            handleLocationError(false, infoWindow, map.getCenter());
-        }
-        <?php endif; ?>
+	        // In eerste instantie op huidige locatie zetten. Try HTML5 geolocation.
+	        if (navigator.geolocation) {
+	            navigator.geolocation.getCurrentPosition(function(currentPosition) {
+	                var pos = {
+	                    lat: currentPosition.coords.latitude,
+	                    lng: currentPosition.coords.longitude
+	                };
+	                map.setCenter(pos);
+	            }, function() {
+	            	setDefaultPos();
+	            });
+	        } else {
+	            // Browser doesn't support Geolocation, leave on defaultpos
+	        }
+	        <?php endif; ?>
     }
 
-    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-//             infoWindow.setPosition(pos);
-//             infoWindow.setContent(browserHasGeolocation ?
-//                 'Fout: geolocatie is mislukt.' :
-//                 'Fout: uw browser ondersteunt geen geolocatie.');
-//             infoWindow.open(map);
-        // Silent decay
+    function setDefaultPos() {
         var backupPos = { // Grote Markt Grunnen
             lat: 53.218721,
             lng: 6.567633
@@ -132,6 +124,10 @@
     }
 
     var searchForPlace = function() {
+		if ($('#locatie_omschrijving').val() == "") {
+            return;
+        }
+        
     	$.get(
             "https://maps.googleapis.com/maps/api/geocode/json?address=" + $('#locatie_omschrijving').val() + "&key=AIzaSyCXVNGEew5BT-iv9th2jqc4-QejCJxhoRk",
             function(data) {
@@ -142,7 +138,7 @@
             	map.setCenter(pos);
         	}
     	);
-    }
+    };
 
     $('#place-marker').click(function() {
         event.preventDefault();
