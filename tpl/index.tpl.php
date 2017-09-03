@@ -35,7 +35,7 @@
 <?php include "footer.tpl.php"; ?>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="js/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="js/bootstrap.min.js"></script>
 
@@ -52,44 +52,16 @@
 <!-- Map -->
 <script>
     var map;
+    var existingMarkers = [];
+    var infowindow = null;
 
     function initMap() {
         map = new google.maps.Map(document.getElementById('map-div'), {
             zoom: 15
         });
 
-        <?php $markerNr = 0; ?>
-        <?php foreach ($speeltuinen as $speeltuin): ?>
-	        var marker<?php echo $markerNr; ?> = new google.maps.Marker({
-	            map: map,
-	            icon: "<?php echo BASE_URL . "img/marker_" . ($speeltuin["public"] == 0 ? "blue" : ($speeltuin["public"] == 1 ? "red" : "yellow")) . ".png"; ?>"
-	        });
-	        var pos<?php echo $markerNr; ?> = {
-	            lat: <?php echo $speeltuin["lat"]; ?>,
-	            lng: <?php echo $speeltuin["lon"]; ?>
-	        };
-	        marker<?php echo $markerNr; ?>.setPosition(pos<?php echo $markerNr; ?>);
-	        var contentString<?php echo $markerNr; ?> = "<h4><?php echo $speeltuin["naam"]; ?></h4>" +
-	            "<p><?php echo $speeltuin["omschrijving"]; ?></p>" +
-	            "<p><a href='detail.php?speeltuin=<?php echo $speeltuin["id"]; ?>'>Meer</a>";
-	        var infowindow<?php echo $markerNr; ?> = new google.maps.InfoWindow({
-	            content: contentString<?php echo $markerNr; ?>
-	        });
-	        marker<?php echo $markerNr; ?>.addListener('click', function() {
-	            infowindow<?php echo $markerNr; ?>.open(map, marker<?php echo $markerNr; ?>);
-	        });
-	        <?php $markerNr++; ?>
-        <?php endforeach; ?>
-
-        //map.addListener('bounds_changed', function() {
-        //	var newBounds = map.getBounds();
-        //	var NE = newBounds.getNorthEast();
-        //	var SW = newBounds.getSouthWest();
-        //	document.getElementById('map-info').innerHTML = "Bounding box: NE " + NE.toString() + " SW " + SW.toString();
-        //});
-
+     	// position the map
         setDefaultPos();
-
         <?php if ($fromSpeeltuin != null): ?>
         	// Terug van speeltuin? Dan daarop centreren
 	        var fromPos = {
@@ -112,7 +84,62 @@
 	        } else {
 	            // Browser doesn't support Geolocation, leave on defaultpos
 	        }
-	        <?php endif; ?>
+		<?php endif; ?>
+
+		// markers for existing speeltuinen
+		function fireIfLastEvent() { 
+			// always remove existing markers
+			for (var i = 0; i < existingMarkers.length; i++) {
+				existingMarkers[i].setMap(null);
+			}
+			existingMarkers = [];
+			
+		    if (lastEvent.getTime() + 100 <= new Date().getTime()) { 
+		    	var newBounds = map.getBounds();
+				var NE = newBounds.getNorthEast();
+				NE = NE.toString().replace(" ", "").replace("(", "").replace(")", "");
+				var SW = newBounds.getSouthWest();
+				SW = SW.toString().replace(" ", "").replace("(", "").replace(")", "");
+				$.get("_markers.php?ne=" + NE + "&sw=" + SW, function(data) {
+					placeMarkers(data);
+			    });
+		    } 
+		}
+		function placeMarkers(data) {
+			var speeltuinen = JSON.parse(data);
+			
+			infowindow = new google.maps.InfoWindow({
+				disableAutoPan: true,
+				content: "Wacht op klik..."
+			});
+
+			for (var i = 0; i < speeltuinen.length; i++) {
+				var speeltuin = speeltuinen[i];
+				var existingMarker = new google.maps.Marker({
+		            map: map,
+		            icon: "<?php echo BASE_URL; ?>img/marker_" + (speeltuin.public == 0 ? "blue" : (speeltuin.public == 1 ? "red" : "yellow")) + ".png",
+		            animation: google.maps.Animation.DROP,
+		            html:	"<h4>" + speeltuin.naam + "</h4>" +
+							"<p>" + speeltuin.omschrijving + "</p>" +
+							"<p><a href='detail.php?speeltuin=" + speeltuin.id + "'>Meer</a>"
+			    });
+				existingMarker.setPosition({
+		            lat: parseFloat(speeltuin.lat),
+		            lng: parseFloat(speeltuin.lon)
+		        });
+				existingMarker.addListener("click", function() {
+			        infowindow.setContent(this.html);
+			        infowindow.open(map, this);
+		        });
+		        
+				existingMarkers.push(existingMarker);
+			} 
+		}
+		function scheduleDelayedCallback() { 
+		    lastEvent = new Date(); 
+		    setTimeout(fireIfLastEvent, 100); 
+		} 
+		map.addListener("bounds_changed", scheduleDelayedCallback);
     }
 
     function setDefaultPos() {

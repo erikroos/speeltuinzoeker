@@ -43,8 +43,8 @@
 
 /* Kaart op editscherm */
 #map-div-edit {
-	height: 300px;
-	width: 300px;
+	height: 400px;
+	width: 400px;
 }
 
 .checkbox {
@@ -61,9 +61,6 @@ input[type=checkbox].form-control {
 	margin-bottom: 20px;
 }
 
-.photobar {
-	height: 110px;
-}
 .photobar ul {
 	padding: 0;
 	list-style-type: none;
@@ -120,6 +117,7 @@ input[type=checkbox].form-control {
 #mini-map {
 	height: 300px;
 	width: 300px;
+	margin-bottom: 10px;
 }
 
 #details {

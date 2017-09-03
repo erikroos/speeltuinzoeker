@@ -5,7 +5,7 @@ $extraHeaders = <<<EOH
     <link href="../css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
 	<!-- if using RTL (Right-To-Left) orientation, load the RTL CSS file after fileinput.css by uncommenting below -->
 	<!-- link href="path/to/css/fileinput-rtl.min.css" media="all" rel="stylesheet" type="text/css" /-->
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="../js/jquery.min.js"></script>
 	<!-- piexif.min.js is only needed for restoring exif data in resized images and when you 
 	      wish to resize images before upload. This must be loaded before fileinput.min.js -->
 	<script src="../js/plugins/piexif.min.js" type="text/javascript"></script>

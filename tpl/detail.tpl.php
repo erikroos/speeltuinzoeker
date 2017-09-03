@@ -30,6 +30,10 @@
         <?php endif; ?>
         
         <p><?php echo $speeltuin->getPublic(); ?></p>
+        <?php $link = $speeltuin->getLink(); ?>
+        <?php if ($link != null): ?>
+        	<p><a href="<?php echo $link; ?>"><?php echo $link; ?></a></p>
+        <?php endif; ?>
         <p><?php echo $speeltuin->getDescription(); ?></p>
     </div>
 
@@ -52,10 +56,11 @@
         <h4>Waar is het precies?</h4>
         <p><?php echo $speeltuin->getLocationDescription(); ?></p>
         <div id="mini-map"></div>
+        <p>Geef me een <a href="https://www.google.com/maps/dir/?api=1&destination=<?php echo $speeltuin->getLatitude(); ?>,<?php echo $speeltuin->getLongitude(); ?>">routebeschrijving</a></p>
     </div>
     
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
 	<script src="js/bootstrap.min.js"></script>

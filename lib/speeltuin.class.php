@@ -19,6 +19,21 @@ class Speeltuin
         }
         return $allSpeeltuinen;
     }
+    
+    public function getAllSpeeltuinenInBoundingBox($neLat, $neLon, $swLat, $swLon) {
+    	$allSpeeltuinen = [];
+    	$res = $this->db->query(sprintf("SELECT id, naam, omschrijving, lat, lon, public FROM speeltuin
+			WHERE status_id = 1
+			AND lat <= %s AND lat >= %s AND lon >= %s AND lon <= %s",
+    		$neLat, $swLat, $swLon, $neLon));
+    	while ($row = $res->fetch_assoc()) {
+    		if (strlen($row["omschrijving"]) > 100) {
+    			$row["omschrijving"] = substr($row["omschrijving"], 0, 100) . "...";
+    		}
+    		$allSpeeltuinen[] = $row;
+    	}
+    	return $allSpeeltuinen;
+    }
 
     public function getAllVoorzieningen($showPopular = 2) {
         $allVoorzieningen = [];
@@ -64,11 +79,19 @@ class Speeltuin
 	}
 	
 	public function getName() {
-		$res = $this->db->query ( sprintf ( "SELECT naam FROM speeltuin WHERE id = %d", $this->id ) );
-		if ($row = $res->fetch_assoc ()) {
-			return $row ["naam"];
+		$res = $this->db->query(sprintf("SELECT naam FROM speeltuin WHERE id = %d", $this->id));
+		if ($row = $res->fetch_assoc()) {
+			return $row["naam"];
 		}
 		return "";
+	}
+	
+	public function getLink() {
+		$res = $this->db->query(sprintf("SELECT link FROM speeltuin WHERE id = %d", $this->id));
+		if ($row = $res->fetch_assoc()) {
+			return $row["link"];
+		}
+		return null;
 	}
 	
 	public function getDescription() {
@@ -173,15 +196,15 @@ class Speeltuin
 		$this->db->query(sprintf("UPDATE speeltuin SET status_id = 2 WHERE id = %d", $this->id));
 	}
 
-	public function insertOrUpdate($name, $omschrijving, $locatieOmschrijving, $lat, $lon, $public = 1) {
+	public function insertOrUpdate($name, $link, $omschrijving, $locatieOmschrijving, $lat, $lon, $public = 1) {
 		if ($this->id == 0) {
-			$this->db->query(sprintf("INSERT INTO speeltuin (naam, omschrijving, locatie_omschrijving, lat, lon, status_id, author_id, public, modified_on)
-					VALUES (\"%s\", \"%s\", \"%s\", %f, %f, 0, %d, %d, NOW())", $name, $omschrijving, $locatieOmschrijving, $lat, $lon, $_SESSION["user_id"], $public));
+			$this->db->query(sprintf("INSERT INTO speeltuin (naam, link, omschrijving, locatie_omschrijving, lat, lon, status_id, author_id, public, modified_on)
+					VALUES (\"%s\", \"%s\", \"%s\", \"%s\", %f, %f, 0, %d, %d, NOW())", $name, $link, $omschrijving, $locatieOmschrijving, $lat, $lon, $_SESSION["user_id"], $public));
 			$this->id = $this->db->getLatestId ();
 		} else {
 			$this->db->query(sprintf("UPDATE speeltuin
-				SET naam = \"%s\", omschrijving = \"%s\", locatie_omschrijving = \"%s\", lat = %f, lon = %f, status_id = 0, public = %d, modified_on = NOW()
-				WHERE id = %d", $name, $omschrijving, $locatieOmschrijving, $lat, $lon, $public, $this->id));
+				SET naam = \"%s\", link = \"%s\", omschrijving = \"%s\", locatie_omschrijving = \"%s\", lat = %f, lon = %f, status_id = 0, public = %d, modified_on = NOW()
+				WHERE id = %d", $name, $link, $omschrijving, $locatieOmschrijving, $lat, $lon, $public, $this->id));
 		}
 		return $this->id;
 	}
@@ -201,11 +224,11 @@ class Speeltuin
 	}
 
 	public function setVoorzieningen($postVars) {
-		$this->db->query ( sprintf ( "DELETE FROM speeltuin_voorziening WHERE speeltuin_id = %d", $this->id ) );
-		foreach ( $this->getAllVoorzieningen () as $voorzieningId => $voorzieningNaam ) {
-			if (isset ( $postVars ["v" . $voorzieningId] )) {
-				$this->db->query ( sprintf ( "INSERT INTO speeltuin_voorziening (speeltuin_id, voorziening_id) 
-						VALUES (%d, %d)", $this->id, $voorzieningId ) );
+		$this->db->query(sprintf("DELETE FROM speeltuin_voorziening WHERE speeltuin_id = %d", $this->id));
+		foreach ($this->getAllVoorzieningen () as $voorzieningId => $voorzieningNaam) {
+			if (isset($postVars["v" . $voorzieningId])) {
+				$this->db->query(sprintf("INSERT INTO speeltuin_voorziening (speeltuin_id, voorziening_id) 
+						VALUES (%d, %d)", $this->id, $voorzieningId));
 			}
 		}
 	}
@@ -216,6 +239,7 @@ class Speeltuin
 			if ($row = $res->fetch_assoc()) {
 				return array (
 						$row["naam"],
+						$row["link"],
 						$row["omschrijving"],
 						$row["locatie_omschrijving"],
 						$row["lat"],

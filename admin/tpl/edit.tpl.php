@@ -28,6 +28,11 @@ include_once "./inc/header.php";
 			<option value="2" <?php if ($public == 2) echo "selected=\"selected\""; ?>>Gratis maar beperkt toegankelijk</option>
 		</select>
 	</div>
+	
+	<div class="form-group">
+		<label for="link">Link (optioneel, bijv. http://www.speeltuinvereniging.nl/speeltuin)</label>
+		<input type="text" id="link" name="link" value="<?php echo $link; ?>" class="form-control" />
+	</div>
 
 	<div class="form-group">
 		<label for="omschrijving">Korte omschrijving van de speeltuin (max. 1000 tekens)</label>
@@ -143,36 +148,29 @@ include_once "./inc/header.php";
 
 	var map;
 	var marker;
-
+	var existingMarkers = [];
+	var infowindow = null;
+	
 	function initMap() {
 		map = new google.maps.Map(document.getElementById('map-div-edit'), {
 		  zoom: 15
 		});
-		
+
+		// the draggable marker for the current speeltuin
 		marker = new google.maps.Marker({
 			map: map,
 			draggable: true,
 			icon: "<?php echo BASE_URL; ?>img/marker_green.png"
 		});
-
 		marker.addListener('dragend', function() {
 			var lat = marker.getPosition().lat();
 			var lng = marker.getPosition().lng();
 			$('#lat').val(lat);
 			$('#lon').val(lng);
 		});
-		
-		map.addListener('bounds_changed', function() {
-			var newBounds = map.getBounds();
-			var NE = newBounds.getNorthEast();
-			var SW = newBounds.getSouthWest();
-			$.get("_markers.php?ne=" + NE.toString() + "&sw=" + SW.toString(), function(data) {
-				// TODO markers aan kaart toevoegen
-		    });
-		});
-		
-		setDefaultPos();
 
+		// position the map
+		setDefaultPos();
 		<?php if ($id == 0 && $lat == 0.0 && $lon == 0.0): // Nieuw? Dan in eerste instantie op huidige locatie zetten ?>
 	        // Try HTML5 geolocation.
 	        if (navigator.geolocation) {
@@ -201,6 +199,66 @@ include_once "./inc/header.php";
 			$('#lat').val(<?php echo $lat; ?>);
 			$('#lon').val(<?php echo $lon; ?>);
 		<?php endif; ?>
+
+		// markers for existing speeltuinen
+		function fireIfLastEvent() {
+			// always remove existing markers
+			for (var i = 0; i < existingMarkers.length; i++) {
+				existingMarkers[i].setMap(null);
+			}
+			existingMarkers = [];
+			
+		    if (lastEvent.getTime() + 100 <= new Date().getTime()) { 
+		    	var newBounds = map.getBounds();
+				var NE = newBounds.getNorthEast();
+				NE = NE.toString().replace(" ", "").replace("(", "").replace(")", "");
+				var SW = newBounds.getSouthWest();
+				SW = SW.toString().replace(" ", "").replace("(", "").replace(")", "");
+				$.get("../_markers.php?ne=" + NE + "&sw=" + SW, function(data) {
+					placeMarkers(data);
+			    });
+		    } 
+		} 
+		function placeMarkers(data) {
+			var speeltuinen = JSON.parse(data);
+
+			infowindow = new google.maps.InfoWindow({
+				disableAutoPan: true,
+				content: "Wacht op klik..."
+			});
+			
+			for (var i = 0; i < speeltuinen.length; i++) {
+				var speeltuin = speeltuinen[i];
+
+				if (speeltuin.id == <?php echo $id; ?>) {
+					continue;
+				}
+				
+				var existingMarker = new google.maps.Marker({
+		            map: map,
+		            icon: "<?php echo BASE_URL; ?>img/marker_" + (speeltuin.public == 0 ? "blue" : (speeltuin.public == 1 ? "red" : "yellow")) + ".png",
+		            animation: google.maps.Animation.DROP,
+		            html:	"<h4>" + speeltuin.naam + "</h4>" +
+							"<p>" + speeltuin.omschrijving + "</p>" //+
+							//"<p><a href='detail.php?speeltuin=" + speeltuin.id + "'>Meer</a>"
+			    });
+				existingMarker.setPosition({
+		            lat: parseFloat(speeltuin.lat),
+		            lng: parseFloat(speeltuin.lon)
+		        });
+				existingMarker.addListener("click", function() {
+					infowindow.setContent(this.html);
+			        infowindow.open(map, this);
+		        });
+		    	
+		        existingMarkers.push(existingMarker);
+			} 
+		}
+		function scheduleDelayedCallback() {
+		    lastEvent = new Date(); 
+		    setTimeout(fireIfLastEvent, 100); 
+		} 
+		map.addListener("bounds_changed", scheduleDelayedCallback);
 	}
 	
 	function setDefaultPos() {

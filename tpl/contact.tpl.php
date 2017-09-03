@@ -3,9 +3,11 @@
     <div id="details">
         <p>
             <strong>Laat wat van je horen!</strong><br>
-            Mail ons op <a href="mailto:info@speeltuinzoeker.nl">info@speeltuinzoeker.nl</a><br>
-            Volg ons op <a href="https://www.facebook.com/speeltuinzoeker/"><i class="fa fa-facebook-square" aria-hidden="true"></i>&nbsp;Facebook</a><br>
-            Volg ons op <a href="https://twitter.com/speeltuinzoeker"><i class="fa fa-twitter-square" aria-hidden="true"></i>&nbsp;Twitter</a>
+            <a href="mailto:info@speeltuinzoeker.nl"><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;info@speeltuinzoeker.nl</a><br>
+            <strong>En volg ons</strong><br>
+            <a href="https://www.facebook.com/speeltuinzoeker"><i class="fa fa-facebook-square" aria-hidden="true"></i>&nbsp;Facebook</a><br>
+            <a href="https://twitter.com/speeltuinzoeker"><i class="fa fa-twitter-square" aria-hidden="true"></i>&nbsp;Twitter</a><br>
+        	<a href="https://www.instagram.com/speeltuinzoeker"><i class="fa fa-instagram" aria-hidden="true"></i>&nbsp;Instagram</a>
         </p>
 
         <p>

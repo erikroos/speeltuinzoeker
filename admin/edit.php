@@ -43,7 +43,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		}
 		
 		$_SESSION["feedback"] = "Speeltuin goedgekeurd.";
-		header("Location: view.php?status=1&start=" . $start);
+		
+		// redirect to last page
+		$totalSize = $speeltuin->getTotalNr(1);
+		header("Location: view.php?status=1&start=" . ($totalSize - ($totalSize % 10)));
 		exit();
 	} else if ($_POST["Submit"] == "Keur af") {
 		
@@ -65,13 +68,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	} else {
 		
 		$name = sanitizeInput(get_request_value("naam", ""));
+		$link = sanitizeInput(get_request_value("link", "")); // TODO check validiteit
 		$omschrijving = sanitizeInput(get_request_value("omschrijving", ""));
 		$locatieOmschrijving = sanitizeInput(get_request_value("locatie_omschrijving", ""));
 		$lat = get_request_value("lat", 0.0);
 		$lon = get_request_value("lon", 0.0);
 		$public = get_request_value("public", 1);
 		
-		$speeltuin->insertOrUpdate($name, $omschrijving, $locatieOmschrijving, $lat, $lon, $public);
+		$speeltuin->insertOrUpdate($name, $link, $omschrijving, $locatieOmschrijving, $lat, $lon, $public);
 		
 		if ($id == 0) {
 			$id = $speeltuin->getId();
@@ -96,6 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 } else {
 	
 	$name = "";
+	$link = "";
 	$omschrijving = "";
 	$locatieOmschrijving = "";
 	$lat = 0.0;
@@ -109,7 +114,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$photos = [];
 	
 	if ($id > 0) { // bestaand
-		list($name, $omschrijving, $locatieOmschrijving, $lat, $lon, $status_id, $public) = $speeltuin->getFields();
+		list($name, $link, $omschrijving, $locatieOmschrijving, $lat, $lon, $status_id, $public) = $speeltuin->getFields();
 		
 		$selectedVoorzieningen = $speeltuin->getVoorzieningen();
 		$selectedVoorzieningIds = array_keys($selectedVoorzieningen);
