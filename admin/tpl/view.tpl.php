@@ -59,6 +59,7 @@ We raden je aan (weer) een <a href="account.php">eigen wachtwoord in te stellen<
 		<thead>
 			<tr>
 				<th>Naam</th>
+				<th>Type</th>
 				<th>Omschrijving</th>
 				<th>Locatieomschrijving</th>
 				<th>Aantal voorzieningen</th>
@@ -75,6 +76,7 @@ We raden je aan (weer) een <a href="account.php">eigen wachtwoord in te stellen<
 		<?php foreach ($rows as $row): ?>
 			<tr>
 				<td><a href="./edit.php?id=<?php echo $row["id"]; ?>&start=<?php echo $start; ?>"><?php echo $row["naam"]; ?></a></td>
+				<td><?php echo $row["speeltuintype"]; ?></td>
 				<td><?php echo strlen($row["omschrijving"]) > 50 ? substr($row["omschrijving"], 0, 50) . "..." : $row["omschrijving"]; ?></td>
 				<td><?php echo $row["locatie_omschrijving"]; ?></td>
 				<td><?php echo $row["aantalVoorzieningen"]; ?></td>

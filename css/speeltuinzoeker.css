@@ -123,6 +123,9 @@ input[type=checkbox].form-control {
 #details {
 	clear: both;
 }
+#details li {
+	margin-left: -20px;
+}
 
 .voorzieningen {
 	float: left;

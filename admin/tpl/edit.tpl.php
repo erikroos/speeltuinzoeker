@@ -11,13 +11,25 @@ include_once "./inc/header.php";
 	<input type="hidden" id="start" name="start" value="<?php echo $start; ?>" />
 	
 	<?php if ($id > 0): ?>
-	<p>
-		<strong>Status</strong>: <?php if ($status_id == 0) echo "voorgesteld"; elseif ($status_id == 1) echo "actief"; elseif ($status_id == 2) echo "afgewezen"; ?></p>
+		<p>
+			<strong>Status</strong>: <?php if ($status_id == 0) echo "voorgesteld"; elseif ($status_id == 1) echo "actief"; elseif ($status_id == 2) echo "afgewezen"; ?>
+		</p>
 	<?php endif; ?>
 
 	<div class="form-group">
 		<label for="name">Naam</label>
 		<input type="text" id="naam" name="naam" value="<?php echo $name; ?>" class="form-control" />
+	</div>
+	
+	<div class="form-group">
+		<label for="speeltuintype">Type</label>
+		<select id="speeltuintype" name="speeltuintype" class="form-control">
+			<option value="Toestelspeeltuin" <?php if ($type == "Toestelspeeltuin") echo "selected=\"selected\""; ?>>Toestelspeeltuin</option>
+			<option value="Natuurspeeltuin" <?php if ($type == "Natuurspeeltuin") echo "selected=\"selected\""; ?>>Natuurspeeltuin</option>
+			<option value="Kinderboerderij" <?php if ($type == "Kinderboerderij") echo "selected=\"selected\""; ?>>Kinderboerderij</option>
+			<option value="Kinderboerderij met speeltuin" <?php if ($type == "Kinderboerderij met speeltuin") echo "selected=\"selected\""; ?>>Kinderboerderij met speeltuin</option>
+			<option value="Sportfaciliteit" <?php if ($type == "Sportfaciliteit") echo "selected=\"selected\""; ?>>Sportfaciliteit</option>
+		</select>
 	</div>
 	
 	<div class="form-group">
@@ -27,6 +39,28 @@ include_once "./inc/header.php";
 			<option value="1" <?php if ($public == 1) echo "selected=\"selected\""; ?>>Gratis en altijd toegankelijk</option>
 			<option value="2" <?php if ($public == 2) echo "selected=\"selected\""; ?>>Gratis maar beperkt toegankelijk</option>
 		</select>
+	</div>
+	
+	<div class="form-group">
+		<label>Leeftijdscategorie(&euml;n)</label>
+		<div class="checkbox">
+			<label>
+				<input type="checkbox" id="agecat_1" name="agecat_1" value="1" class="form-control" <?php if ($agecat1) echo "checked=\"checked\""; ?> />
+				Leuk voor de allerkleinsten
+			</label>
+		</div>
+		<div class="checkbox">
+			<label>
+				<input type="checkbox" id="agecat_2" name="agecat_2" value="1" class="form-control" <?php if ($agecat2) echo "checked=\"checked\""; ?> />
+				Leuk voor de jonge jeugd
+			</label>
+		</div>
+		<div class="checkbox">
+			<label>
+				<input type="checkbox" id="agecat_3" name="agecat_3" value="1" class="form-control" <?php if ($agecat3) echo "checked=\"checked\""; ?> />
+				Leuk voor de wat oudere jeugd
+			</label>
+		</div>
 	</div>
 	
 	<div class="form-group">
@@ -53,7 +87,7 @@ include_once "./inc/header.php";
 	<div id="map-div-edit"></div>
 	
 	<?php if ($isUser): ?>
-		<p><em>Staat de marker nog niet op de goede plaats?</em> Sleep hem er dan heen.</p>
+		<p><em>Staat de groene marker nog niet op de goede plaats?</em> Sleep hem er dan heen.</p>
 	<?php endif; ?>
 	
 	<div class="form-group">
@@ -111,11 +145,11 @@ include_once "./inc/header.php";
 				<img src="<?php echo $photo; ?>" alt="Foto van deze speeltuin" title="Foto van deze speeltuin" />
 			<?php endforeach; ?>
 		</div>
-		<p id="photo-info">Je kunt foto's toevoegen en verwijderen vanuit het overzicht van je speeltuinen.</p>
+		<p id="photo-info">Je kunt foto's toevoegen en verwijderen vanuit het overzicht van je speeltuinen (klik op de link "Foto's" in de meest rechtse kolom).</p>
 	<?php else: ?>
 		<p id="photo-info">Er zijn nog geen foto's.
 		<?php if ($isUser): ?>
-			Je kunt deze <?php if ($id ==0): ?>na het opslaan<?php endif; ?> vanuit het overzicht van je speeltuinen toevoegen.</p>
+			Je kunt deze <?php if ($id ==0): ?>na het opslaan<?php endif; ?> vanuit het overzicht van je speeltuinen toevoegen (klik op de link "Foto's" in meest rechtse kolom).</p>
 		<?php endif; ?>
 	<?php endif; ?>
 	

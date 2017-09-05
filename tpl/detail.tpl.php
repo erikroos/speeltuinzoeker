@@ -29,18 +29,17 @@
 	        <?php endif; ?>
         <?php endif; ?>
         
-        <p><?php echo $speeltuin->getPublic(); ?></p>
+        <ul>
+        	<li><?php echo $speeltuin->getPublic(); ?></li>
+        	<li><?php echo $speeltuin->getType(); ?></li>
+        	<li><?php echo $speeltuin->getAgecatString(); ?></li>
+        </ul>
+        
         <?php $link = $speeltuin->getLink(); ?>
         <?php if ($link != null): ?>
         	<p><a href="<?php echo $link; ?>"><?php echo $link; ?></a></p>
         <?php endif; ?>
         <p><?php echo $speeltuin->getDescription(); ?></p>
-    </div>
-
-    <div class="detail-photobar">
-        <?php foreach ($photos as $photo): ?>
-            <div><img src="<?php echo $photo; ?>" alt="Foto van deze speeltuin" /></div>
-        <?php endforeach; ?>
     </div>
 
     <div class="voorzieningen">
@@ -55,9 +54,19 @@
     <div class="locatie">
         <h4>Waar is het precies?</h4>
         <p><?php echo $speeltuin->getLocationDescription(); ?></p>
-        <div id="mini-map"></div>
         <p>Geef me een <a href="https://www.google.com/maps/dir/?api=1&destination=<?php echo $speeltuin->getLatitude(); ?>,<?php echo $speeltuin->getLongitude(); ?>">routebeschrijving</a></p>
+        <div id="mini-map"></div>
     </div>
+    
+    <?php if (sizeof($photos) > 0): ?>
+    	<div class="betweenbar"></div>
+    	<h4>Kijk eens rond</h4>
+	    <div class="detail-photobar">
+	        <?php foreach ($photos as $photo): ?>
+	            <div><img src="<?php echo $photo; ?>" alt="Foto van deze speeltuin" /></div>
+	        <?php endforeach; ?>
+	    </div>
+    <?php endif; ?>
     
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="js/jquery.min.js"></script>

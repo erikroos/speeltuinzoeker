@@ -74,8 +74,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$lat = get_request_value("lat", 0.0);
 		$lon = get_request_value("lon", 0.0);
 		$public = get_request_value("public", 1);
+		$type = get_request_value("speeltuintype", 1);
+		$agecat1 = (isset($_POST["agecat_1"]) ? true : false);
+		$agecat2 = (isset($_POST["agecat_2"]) ? true : false);
+		$agecat3 = (isset($_POST["agecat_3"]) ? true : false);
 		
-		$speeltuin->insertOrUpdate($name, $link, $omschrijving, $locatieOmschrijving, $lat, $lon, $public);
+		$speeltuin->insertOrUpdate($name, $link, $omschrijving, $locatieOmschrijving, $lat, $lon, $public, $type, $agecat1, $agecat2, $agecat3);
 		
 		if ($id == 0) {
 			$id = $speeltuin->getId();
@@ -107,6 +111,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$lon = 0.0;
 	$status_id = 0;
 	$public = 1;
+	$type = "Toestelspeeltuin";
+	$agecat1 = false;
+	$agecat2 = true;
+	$agecat3 = true;
 	
 	$allVoorzieningenPop = $speeltuin->getAllVoorzieningen(1);
 	$allVoorzieningenNonPop = $speeltuin->getAllVoorzieningen(0);
@@ -114,7 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$photos = [];
 	
 	if ($id > 0) { // bestaand
-		list($name, $link, $omschrijving, $locatieOmschrijving, $lat, $lon, $status_id, $public) = $speeltuin->getFields();
+		list($name, $link, $omschrijving, $locatieOmschrijving, $lat, $lon, $status_id, $public, $type, $agecat1, $agecat2, $agecat3) = $speeltuin->getFields();
 		
 		$selectedVoorzieningen = $speeltuin->getVoorzieningen();
 		$selectedVoorzieningIds = array_keys($selectedVoorzieningen);

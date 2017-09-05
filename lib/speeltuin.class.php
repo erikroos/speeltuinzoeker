@@ -119,9 +119,35 @@ class Speeltuin
 	}
 
 	public function getLocationDescription() {
-		$res = $this->db->query ( sprintf ( "SELECT locatie_omschrijving FROM speeltuin WHERE id = %d", $this->id ) );
-		if ($row = $res->fetch_assoc ()) {
-			return $row ["locatie_omschrijving"];
+		$res = $this->db->query(sprintf("SELECT locatie_omschrijving FROM speeltuin WHERE id = %d", $this->id));
+		if ($row = $res->fetch_assoc()) {
+			return $row["locatie_omschrijving"];
+		}
+		return "";
+	}
+	
+	public function getType() {
+		$res = $this->db->query(sprintf("SELECT speeltuintype FROM speeltuin WHERE id = %d", $this->id));
+		if ($row = $res->fetch_assoc()) {
+			return $row["speeltuintype"];
+		}
+		return "";
+	}
+	
+	public function getAgecatString() {
+		$res = $this->db->query(sprintf("SELECT agecat_1, agecat_2, agecat_3 FROM speeltuin WHERE id = %d", $this->id));
+		if ($row = $res->fetch_assoc()) {
+			$cats = [];
+			if ($row["agecat_1"] == 1) {
+				$cats[] = "de allerkleinsten";
+			}
+			if ($row["agecat_2"] == 1) {
+				$cats[] = "de jonge jeugd";
+			}
+			if ($row["agecat_3"] == 1) {
+				$cats[] = "de wat oudere jeugd";
+			}
+			return "Leuk voor " . implode(", ", $cats);
 		}
 		return "";
 	}
@@ -196,15 +222,18 @@ class Speeltuin
 		$this->db->query(sprintf("UPDATE speeltuin SET status_id = 2 WHERE id = %d", $this->id));
 	}
 
-	public function insertOrUpdate($name, $link, $omschrijving, $locatieOmschrijving, $lat, $lon, $public = 1) {
+	public function insertOrUpdate($name, $link, $omschrijving, $locatieOmschrijving, $lat, $lon, $public, $type, $agecat1, $agecat2, $agecat3) {
 		if ($this->id == 0) {
-			$this->db->query(sprintf("INSERT INTO speeltuin (naam, link, omschrijving, locatie_omschrijving, lat, lon, status_id, author_id, public, modified_on)
-					VALUES (\"%s\", \"%s\", \"%s\", \"%s\", %f, %f, 0, %d, %d, NOW())", $name, $link, $omschrijving, $locatieOmschrijving, $lat, $lon, $_SESSION["user_id"], $public));
+			$this->db->query(sprintf("INSERT INTO speeltuin 
+					(naam, link, omschrijving, locatie_omschrijving, lat, lon, status_id, author_id, public, speeltuintype, agecat_1, agecat_2, agecat_3, modified_on)
+					VALUES (\"%s\", \"%s\", \"%s\", \"%s\", %f, %f, 0, %d, %d, \"%s\", %d, %d, %d, NOW())", 
+					$name, $link, $omschrijving, $locatieOmschrijving, $lat, $lon, $_SESSION["user_id"], $public, $type, $agecat1 ? 1 : 0, $agecat2 ? 1 : 0, $agecat3 ? 1 : 0));
 			$this->id = $this->db->getLatestId ();
 		} else {
 			$this->db->query(sprintf("UPDATE speeltuin
-				SET naam = \"%s\", link = \"%s\", omschrijving = \"%s\", locatie_omschrijving = \"%s\", lat = %f, lon = %f, status_id = 0, public = %d, modified_on = NOW()
-				WHERE id = %d", $name, $link, $omschrijving, $locatieOmschrijving, $lat, $lon, $public, $this->id));
+				SET naam = \"%s\", link = \"%s\", omschrijving = \"%s\", locatie_omschrijving = \"%s\", lat = %f, lon = %f, status_id = 0, 
+					public = %d, speeltuintype = \"%s\", agecat_1 = %d, agecat_2 = %d, agecat_3 = %d, modified_on = NOW()
+				WHERE id = %d", $name, $link, $omschrijving, $locatieOmschrijving, $lat, $lon, $public, $type, $agecat1 ? 1 : 0, $agecat2 ? 1 : 0, $agecat3 ? 1 : 0, $this->id));
 		}
 		return $this->id;
 	}
@@ -245,7 +274,11 @@ class Speeltuin
 						$row["lat"],
 						$row["lon"],
 						$row["status_id"],
-						$row["public"]
+						$row["public"],
+						$row["speeltuintype"],
+						$row["agecat_1"],
+						$row["agecat_2"],
+						$row["agecat_3"]
 				);
 			}
 		}
@@ -256,7 +289,11 @@ class Speeltuin
 				"",
 				"",
 				0,
-				1
+				1,
+				"Toestelspeeltuin",
+				false,
+				true,
+				true
 		);
 	}
 

@@ -54,7 +54,7 @@ if ($res !== false) {
 	}
 }
 
-$res = $db->query(sprintf("SELECT speeltuin.id, speeltuin.naam, locatie_omschrijving, omschrijving,
+$res = $db->query(sprintf("SELECT speeltuin.id, speeltuin.naam, speeltuintype, locatie_omschrijving, omschrijving,
 			user.naam AS userNaam, status_id
 			FROM speeltuin
 			LEFT JOIN user ON speeltuin.author_id = user.id
