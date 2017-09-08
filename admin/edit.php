@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 				"<p>Hij is nu <a href='" . BASE_URL . "index.php?speeltuin=" . $speeltuin->getId() . "'>zichtbaar</a> op de site.</p>" . 
 				"<p>Met vriendelijke groeten,<br>" . 
 				"Het team van Speeltuinzoeker.nl</p>";
-			Mail::sendMail($userEmail, "Speeltuin " . $speeltuin->getName() . " geactiveerd", $message);
+			Mail::sendMail($userEmail, "Speeltuin " . $speeltuin->getName() . " goedgekeurd", $message);
 		}
 		
 		$_SESSION["feedback"] = "Speeltuin goedgekeurd.";
@@ -57,11 +57,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			$message = "<p>Beste " . $speeltuin->getAuthorName() . ",</p>" .
 					"<p>Je speeltuin \"" . $speeltuin->getName() . "\" is helaas afgekeurd.</p>" .
 					"<p>De reden hiervan is: " . $_POST["afkeur_reden"] . "</p>" .
-                    "<p>De speeltuin staat nog steeds in <a href='" . BASE_URL . "admin/view.php?user'>je overzicht</a>." .
+                    "<p>De speeltuin staat nog steeds in je <a href='" . BASE_URL . "admin/view.php?user'>overzicht</a>." .
                     "Je kunt hem eventueel bewerken en opslaan, zodat we hem opnieuw kunnen beoordelen.</p>" .
 					"<p>Met vriendelijke groeten,<br>" .
 					"Het team van Speeltuinzoeker.nl</p>";
-			Mail::sendMail($userEmail, "Speeltuin " . $speeltuin->getName() . " geactiveerd", $message);
+			Mail::sendMail($userEmail, "Speeltuin " . $speeltuin->getName() . " afgekeurd", $message);
 		}
 		
 		$_SESSION["feedback"] = "Speeltuin afgekeurd.";
