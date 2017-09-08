@@ -235,6 +235,7 @@ include_once "./inc/header.php";
 		<?php endif; ?>
 
 		// markers for existing speeltuinen
+        var lastEvent;
 		function fireIfLastEvent() {
 			// always remove existing markers
 			for (var i = 0; i < existingMarkers.length; i++) {
@@ -305,7 +306,8 @@ include_once "./inc/header.php";
     }
 
 	$(document).on('ready', function() {
-	    $("#cancel").click(function() {
+
+	    $("#cancel").click(function(event) {
 	    	event.preventDefault();
 	    	<?php if ($isUser): ?>
 				window.location = './view.php?user';
@@ -314,13 +316,13 @@ include_once "./inc/header.php";
 			<?php endif; ?>
 		});
 
-		$("#expand_items").click(function() {
+		$("#expand_items").click(function(event) {
 			event.preventDefault();
 			$("#nonPopItems").show();
 			$("#expand_items").hide();
 		});
 
-		$('#place-marker').click(function() {
+		$('#place-marker').click(function(event) {
 			event.preventDefault();
 
 			if ($('#locatie_omschrijving').val() == "") {

@@ -57,6 +57,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			$message = "<p>Beste " . $speeltuin->getAuthorName() . ",</p>" .
 					"<p>Je speeltuin \"" . $speeltuin->getName() . "\" is helaas afgekeurd.</p>" .
 					"<p>De reden hiervan is: " . $_POST["afkeur_reden"] . "</p>" .
+                    "<p>De speeltuin staat nog steeds in <a href='" . BASE_URL . "admin/view.php?user'>je overzicht</a>." .
+                    "Je kunt hem eventueel bewerken en opslaan, zodat we hem opnieuw kunnen beoordelen.</p>" .
 					"<p>Met vriendelijke groeten,<br>" .
 					"Het team van Speeltuinzoeker.nl</p>";
 			Mail::sendMail($userEmail, "Speeltuin " . $speeltuin->getName() . " geactiveerd", $message);

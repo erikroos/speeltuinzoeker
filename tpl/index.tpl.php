@@ -87,6 +87,7 @@
 		<?php endif; ?>
 
 		// markers for existing speeltuinen
+        var lastEvent;
 		function fireIfLastEvent() { 
 			// always remove existing markers
 			for (var i = 0; i < existingMarkers.length; i++) {
@@ -167,19 +168,19 @@
     	);
     };
 
-    $('#place-marker').click(function() {
+    $('#place-marker').click(function(event) {
         event.preventDefault();
         searchForPlace();
         $('#locatie_omschrijving').blur();
     });
 
-    $('#searchform').submit(function() {
+    $('#searchform').submit(function(event) {
         event.preventDefault();
         searchForPlace();
         $('#locatie_omschrijving').blur();
     });
 
-    $('#locatie_omschrijving').click(function() {
+    $('#locatie_omschrijving').click(function(event) {
         if ($('#locatie_omschrijving').val() == "<?php echo $defaultLocationString; ?>") {
     		$('#locatie_omschrijving').val("");
         }
