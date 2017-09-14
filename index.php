@@ -22,6 +22,9 @@ if (isset($_GET["speeltuin"])) {
 $totalNr = $speeltuin->getTotalNr();
 $latestSpeeltuin = $speeltuin->getLatestEntry();
 
+$user = new User($db);
+$totalNrOfUsers = $user->getTotalNr(1);
+
 $defaultLocationString = "Bijv.: Fazantweg, Paterswolde";
 
 include "tpl/index.tpl.php";

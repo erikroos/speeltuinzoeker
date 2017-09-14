@@ -1,3 +1,4 @@
+<?php $indexTitle = "Speeltuinzoeker.nl - Info"; ?>
 <?php include "header.tpl.php"; ?>
 
     <div id="details">

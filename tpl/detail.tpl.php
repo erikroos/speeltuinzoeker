@@ -1,3 +1,4 @@
+<?php $indexTitle = $speeltuin->getName() . " - Speeltuinzoeker.nl"; ?>
 <?php include "header.tpl.php"; ?>
 
     <div id="details">
@@ -35,11 +36,12 @@
         	<li><?php echo $speeltuin->getAgecatString(); ?></li>
         </ul>
         
+        <p><?php echo $speeltuin->getDescription(); ?></p>
+        
         <?php $link = $speeltuin->getLink(); ?>
         <?php if ($link != null): ?>
         	<p><a href="<?php echo $link; ?>"><?php echo $link; ?></a></p>
         <?php endif; ?>
-        <p><?php echo $speeltuin->getDescription(); ?></p>
     </div>
 
     <div class="voorzieningen">

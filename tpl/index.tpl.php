@@ -1,7 +1,8 @@
+<?php $indexTitle = "Speeltuinzoeker.nl - Laat ze spelen!"; ?>
 <?php include "header.tpl.php"; ?>
 
     <div id="latestbox">
-        <p>Er zijn al <strong><?php echo $totalNr; ?></strong> speeltuinen!</p>
+        <p><?php echo $totalNrOfUsers; ?> actieve gebruikers beheren samen<br>al <strong><?php echo $totalNr; ?></strong> speeltuinen</p>
         <?php if ($latestSpeeltuin != null): ?>
             <p>
                 De nieuwste: <strong><?php echo $latestSpeeltuin["naam"]; ?></strong><br>
@@ -22,7 +23,7 @@
     <div id="map-div"></div>
     
     <div id="latestbox-resp">
-        <p>Er zijn al <strong><?php echo $totalNr; ?></strong> speeltuinen!</p>
+        <p><?php echo $totalNrOfUsers; ?> actieve gebruikers beheren samen<br>al <strong><?php echo $totalNr; ?></strong> speeltuinen</p>
         <?php if ($latestSpeeltuin != null): ?>
             <p>
                 De nieuwste: <strong><?php echo $latestSpeeltuin["naam"]; ?></strong><br>
@@ -30,6 +31,20 @@
                 <a href="detail.php?speeltuin=<?php echo $latestSpeeltuin["id"]; ?>">Meer</a>
             </p>
         <?php endif; ?>
+    </div>
+    
+    <div id="footer">
+    	<h4>Sitemap</h4>
+    	<nav class="sitemap">
+    		<a href="./index.php">Home</a>
+		    <a href="./about.php">Info</a>
+		    <a href="./join.php">Meedoen</a>
+		    <a href="./contact.php">Contact</a>
+		    <a href="./admin/<?php echo (!isset($_SESSION["user_id"]) ? "index.php" : ($_SESSION["admin"] == 1 ? "index.php" : "view.php?user")); ?>">Mijn Speeltuinzoeker</a>
+    	</nav>
+    	<p>Speeltuinzoeker.nl gebruikt <strong>cookies</strong> om de site goed te laten werken.</p>
+    	<p><strong>Adverteren?</strong> Jouw (indoor) speeltuin op deze site? Neem contact op!</p>
+    	<p>&copy; <?php echo date("Y"); ?> Speeltuinzoeker.nl <a href="mailto:info@speeltuinzoeker.nl">info@speeltuinzoeker.nl</a></p>
     </div>
 
 <?php include "footer.tpl.php"; ?>
@@ -121,6 +136,8 @@
 		            icon: "<?php echo BASE_URL; ?>img/marker_" + (speeltuin.public == 0 ? "blue" : (speeltuin.public == 1 ? "red" : "yellow")) + ".png",
 		            animation: google.maps.Animation.DROP,
 		            html:	"<h4>" + speeltuin.naam + "</h4>" +
+		            		"<p>" + (speeltuin.public == 0 ? "Betaald" : (speeltuin.public == 1 ? "Gratis en altijd toegankelijk" : "Gratis maar beperkt toegankelijk")) + "</p>" +
+		            		"<p>" + speeltuin.speeltuintype + "</p>" +
 							"<p>" + speeltuin.omschrijving + "</p>" +
 							"<p><a href='detail.php?speeltuin=" + speeltuin.id + "'>Meer</a>"
 			    });

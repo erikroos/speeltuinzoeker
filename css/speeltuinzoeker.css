@@ -258,3 +258,25 @@ th {
 	border-radius: 4px;
 	padding: 10px;
 }
+
+#footer {
+	margin: 20px 0px 10px 0px;
+	background-color: #88CE00;
+	border-radius: 4px;
+	padding: 10px;
+}
+#footer h4 {
+	margin-bottom: 0px;
+}
+#footer a {
+	color: #FF0025;
+}
+#footer a:hover {
+	color: #FF4200;
+}
+#footer .sitemap {
+	margin-top: 0px;
+}
+#footer .sitemap a {
+	display: block;
+}

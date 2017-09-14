@@ -22,7 +22,7 @@ class Speeltuin
     
     public function getAllSpeeltuinenInBoundingBox($neLat, $neLon, $swLat, $swLon) {
     	$allSpeeltuinen = [];
-    	$res = $this->db->query(sprintf("SELECT id, naam, omschrijving, lat, lon, public FROM speeltuin
+    	$res = $this->db->query(sprintf("SELECT id, naam, speeltuintype, omschrijving, lat, lon, public FROM speeltuin
 			WHERE status_id = 1
 			AND lat <= %s AND lat >= %s AND lon >= %s AND lon <= %s",
     		$neLat, $swLat, $swLon, $neLon));

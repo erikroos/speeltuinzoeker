@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Speeltuinzoeker.nl - Laat ze spelen!</title>
+    <title><?php echo $indexTitle; ?></title>
     
     <meta name="description" content="De (mobiele) website om snel en makkelijk een speeltuin in jouw buurt te vinden. Speeltuinzoeker laat kinderen spelen!">
 	<meta name="keywords" content="speeltuin,speelplein,speelplaats,gratis,zoeken,vinden,kind,kinderen,spelen">
