@@ -25,6 +25,15 @@
 	.logo {
 		display: none;
 	}
+
+    #footer .footer-column {
+        float: none;
+        width: 100%;
+    }
+
+    #map-div {
+        margin-right: 20px;
+    }
 }
 
 @media (min-width: 601px) {

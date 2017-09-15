@@ -2,12 +2,15 @@
 <?php include "header.tpl.php"; ?>
 
     <div id="latestbox">
-        <p><?php echo $totalNrOfUsers; ?> actieve gebruikers beheren samen<br>al <strong><?php echo $totalNr; ?></strong> speeltuinen</p>
+        <p>
+            <?php echo $totalNrOfUsers; ?> actieve gebruikers beheren samen al <strong><?php echo $totalNr; ?></strong> speeltuinen.
+            <a href="join.php">Doe mee!</a>
+        </p>
         <?php if ($latestSpeeltuin != null): ?>
             <p>
                 De nieuwste: <strong><?php echo $latestSpeeltuin["naam"]; ?></strong><br>
                 <?php if (!empty($latestSpeeltuin["locatie_omschrijving"])) echo $latestSpeeltuin["locatie_omschrijving"] . "<br>"; ?>
-                <a href="detail.php?speeltuin=<?php echo $latestSpeeltuin["id"]; ?>">Meer</a>
+                <a href="detail.php?speeltuin=<?php echo $latestSpeeltuin["id"]; ?>">Bekijk</a>
             </p>
         <?php endif; ?>
     </div>
@@ -23,28 +26,36 @@
     <div id="map-div"></div>
     
     <div id="latestbox-resp">
-        <p><?php echo $totalNrOfUsers; ?> actieve gebruikers beheren samen<br>al <strong><?php echo $totalNr; ?></strong> speeltuinen</p>
+        <p>
+            <?php echo $totalNrOfUsers; ?> actieve gebruikers beheren samen al <strong><?php echo $totalNr; ?></strong> speeltuinen.
+            <a href="join.php">Doe mee!</a>
+        </p>
         <?php if ($latestSpeeltuin != null): ?>
             <p>
                 De nieuwste: <strong><?php echo $latestSpeeltuin["naam"]; ?></strong><br>
                 <?php if (!empty($latestSpeeltuin["locatie_omschrijving"])) echo $latestSpeeltuin["locatie_omschrijving"] . "<br>"; ?>
-                <a href="detail.php?speeltuin=<?php echo $latestSpeeltuin["id"]; ?>">Meer</a>
+                <a href="detail.php?speeltuin=<?php echo $latestSpeeltuin["id"]; ?>">Bekijk</a>
             </p>
         <?php endif; ?>
     </div>
     
     <div id="footer">
-    	<h4>Sitemap</h4>
-    	<nav class="sitemap">
-    		<a href="./index.php">Home</a>
-		    <a href="./about.php">Info</a>
-		    <a href="./join.php">Meedoen</a>
-		    <a href="./contact.php">Contact</a>
-		    <a href="./admin/<?php echo (!isset($_SESSION["user_id"]) ? "index.php" : ($_SESSION["admin"] == 1 ? "index.php" : "view.php?user")); ?>">Mijn Speeltuinzoeker</a>
-    	</nav>
-    	<p>Speeltuinzoeker.nl gebruikt <strong>cookies</strong> om de site goed te laten werken.</p>
-    	<p><strong>Adverteren?</strong> Jouw (indoor) speeltuin op deze site? Neem contact op!</p>
-    	<p>&copy; <?php echo date("Y"); ?> Speeltuinzoeker.nl <a href="mailto:info@speeltuinzoeker.nl">info@speeltuinzoeker.nl</a></p>
+        <div class="footer-column">
+            <h4>Sitemap</h4>
+            <nav class="sitemap">
+                <a href="./index.php">Home</a>
+                <a href="./about.php">Info</a>
+                <a href="./join.php">Meedoen</a>
+                <a href="./contact.php">Contact</a>
+                <a href="./admin/<?php echo (!isset($_SESSION["user_id"]) ? "index.php" : ($_SESSION["admin"] == 1 ? "index.php" : "view.php?user")); ?>">Mijn Speeltuinzoeker</a>
+            </nav>
+        </div>
+        <div class="footer-column right">
+            <p>Speeltuinzoeker.nl gebruikt <strong>cookies</strong> om de site goed te laten werken.</p>
+            <p><strong>Adverteren?</strong> Jouw (indoor) speeltuin op deze site? Neem <a href="contact.php">contact</a> op!</p>
+            <p>&copy; <?php echo date("Y"); ?> Speeltuinzoeker.nl<br><a href="mailto:info@speeltuinzoeker.nl">info@speeltuinzoeker.nl</a></p>
+        </div>
+        <div class="betweenbar"></div>
     </div>
 
 <?php include "footer.tpl.php"; ?>
