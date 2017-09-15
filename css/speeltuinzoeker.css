@@ -217,7 +217,6 @@ th {
     padding: 5px;
 }
 #latestbox-resp a {
-	font-weight: bold;
 	/*color: #FF0025;*/
 }
 #latestbox-resp a:hover {
@@ -286,6 +285,6 @@ th {
 	float: left;
 	width: 50%;
 }
-#footer .right {
-	margin-top: 10px;
+#footer .right h4 {
+	margin-bottom: 10px;
 }

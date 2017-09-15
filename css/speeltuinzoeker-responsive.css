@@ -34,6 +34,10 @@
     #map-div {
         margin-right: 20px;
     }
+    
+    #map-div-edit {
+    	width: 90%;
+    }
 }
 
 @media (min-width: 601px) {

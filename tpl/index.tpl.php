@@ -40,17 +40,6 @@
     </div>
     
     <div id="footer">
-    	<h4>Sitemap</h4>
-    	<nav class="sitemap">
-    		<a href="./index.php">Home</a>
-		    <a href="./about.php">Info</a>
-		    <a href="./join.php">Meedoen</a>
-		    <a href="./contact.php">Contact</a>
-		    <a href="./admin/<?php echo (!isset($_SESSION["user_id"]) ? "index.php" : ($_SESSION["admin"] == 1 ? "index.php" : "view.php?user")); ?>">Mijn Speeltuinzoeker</a>
-    	</nav>
-    	<p>Speeltuinzoeker.nl gebruikt <strong>cookies</strong> om de site goed te laten werken.</p>
-    	<p><strong>Adverteren?</strong> Jouw (indoor)speeltuin op deze site? Neem contact op!</p>
-    	<p>&copy; <?php echo date("Y"); ?> Speeltuinzoeker.nl <a href="mailto:info@speeltuinzoeker.nl">info@speeltuinzoeker.nl</a></p>
         <div class="footer-column">
             <h4>Sitemap</h4>
             <nav class="sitemap">
@@ -62,6 +51,7 @@
             </nav>
         </div>
         <div class="footer-column right">
+        	<h4>Colofon</h4>
             <p>Speeltuinzoeker.nl gebruikt <strong>cookies</strong> om de site goed te laten werken.</p>
             <p><strong>Adverteren?</strong> Jouw (indoor) speeltuin op deze site? Neem <a href="contact.php">contact</a> op!</p>
             <p>&copy; <?php echo date("Y"); ?> Speeltuinzoeker.nl<br><a href="mailto:info@speeltuinzoeker.nl">info@speeltuinzoeker.nl</a></p>
