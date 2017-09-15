@@ -43,7 +43,7 @@
 		    <a href="./admin/<?php echo (!isset($_SESSION["user_id"]) ? "index.php" : ($_SESSION["admin"] == 1 ? "index.php" : "view.php?user")); ?>">Mijn Speeltuinzoeker</a>
     	</nav>
     	<p>Speeltuinzoeker.nl gebruikt <strong>cookies</strong> om de site goed te laten werken.</p>
-    	<p><strong>Adverteren?</strong> Jouw (indoor) speeltuin op deze site? Neem contact op!</p>
+    	<p><strong>Adverteren?</strong> Jouw (indoor)speeltuin op deze site? Neem contact op!</p>
     	<p>&copy; <?php echo date("Y"); ?> Speeltuinzoeker.nl <a href="mailto:info@speeltuinzoeker.nl">info@speeltuinzoeker.nl</a></p>
     </div>
 
