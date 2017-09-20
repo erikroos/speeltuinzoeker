@@ -209,6 +209,7 @@ th {
 	color: #FF4200;
 }
 #latestbox-resp {
+	width: 100%;
 	display: none;
     margin-top: 10px;
     margin-bottom: 10px;

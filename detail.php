@@ -6,10 +6,19 @@ require_once "./admin/inc/functions.php";
 
 $id = get_request_value("speeltuin", 0);
 
+if (!is_numeric($id) || $id <= 0) {
+	die("Ongeldig ID!");
+}
+
 $db = new Db();
 $db->connect();
 
 $speeltuin = new Speeltuin($db, $id);
+
+if (!$speeltuin->isExistingId($id)) {
+	die("Niet-bestaande speeltuin!");
+}
+
 $photos = $speeltuin->getPhotos();
 
 $alleVoorzieningen = $speeltuin->getAllVoorzieningen();

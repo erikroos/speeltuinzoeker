@@ -10,6 +10,14 @@ class Speeltuin
     }
 
     // Functions that don't need ID:
+    
+    public function isExistingId($idToCheck) {
+    	$res = $this->db->query(sprintf("SELECT * FROM speeltuin WHERE id = %d", $idToCheck));
+    	if ($res != null && $row = $res->fetch_assoc()) {
+    		return true;
+    	}
+    	return false;
+    }
 
     public function getAllSpeeltuinen() {
         $allSpeeltuinen = [];
