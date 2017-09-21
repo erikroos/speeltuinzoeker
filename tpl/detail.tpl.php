@@ -10,7 +10,7 @@
         	<?php if ($sent): ?>
         		<p class="notice">Verzoek succesvol verstuurd! Er staat een kopie (cc) in je mailbox.</p>
         	<?php else: ?>
-        		<p class="error">Verzoek versturen mislukt! Niet (correct) ingelogd.</p>
+        		<p class="error">Verzoek versturen mislukt! Niet (correct) ingelogd en/of geen verzoek opgegeven.</p>
         	<?php endif; ?>
         <?php else: ?>
 	        <p class="request">Klopt er iets niet?

@@ -23,5 +23,7 @@ function humanFileSize($size, $unit = "") {
 }
 
 function sanitizeInput($input) {
-	return strip_tags($input);
+	$input = strip_tags($input);
+    $input = str_replace('"', '', $input);
+    return $input;
 }

@@ -21,7 +21,7 @@ include_once "./inc/header.php";
 
 	<hr>
 	<div class="buttonbar">
-		<input type="submit" name="Submit" value="Reset" class="btn btn-default" />
+		<input type="submit" name="Submit" value="Stuur toe" class="btn btn-default" />
 	</div>
 
 </form>

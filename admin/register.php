@@ -15,8 +15,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$db->connect();
 	$auth = new Auth($db);
 	
-	$name = get_request_value("naam", "");
-	$email = get_request_value("email", "");
+	$name = sanitizeInput(get_request_value("naam", ""));
+	$email = sanitizeInput(get_request_value("email", ""));
 	$password = get_request_value("password", "");
 	$password2 = get_request_value("password2", "");
 	$antispam = get_request_value("antispam", 0);
