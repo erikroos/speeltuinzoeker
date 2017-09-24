@@ -13,7 +13,44 @@
     	</form>
     </div>
 
-    <div id="map-div"></div>
+    <div id="map-container">
+    	<button id="toggleFilterDiv" class="btn btn-default">Filter&nbsp;<i id="filterToggleIcon" class="fa fa-toggle-right" aria-hidden="true"></i></button>
+    	<button id="toggleFilterDiv-resp" class="btn btn-default">Filter&nbsp;<i id="filterToggleIcon-resp" class="fa fa-toggle-down" aria-hidden="true"></i></button>
+    	<div id="map-filter-div">
+    		<form id="filter-form-type">
+    			<label>Type speeltuin</label><br>
+    			<?php foreach ($speeltuin->getAllTypes() as $typeOption): ?>
+    				<input type="checkbox" name="<?php echo $typeOption; ?>" value="1">&nbsp;<?php echo $typeOption; ?><br>
+    			<?php endforeach; ?>
+    		</form>
+    		<form id="filter-form-agecat">
+    			<label>Leeftijdscategorie(&euml;n)</label><br>
+    			<?php foreach ($speeltuin->getAllAgecats() as $agecatOptionColname => $agecatOptionName): ?>
+    				<input type="checkbox" name="<?php echo $agecatOptionColname; ?>" value="1">&nbsp;<?php echo $agecatOptionName; ?><br>
+    			<?php endforeach; ?>
+    		</form>
+    		<form id="filter-form-access">
+    			<label>Toegankelijkheid</label><br>
+    			<?php $paidAllowed = false; // TODO true indien er betalende klanten komen ?>
+				<?php foreach ($speeltuin->getAllAccessOptions($paidAllowed) as $accessId => $accessName): ?>
+					<input type="checkbox" name="<?php echo $accessId; ?>" value="1">&nbsp;<?php echo $accessName; ?><br>
+				<?php endforeach; ?>
+    		</form>
+    		<form id="filter-form-voorzieningen">
+    			<label>Voorzieningen</label><br>
+    			<?php foreach ($speeltuin->getAllVoorzieningen(1) as $voorzieningId => $voorzieningName): ?>
+    				<input type="checkbox" name="<?php echo $voorzieningId; ?>" value="1">&nbsp;<?php echo $voorzieningName; ?><br>
+    			<?php endforeach; ?>
+    			<a href="#" id="expand_items"><i class="fa fa-chevron-circle-down" aria-hidden="true"></i>&nbsp;Meer</a>
+				<div id="nonPopItems">
+	    			<?php foreach ($speeltuin->getAllVoorzieningen(0) as $voorzieningId => $voorzieningName): ?>
+	    				<input type="checkbox" name="<?php echo $voorzieningId; ?>" value="1">&nbsp;<?php echo $voorzieningName; ?><br>
+	    			<?php endforeach; ?>
+	    		</div>
+    		</form>
+    	</div>
+    	<div id="map-div"></div>
+    </div>
     
     <div id="latestbox-resp">
         <?php include "latestbox.tpl.php"; ?>
@@ -24,6 +61,7 @@
             <h4>Sitemap</h4>
             <nav class="sitemap">
                 <a href="./index.php">Home</a>
+                <a href="./atoz.php">Alle speeltuinen</a>
                 <a href="./about.php">Info</a>
                 <a href="./join.php">Meedoen</a>
                 <a href="./contact.php">Contact</a>
@@ -32,9 +70,10 @@
         </div>
         <div class="footer-column right">
         	<h4>Colofon</h4>
-            <p>Speeltuinzoeker.nl gebruikt <strong>cookies</strong> om de site goed te laten werken.</p>
             <p><strong>Adverteren?</strong> Jouw (indoor) speeltuin op deze site? Neem <a href="contact.php">contact</a> op!</p>
-            <p>&copy; <?php echo date("Y"); ?> Speeltuinzoeker.nl<br><a href="mailto:info@speeltuinzoeker.nl">info@speeltuinzoeker.nl</a></p>
+            <p>Speeltuinzoeker.nl gebruikt <strong>cookies</strong> om de site goed te laten werken.</p>
+            <p>We doen ons uiterste best om deze site actueel, snel en veilig te houden. Kom je iets tegen wat niet klopt? Laat het ons weten!</p>
+            <p>&copy; <?php echo date("Y"); ?> RO Online Solutions<br><a href="mailto:info@speeltuinzoeker.nl">info@speeltuinzoeker.nl</a></p>
         </div>
         <div class="betweenbar"></div>
     </div>
@@ -62,36 +101,45 @@
     var existingMarkers = [];
     var infowindow = null;
 
-    function initMap() {
+    function initMap(existingPos, existingZoom) {
+
+    	if (typeof existingZoom === "undefined") {
+    		existingZoom = 15;
+    	}
+        
         map = new google.maps.Map(document.getElementById('map-div'), {
-            zoom: 15
+            zoom: existingZoom
         });
 
-     	// position the map
-        setDefaultPos();
-        <?php if ($fromSpeeltuin != null): ?>
-        	// Terug van speeltuin? Dan daarop centreren
-	        var fromPos = {
-	            lat: <?php echo $fromSpeeltuin->getLatitude(); ?>,
-	            lng: <?php echo $fromSpeeltuin->getLongitude(); ?>
-	        };
-	        map.setCenter(fromPos);
-        <?php else: ?>
-	        // In eerste instantie op huidige locatie zetten. Try HTML5 geolocation.
-	        if (navigator.geolocation) {
-	            navigator.geolocation.getCurrentPosition(function(currentPosition) {
-	                var pos = {
-	                    lat: currentPosition.coords.latitude,
-	                    lng: currentPosition.coords.longitude
-	                };
-	                map.setCenter(pos);
-	            }, function() {
-	            	setDefaultPos();
-	            });
-	        } else {
-	            // Browser doesn't support Geolocation, leave on defaultpos
-	        }
-		<?php endif; ?>
+        if (typeof existingPos !== "undefined") {
+        	map.setCenter(existingPos);
+        } else {
+	     	// position the map
+	        setDefaultPos();
+	        <?php if ($fromSpeeltuin != null): ?>
+	        	// Terug van speeltuin? Dan daarop centreren
+		        var fromPos = {
+		            lat: <?php echo $fromSpeeltuin->getLatitude(); ?>,
+		            lng: <?php echo $fromSpeeltuin->getLongitude(); ?>
+		        };
+		        map.setCenter(fromPos);
+	        <?php else: ?>
+		        // In eerste instantie op huidige locatie zetten. Try HTML5 geolocation.
+		        if (navigator.geolocation) {
+		            navigator.geolocation.getCurrentPosition(function(currentPosition) {
+		                var pos = {
+		                    lat: currentPosition.coords.latitude,
+		                    lng: currentPosition.coords.longitude
+		                };
+		                map.setCenter(pos);
+		            }, function() {
+		            	setDefaultPos();
+		            });
+		        } else {
+		            // Browser doesn't support Geolocation, leave on defaultpos
+		        }
+			<?php endif; ?>
+        }
 
 		// markers for existing speeltuinen
         var lastEvent;
@@ -108,7 +156,24 @@
 				NE = NE.toString().replace(" ", "").replace("(", "").replace(")", "");
 				var SW = newBounds.getSouthWest();
 				SW = SW.toString().replace(" ", "").replace("(", "").replace(")", "");
-				$.get("_markers.php?ne=" + NE + "&sw=" + SW, function(data) {
+				var url = "_markers.php?ne=" + NE + "&sw=" + SW;
+				$("form#filter-form-type :checkbox:checked").each(function() {
+					var input = $(this);
+					url += "&type[]=" + input.attr("name");
+				});
+				$("form#filter-form-agecat :checkbox:checked").each(function() {
+					var input = $(this);
+					url += "&agecat[]=" + input.attr("name");
+				});
+				$("form#filter-form-access :checkbox:checked").each(function() {
+					var input = $(this);
+					url += "&access[]=" + input.attr("name");
+				});
+				$("form#filter-form-voorzieningen :checkbox:checked").each(function() {
+					var input = $(this);
+					url += "&voorziening[]=" + input.attr("name");
+				});
+				$.get(url, function(data) {
 					placeMarkers(data);
 			    });
 		    } 
@@ -194,6 +259,37 @@
     		$('#locatie_omschrijving').val("");
         }
     });
+
+    $('#toggleFilterDiv').click(function(event) {
+    	event.preventDefault();
+    	$('#map-filter-div').toggle("slow");
+    	$('#filterToggleIcon').toggleClass('fa-toggle-right fa-toggle-left');
+    });
+    $('#toggleFilterDiv-resp').click(function(event) {
+    	event.preventDefault();
+    	$('#map-filter-div').toggle("slow");
+    	$('#filterToggleIcon-resp').toggleClass('fa-toggle-down fa-toggle-up');
+    });
+
+    $('#filter-form-type input').click(function(event) {
+    	initMap(map.getCenter(), map.getZoom());
+    });
+    $('#filter-form-agecat input').click(function(event) {
+    	initMap(map.getCenter(), map.getZoom());
+    });
+    $('#filter-form-access input').click(function(event) {
+    	initMap(map.getCenter(), map.getZoom());
+    });
+    $('#filter-form-voorzieningen input').click(function(event) {
+    	initMap(map.getCenter(), map.getZoom());
+    });
+
+    $("#expand_items").click(function(event) {
+		event.preventDefault();
+		$("#nonPopItems").show();
+		$("#expand_items").hide();
+	});
+    
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=<?php echo MAPS_API_KEY; ?>&callback=initMap"></script>
 

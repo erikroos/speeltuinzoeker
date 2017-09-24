@@ -39,3 +39,5 @@ define("MAX_NR_OF_PHOTOS", 3);
 define("MAX_PHOTO_DIM", 600);
 
 define("MAPS_API_KEY", "MyKey");
+
+define("AUTHOR", "RO Online Solutions");

@@ -1,3 +1,8 @@
+<?php 
+if (!isset($indexDescription)) {
+	$indexDescription = "De (mobiele) website om snel en makkelijk een speeltuin in jouw buurt te vinden. Speeltuinzoeker laat kinderen spelen!";
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,12 +12,12 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title><?php echo $indexTitle; ?></title>
     
-    <meta name="description" content="De (mobiele) website om snel en makkelijk een speeltuin in jouw buurt te vinden. Speeltuinzoeker laat kinderen spelen!">
+    <meta name="description" content="<?php echo $indexDescription; ?>">
 	<meta name="keywords" content="speeltuin,speelplein,speelplaats,gratis,zoeken,vinden,kind,kinderen,spelen">
-	<meta name="author" content="Erik Roos">
+	<meta name="author" content="<?php echo AUTHOR; ?>">
 	
 	<meta name="og:title" content="Speeltuinzoeker.nl - Laat ze spelen!">
-	<meta name="og:description" content="De (mobiele) website om snel en makkelijk een speeltuin in jouw buurt te vinden. Speeltuinzoeker laat kinderen spelen!">
+	<meta name="og:description" content="<?php echo $indexDescription; ?>">
 	<meta name="og:image" content="https://www.speeltuinzoeker.nl/img/logo_compleet.png">
 
     <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -52,6 +57,7 @@
 	  <div class="navWide">
 	  	<div class="wideDiv">
 		  	<a href="./index.php"><i class="fa fa-globe" aria-hidden="true"></i>&nbsp;Home</a>
+		  	<a href="./atoz.php"><i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>&nbsp;Alle speeltuinen</a>
 		    <a href="./about.php"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;Info</a>
 		    <a href="./join.php"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;Meedoen</a>
 		    <a href="./contact.php"><i class="fa fa-comments" aria-hidden="true"></i>&nbsp;Contact</a>
@@ -62,6 +68,7 @@
 	  	<i class="fa fa-bars fa-2x"></i>
 	    <div class="narrowLinks hidden">
 	    	<a href="./index.php"><i class="fa fa-globe" aria-hidden="true"></i>&nbsp;Home</a>
+		    <a href="./atoz.php"><i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>&nbsp;Alle speeltuinen</a>
 		    <a href="./about.php"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;Info</a>
 		    <a href="./join.php"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;Meedoen</a>
 		    <a href="./contact.php"><i class="fa fa-comments" aria-hidden="true"></i>&nbsp;Contact</a>

@@ -5,6 +5,15 @@ include_once "./inc/header.php";
 
 <h1><?php echo $pageTitle; ?></h1>
 
+<label>Spelregels</label>
+<ul>
+	<li>Vul de velden zo volledig en correct mogelijk in.</li>
+	<li>Later verbeteren en/of aanvullen is natuurlijk altijd mogelijk.</li>
+	<li>Na opslaan gaat de speeltuin op inactief totdat deze door de beheerder gecontroleerd is.</li>
+	<li>Beledigende teksten of andere uitingen die in strijd zijn met waar deze website voor staat (een veilige omgeving voor en door ouders) zijn niet toegestaan.</li>
+	<li>Speeltuinzoeker.nl behoudt zich het recht voor om speeltuinen die niet voldoen aan bovenstaande, te weigeren.</li>
+</ul>
+		
 <form method="post" action="edit.php">
 
 	<input type="hidden" id="id" name="id" value="<?php echo $id; ?>" />
@@ -17,50 +26,39 @@ include_once "./inc/header.php";
 	<?php endif; ?>
 
 	<div class="form-group">
-		<label for="name">Naam</label>
+		<label for="name">Naam van de speeltuin (bijv. Buurtspeeltuin het Haventje)</label>
 		<input type="text" id="naam" name="naam" value="<?php echo $name; ?>" class="form-control" />
 	</div>
 	
 	<div class="form-group">
 		<label for="speeltuintype">Type</label>
 		<select id="speeltuintype" name="speeltuintype" class="form-control">
-			<option value="Toestelspeeltuin" <?php if ($type == "Toestelspeeltuin") echo "selected=\"selected\""; ?>>Toestelspeeltuin</option>
-			<option value="Natuurspeeltuin" <?php if ($type == "Natuurspeeltuin") echo "selected=\"selected\""; ?>>Natuurspeeltuin</option>
-			<option value="Kinderboerderij" <?php if ($type == "Kinderboerderij") echo "selected=\"selected\""; ?>>Kinderboerderij</option>
-			<option value="Kinderboerderij met speeltuin" <?php if ($type == "Kinderboerderij met speeltuin") echo "selected=\"selected\""; ?>>Kinderboerderij met speeltuin</option>
-			<option value="Sportfaciliteit" <?php if ($type == "Sportfaciliteit") echo "selected=\"selected\""; ?>>Sportfaciliteit</option>
+		<?php foreach ($speeltuin->getAllTypes() as $typeOption): ?>
+			<option value="<?php echo $typeOption; ?>" <?php if ($type == $typeOption) echo "selected=\"selected\""; ?>><?php echo $typeOption; ?></option>
+		<?php endforeach; ?>
 		</select>
 	</div>
 	
 	<div class="form-group">
 		<label for="public">Toegankelijkheid</label>
 		<select id="public" name="public" class="form-control">
-			<!--option value="0" <?php //if ($public == 0) echo "selected=\"selected\""; ?>>Betaald</option-->
-			<option value="1" <?php if ($public == 1) echo "selected=\"selected\""; ?>>Gratis en altijd toegankelijk</option>
-			<option value="2" <?php if ($public == 2) echo "selected=\"selected\""; ?>>Gratis maar beperkt toegankelijk</option>
+			<?php $paidAllowed = false; // TODO true indien betalende klant ?>
+			<?php foreach ($speeltuin->getAllAccessOptions($paidAllowed) as $accessId => $accessName): ?>
+				<option value="<?php echo $accessId; ?>" <?php if ($public == $accessId) echo "selected=\"selected\""; ?>><?php echo $accessName; ?></option>
+			<?php endforeach; ?>
 		</select>
 	</div>
 	
 	<div class="form-group">
 		<label>Leeftijdscategorie(&euml;n)</label>
-		<div class="checkbox">
-			<label>
-				<input type="checkbox" id="agecat_1" name="agecat_1" value="1" class="form-control" <?php if ($agecat1) echo "checked=\"checked\""; ?> />
-				Leuk voor de allerkleinsten
-			</label>
-		</div>
-		<div class="checkbox">
-			<label>
-				<input type="checkbox" id="agecat_2" name="agecat_2" value="1" class="form-control" <?php if ($agecat2) echo "checked=\"checked\""; ?> />
-				Leuk voor de jonge jeugd
-			</label>
-		</div>
-		<div class="checkbox">
-			<label>
-				<input type="checkbox" id="agecat_3" name="agecat_3" value="1" class="form-control" <?php if ($agecat3) echo "checked=\"checked\""; ?> />
-				Leuk voor de wat oudere jeugd
-			</label>
-		</div>
+		<?php foreach ($speeltuin->getAllAgecats() as $agecatOptionColname => $agecatOptionName): ?>
+			<div class="checkbox">
+				<label>
+					<input type="checkbox" id="<?php echo $agecatOptionColname; ?>" name="<?php echo $agecatOptionColname; ?>" value="1" class="form-control" <?php if (($agecatOptionColname == "agecat_1" && $agecat1) || ($agecatOptionColname == "agecat_2" && $agecat2) || ($agecatOptionColname == "agecat_3" && $agecat3)) echo "checked=\"checked\""; ?> />
+					<?php echo $agecatOptionName; ?>
+				</label>
+			</div>
+		<?php endforeach; ?>
 	</div>
 	
 	<div class="form-group">
@@ -69,7 +67,7 @@ include_once "./inc/header.php";
 	</div>
 
 	<div class="form-group">
-		<label for="omschrijving">Korte omschrijving van de speeltuin (max. 1000 tekens)</label>
+		<label for="omschrijving">Korte omschrijving (max. 1000 tekens)</label>
 		<textarea id="omschrijving" name="omschrijving" rows="3" maxlength="1000" class="form-control"><?php echo $omschrijving; ?></textarea>
 	</div>
 

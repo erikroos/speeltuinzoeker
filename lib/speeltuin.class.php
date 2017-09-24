@@ -28,13 +28,69 @@ class Speeltuin
         return $allSpeeltuinen;
     }
     
-    public function getAllSpeeltuinenInBoundingBox($neLat, $neLon, $swLat, $swLon) {
+    public function getAllSpeeltuinenAtoZ() {
     	$allSpeeltuinen = [];
-    	$res = $this->db->query(sprintf("SELECT id, naam, speeltuintype, omschrijving, lat, lon, public FROM speeltuin
-			WHERE status_id = 1
-			AND lat <= %s AND lat >= %s AND lon >= %s AND lon <= %s",
-    		$neLat, $swLat, $swLon, $neLon));
+    	$res = $this->db->query("SELECT LEFT(LOWER(naam), 1) AS first_letter, speeltuin.* FROM speeltuin WHERE status_id = 1 ORDER BY naam");
     	while ($row = $res->fetch_assoc()) {
+    		$allSpeeltuinen[$row["first_letter"]][] = $row;
+    	}
+    	return $allSpeeltuinen;
+    }
+    
+    public function getAllSpeeltuinenInBoundingBox($neLat, $neLon, $swLat, $swLon, $type = null, $agecat = null, $access = null, $voorziening = null) {
+    	$allSpeeltuinen = [];
+    	
+    	$typeClause = "";
+    	if ($type != null) {
+    		$typeClause = "AND speeltuintype IN (\"" . implode("\",\"", $type) . "\")";
+    	}
+    	
+    	$ageClause = "";
+    	if ($agecat != null) {
+    		if (sizeof($agecat) == 1) {
+    			$ageClause = "AND " . $agecat[0] . " = 1";
+    		} else {
+    			$ageClause = "AND (";
+	    		foreach ($agecat as $agecatColname) {
+	    			$ageClause .= ($agecatColname . " = 1 OR ");
+	    		}
+	    		$ageClause = substr($ageClause, 0, -4);
+	    		$ageClause .= ")";
+    		}
+    	}
+    	
+    	$accessClause = "";
+    	if ($access != null) {
+    		if (sizeof($access) == 1) {
+    			$accessClause = "AND public = " . $access[0];
+    		} else {
+    			$accessClause = "AND (";
+	    		foreach ($access as $accessId) {
+	    			$accessClause .= ("public = " . $accessId . " OR ");
+	    		}
+	    		$accessClause = substr($accessClause, 0, -4);
+	    		$accessClause .= ")";
+    		}
+    	}
+    	
+    	$query = sprintf("SELECT id, naam, speeltuintype, omschrijving, lat, lon, public FROM speeltuin
+			WHERE status_id = 1
+			AND lat <= %s AND lat >= %s AND lon >= %s AND lon <= %s
+    		%s %s %s",
+    		$neLat, $swLat, $swLon, $neLon, $typeClause, $ageClause, $accessClause);
+    	$res = $this->db->query($query);
+    	while ($row = $res->fetch_assoc()) {
+    		
+    		// Na-filtering op voorziening
+    		if ($voorziening != null) {
+    			foreach ($voorziening as $voorzieningId) {
+    				$res2 = $this->db->query(sprintf("SELECT * FROM speeltuin_voorziening WHERE speeltuin_id = %d AND voorziening_id = %d", $row["id"], $voorzieningId));
+    				if ($res2 === false || $res2->num_rows == 0) {
+    					continue 2; // while
+    				}
+    			}
+    		}
+    		
     		if (strlen($row["omschrijving"]) > 100) {
     			$row["omschrijving"] = substr($row["omschrijving"], 0, 100) . "...";
     		}
@@ -78,6 +134,23 @@ class Speeltuin
             }
         }
         return null;
+    }
+    
+    public function getAllTypes() {
+    	// TODO koppeling met enum in DB
+    	return ["Toestelspeeltuin", "Natuurspeeltuin", "Kinderboerderij", "Kinderboerderij met speeltuin", "Sportfaciliteit"];
+    }
+    
+    public function getAllAgecats() {
+    	return ["agecat_1" => "Leuk voor de allerkleinsten", "agecat_2" => "Leuk voor de jonge jeugd", "agecat_3" => "Leuk voor de wat oudere jeugd"];
+    }
+    
+    public function getAllAccessOptions($paidAllowed = false) {
+    	if ($paidAllowed) {
+    		return [0 => "Betaald", 1 => "Gratis en altijd toegankelijk", 2 => "Gratis maar beperkt toegankelijk"];
+    	} else {
+    		return [1 => "Gratis en altijd toegankelijk", 2 => "Gratis maar beperkt toegankelijk"];
+    	}
     }
 
     // Instance functions:
