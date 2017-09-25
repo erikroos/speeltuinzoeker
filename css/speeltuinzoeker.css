@@ -202,7 +202,7 @@ th {
 #latestbox {
 	width: 300px;
 	float: right;
-	background-color: rgba(138, 197, 63, 0.5);; /*#88CE00;*/
+	background-color: rgba(138, 197, 63, 0.5); /*#88CE00;*/
 	border-radius: 4px;
 	padding: 10px;
 }

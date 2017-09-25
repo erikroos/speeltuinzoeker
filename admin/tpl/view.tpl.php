@@ -3,6 +3,10 @@ $title = "Mijn Speeltuinzoeker - bekijk en beheer speeltuinen";
 include_once "./inc/header.php";
 ?>
 
+<?php if ($msgBody != null): ?>
+<p class="notice"><?php echo $msgBody; ?></p>
+<?php endif; ?>
+
 <h1><?php echo $pageTitle; ?></h1>
 
 <?php if ($isAdmin): ?>

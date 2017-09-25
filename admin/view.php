@@ -34,6 +34,13 @@ if (isset($_GET["user"])) {
 	exit();
 }
 
+// most recent message
+$msgBody = null;
+if ($isUser) {
+	$msg = new Message($db);
+	$msgBody = $msg->getMostRecentMessage();
+}
+
 $totalSize = 0;
 if ($isUser) {
 	$whereClause = "WHERE author_id = " . $_SESSION["user_id"];

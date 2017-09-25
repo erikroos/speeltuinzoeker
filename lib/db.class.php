@@ -36,4 +36,8 @@ class Db {
 	public function realEscapeString($string) {
 		return mysqli_real_escape_string($this->link, $string);
 	}
+	
+	public function getError() {
+		return mysqli_error($this->link);
+	}
 }
