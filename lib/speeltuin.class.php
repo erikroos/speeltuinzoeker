@@ -11,6 +11,13 @@ class Speeltuin
 
     // Functions that don't need ID:
     
+    public function toSeoUrl($name) {
+    	$seoUrl = strtolower($name);
+    	$seoUrl = str_replace(" ", "-", $seoUrl);
+    	$seoUrl = preg_replace("/[^a-z0-9\-]/", "", $seoUrl);
+    	return $seoUrl;
+    }
+    
     public function isExistingId($idToCheck) {
     	$res = $this->db->query(sprintf("SELECT * FROM speeltuin WHERE id = %d", $idToCheck));
     	if ($res != null && $row = $res->fetch_assoc()) {
@@ -73,7 +80,7 @@ class Speeltuin
     		}
     	}
     	
-    	$query = sprintf("SELECT id, naam, speeltuintype, omschrijving, lat, lon, public FROM speeltuin
+    	$query = sprintf("SELECT id, naam, speeltuintype, omschrijving, lat, lon, public, seo_url FROM speeltuin
 			WHERE status_id = 1
 			AND lat <= %s AND lat >= %s AND lon >= %s AND lon <= %s
     		%s %s %s",
@@ -151,6 +158,14 @@ class Speeltuin
     	} else {
     		return [1 => "Gratis en altijd toegankelijk", 2 => "Gratis maar beperkt toegankelijk"];
     	}
+    }
+    
+    public function getIdBySeoUrl($seoUrl) {
+    	$res = $this->db->query(sprintf("SELECT id FROM speeltuin WHERE seo_url = \"%s\"", $seoUrl));
+    	if ($row = $res->fetch_assoc()) {
+    		return $row["id"];
+    	}
+    	return 0;
     }
 
     // Instance functions:
@@ -306,15 +321,17 @@ class Speeltuin
 	public function insertOrUpdate($name, $link, $omschrijving, $locatieOmschrijving, $lat, $lon, $public, $type, $agecat1, $agecat2, $agecat3) {
 		if ($this->id == 0) {
 			$this->db->query(sprintf("INSERT INTO speeltuin 
-					(naam, link, omschrijving, locatie_omschrijving, lat, lon, status_id, author_id, public, speeltuintype, agecat_1, agecat_2, agecat_3, modified_on)
-					VALUES (\"%s\", \"%s\", \"%s\", \"%s\", %f, %f, 0, %d, %d, \"%s\", %d, %d, %d, NOW())", 
-					$name, $link, $omschrijving, $locatieOmschrijving, $lat, $lon, $_SESSION["user_id"], $public, $type, $agecat1 ? 1 : 0, $agecat2 ? 1 : 0, $agecat3 ? 1 : 0));
+					(naam, link, omschrijving, locatie_omschrijving, lat, lon, status_id, author_id, public, speeltuintype, agecat_1, agecat_2, agecat_3, seo_url, modified_on)
+					VALUES (\"%s\", \"%s\", \"%s\", \"%s\", %f, %f, 0, %d, %d, \"%s\", %d, %d, %d, \"%s\", NOW())", 
+					$name, $link, $omschrijving, $locatieOmschrijving, $lat, $lon, $_SESSION["user_id"], $public, 
+					$type, $agecat1 ? 1 : 0, $agecat2 ? 1 : 0, $agecat3 ? 1 : 0, $this->toSeoUrl($name)));
 			$this->id = $this->db->getLatestId ();
 		} else {
 			$this->db->query(sprintf("UPDATE speeltuin
 				SET naam = \"%s\", link = \"%s\", omschrijving = \"%s\", locatie_omschrijving = \"%s\", lat = %f, lon = %f, status_id = 0, 
-					public = %d, speeltuintype = \"%s\", agecat_1 = %d, agecat_2 = %d, agecat_3 = %d, modified_on = NOW()
-				WHERE id = %d", $name, $link, $omschrijving, $locatieOmschrijving, $lat, $lon, $public, $type, $agecat1 ? 1 : 0, $agecat2 ? 1 : 0, $agecat3 ? 1 : 0, $this->id));
+					public = %d, speeltuintype = \"%s\", agecat_1 = %d, agecat_2 = %d, agecat_3 = %d, seo_url = \"%s\", modified_on = NOW()
+				WHERE id = %d", $name, $link, $omschrijving, $locatieOmschrijving, $lat, $lon, $public, $type, 
+					$agecat1 ? 1 : 0, $agecat2 ? 1 : 0, $agecat3 ? 1 : 0, $this->toSeoUrl($name), $this->id));
 		}
 		return $this->id;
 	}
@@ -390,24 +407,24 @@ class Speeltuin
 	}
 
 	public function addPhoto($photoName) {
-		$this->db->query ( sprintf ( "INSERT INTO bestand (naam, full_path, url, extensie)
-									VALUES (\"%s\", \"%s\", \"%s\", \"png\")", $photoName, MEDIA_PATH . $photoName, MEDIA_URL . $photoName ) );
-		$bestandId = $this->db->getLatestId ();
-		$this->db->query ( sprintf ( "INSERT INTO speeltuin_bestand (speeltuin_id, bestand_id)
-									VALUES (%d, %d)", $this->id, $bestandId ) );
+		$this->db->query(sprintf("INSERT INTO bestand (naam, full_path, url, extensie)
+									VALUES (\"%s\", \"%s\", \"%s\", \"png\")", $photoName, MEDIA_PATH . $photoName, MEDIA_URL . $photoName));
+		$bestandId = $this->db->getLatestId();
+		$this->db->query(sprintf("INSERT INTO speeltuin_bestand (speeltuin_id, bestand_id)
+									VALUES (%d, %d)", $this->id, $bestandId));
 	}
 
 	public function removePhoto($photoName) {
-		$res = $this->db->query ( sprintf ( "SELECT id FROM bestand WHERE naam = \"%s\"", $photoName ) );
+		$res = $this->db->query(sprintf("SELECT id FROM bestand WHERE naam = \"%s\"", $photoName));
 		if ($res !== false) {
-			if ($row = $res->fetch_assoc ()) {
-				$this->db->query ( sprintf ( "DELETE FROM bestand WHERE id = %d", $row ["id"] ) );
-				$this->db->query ( sprintf ( "DELETE FROM speeltuin_bestand WHERE bestand_id = %d", $row ["id"] ) );
+			if ($row = $res->fetch_assoc()) {
+				$this->db->query(sprintf("DELETE FROM bestand WHERE id = %d", $row ["id"]));
+				$this->db->query(sprintf("DELETE FROM speeltuin_bestand WHERE bestand_id = %d", $row ["id"]));
 			}
 		}
 	}
 
 	public function setStatus($statusId) {
-		$this->db->query ( sprintf ( "UPDATE speeltuin SET status_id = %d WHERE id = %d", $statusId, $this->id ) );
+		$this->db->query(sprintf("UPDATE speeltuin SET status_id = %d WHERE id = %d", $statusId, $this->id));
 	}
 }

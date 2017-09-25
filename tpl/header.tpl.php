@@ -56,22 +56,22 @@ if (!isset($indexDescription)) {
 	<nav>
 	  <div class="navWide">
 	  	<div class="wideDiv">
-		  	<a href="<?php echo BASE_URL; ?>index.php"><i class="fa fa-globe" aria-hidden="true"></i>&nbsp;Home</a>
-		  	<a href="<?php echo BASE_URL; ?>atoz.php"><i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>&nbsp;Alle speeltuinen</a>
-		    <a href="<?php echo BASE_URL; ?>about.php"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;Info</a>
-		    <a href="<?php echo BASE_URL; ?>join.php"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;Meedoen</a>
-		    <a href="<?php echo BASE_URL; ?>contact.php"><i class="fa fa-comments" aria-hidden="true"></i>&nbsp;Contact</a>
+		  	<a href="<?php echo BASE_URL; ?>"><i class="fa fa-globe" aria-hidden="true"></i>&nbsp;Home</a>
+		  	<a href="<?php echo BASE_URL; ?>atoz"><i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>&nbsp;Alle speeltuinen</a>
+		    <a href="<?php echo BASE_URL; ?>over"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;Info</a>
+		    <a href="<?php echo BASE_URL; ?>meedoen"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;Meedoen</a>
+		    <a href="<?php echo BASE_URL; ?>contact"><i class="fa fa-comments" aria-hidden="true"></i>&nbsp;Contact</a>
 		    <a href="<?php echo BASE_URL; ?>admin/<?php echo (!isset($_SESSION["user_id"]) ? "index.php" : ($_SESSION["admin"] == 1 ? "index.php" : "view.php?user")); ?>" class="admin"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;Mijn Speeltuinzoeker</a>
 		  </div>
 	  </div>
 	  <div class="navNarrow">
 	  	<i class="fa fa-bars fa-2x"></i>
 	    <div class="narrowLinks hidden">
-	    	<a href="<?php echo BASE_URL; ?>index.php"><i class="fa fa-globe" aria-hidden="true"></i>&nbsp;Home</a>
-		    <a href="<?php echo BASE_URL; ?>atoz.php"><i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>&nbsp;Alle speeltuinen</a>
-		    <a href="<?php echo BASE_URL; ?>about.php"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;Info</a>
-		    <a href="<?php echo BASE_URL; ?>join.php"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;Meedoen</a>
-		    <a href="<?php echo BASE_URL; ?>contact.php"><i class="fa fa-comments" aria-hidden="true"></i>&nbsp;Contact</a>
+	    	<a href="<?php echo BASE_URL; ?>"><i class="fa fa-globe" aria-hidden="true"></i>&nbsp;Home</a>
+		    <a href="<?php echo BASE_URL; ?>atoz"><i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>&nbsp;Alle speeltuinen</a>
+		    <a href="<?php echo BASE_URL; ?>over"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;Info</a>
+		    <a href="<?php echo BASE_URL; ?>meedoen"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;Meedoen</a>
+		    <a href="<?php echo BASE_URL; ?>contact"><i class="fa fa-comments" aria-hidden="true"></i>&nbsp;Contact</a>
 		    <a href="<?php echo BASE_URL; ?>admin/<?php echo (!isset($_SESSION["user_id"]) ? "index.php" : ($_SESSION["admin"] == 1 ? "index.php" : "view.php?user")); ?>" class="admin"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;Mijn Speeltuinzoeker</a>
 	    </div>
 	  </div>

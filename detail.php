@@ -15,8 +15,10 @@ if (is_numeric($id)) {
         die("Ongeldig ID!");
     }
 } else if (is_string($id)) {
-    // TODO vertaal seo-url naar id: $id = $speeltuin->getIdBySeoUrl($id);
-    $id = 113;
+    $id = $speeltuin->getIdBySeoUrl($id);
+    if ($id == 0) {
+    	die("Ongeldige naam!");
+    }
 } else {
     die("Ongeldig(e) ID/naam!");
 }

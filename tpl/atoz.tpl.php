@@ -7,7 +7,7 @@
 		<ul>
 		<?php foreach ($speeltuinArray as $speeltuin): ?>
 			<li>
-				<a href="detail.php?speeltuin=<?php echo $speeltuin["id"]; ?>"><?php echo $speeltuin["naam"]; ?></a>
+				<a href="<?php echo BASE_URL; ?>speeltuinen/<?php echo $speeltuin["seo_url"]; ?>"><?php echo $speeltuin["naam"]; ?></a>
 				<?php if (!empty($speeltuin["locatie_omschrijving"])): ?>
 					<?php echo "- " . $speeltuin["locatie_omschrijving"]; ?>
 				<?php endif; ?>

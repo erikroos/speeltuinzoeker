@@ -1,9 +1,10 @@
 <?php $indexTitle = $speeltuin->getName() . " - Speeltuinzoeker.nl"; ?>
-<?php $indexDescription = empty($speeltuin->getDescription()) ? $indexTitle : $speeltuin->getDescription(); ?>
+<?php $indexDescription = $speeltuin->getDescription(); ?>
+<?php $indexDescription = empty($indexDescription) ? $indexTitle : $indexDescription; ?>
 <?php include "header.tpl.php"; ?>
 
     <div id="details">
-        <a href="<?php echo BASE_URL; ?>index.php?speeltuin=<?php echo $id; ?>"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i>&nbsp;Startscherm</a>
+        <a href="<?php echo BASE_URL; ?>?speeltuin=<?php echo $id; ?>"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i>&nbsp;Startscherm</a>
         <h3><?php echo $speeltuin->getName(); ?></h3>
         <p>Aangemaakt door <?php echo $speeltuin->getAuthorName(); ?>, laatst bewerkt: <?php echo $speeltuin->getLastModified(); ?></p>
         

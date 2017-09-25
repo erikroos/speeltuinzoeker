@@ -70,7 +70,7 @@
         </div>
         <div class="footer-column right">
         	<h4>Colofon</h4>
-            <p><strong>Adverteren?</strong> Jouw (indoor) speeltuin op deze site? Neem <a href="contact.php">contact</a> op!</p>
+            <p><strong>Adverteren?</strong> Jouw (indoor) speeltuin op deze site? Neem <a href="<?php echo BASE_URL; ?>contact">contact</a> op!</p>
             <p>Speeltuinzoeker.nl gebruikt <strong>cookies</strong> om de site goed te laten werken.</p>
             <p>We doen ons uiterste best om deze site actueel, snel en veilig te houden. Kom je iets tegen wat niet klopt? Laat het ons weten!</p>
             <p>&copy; <?php echo date("Y"); ?> RO Online Solutions<br><a href="mailto:info@speeltuinzoeker.nl">info@speeltuinzoeker.nl</a></p>
@@ -196,7 +196,7 @@
 		            		"<p>" + (speeltuin.public == 0 ? "Betaald" : (speeltuin.public == 1 ? "Gratis en altijd toegankelijk" : "Gratis maar beperkt toegankelijk")) + "</p>" +
 		            		"<p>" + speeltuin.speeltuintype + "</p>" +
 							"<p>" + speeltuin.omschrijving + "</p>" +
-							"<p><a href='detail.php?speeltuin=" + speeltuin.id + "'>Meer</a>"
+							"<p><a href='speeltuinen/" + speeltuin.seo_url + "'>Meer</a>"
 			    });
 				existingMarker.setPosition({
 		            lat: parseFloat(speeltuin.lat),
