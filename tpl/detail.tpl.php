@@ -1,9 +1,9 @@
 <?php $indexTitle = $speeltuin->getName() . " - Speeltuinzoeker.nl"; ?>
-<?php $indexDescription = $speeltuin->getDescription(); ?>
+<?php $indexDescription = empty($speeltuin->getDescription()) ? $indexTitle : $speeltuin->getDescription(); ?>
 <?php include "header.tpl.php"; ?>
 
     <div id="details">
-        <a href="index.php?speeltuin=<?php echo $id; ?>"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i>&nbsp;Startscherm</a>
+        <a href="<?php echo BASE_URL; ?>index.php?speeltuin=<?php echo $id; ?>"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i>&nbsp;Startscherm</a>
         <h3><?php echo $speeltuin->getName(); ?></h3>
         <p>Aangemaakt door <?php echo $speeltuin->getAuthorName(); ?>, laatst bewerkt: <?php echo $speeltuin->getLastModified(); ?></p>
         
@@ -27,7 +27,7 @@
 	        		<input type="submit" value="Verstuur" class="btn btn-default" />
 	        	</form>
 	        <?php else: ?>
-	        	<a href="admin/login.php">Log in</a> om een wijziging aan te vragen bij de aanmaker van deze speeltuin.</p>
+	        	<a href="<?php echo BASE_URL; ?>admin/login.php">Log in</a> om een wijziging aan te vragen bij de aanmaker van deze speeltuin.</p>
 	        <?php endif; ?>
         <?php endif; ?>
         
@@ -72,12 +72,12 @@
     <?php endif; ?>
     
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script src="js/jquery.min.js"></script>
+	<script src="<?php echo BASE_URL; ?>js/jquery.min.js"></script>
 	<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
-	<script src="js/bootstrap.min.js"></script>
+	<script src="<?php echo BASE_URL; ?>js/bootstrap.min.js"></script>
 	
-	<script type="text/javascript" src="slick/slick.min.js"></script>
+	<script type="text/javascript" src="<?php echo BASE_URL; ?>slick/slick.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$('.detail-photobar').slick({
