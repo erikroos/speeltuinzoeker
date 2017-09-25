@@ -4,15 +4,24 @@ session_start();
 require_once "./cfg/config.php";
 require_once "./admin/inc/functions.php";
 
-$id = get_request_value("speeltuin", 0);
-
-if (!is_numeric($id) || $id <= 0) {
-	die("Ongeldig ID!");
-}
-
 $db = new Db();
 $db->connect();
 
+$speeltuin = new Speeltuin($db);
+
+$id = get_request_value("speeltuin", 0);
+if (is_numeric($id)) {
+    if ($id <= 0) {
+        die("Ongeldig ID!");
+    }
+} else if (is_string($id)) {
+    // TODO vertaal seo-url naar id: $id = $speeltuin->getIdBySeoUrl($id);
+    $id = 113;
+} else {
+    die("Ongeldig(e) ID/naam!");
+}
+
+// Opnieuw, nu mét ID:
 $speeltuin = new Speeltuin($db, $id);
 
 if (!$speeltuin->isExistingId($id)) {

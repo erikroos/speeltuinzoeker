@@ -18,19 +18,19 @@ if (!isset($indexDescription)) {
 	
 	<meta name="og:title" content="Speeltuinzoeker.nl - Laat ze spelen!">
 	<meta name="og:description" content="<?php echo $indexDescription; ?>">
-	<meta name="og:image" content="https://www.speeltuinzoeker.nl/img/logo_compleet.png">
+	<meta name="og:image" content="<?php echo BASE_URL; ?>img/logo_compleet.png">
 
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/x-icon" href="<?php echo BASE_URL; ?>favicon.ico">
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo BASE_URL; ?>css/bootstrap.min.css" rel="stylesheet">
     
-    <link href="font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="<?php echo BASE_URL; ?>font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
     
-    <link rel="stylesheet" type="text/css" href="slick/slick.css">
-    <link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
+    <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>slick/slick.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>slick/slick-theme.css"/>
 
-    <link href="css/speeltuinzoeker.css" rel="stylesheet">
-    <link href="css/speeltuinzoeker-responsive.css" rel="stylesheet">
+    <link href="<?php echo BASE_URL; ?>css/speeltuinzoeker.css" rel="stylesheet">
+    <link href="<?php echo BASE_URL; ?>css/speeltuinzoeker-responsive.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -56,23 +56,23 @@ if (!isset($indexDescription)) {
 	<nav>
 	  <div class="navWide">
 	  	<div class="wideDiv">
-		  	<a href="./index.php"><i class="fa fa-globe" aria-hidden="true"></i>&nbsp;Home</a>
-		  	<a href="./atoz.php"><i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>&nbsp;Alle speeltuinen</a>
-		    <a href="./about.php"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;Info</a>
-		    <a href="./join.php"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;Meedoen</a>
-		    <a href="./contact.php"><i class="fa fa-comments" aria-hidden="true"></i>&nbsp;Contact</a>
-		    <a href="./admin/<?php echo (!isset($_SESSION["user_id"]) ? "index.php" : ($_SESSION["admin"] == 1 ? "index.php" : "view.php?user")); ?>" class="admin"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;Mijn Speeltuinzoeker</a>
+		  	<a href="<?php echo BASE_URL; ?>index.php"><i class="fa fa-globe" aria-hidden="true"></i>&nbsp;Home</a>
+		  	<a href="<?php echo BASE_URL; ?>atoz.php"><i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>&nbsp;Alle speeltuinen</a>
+		    <a href="<?php echo BASE_URL; ?>about.php"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;Info</a>
+		    <a href="<?php echo BASE_URL; ?>join.php"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;Meedoen</a>
+		    <a href="<?php echo BASE_URL; ?>contact.php"><i class="fa fa-comments" aria-hidden="true"></i>&nbsp;Contact</a>
+		    <a href="<?php echo BASE_URL; ?>admin/<?php echo (!isset($_SESSION["user_id"]) ? "index.php" : ($_SESSION["admin"] == 1 ? "index.php" : "view.php?user")); ?>" class="admin"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;Mijn Speeltuinzoeker</a>
 		  </div>
 	  </div>
 	  <div class="navNarrow">
 	  	<i class="fa fa-bars fa-2x"></i>
 	    <div class="narrowLinks hidden">
-	    	<a href="./index.php"><i class="fa fa-globe" aria-hidden="true"></i>&nbsp;Home</a>
-		    <a href="./atoz.php"><i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>&nbsp;Alle speeltuinen</a>
-		    <a href="./about.php"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;Info</a>
-		    <a href="./join.php"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;Meedoen</a>
-		    <a href="./contact.php"><i class="fa fa-comments" aria-hidden="true"></i>&nbsp;Contact</a>
-		    <a href="./admin/<?php echo (!isset($_SESSION["user_id"]) ? "index.php" : ($_SESSION["admin"] == 1 ? "index.php" : "view.php?user")); ?>" class="admin"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;Mijn Speeltuinzoeker</a>
+	    	<a href="<?php echo BASE_URL; ?>index.php"><i class="fa fa-globe" aria-hidden="true"></i>&nbsp;Home</a>
+		    <a href="<?php echo BASE_URL; ?>atoz.php"><i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>&nbsp;Alle speeltuinen</a>
+		    <a href="<?php echo BASE_URL; ?>about.php"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;Info</a>
+		    <a href="<?php echo BASE_URL; ?>join.php"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;Meedoen</a>
+		    <a href="<?php echo BASE_URL; ?>contact.php"><i class="fa fa-comments" aria-hidden="true"></i>&nbsp;Contact</a>
+		    <a href="<?php echo BASE_URL; ?>admin/<?php echo (!isset($_SESSION["user_id"]) ? "index.php" : ($_SESSION["admin"] == 1 ? "index.php" : "view.php?user")); ?>" class="admin"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;Mijn Speeltuinzoeker</a>
 	    </div>
 	  </div>
 	</nav>
@@ -86,8 +86,8 @@ if (!isset($indexDescription)) {
 	</script>
 
     <div class="logo">
-    	<img src="img/logo_compleet.png" />
+    	<img src="<?php echo BASE_URL; ?>img/logo_compleet.png" />
     </div>
     <div class="logo-resp">
-    	<img src="img/logo_klein.png" />
+    	<img src="<?php echo BASE_URL; ?>img/logo_klein.png" />
     </div>
