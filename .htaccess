@@ -4,6 +4,9 @@ RewriteCond %{HTTP_HOST} !=localhost
 RewriteCond %{HTTPS} !=on
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
+RewriteCond %{HTTP_HOST} ^speeltuinzoeker.nl$ [NC]
+RewriteRule (.*) https://www.speeltuinzoeker.nl/$1 [R=301,L]
+
 RewriteRule ^speeltuinen/(.+)$ /detail.php?speeltuin=$1 [L]
 
 RewriteRule ^over$ /about.php [L]
