@@ -132,6 +132,16 @@ class Speeltuin
         }
 	    return 0;
     }
+    
+    public function getTotalNrForUser($userId) {
+    	$res = $this->db->query(sprintf("SELECT COUNT(*) AS totNr FROM speeltuin WHERE author_id = %d", $userId));
+    	if ($res !== false) {
+    		if ($row = $res->fetch_assoc()) {
+    			return $row["totNr"];
+    		}
+    	}
+    	return 0;
+    }
 
     public function getLatestEntry() {
         $res = $this->db->query("SELECT * FROM speeltuin WHERE status_id = 1 ORDER BY id DESC LIMIT 1");

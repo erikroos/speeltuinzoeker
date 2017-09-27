@@ -273,7 +273,7 @@ include_once "./inc/header.php";
 		            animation: google.maps.Animation.DROP,
 		            html:	"<h4>" + speeltuin.naam + "</h4>" +
 							"<p>" + speeltuin.omschrijving + "</p>" //+
-							//"<p><a href='detail.php?speeltuin=" + speeltuin.id + "'>Meer</a>"
+							//"<p><a href='speeltuinen/" + speeltuin.seo_url + "'>Meer</a>"
 			    });
 				existingMarker.setPosition({
 		            lat: parseFloat(speeltuin.lat),

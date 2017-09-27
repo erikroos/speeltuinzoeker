@@ -86,7 +86,7 @@ We raden je aan (weer) een <a href="account.php">eigen wachtwoord in te stellen<
 				<td><?php echo $row["aantalVoorzieningen"]; ?></td>
 				<td><?php echo $row["aantalBestanden"]; ?></td>
 				<td><?php echo $row["userNaam"]; ?></td>
-				<td><?php echo $row["status"]; ?></td>
+				<td class="<?php echo strtolower($row["status"]); ?>"><?php echo $row["status"]; ?></td>
 				<td>
 					<a href="./edit.php?id=<?php echo $row["id"]; ?>&start=<?php echo $start; ?>">
 					<?php if ($isUser): ?>

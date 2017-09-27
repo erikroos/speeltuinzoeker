@@ -314,3 +314,13 @@ th {
 	overflow: auto;
 	padding: 10px;
 }
+
+td.voorgesteld {
+	background-color: #FAA21C;
+}
+td.actief {
+	background-color: #88CE00;
+}
+td.afgewezen {
+	background-color: #ED1E30;
+}

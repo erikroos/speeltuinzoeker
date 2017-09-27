@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		if ($userEmail != null) {
 			$message = "<p>Beste " . $speeltuin->getAuthorName() . ",</p>" . 
 				"<p>Je speeltuin \"" . $speeltuin->getName() . "\" is goedgekeurd!</p>" . 
-				"<p>Hij is nu <a href='" . BASE_URL . "index.php?speeltuin=" . $speeltuin->getId() . "'>zichtbaar</a> op de site.</p>" . 
+				"<p>Hij is nu <a href='" . BASE_URL . "?speeltuin=" . $speeltuin->getId() . "'>zichtbaar</a> op de site.</p>" . 
 				"<p>Met vriendelijke groeten,<br>" . 
 				"Het team van Speeltuinzoeker.nl</p>";
 			Mail::sendMail($userEmail, "Speeltuin " . $speeltuin->getName() . " goedgekeurd", $message);
@@ -44,9 +44,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		
 		$_SESSION["feedback"] = "Speeltuin goedgekeurd.";
 		
-		// redirect to last page
+		// redirect to last page of actives
 		$totalSize = $speeltuin->getTotalNr(1);
-		header("Location: view.php?status=1&start=" . ($totalSize - ($totalSize % 10)));
+		$newStart = $totalSize - ($totalSize % 10);
+		if ($newStart >= 10 && $totalSize % 10 == 0) { // correct for start at 0 instead of 1
+			$newStart -= 10;
+		}
+		header("Location: view.php?status=1&start=" . $newStart);
 		exit();
 	} else if ($_POST["Submit"] == "Keur af") {
 		
@@ -100,7 +104,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		
 		$speeltuin->setVoorzieningen($_POST);
 		
-		header("Location: view.php?user&start=" . $start);
+		// redirect to last page of actives for this user
+		$totalSize = $speeltuin->getTotalNrForUser($_SESSION["user_id"]);
+		$newStart = $totalSize - ($totalSize % 10);
+		if ($newStart >= 10 && $totalSize % 10 == 0) { // correct for start at 0 instead of 1
+			$newStart -= 10;
+		}
+		header("Location: view.php?user&start=" . $newStart);
 		exit();
 	}
 } else {
