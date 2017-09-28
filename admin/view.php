@@ -34,6 +34,15 @@ if (isset($_GET["user"])) {
 	exit();
 }
 
+if ($isAdmin && isset($_GET["del"])) {
+	if (is_numeric($_GET["del"]) && $_GET["del"] > 0) {
+		$speeltuin = new Speeltuin($db, $_GET["del"]);
+		$speeltuin->delete();
+	}
+	header("Location: view.php?status=" . $status . "&start=" . $start);
+	exit();
+}
+
 // most recent message
 $msgBody = null;
 if ($isUser) {

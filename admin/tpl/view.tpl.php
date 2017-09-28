@@ -71,6 +71,9 @@ We raden je aan (weer) een <a href="account.php">eigen wachtwoord in te stellen<
 				<th>Auteur</th>
 				<th>Status</th>
 				<th></th>
+				<?php if ($isAdmin && $status == 2): ?>
+				<th></th>
+				<?php endif; ?>
 				<?php if ($isUser): ?>
 				<th></th>
 				<?php endif; ?>
@@ -100,6 +103,9 @@ We raden je aan (weer) een <a href="account.php">eigen wachtwoord in te stellen<
 					<?php endif; ?>
 					</a>
 				</td>
+				<?php if ($isAdmin && $status == 2): ?>
+				<td><a href="view.php?del=<?php echo $row["id"]; ?>&status=2&start=<?php echo $start; ?>" onclick="return confirm('Weet je het zeker?')">Verwijder</a></td>
+				<?php endif; ?>
 				<?php if ($isUser): ?>
 				<td><a href="photo.php?id=<?php echo $row["id"]; ?>&start=<?php echo $start; ?>">Foto's</a></td>
 				<?php endif; ?>

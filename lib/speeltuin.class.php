@@ -390,7 +390,7 @@ class Speeltuin
 				);
 			}
 		}
-		return array (
+		return array(
 				"",
 				"",
 				"",
@@ -428,13 +428,31 @@ class Speeltuin
 		$res = $this->db->query(sprintf("SELECT id FROM bestand WHERE naam = \"%s\"", $photoName));
 		if ($res !== false) {
 			if ($row = $res->fetch_assoc()) {
-				$this->db->query(sprintf("DELETE FROM bestand WHERE id = %d", $row ["id"]));
-				$this->db->query(sprintf("DELETE FROM speeltuin_bestand WHERE bestand_id = %d", $row ["id"]));
+				$this->db->query(sprintf("DELETE FROM bestand WHERE id = %d", $row["id"]));
+				$this->db->query(sprintf("DELETE FROM speeltuin_bestand WHERE bestand_id = %d", $row["id"]));
 			}
 		}
 	}
 
 	public function setStatus($statusId) {
 		$this->db->query(sprintf("UPDATE speeltuin SET status_id = %d WHERE id = %d", $statusId, $this->id));
+	}
+	
+	public function delete() {
+		$this->db->query(sprintf("DELETE FROM speeltuin WHERE id = %d", $this->id));
+		$this->db->query(sprintf("DELETE FROM speeltuin_voorziening WHERE speeltuin_id = %d", $this->id));
+		// Files, also on disk:
+		$res = $this->db->query(sprintf("SELECT bestand_id FROM speeltuin_bestand WHERE speeltuin_id = %d", $this->id));
+		if ($res !== false) {
+			while ($row = $res->fetch_assoc()) {
+				$bestandId = $row["bestand_id"];
+				$res2 = $this->db->query(sprintf("SELECT full_path FROM bestand WHERE id = %d", $bestandId));
+				if ($row2 = $res2->fetch_assoc()) {
+					unlink($row2["full_path"]);
+				}
+				$this->db->query(sprintf("DELETE FROM bestand WHERE id = %d", $bestandId));
+				$this->db->query(sprintf("DELETE FROM speeltuin_bestand WHERE bestand_id = %d", $bestandId));
+			}
+		}
 	}
 }
