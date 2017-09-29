@@ -133,10 +133,13 @@
 		                };
 		                map.setCenter(pos);
 		            }, function() {
+		                // Geolocation failed
 		            	setDefaultPos();
+                        $("#locationTip").show();
 		            });
 		        } else {
 		            // Browser doesn't support Geolocation, leave on defaultpos
+                    $("#locationTip").show();
 		        }
 			<?php endif; ?>
         }

@@ -324,3 +324,11 @@ td.actief {
 td.afgewezen {
 	background-color: #ED1E30;
 }
+
+#locationTip {
+	display: none;
+	width: 100%;
+	background-color: #FAA21C;
+	padding: 4px;
+	text-align: center;
+}
