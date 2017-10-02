@@ -3,83 +3,118 @@
 <?php $indexDescription = empty($indexDescription) ? $indexTitle : $indexDescription; ?>
 <?php include "header.tpl.php"; ?>
 
-    <div id="details">
+<div id="postFeedback">
+	<?php if (isset($reviewed)): ?>
+        <?php if ($reviewed): ?>
+        	<p class="notice">Beoordeling succesvol verstuurd! De beoordeling is nog niet zichtbaar tot deze gecontroleerd is. We streven ernaar dit binnen 24 uur te doen.</p>
+        <?php else: ?>
+        	<p class="error">Beoordeling versturen mislukt! Niet (correct) ingelogd en/of geen beoordeling of toelichting ingevuld.</p>
+        <?php endif; ?>
+    <?php endif; ?>
+        
+    <?php if (isset($sent)): ?>
+        <?php if ($sent): ?>
+        	<p class="notice">Verzoek succesvol verstuurd! Er staat een kopie (cc) in je mailbox.</p>
+        <?php else: ?>
+        	<p class="error">Verzoek versturen mislukt! Niet (correct) ingelogd en/of geen verzoek opgegeven.</p>
+        <?php endif; ?>
+	<?php endif; ?>
+</div>
+
+<div id="details">
         <a href="<?php echo BASE_URL; ?>?speeltuin=<?php echo $id; ?>"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i>&nbsp;Startscherm</a>
         <h3><?php echo $speeltuin->getName(); ?></h3>
         <p>Aangemaakt door <?php echo $speeltuin->getAuthorName(); ?>, laatst bewerkt: <?php echo $speeltuin->getLastModified(); ?></p>
-        
-        <?php if (isset($sent)): ?>
-        	<?php if ($sent): ?>
-        		<p class="notice">Verzoek succesvol verstuurd! Er staat een kopie (cc) in je mailbox.</p>
-        	<?php else: ?>
-        		<p class="error">Verzoek versturen mislukt! Niet (correct) ingelogd en/of geen verzoek opgegeven.</p>
-        	<?php endif; ?>
-        <?php else: ?>
-	        <p class="request">Klopt er iets niet?
-	        <?php if (isset($_SESSION["user_id"])): ?>
-	        	Vraag een <a id="requestChange" href="#">wijziging</a> aan bij de aanmaker van deze speeltuin (met een kopie aan jezelf en de beheerder van deze site).</p>
-	        	<form id="requestChangeForm" method="post" action="detail.php">
-	        		<input type="hidden" id="speeltuin" name="speeltuin" value="<?php echo $id; ?>" />
-	        		<input type="hidden" id="userId" name="userId" value="<?php echo $_SESSION["user_id"]; ?>" />
-	        		<div class="form-group">
-						<label for="comment">Opmerking(en)</label>
-	        			<textarea id="comment" name="comment" class="form-control" rows="4"></textarea>
-	        		</div>
-	        		<input type="submit" value="Verstuur" class="btn btn-default" />
-	        	</form>
-	        <?php else: ?>
-	        	<a href="<?php echo BASE_URL; ?>admin/login.php">Log in</a> om een wijziging aan te vragen bij de aanmaker van deze speeltuin.</p>
-	        <?php endif; ?>
-        <?php endif; ?>
-        
         <ul>
         	<li><?php echo $speeltuin->getPublic(); ?></li>
         	<li><?php echo $speeltuin->getType(); ?></li>
         	<li><?php echo $speeltuin->getAgecatString(); ?></li>
         </ul>
-        
         <p><?php echo $speeltuin->getDescription(); ?></p>
-        
         <?php $link = $speeltuin->getLink(); ?>
         <?php if ($link != null): ?>
         	<p><a href="<?php echo $link; ?>"><?php echo $link; ?></a></p>
         <?php endif; ?>
-    </div>
+        
+    <?php if (!isset($reviewed)): ?>
+        <?php if (isset($_SESSION["user_id"])): ?>
+        	<p class="request">Ben je hier geweest? Laat een <a id="review" href="#">beoordeling</a> achter!</p>
+        <?php endif; ?>
+    <?php endif; ?>
+        
+    <?php if (!isset($sent)): ?>
+        <p class="request">Klopt er iets niet? Wil je iets aanvullen?
+        <?php if (isset($_SESSION["user_id"])): ?>
+        	Vraag een <a id="requestChange" href="#">wijziging</a> aan bij de aanmaker van deze speeltuin.</p>
+        <?php else: ?>
+        	<a href="<?php echo BASE_URL; ?>admin/login.php">Log in</a> om een wijziging aan te vragen bij de aanmaker van deze speeltuin.</p>
+        <?php endif; ?>
+	<?php endif; ?>
+</div>
 
-    <div class="voorzieningen">
+<div class="voorzieningen">
         <h4>Wat is hier te doen?</h4>
         <ul>
         <?php foreach ($speeltuin->getVoorzieningen() as $voorziening): ?>
             <li><?php echo $voorziening; ?></li>
         <?php endforeach; ?>
         </ul>
-    </div>
+</div>
 
-    <div class="locatie">
+<div class="locatie">
         <h4>Waar is het precies?</h4>
         <p><?php echo $speeltuin->getLocationDescription(); ?></p>
         <p>Geef me een <a href="https://www.google.com/maps/dir/?api=1&destination=<?php echo $speeltuin->getLatitude(); ?>,<?php echo $speeltuin->getLongitude(); ?>">routebeschrijving</a></p>
         <div id="mini-map"></div>
-    </div>
+</div>
     
-    <?php if (sizeof($photos) > 0): ?>
+<?php if (sizeof($photos) > 0): ?>
     	<div class="betweenbar"></div>
     	<h4>Kijk eens rond</h4>
 	    <div class="detail-photobar">
 	        <?php foreach ($photos as $photo): ?>
-	            <div><img src="<?php echo $photo; ?>" alt="Foto van deze speeltuin" /></div>
-	        <?php endforeach; ?>
+            	<div><img src="<?php echo $photo; ?>" alt="Foto van deze speeltuin" /></div>
+        	<?php endforeach; ?>
 	    </div>
-    <?php endif; ?>
+<?php endif; ?>
     
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script src="<?php echo BASE_URL; ?>js/jquery.min.js"></script>
-	<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-	<!-- Include all compiled plugins (below), or include individual files as needed -->
-	<script src="<?php echo BASE_URL; ?>js/bootstrap.min.js"></script>
+<div id="requestChangeFormDiv">
+    	<form id="requestChangeForm" method="post" action="detail.php">
+        	<input type="hidden" id="speeltuin" name="speeltuin" value="<?php echo $id; ?>" />
+        	<input type="hidden" id="userId" name="userId" value="<?php echo $_SESSION["user_id"]; ?>" />
+        	<div class="form-group">
+				<label for="comment">Opmerking(en) (max. 1000 tekens)</label>
+        		<textarea id="comment" name="comment" class="form-control" maxlength="1000" rows="4"></textarea>
+        	</div>
+        	<input type="submit" value="Verstuur" id="submitRequestChange" class="btn btn-default" />
+        	<p><em>Er gaat een kopie naar jezelf en de beheerder van deze site.</em></p>
+        </form>
+</div>
+    
+<div id="reviewFormDiv">
+    	<form id="reviewForm" method="post" action="detail.php">
+        	<input type="hidden" id="speeltuin" name="speeltuin" value="<?php echo $id; ?>" />
+        	<input type="hidden" id="userId" name="userId" value="<?php echo $_SESSION["user_id"]; ?>" />
+        	<div class="form-group">
+				<label for="rating">Beoordeling</label>
+        		<input type="text" id="rating" name="rating" class="form-control" value="0" />
+        	</div>
+        	<div class="form-group">
+				<label for="comment">Toelichting (max. 1000 tekens)</label>
+        		<textarea id="comment" name="comment" class="form-control" maxlength="1000" rows="4"></textarea>
+        	</div>
+        	<input type="submit" value="Verstuur" class="btn btn-default" />
+        </form>
+</div>
+    
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="<?php echo BASE_URL; ?>js/jquery.min.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="<?php echo BASE_URL; ?>js/bootstrap.min.js"></script>
 	
-	<script type="text/javascript" src="<?php echo BASE_URL; ?>slick/slick.min.js"></script>
-	<script type="text/javascript">
+<script type="text/javascript" src="<?php echo BASE_URL; ?>slick/slick.min.js"></script>
+<script type="text/javascript">
 		$(document).ready(function(){
 			$('.detail-photobar').slick({
 				centerMode: true,
@@ -106,16 +141,30 @@
 			  ]
 	  		});
 
+			$.fn.scrollView = function () {
+			    return this.each(function () {
+			        $('html, body').animate({
+			            scrollTop: $(this).offset().top
+			        }, 1000);
+			    });
+			}
+
 	  		$("#requestChange").click(function(){
 	  			$("#requestChangeForm").show();
+	  			$('#requestChangeFormDiv').scrollView();
+		  	});
+
+	  		$("#review").click(function(){
+	  			$("#reviewForm").show();
+	  			$('#reviewFormDiv').scrollView();
 		  	});
 		});
-	</script>
+</script>
 
 <?php include "footer.tpl.php"; ?>
 
 <!-- Map -->
-<script>
+<script type="text/javascript">
     var map;
 
     function initMap() {

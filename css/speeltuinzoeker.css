@@ -258,7 +258,24 @@ th {
 	font-size: 80%;
 	font-style: italic;
 }
+#requestChangeFormDiv {
+	margin-bottom: 10px;
+}
 #requestChangeForm {
+	display: none;
+	background-color: rgba(138, 197, 63, 0.5);
+	border-radius: 4px;
+	padding: 10px;
+}
+#submitRequestChange {
+	float: left;
+	margin-right: 5px;
+}
+
+#reviewFormDiv {
+	margin-bottom: 10px;
+}
+#reviewForm {
 	display: none;
 	background-color: rgba(138, 197, 63, 0.5);
 	border-radius: 4px;
@@ -331,4 +348,8 @@ td.afgewezen {
 	background-color: #FAA21C;
 	padding: 4px;
 	text-align: center;
+}
+
+#postFeedback {
+	clear: both;
 }
