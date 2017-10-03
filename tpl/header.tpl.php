@@ -16,9 +16,13 @@ if (!isset($indexDescription)) {
 	<meta name="keywords" content="speeltuin,speelplein,speelplaats,gratis,zoeken,vinden,kind,kinderen,spelen">
 	<meta name="author" content="<?php echo AUTHOR; ?>">
 	
-	<meta name="og:title" content="<?php echo $indexTitle; ?>">
-	<meta name="og:description" content="<?php echo $indexDescription; ?>">
-	<meta name="og:image" content="<?php echo BASE_URL; ?>img/logo_compleet.png">
+	<meta property="og:title" content="<?php echo $indexTitle; ?>">
+	<meta property="og:description" content="<?php echo $indexDescription; ?>">
+	<meta property="og:image" content="<?php echo BASE_URL; ?>img/logo_groot.png">
+    <meta property="og:image:alt" content="Logo van Speeltuinzoeker">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="<?php echo substr(BASE_URL, 0, -1); ?><?php echo parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH); ?>">
+    <meta property="fb:app_id" content="1959895767582132">
 
     <link rel="icon" type="image/x-icon" href="<?php echo BASE_URL; ?>favicon.ico">
 
