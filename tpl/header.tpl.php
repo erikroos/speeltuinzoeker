@@ -16,7 +16,7 @@ if (!isset($indexDescription)) {
 	<meta name="keywords" content="speeltuin,speelplein,speelplaats,gratis,zoeken,vinden,kind,kinderen,spelen">
 	<meta name="author" content="<?php echo AUTHOR; ?>">
 	
-	<meta name="og:title" content="Speeltuinzoeker.nl - Laat ze spelen!">
+	<meta name="og:title" content="<?php echo $indexTitle; ?>">
 	<meta name="og:description" content="<?php echo $indexDescription; ?>">
 	<meta name="og:image" content="<?php echo BASE_URL; ?>img/logo_compleet.png">
 
