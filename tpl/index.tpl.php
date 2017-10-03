@@ -73,7 +73,7 @@
             <p><strong>Adverteren?</strong> Jouw (indoor) speeltuin op deze site? Neem <a href="<?php echo BASE_URL; ?>contact">contact</a> op!</p>
             <p>Speeltuinzoeker.nl gebruikt <strong>cookies</strong> om de site goed te laten werken.</p>
             <p>We doen ons uiterste best om deze site actueel, snel en veilig te houden. Kom je iets tegen wat niet klopt? Laat het ons weten!</p>
-            <p>&copy; <?php echo date("Y"); ?> RO Online Solutions<br>KvK 69736766, BTW NL102158228B01</p>
+            <p><strong>&copy; <?php echo date("Y"); ?></strong> RO Online Solutions<br>KvK 69736766, BTW NL102158228B01</p>
         </div>
         <div class="betweenbar"></div>
     </div>

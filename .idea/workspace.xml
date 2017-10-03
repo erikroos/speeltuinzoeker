@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="4dd4a811-c57e-424e-a1cf-22e518d7a993" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tpl/header.tpl.php" afterPath="$PROJECT_DIR$/tpl/header.tpl.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tpl/index.tpl.php" afterPath="$PROJECT_DIR$/tpl/index.tpl.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -19,8 +18,10 @@
         <entry file="file://$PROJECT_DIR$/tpl/index.tpl.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="347">
-              <caret line="75" column="102" lean-forward="false" selection-start-line="75" selection-start-column="102" selection-end-line="75" selection-end-column="102" />
-              <folding />
+              <caret line="75" column="63" lean-forward="false" selection-start-line="75" selection-start-column="63" selection-end-line="75" selection-end-column="63" />
+              <folding>
+                <element signature="e#4055#4061#0#HTML" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -332,7 +333,7 @@
       <workItem from="1506409721751" duration="224000" />
       <workItem from="1506667180856" duration="178000" />
       <workItem from="1506688912261" duration="1122000" />
-      <workItem from="1507019827400" duration="261000" />
+      <workItem from="1507019827400" duration="359000" />
     </task>
     <task id="LOCAL-00001" summary="Show map on home screen, first steps">
       <created>1501840612407</created>
@@ -425,11 +426,18 @@
       <option name="project" value="LOCAL" />
       <updated>1506690007069</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="BTW, KvK">
+      <created>1507020099211</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1507020099211</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24136000" />
+    <option name="totallyTimeSpent" value="24234000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
@@ -485,7 +493,8 @@
     <MESSAGE value="htaccess" />
     <MESSAGE value="Non www to www" />
     <MESSAGE value="Location tip" />
-    <option name="LAST_COMMIT_MESSAGE" value="Location tip" />
+    <MESSAGE value="BTW, KvK" />
+    <option name="LAST_COMMIT_MESSAGE" value="BTW, KvK" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -829,8 +838,10 @@
     <entry file="file://$PROJECT_DIR$/tpl/index.tpl.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="347">
-          <caret line="75" column="102" lean-forward="false" selection-start-line="75" selection-start-column="102" selection-end-line="75" selection-end-column="102" />
-          <folding />
+          <caret line="75" column="63" lean-forward="false" selection-start-line="75" selection-start-column="63" selection-end-line="75" selection-end-column="63" />
+          <folding>
+            <element signature="e#4055#4061#0#HTML" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
