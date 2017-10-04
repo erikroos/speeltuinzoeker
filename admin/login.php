@@ -9,11 +9,7 @@ if ($_SERVER ['REQUEST_METHOD'] == 'POST') {
 	$auth = new Auth($db);
 	
 	if ($auth->login($_POST["login"], $_POST["password"])) {
-		if ($_SESSION["admin"] == 1) {
-			header("Location: index.php");
-		} else {
-			header("Location: view.php?user");
-		}
+		header("Location: index.php");
 		exit();
 	}
 	

@@ -335,7 +335,7 @@ class Speeltuin
 					VALUES (\"%s\", \"%s\", \"%s\", \"%s\", %f, %f, 0, %d, %d, \"%s\", %d, %d, %d, \"%s\", NOW())", 
 					$name, $link, $omschrijving, $locatieOmschrijving, $lat, $lon, $_SESSION["user_id"], $public, 
 					$type, $agecat1 ? 1 : 0, $agecat2 ? 1 : 0, $agecat3 ? 1 : 0, $this->toSeoUrl($name)));
-			$this->id = $this->db->getLatestId ();
+			$this->id = $this->db->getLatestId();
 		} else {
 			$this->db->query(sprintf("UPDATE speeltuin
 				SET naam = \"%s\", link = \"%s\", omschrijving = \"%s\", locatie_omschrijving = \"%s\", lat = %f, lon = %f, status_id = 0, 
@@ -374,7 +374,7 @@ class Speeltuin
 		$res = $this->db->query(sprintf("SELECT * FROM speeltuin WHERE id = %d", $this->id));
 		if ($res !== false) {
 			if ($row = $res->fetch_assoc()) {
-				return array (
+				return array(
 						$row["naam"],
 						$row["link"],
 						$row["omschrijving"],

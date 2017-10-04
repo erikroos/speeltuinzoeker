@@ -65,7 +65,7 @@
                 <a href="./about.php">Info</a>
                 <a href="./join.php">Meedoen</a>
                 <a href="./contact.php">Contact</a>
-                <a href="./admin/<?php echo (!isset($_SESSION["user_id"]) ? "index.php" : ($_SESSION["admin"] == 1 ? "index.php" : "view.php?user")); ?>">Mijn Speeltuinzoeker</a>
+                <a href="./admin/index.php">Mijn Speeltuinzoeker</a>
             </nav>
         </div>
         <div class="footer-column right">

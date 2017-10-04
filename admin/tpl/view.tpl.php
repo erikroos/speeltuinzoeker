@@ -3,24 +3,13 @@ $title = "Mijn Speeltuinzoeker - bekijk en beheer speeltuinen";
 include_once "./inc/header.php";
 ?>
 
-<?php if ($msgBody != null): ?>
-<p class="notice"><?php echo $msgBody; ?></p>
-<?php endif; ?>
-
 <h1><?php echo $pageTitle; ?></h1>
 
-<?php if ($isAdmin): ?>
 <p><a href="./index.php"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i>&nbsp;Terug</a></p>
-<?php endif; ?>
 
 <?php if (isset($_SESSION["feedback"])): ?>
 <p class="notice"><?php echo $_SESSION["feedback"]; ?></p>
 <?php unset($_SESSION["feedback"]); ?>
-<?php endif; ?>
-
-<?php if ($_SESSION["password_generated"] == 1): ?>
-<p class="notice">Je gebruikt een automatisch gegenereerd wachtwoord.
-We raden je aan (weer) een <a href="account.php">eigen wachtwoord in te stellen</a>.</p>
 <?php endif; ?>
 
 <?php if ($isUser): ?>

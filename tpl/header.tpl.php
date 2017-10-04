@@ -69,7 +69,7 @@ if (!isset($indexDescription)) {
 		    <a href="<?php echo BASE_URL; ?>over"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;Info</a>
 		    <a href="<?php echo BASE_URL; ?>meedoen"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;Meedoen</a>
 		    <a href="<?php echo BASE_URL; ?>contact"><i class="fa fa-comments" aria-hidden="true"></i>&nbsp;Contact</a>
-		    <a href="<?php echo BASE_URL; ?>admin/<?php echo (!isset($_SESSION["user_id"]) ? "index.php" : ($_SESSION["admin"] == 1 ? "index.php" : "view.php?user")); ?>" class="admin"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;Mijn Speeltuinzoeker</a>
+		    <a href="<?php echo BASE_URL; ?>admin/index.php" class="admin"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;Mijn Speeltuinzoeker</a>
 		  </div>
 	  </div>
 	  <div class="navNarrow">
@@ -80,7 +80,7 @@ if (!isset($indexDescription)) {
 		    <a href="<?php echo BASE_URL; ?>over"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;Info</a>
 		    <a href="<?php echo BASE_URL; ?>meedoen"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;Meedoen</a>
 		    <a href="<?php echo BASE_URL; ?>contact"><i class="fa fa-comments" aria-hidden="true"></i>&nbsp;Contact</a>
-		    <a href="<?php echo BASE_URL; ?>admin/<?php echo (!isset($_SESSION["user_id"]) ? "index.php" : ($_SESSION["admin"] == 1 ? "index.php" : "view.php?user")); ?>" class="admin"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;Mijn Speeltuinzoeker</a>
+		    <a href="<?php echo BASE_URL; ?>admin/index.php" class="admin"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;Mijn Speeltuinzoeker</a>
 	    </div>
 	  </div>
 	</nav>
