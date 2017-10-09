@@ -34,6 +34,8 @@ $photos = $speeltuin->getPhotos();
 
 $alleVoorzieningen = $speeltuin->getAllVoorzieningen();
 
+$rating = $speeltuin->getRating();
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	if (isset($_SESSION["user_id"]) && $_SESSION["user_id"] == $_POST["userId"]) {
 		

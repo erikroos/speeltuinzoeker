@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		exit();
 	} else if ($_POST["Submit"] == "Keur af") {
 		
-		$review->deactivate();
+		$review->deactivate(false);
 		
 		$userEmail = $speeltuin->getAuthorEmail();
 		if ($userEmail != null) {

@@ -33,20 +33,35 @@ class Review
 	
 	// Instance functions:
 	
+	public function getStatus() {
+		$status = 0;
+		$res = $this->db->query(sprintf("SELECT status FROM review WHERE id = %d", $this->id));
+		if ($res !== false) {
+			if ($row = $res->fetch_assoc()) {
+				$status = $row["status"];
+			}
+		}
+		return $status;
+	}
+	
 	public function insertOrUpdate($speeltuinId, $rating, $comment, $userId) {
 		if ($this->id == 0) {
-			$this->db->query(sprintf("INSERT INTO review (speeltuin_id, rating, comment, user_id, status) 
-					VALUES (%d, %d, \"%s\", %d, 0)", 
+			$this->db->query(sprintf("INSERT INTO review (speeltuin_id, rating, comment, user_id, status, rated_on) 
+					VALUES (%d, %d, \"%s\", %d, 0, NOW())", 
 					$speeltuinId, $rating, $comment, $userId));
 			$this->id = $this->db->getLatestId();
 		} else {
+			$previousStatus = $this->getStatus();
+			// update
 			$this->db->query(sprintf("UPDATE review SET speeltuin_id = %d, rating = %d, comment = \"%s\", 
-					user_id = %d, status = 0 WHERE id = %d", 
+					user_id = %d, status = 0, rated_on = NOW() WHERE id = %d", 
 					$speeltuinId, $rating, $comment, $userId, $this->id));
-			// update speeltuin rating (-1)
-			$this->db->query(sprintf("UPDATE speeltuin SET times_rated = times_rated - 1,
-					total_rating = total_rating - %d WHERE id = %d", $rating, $speeltuinId));
-			$this->db->query(sprintf("UPDATE speeltuin SET avg_rating = total_rating / times_rated WHERE id = %d", $speeltuinId));
+			if ($previousStatus == 1) {
+				// update speeltuin rating (-1)
+				$this->db->query(sprintf("UPDATE speeltuin SET times_rated = times_rated - 1,
+						total_rating = total_rating - %d WHERE id = %d", $rating, $speeltuinId));
+				$this->db->query(sprintf("UPDATE speeltuin SET avg_rating = total_rating / times_rated WHERE id = %d", $speeltuinId));
+			}
 		}
 		return $this->id;
 	}
@@ -67,11 +82,14 @@ class Review
 	}
 	
 	public function deactivate() {
+		$previousStatus = $this->getStatus();
 		$this->db->query(sprintf("UPDATE review SET status = 2 WHERE id = %d", $this->id));
-		// update speeltuin rating (-1)
-		$this->db->query(sprintf("UPDATE speeltuin SET times_rated = times_rated - 1,
+		if ($previousStatus == 1) {
+			// update speeltuin rating (-1)
+			$this->db->query(sprintf("UPDATE speeltuin SET times_rated = times_rated - 1,
 					total_rating = total_rating - %d WHERE id = %d", $rating, $speeltuinId));
-		$this->db->query(sprintf("UPDATE speeltuin SET avg_rating = total_rating / times_rated WHERE id = %d", $speeltuinId));
+			$this->db->query(sprintf("UPDATE speeltuin SET avg_rating = total_rating / times_rated WHERE id = %d", $speeltuinId));
+		}
 	}
 	
 	public function delete() {
@@ -81,10 +99,12 @@ class Review
 				$rating = $row["rating"];
 				$speeltuinId = $row["speeltuin_id"];
 				$this->db->query(sprintf("DELETE FROM review WHERE id = %d", $this->id));
-				// update speeltuin rating (-1)
-				$this->db->query(sprintf("UPDATE speeltuin SET times_rated = times_rated - 1,
-					total_rating = total_rating - %d WHERE id = %d", $rating, $speeltuinId));
-				$this->db->query(sprintf("UPDATE speeltuin SET avg_rating = total_rating / times_rated WHERE id = %d", $speeltuinId));
+				if ($row["status"] == 1) {
+					// update speeltuin rating (-1)
+					$this->db->query(sprintf("UPDATE speeltuin SET times_rated = times_rated - 1,
+						total_rating = total_rating - %d WHERE id = %d", $rating, $speeltuinId));
+					$this->db->query(sprintf("UPDATE speeltuin SET avg_rating = total_rating / times_rated WHERE id = %d", $speeltuinId));
+				}
 			}
 		}
 	}

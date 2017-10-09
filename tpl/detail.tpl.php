@@ -25,6 +25,10 @@
         <a href="<?php echo BASE_URL; ?>?speeltuin=<?php echo $id; ?>"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i>&nbsp;Startscherm</a>
         <h3><?php echo $speeltuin->getName(); ?></h3>
         <p>Aangemaakt door <?php echo $speeltuin->getAuthorName(); ?>, laatst bewerkt: <?php echo $speeltuin->getLastModified(); ?></p>
+        <?php if ($rating != null): ?>
+        	<p>Gemiddelde beoordeling: <?php echo $rating["avg_rating"]; ?> (<?php echo $rating["times_rated"]; ?> x beoordeeld)</p>
+        	<p>Laatste beoordeling: TODO</p>
+        <?php endif; ?>
         <ul>
         	<li><?php echo $speeltuin->getPublic(); ?></li>
         	<li><?php echo $speeltuin->getType(); ?></li>
