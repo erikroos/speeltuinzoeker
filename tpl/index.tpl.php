@@ -48,6 +48,22 @@
 	    			<?php endforeach; ?>
 	    		</div>
     		</form>
+    		<form id="filter-form-rating">
+    			<label>Minimale beoordeling</label><br>
+    			<select id="min_rating">
+    				<option value="0">0</option>
+    				<option value="0.5">0.5</option>
+    				<option value="1">1</option>
+    				<option value="1.5">1.5</option>
+    				<option value="2">2</option>
+    				<option value="2.5">2.5</option>
+    				<option value="3">3</option>
+    				<option value="3.5">3.5</option>
+    				<option value="4">4</option>
+    				<option value="4.5">4.5</option>
+    				<option value="5">5</option>
+    			</select>
+    		</form>
     	</div>
     	<div id="map-div"></div>
     </div>
@@ -176,6 +192,7 @@
 					var input = $(this);
 					url += "&voorziening[]=" + input.attr("name");
 				});
+				url += "&min_rating=" + $("#min_rating").val();
 				$.get(url, function(data) {
 					placeMarkers(data);
 			    });
@@ -284,6 +301,9 @@
     	initMap(map.getCenter(), map.getZoom());
     });
     $('#filter-form-voorzieningen input').click(function(event) {
+    	initMap(map.getCenter(), map.getZoom());
+    });
+    $('#min_rating').change(function(event) {
     	initMap(map.getCenter(), map.getZoom());
     });
 

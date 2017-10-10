@@ -16,11 +16,12 @@ $type = get_request_value("type", array());
 $agecat = get_request_value("agecat", array());
 $access = get_request_value("access", array());
 $voorziening = get_request_value("voorziening", array());
+$minRating = get_request_value("min_rating", 0);
 
 $db = new Db();
 $speeltuin = new Speeltuin($db);
 $speeltuinenInBox = $speeltuin->getAllSpeeltuinenInBoundingBox($neLat, $neLon, $swLat, $swLon, 
-		$type, $agecat, $access, $voorziening);
+		$type, $agecat, $access, $voorziening, $minRating);
 
 echo json_encode($speeltuinenInBox);
 

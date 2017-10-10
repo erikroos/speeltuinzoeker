@@ -44,7 +44,7 @@ class Speeltuin
     	return $allSpeeltuinen;
     }
     
-    public function getAllSpeeltuinenInBoundingBox($neLat, $neLon, $swLat, $swLon, $type = null, $agecat = null, $access = null, $voorziening = null) {
+    public function getAllSpeeltuinenInBoundingBox($neLat, $neLon, $swLat, $swLon, $type = null, $agecat = null, $access = null, $voorziening = null, $minRating = 0) {
     	$allSpeeltuinen = [];
     	
     	$typeClause = "";
@@ -80,14 +80,14 @@ class Speeltuin
     		}
     	}
     	
-    	$query = sprintf("SELECT id, naam, speeltuintype, omschrijving, lat, lon, public, seo_url FROM speeltuin
+    	$query = sprintf("SELECT id, naam, speeltuintype, omschrijving, lat, lon, public, seo_url, avg_rating, times_rated FROM speeltuin
 			WHERE status_id = 1
 			AND lat <= %s AND lat >= %s AND lon >= %s AND lon <= %s
-    		%s %s %s",
-    		$neLat, $swLat, $swLon, $neLon, $typeClause, $ageClause, $accessClause);
+    		%s %s %s
+    		AND avg_rating >= %f",
+    		$neLat, $swLat, $swLon, $neLon, $typeClause, $ageClause, $accessClause, $minRating);
     	$res = $this->db->query($query);
     	while ($row = $res->fetch_assoc()) {
-    		
     		// Na-filtering op voorziening
     		if ($voorziening != null) {
     			foreach ($voorziening as $voorzieningId) {
@@ -460,9 +460,8 @@ class Speeltuin
 		$res = $this->db->query(sprintf("SELECT times_rated, avg_rating FROM speeltuin WHERE id = %d", $this->id));
         if ($res !== false) {
             if ($row = $res->fetch_assoc()) {
-                // round avg. rating
+                // round avg. rating on .5's
                 $row["avg_rating"] = round($row["avg_rating"] * 2, 0) / 2.0;
-
                 return $row;
             }
         }
