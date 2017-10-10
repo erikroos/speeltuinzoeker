@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4dd4a811-c57e-424e-a1cf-22e518d7a993" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/img/logo_groot.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tpl/header.tpl.php" afterPath="$PROJECT_DIR$/tpl/header.tpl.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/speeltuin.class.php" afterPath="$PROJECT_DIR$/lib/speeltuin.class.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -14,24 +13,68 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.tpl.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tpl/index.tpl.php">
+    <leaf>
+      <file leaf-file-name="config.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cfg/config.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="347">
-              <caret line="75" column="63" lean-forward="false" selection-start-line="75" selection-start-column="63" selection-end-line="75" selection-end-column="63" />
+            <state relative-caret-position="714">
+              <caret line="42" column="40" lean-forward="false" selection-start-line="42" selection-start-column="40" selection-end-line="42" selection-end-column="40" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="header.tpl.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/tpl/header.tpl.php">
+      <file leaf-file-name="speeltuin.class.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/speeltuin.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="21" column="69" lean-forward="false" selection-start-line="21" selection-start-column="69" selection-end-line="21" selection-end-column="69" />
+            <state relative-caret-position="597">
+              <caret line="461" column="16" lean-forward="false" selection-start-line="461" selection-start-column="16" selection-end-line="461" selection-end-column="16" />
               <folding>
-                <marker date="1507040107753" expanded="true" signature="4435:4769" ph="..." />
+                <marker date="1507631316947" expanded="true" signature="501:538" ph="SELECT * FRO... speeltuin" />
+                <marker date="1507631316947" expanded="true" signature="767:810" ph="SELECT * FRO... speeltuin" />
+                <marker date="1507631316947" expanded="true" signature="1053:1158" ph="SELECT LEFT(... " />
+                <marker date="1507631316947" expanded="true" signature="2436:2619" ph="SELECT id, n... " />
+                <marker date="1507631316947" expanded="true" signature="2951:3034" ph="SELECT * FRO... speeltuin_voorziening" />
+                <marker date="1507631316947" expanded="true" signature="3695:3743" ph="SELECT id, n... voorziening" />
+                <marker date="1507631316947" expanded="true" signature="4052:4112" ph="SELECT COUNT... speeltuin" />
+                <marker date="1507631316947" expanded="true" signature="4377:4437" ph="SELECT COUNT... speeltuin" />
+                <marker date="1507631316947" expanded="true" signature="4656:4724" ph="SELECT * FRO... speeltuin" />
+                <marker date="1507631316947" expanded="true" signature="5703:5750" ph="SELECT id FR... speeltuin" />
+                <marker date="1507631316947" expanded="true" signature="6002:6042" ph="SELECT naam speeltuin" />
+                <marker date="1507631316947" expanded="true" signature="6204:6244" ph="SELECT link speeltuin" />
+                <marker date="1507631316947" expanded="true" signature="6419:6467" ph="SELECT omsch... speeltuin" />
+                <marker date="1507631316947" expanded="true" signature="6648:6687" ph="SELECT lat F... speeltuin" />
+                <marker date="1507631316947" expanded="true" signature="6860:6899" ph="SELECT lon F... speeltuin" />
+                <marker date="1507631316947" expanded="true" signature="7078:7134" ph="SELECT locat... speeltuin" />
+                <marker date="1507631316947" expanded="true" signature="7312:7361" ph="SELECT speel... speeltuin" />
+                <marker date="1507631316947" expanded="true" signature="7540:7604" ph="SELECT ageca... speeltuin" />
+                <marker date="1507631316947" expanded="true" signature="8020:8065" ph="SELECT autho... speeltuin" />
+                <marker date="1507631316947" expanded="true" signature="8302:8337" ph="SELECT naam user" />
+                <marker date="1507631316947" expanded="true" signature="8579:8615" ph="SELECT email... user" />
+                <marker date="1507631316947" expanded="true" signature="8819:8866" ph="SELECT modif... speeltuin" />
+                <marker date="1507631316947" expanded="true" signature="9148:9190" ph="SELECT publi... " />
+                <marker date="1507631316947" expanded="true" signature="9592:9640" ph="UPDATE speel... " />
+                <marker date="1507631316947" expanded="true" signature="9720:9768" ph="UPDATE speel... " />
+                <marker date="1507631316947" expanded="true" signature="9984:10266" ph="INSERT INTO speeltuin... " />
+                <marker date="1507631316947" expanded="true" signature="10543:10830" ph="UPDATE speel... " />
+                <marker date="1507631316947" expanded="true" signature="11141:11317" ph="SELECT voorz... speeltuin_voorziening" />
+                <marker date="1507631316947" expanded="true" signature="11585:11642" ph="DELETE FROM " />
+                <marker date="1507631316947" expanded="true" signature="11819:11906" ph="INSERT INTO speeltuin_voorziening... " />
+                <marker date="1507631316947" expanded="true" signature="12017:12054" ph="SELECT * FRO... speeltuin" />
+                <marker date="1507631316947" expanded="true" signature="12669:12810" ph="SELECT url F... bestand" />
+                <marker date="1507631316947" expanded="true" signature="12987:13089" ph="INSERT INTO bestand... " />
+                <marker date="1507631316947" expanded="true" signature="13224:13305" ph="INSERT INTO speeltuin_bestand... " />
+                <marker date="1507631316947" expanded="true" signature="13415:13457" ph="SELECT id FR... bestand" />
+                <marker date="1507631316947" expanded="true" signature="13565:13598" ph="DELETE FROM " />
+                <marker date="1507631316947" expanded="true" signature="13645:13696" ph="DELETE FROM " />
+                <marker date="1507631316947" expanded="true" signature="13794:13843" ph="UPDATE speel... " />
+                <marker date="1507631316947" expanded="true" signature="13931:13966" ph="DELETE FROM " />
+                <marker date="1507631316947" expanded="true" signature="14010:14067" ph="DELETE FROM " />
+                <marker date="1507631316947" expanded="true" signature="14144:14208" ph="SELECT besta... speeltuin_bestand" />
+                <marker date="1507631316947" expanded="true" signature="14363:14406" ph="SELECT full_... bestand" />
+                <marker date="1507631316947" expanded="true" signature="14532:14565" ph="DELETE FROM " />
+                <marker date="1507631316947" expanded="true" signature="14612:14663" ph="DELETE FROM " />
+                <marker date="1507631316947" expanded="true" signature="14760:14819" ph="SELECT times... speeltuin" />
               </folding>
             </state>
           </provider>
@@ -60,7 +103,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/_latest.php" />
-        <option value="$PROJECT_DIR$/lib/speeltuin.class.php" />
         <option value="$PROJECT_DIR$/lib/image.class.php" />
         <option value="$PROJECT_DIR$/admin/_del_photo.php" />
         <option value="$PROJECT_DIR$/cfg/example.config.php" />
@@ -92,6 +134,7 @@
         <option value="$PROJECT_DIR$/css/speeltuinzoeker.css" />
         <option value="$PROJECT_DIR$/tpl/index.tpl.php" />
         <option value="$PROJECT_DIR$/tpl/header.tpl.php" />
+        <option value="$PROJECT_DIR$/lib/speeltuin.class.php" />
       </list>
     </option>
   </component>
@@ -160,7 +203,6 @@
     </navigator>
     <panes>
       <pane id="AndroidView" />
-      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -172,12 +214,22 @@
             <path>
               <item name="speeltuinzoeker-git" type="b2602c69:ProjectViewProjectNode" />
               <item name="speeltuinzoeker-git" type="462c0819:PsiDirectoryNode" />
+              <item name="cfg" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="speeltuinzoeker-git" type="b2602c69:ProjectViewProjectNode" />
+              <item name="speeltuinzoeker-git" type="462c0819:PsiDirectoryNode" />
               <item name="css" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="speeltuinzoeker-git" type="b2602c69:ProjectViewProjectNode" />
               <item name="speeltuinzoeker-git" type="462c0819:PsiDirectoryNode" />
               <item name="img" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="speeltuinzoeker-git" type="b2602c69:ProjectViewProjectNode" />
+              <item name="speeltuinzoeker-git" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="speeltuinzoeker-git" type="b2602c69:ProjectViewProjectNode" />
@@ -203,6 +255,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -353,7 +406,8 @@
       <workItem from="1506667180856" duration="178000" />
       <workItem from="1506688912261" duration="1122000" />
       <workItem from="1507019827400" duration="577000" />
-      <workItem from="1507038846970" duration="1342000" />
+      <workItem from="1507038846970" duration="1372000" />
+      <workItem from="1507630894732" duration="440000" />
     </task>
     <task id="LOCAL-00001" summary="Show map on home screen, first steps">
       <created>1501840612407</created>
@@ -460,11 +514,18 @@
       <option name="project" value="LOCAL" />
       <updated>1507020190914</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="og-tags for Facebook">
+      <created>1507040201621</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1507040201621</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25794000" />
+    <option name="totallyTimeSpent" value="26264000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
@@ -481,7 +542,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2153518" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21748401" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1391258" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -522,7 +583,8 @@
     <MESSAGE value="Location tip" />
     <MESSAGE value="BTW, KvK" />
     <MESSAGE value="bold" />
-    <option name="LAST_COMMIT_MESSAGE" value="bold" />
+    <MESSAGE value="og-tags for Facebook" />
+    <option name="LAST_COMMIT_MESSAGE" value="og-tags for Facebook" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -540,7 +602,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="765">
           <caret line="45" column="34" lean-forward="false" selection-start-line="45" selection-start-column="34" selection-end-line="45" selection-end-column="34" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -569,7 +630,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="884">
           <caret line="52" column="34" lean-forward="false" selection-start-line="52" selection-start-column="34" selection-end-line="52" selection-end-column="34" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -618,7 +678,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -777,14 +836,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/speeltuin.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3434">
-          <caret line="202" column="20" lean-forward="false" selection-start-line="202" selection-start-column="20" selection-end-line="202" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tpl/detail.tpl.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -800,18 +851,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cfg/config.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="42" column="40" lean-forward="false" selection-start-line="42" selection-start-column="40" selection-end-line="42" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.htaccess">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="47" lean-forward="false" selection-start-line="7" selection-start-column="47" selection-end-line="7" selection-end-column="47" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -819,14 +862,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5865">
           <caret line="345" column="18" lean-forward="false" selection-start-line="345" selection-start-column="18" selection-end-line="345" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tpl/index.tpl.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="347">
-          <caret line="75" column="63" lean-forward="false" selection-start-line="75" selection-start-column="63" selection-end-line="75" selection-end-column="63" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -862,8 +897,76 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
           <caret line="21" column="69" lean-forward="false" selection-start-line="21" selection-start-column="69" selection-end-line="21" selection-end-column="69" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tpl/index.tpl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="347">
+          <caret line="75" column="63" lean-forward="false" selection-start-line="75" selection-start-column="63" selection-end-line="75" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cfg/config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="714">
+          <caret line="42" column="40" lean-forward="false" selection-start-line="42" selection-start-column="40" selection-end-line="42" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/speeltuin.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="597">
+          <caret line="461" column="16" lean-forward="false" selection-start-line="461" selection-start-column="16" selection-end-line="461" selection-end-column="16" />
           <folding>
-            <marker date="1507040107753" expanded="true" signature="4435:4769" ph="..." />
+            <marker date="1507631316947" expanded="true" signature="501:538" ph="SELECT * FRO... speeltuin" />
+            <marker date="1507631316947" expanded="true" signature="767:810" ph="SELECT * FRO... speeltuin" />
+            <marker date="1507631316947" expanded="true" signature="1053:1158" ph="SELECT LEFT(... " />
+            <marker date="1507631316947" expanded="true" signature="2436:2619" ph="SELECT id, n... " />
+            <marker date="1507631316947" expanded="true" signature="2951:3034" ph="SELECT * FRO... speeltuin_voorziening" />
+            <marker date="1507631316947" expanded="true" signature="3695:3743" ph="SELECT id, n... voorziening" />
+            <marker date="1507631316947" expanded="true" signature="4052:4112" ph="SELECT COUNT... speeltuin" />
+            <marker date="1507631316947" expanded="true" signature="4377:4437" ph="SELECT COUNT... speeltuin" />
+            <marker date="1507631316947" expanded="true" signature="4656:4724" ph="SELECT * FRO... speeltuin" />
+            <marker date="1507631316947" expanded="true" signature="5703:5750" ph="SELECT id FR... speeltuin" />
+            <marker date="1507631316947" expanded="true" signature="6002:6042" ph="SELECT naam speeltuin" />
+            <marker date="1507631316947" expanded="true" signature="6204:6244" ph="SELECT link speeltuin" />
+            <marker date="1507631316947" expanded="true" signature="6419:6467" ph="SELECT omsch... speeltuin" />
+            <marker date="1507631316947" expanded="true" signature="6648:6687" ph="SELECT lat F... speeltuin" />
+            <marker date="1507631316947" expanded="true" signature="6860:6899" ph="SELECT lon F... speeltuin" />
+            <marker date="1507631316947" expanded="true" signature="7078:7134" ph="SELECT locat... speeltuin" />
+            <marker date="1507631316947" expanded="true" signature="7312:7361" ph="SELECT speel... speeltuin" />
+            <marker date="1507631316947" expanded="true" signature="7540:7604" ph="SELECT ageca... speeltuin" />
+            <marker date="1507631316947" expanded="true" signature="8020:8065" ph="SELECT autho... speeltuin" />
+            <marker date="1507631316947" expanded="true" signature="8302:8337" ph="SELECT naam user" />
+            <marker date="1507631316947" expanded="true" signature="8579:8615" ph="SELECT email... user" />
+            <marker date="1507631316947" expanded="true" signature="8819:8866" ph="SELECT modif... speeltuin" />
+            <marker date="1507631316947" expanded="true" signature="9148:9190" ph="SELECT publi... " />
+            <marker date="1507631316947" expanded="true" signature="9592:9640" ph="UPDATE speel... " />
+            <marker date="1507631316947" expanded="true" signature="9720:9768" ph="UPDATE speel... " />
+            <marker date="1507631316947" expanded="true" signature="9984:10266" ph="INSERT INTO speeltuin... " />
+            <marker date="1507631316947" expanded="true" signature="10543:10830" ph="UPDATE speel... " />
+            <marker date="1507631316947" expanded="true" signature="11141:11317" ph="SELECT voorz... speeltuin_voorziening" />
+            <marker date="1507631316947" expanded="true" signature="11585:11642" ph="DELETE FROM " />
+            <marker date="1507631316947" expanded="true" signature="11819:11906" ph="INSERT INTO speeltuin_voorziening... " />
+            <marker date="1507631316947" expanded="true" signature="12017:12054" ph="SELECT * FRO... speeltuin" />
+            <marker date="1507631316947" expanded="true" signature="12669:12810" ph="SELECT url F... bestand" />
+            <marker date="1507631316947" expanded="true" signature="12987:13089" ph="INSERT INTO bestand... " />
+            <marker date="1507631316947" expanded="true" signature="13224:13305" ph="INSERT INTO speeltuin_bestand... " />
+            <marker date="1507631316947" expanded="true" signature="13415:13457" ph="SELECT id FR... bestand" />
+            <marker date="1507631316947" expanded="true" signature="13565:13598" ph="DELETE FROM " />
+            <marker date="1507631316947" expanded="true" signature="13645:13696" ph="DELETE FROM " />
+            <marker date="1507631316947" expanded="true" signature="13794:13843" ph="UPDATE speel... " />
+            <marker date="1507631316947" expanded="true" signature="13931:13966" ph="DELETE FROM " />
+            <marker date="1507631316947" expanded="true" signature="14010:14067" ph="DELETE FROM " />
+            <marker date="1507631316947" expanded="true" signature="14144:14208" ph="SELECT besta... speeltuin_bestand" />
+            <marker date="1507631316947" expanded="true" signature="14363:14406" ph="SELECT full_... bestand" />
+            <marker date="1507631316947" expanded="true" signature="14532:14565" ph="DELETE FROM " />
+            <marker date="1507631316947" expanded="true" signature="14612:14663" ph="DELETE FROM " />
+            <marker date="1507631316947" expanded="true" signature="14760:14819" ph="SELECT times... speeltuin" />
           </folding>
         </state>
       </provider>

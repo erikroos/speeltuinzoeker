@@ -458,12 +458,14 @@ class Speeltuin
 	
 	public function getRating() {
 		$res = $this->db->query(sprintf("SELECT times_rated, avg_rating FROM speeltuin WHERE id = %d", $this->id));
-		if ($row = $res->fetch_assoc()) {
-			// round avg. rating
-			$row["avg_rating"] = round($row["avg_rating"] * 2, 0) / 2.0;
-			
-			return $row;
-		}
+        if ($res !== false) {
+            if ($row = $res->fetch_assoc()) {
+                // round avg. rating
+                $row["avg_rating"] = round($row["avg_rating"] * 2, 0) / 2.0;
+
+                return $row;
+            }
+        }
 		return null;
 	}
 }
