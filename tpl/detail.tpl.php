@@ -3,6 +3,10 @@
 <?php $indexDescription = empty($indexDescription) ? $indexTitle : $indexDescription; ?>
 <?php include "header.tpl.php"; ?>
 
+<div class="morelink">
+	<p><a href="<?php echo BASE_URL; ?>?speeltuin=<?php echo $id; ?>"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i>&nbsp;Startscherm</a></p>
+</div>
+
 <div id="postFeedback">
 	<?php if (isset($reviewed)): ?>
         <?php if ($reviewed): ?>
@@ -22,48 +26,43 @@
 </div>
 
 <div id="details">
-        <a href="<?php echo BASE_URL; ?>?speeltuin=<?php echo $id; ?>"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i>&nbsp;Startscherm</a>
-        <h3><?php echo $speeltuin->getName(); ?></h3>
-        <p>Aangemaakt door <?php echo $speeltuin->getAuthorName(); ?>, laatst bewerkt: <?php echo $speeltuin->getLastModified(); ?></p>
-        <?php if ($rating != null): ?>
-        	<span class="stars"><?php echo $rating["avg_rating"]; ?></span>
-        	<p>(<?php echo $rating["times_rated"]; ?> x beoordeeld)</p>
-        	<p>Laatste beoordeling: TODO</p>
-        <?php endif; ?>
-        <ul>
-        	<li><?php echo $speeltuin->getPublic(); ?></li>
-        	<li><?php echo $speeltuin->getType(); ?></li>
-        	<li><?php echo $speeltuin->getAgecatString(); ?></li>
-        </ul>
-        <p><?php echo $speeltuin->getDescription(); ?></p>
-        <?php $link = $speeltuin->getLink(); ?>
-        <?php if ($link != null): ?>
-        	<p><a href="<?php echo $link; ?>"><?php echo $link; ?></a></p>
-        <?php endif; ?>
-        
-    <?php if (!isset($reviewed)): ?>
-        <?php if (isset($_SESSION["user_id"])): ?>
-        	<p class="request">Ben je hier geweest? Laat een <a id="review" href="#">beoordeling</a> achter!</p>
-        <?php endif; ?>
-    <?php endif; ?>
-        
-    <?php if (!isset($sent)): ?>
-        <p class="request">Klopt er iets niet? Wil je iets aanvullen?
-        <?php if (isset($_SESSION["user_id"])): ?>
-        	Vraag een <a id="requestChange" href="#">wijziging</a> aan bij de aanmaker van deze speeltuin.</p>
-        <?php else: ?>
-        	<a href="<?php echo BASE_URL; ?>admin/login.php">Log in</a> om een wijziging aan te vragen bij de aanmaker van deze speeltuin.</p>
-        <?php endif; ?>
+	<h3><?php echo $speeltuin->getName(); ?></h3>
+	<p>Aangemaakt door <?php echo $speeltuin->getAuthorName(); ?>, laatst bewerkt: <?php echo $speeltuin->getLastModified(); ?></p>
+	<?php if ($rating != null): ?>
+        <span class="stars"><?php echo $rating["avg_rating"]; ?></span>
+        <p>(<?php echo $rating["times_rated"]; ?> x beoordeeld)</p>
+        <p>Laatste beoordeling: TODO</p>
+	<?php endif; ?>
+	<ul>
+        <li><?php echo $speeltuin->getPublic(); ?></li>
+        <li><?php echo $speeltuin->getType(); ?></li>
+        <li><?php echo $speeltuin->getAgecatString(); ?></li>
+	</ul>
+	<p><?php echo $speeltuin->getDescription(); ?></p>
+	<?php $link = $speeltuin->getLink(); ?>
+	<?php if ($link != null): ?>
+        <p><a href="<?php echo $link; ?>"><?php echo $link; ?></a></p>
+	<?php endif; ?>
+	
+	<?php if (isset($_SESSION["user_id"])): ?>
+	    <?php if (!isset($reviewed)): ?>
+	        <p class="request">Ben je hier geweest? Laat een <a id="review" href="#">beoordeling</a> achter!</p>
+	    <?php endif; ?>
+	    <?php if (!isset($sent)): ?>
+	        <p class="request">Klopt er iets niet? Wil je iets aanvullen? Vraag een <a id="requestChange" href="#">wijziging</a> aan bij de aanmaker van deze speeltuin.</p>
+		<?php endif; ?>
+	<?php else: ?>
+		<p class="request">Wil je een beoordeling achterlaten of een wijziging aanvragen? <a href="<?php echo BASE_URL; ?>admin/login.php">Log dan eerst in</a>.</p>
 	<?php endif; ?>
 </div>
 
 <div class="voorzieningen">
-        <h4>Wat is hier te doen?</h4>
-        <ul>
+	<h4>Wat is hier te doen?</h4>
+	<ul>
         <?php foreach ($speeltuin->getVoorzieningen() as $voorziening): ?>
             <li><?php echo $voorziening; ?></li>
         <?php endforeach; ?>
-        </ul>
+	</ul>
 </div>
 
 <div class="locatie">
@@ -97,19 +96,19 @@
 </div>
     
 <div id="reviewFormDiv">
-    	<form id="reviewForm" method="post" action="detail.php">
-        	<input type="hidden" id="speeltuin" name="speeltuin" value="<?php echo $id; ?>" />
-        	<input type="hidden" id="userId" name="userId" value="<?php echo $_SESSION["user_id"]; ?>" />
-        	<div class="form-group">
-				<label for="rating">Beoordeling</label>
-        		<input type="text" id="rating" name="rating" class="form-control" value="0" />
-        	</div>
-        	<div class="form-group">
-				<label for="comment">Toelichting (max. 1000 tekens)</label>
-        		<textarea id="comment" name="comment" class="form-control" maxlength="1000" rows="4"></textarea>
-        	</div>
-        	<input type="submit" value="Verstuur" class="btn btn-default" />
-        </form>
+    <form id="reviewForm" method="post" action="detail.php">
+        <input type="hidden" id="speeltuin" name="speeltuin" value="<?php echo $id; ?>" />
+        <input type="hidden" id="userId" name="userId" value="<?php echo $_SESSION["user_id"]; ?>" />
+        <div class="form-group">
+			<label for="rating">Beoordeling (kies 0-5 sterren)</label>
+			<input type="number" name="rating" class="rating" />
+        </div>
+        <div class="form-group">
+			<label for="comment">Toelichting (max. 1000 tekens)</label>
+        	<textarea id="comment" name="comment" class="form-control" maxlength="1000" rows="4"></textarea>
+        </div>
+        <input type="submit" value="Verstuur" class="btn btn-default" />
+	</form>
 </div>
     
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -117,6 +116,7 @@
 <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="<?php echo BASE_URL; ?>js/bootstrap.min.js"></script>
+<script src="<?php echo BASE_URL; ?>js/bootstrap-rating-input.js" type="text/javascript"></script>
 	
 <script type="text/javascript" src="<?php echo BASE_URL; ?>slick/slick.min.js"></script>
 <script type="text/javascript">
