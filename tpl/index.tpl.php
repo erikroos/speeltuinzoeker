@@ -213,10 +213,10 @@
 		            icon: "<?php echo BASE_URL; ?>img/marker_" + (speeltuin.public == 0 ? "blue" : (speeltuin.public == 1 ? "red" : "yellow")) + ".png",
 		            animation: google.maps.Animation.DROP,
 		            html:	"<h4>" + speeltuin.naam + "</h4>" +
-		            		"<p>" + (speeltuin.public == 0 ? "Betaald" : (speeltuin.public == 1 ? "Gratis en altijd toegankelijk" : "Gratis maar beperkt toegankelijk")) + "</p>" +
 		            		"<p>" + speeltuin.speeltuintype + "</p>" +
-							"<p>" + speeltuin.omschrijving + "</p>" +
-							"<p><a href='speeltuinen/" + speeltuin.seo_url + "'>Meer</a>"
+		            		"<p>" + (speeltuin.public == 0 ? "Betaald" : (speeltuin.public == 1 ? "Gratis en altijd toegankelijk" : "Gratis maar beperkt toegankelijk")) + "</p>" +
+							"<span class=\"stars\"><span style=\"width: " + (speeltuin.avg_rating * 16) + "px\"></span></span>" +
+							"<p class=\"morelink\"><br><a href='speeltuinen/" + speeltuin.seo_url + "'>Meer</a></p>"
 			    });
 				existingMarker.setPosition({
 		            lat: parseFloat(speeltuin.lat),
@@ -228,7 +228,7 @@
 		        });
 		        
 				existingMarkers.push(existingMarker);
-			} 
+			}
 		}
 		function scheduleDelayedCallback() { 
 		    lastEvent = new Date(); 
@@ -312,7 +312,6 @@
 		$("#nonPopItems").show();
 		$("#expand_items").hide();
 	});
-    
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=<?php echo MAPS_API_KEY; ?>&callback=initMap"></script>
 

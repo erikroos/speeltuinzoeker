@@ -26,7 +26,8 @@
         <h3><?php echo $speeltuin->getName(); ?></h3>
         <p>Aangemaakt door <?php echo $speeltuin->getAuthorName(); ?>, laatst bewerkt: <?php echo $speeltuin->getLastModified(); ?></p>
         <?php if ($rating != null): ?>
-        	<p>Gemiddelde beoordeling: <?php echo $rating["avg_rating"]; ?> (<?php echo $rating["times_rated"]; ?> x beoordeeld)</p>
+        	<span class="stars"><?php echo $rating["avg_rating"]; ?></span>
+        	<p>(<?php echo $rating["times_rated"]; ?> x beoordeeld)</p>
         	<p>Laatste beoordeling: TODO</p>
         <?php endif; ?>
         <ul>
@@ -66,10 +67,10 @@
 </div>
 
 <div class="locatie">
-        <h4>Waar is het precies?</h4>
-        <p><?php echo $speeltuin->getLocationDescription(); ?></p>
-        <p>Geef me een <a href="https://www.google.com/maps/dir/?api=1&destination=<?php echo $speeltuin->getLatitude(); ?>,<?php echo $speeltuin->getLongitude(); ?>">routebeschrijving</a></p>
-        <div id="mini-map"></div>
+	<h4>Waar is het precies?</h4>
+    <p><?php echo $speeltuin->getLocationDescription(); ?></p>
+    <p>Geef me een <a href="https://www.google.com/maps/dir/?api=1&destination=<?php echo $speeltuin->getLatitude(); ?>,<?php echo $speeltuin->getLongitude(); ?>">routebeschrijving</a></p>
+    <div id="mini-map"></div>
 </div>
     
 <?php if (sizeof($photos) > 0): ?>
@@ -83,16 +84,16 @@
 <?php endif; ?>
     
 <div id="requestChangeFormDiv">
-    	<form id="requestChangeForm" method="post" action="detail.php">
-        	<input type="hidden" id="speeltuin" name="speeltuin" value="<?php echo $id; ?>" />
-        	<input type="hidden" id="userId" name="userId" value="<?php echo $_SESSION["user_id"]; ?>" />
-        	<div class="form-group">
-				<label for="comment">Opmerking(en) (max. 1000 tekens)</label>
-        		<textarea id="comment" name="comment" class="form-control" maxlength="1000" rows="4"></textarea>
-        	</div>
-        	<input type="submit" value="Verstuur" id="submitRequestChange" class="btn btn-default" />
-        	<p><em>Er gaat een kopie naar jezelf en de beheerder van deze site.</em></p>
-        </form>
+    <form id="requestChangeForm" method="post" action="detail.php">
+        <input type="hidden" id="speeltuin" name="speeltuin" value="<?php echo $id; ?>" />
+        <input type="hidden" id="userId" name="userId" value="<?php echo $_SESSION["user_id"]; ?>" />
+        <div class="form-group">
+			<label for="comment">Opmerking(en) (max. 1000 tekens)</label>
+        	<textarea id="comment" name="comment" class="form-control" maxlength="1000" rows="4"></textarea>
+        </div>
+        <input type="submit" value="Verstuur" id="submitRequestChange" class="btn btn-default" />
+        <p><em>Er gaat een kopie naar jezelf en de beheerder van deze site.</em></p>
+	</form>
 </div>
     
 <div id="reviewFormDiv">
@@ -119,50 +120,65 @@
 	
 <script type="text/javascript" src="<?php echo BASE_URL; ?>slick/slick.min.js"></script>
 <script type="text/javascript">
-		$(document).ready(function(){
-			$('.detail-photobar').slick({
-				centerMode: true,
-				centerPadding: '60px',
-				variableWidth: true,
-				dots: true,
-				arrows: true,
-				infinite: true,
-				slidesToShow: 1<?php //echo sizeof($photos); ?>,
-				slidesToScroll: 1<?php //echo sizeof($photos); ?>,
-				responsive: [
-				    {
-				    	breakpoint: 800,
-				    	settings: {
-					    	centerMode: false,
-					    	arrows: false,
-				      		slidesToShow: 1,
-				      		slidesToScroll: 1
-				    	}
-				    }
-				    // You can unslick at a given breakpoint now by adding:
-				    // settings: "unslick"
-				    // instead of a settings object
-			  ]
-	  		});
+	$(document).ready(function() {
+		$('.detail-photobar').slick({
+			centerMode: true,
+			centerPadding: '60px',
+			variableWidth: true,
+			dots: true,
+			arrows: true,
+			infinite: true,
+			slidesToShow: 1<?php //echo sizeof($photos); ?>,
+			slidesToScroll: 1<?php //echo sizeof($photos); ?>,
+			responsive: [
+			    {
+			    	breakpoint: 800,
+			    	settings: {
+				    	centerMode: false,
+				    	arrows: false,
+			      		slidesToShow: 1,
+			      		slidesToScroll: 1
+			    	}
+			    }
+			    // You can unslick at a given breakpoint now by adding:
+			    // settings: "unslick"
+			    // instead of a settings object
+		  ]
+  		});
 
-			$.fn.scrollView = function () {
-			    return this.each(function () {
-			        $('html, body').animate({
-			            scrollTop: $(this).offset().top
-			        }, 1000);
-			    });
-			}
+		$.fn.scrollView = function () {
+		    return this.each(function () {
+		        $('html, body').animate({
+		            scrollTop: $(this).offset().top
+		        }, 1000);
+		    });
+		}
 
-	  		$("#requestChange").click(function(){
-	  			$("#requestChangeForm").show();
-	  			$('#requestChangeFormDiv').scrollView();
-		  	});
+  		$("#requestChange").click(function(){
+  			$("#requestChangeForm").show();
+  			$('#requestChangeFormDiv').scrollView();
+	  	});
 
-	  		$("#review").click(function(){
-	  			$("#reviewForm").show();
-	  			$('#reviewFormDiv').scrollView();
-		  	});
-		});
+  		$("#review").click(function(){
+  			$("#reviewForm").show();
+  			$('#reviewFormDiv').scrollView();
+	  	});
+
+  		$.fn.stars = function() {
+  		    return $(this).each(function() {
+  		        // Get the value
+  		        var val = parseFloat($(this).html());
+  		        // Make sure that the value is in 0 - 5 range, multiply to get width
+  		        var size = Math.max(0, (Math.min(5, val))) * 16;
+  		        // Create stars holder
+  		        var $span = $('<span />').width(size);
+  		        // Replace the numerical value with stars
+  		        $(this).html($span);
+  		    });
+  		};
+
+  		$('span.stars').stars();
+	});
 </script>
 
 <?php include "footer.tpl.php"; ?>

@@ -1,15 +1,17 @@
-RewriteEngine On
-
-RewriteCond %{HTTP_HOST} !=localhost
-RewriteCond %{HTTPS} !=on [NC]
-RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
-
-RewriteCond %{HTTP_HOST} ^speeltuinzoeker.nl$ [NC]
-RewriteRule (.*) https://www.speeltuinzoeker.nl/$1 [R=301,L]
-
-RewriteRule ^speeltuinen/(.+)$ /detail.php?speeltuin=$1 [L]
-
-RewriteRule ^over$ /about.php [L]
-RewriteRule ^contact$ /contact.php [L]
-RewriteRule ^atoz$ /atoz.php [L]
-RewriteRule ^meedoen$ /join.php [L]
+<IfModule mod_rewrite.so>
+	RewriteEngine On
+	
+	RewriteCond %{HTTP_HOST} != localhost
+	RewriteCond %{HTTPS} != on [NC]
+	RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+	
+	RewriteCond %{HTTP_HOST} ^speeltuinzoeker.nl$ [NC]
+	RewriteRule (.*) https://www.speeltuinzoeker.nl/$1 [R=301,L]
+	
+	RewriteRule ^speeltuinen/(.+)$ /detail.php?speeltuin=$1 [L]
+	
+	RewriteRule ^over$ /about.php [L]
+	RewriteRule ^contact$ /contact.php [L]
+	RewriteRule ^atoz$ /atoz.php [L]
+	RewriteRule ^meedoen$ /join.php [L]
+</IfModule>
