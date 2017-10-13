@@ -36,6 +36,9 @@ $alleVoorzieningen = $speeltuin->getAllVoorzieningen();
 
 $rating = $speeltuin->getRating();
 
+$review = new Review($db);
+$reviews = $review->getAllReviewsForSpeeltuin($id);
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	if (isset($_SESSION["user_id"]) && $_SESSION["user_id"] == $_POST["userId"]) {
 		
@@ -45,7 +48,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		if (isset($_POST["rating"])) { // beoordeling
 			
 			if (!empty($comment) && $_POST["rating"] > 0) {
-				$review = new Review($db);
 				$review->insertOrUpdate($id, $_POST["rating"], $comment, $_POST["userId"]);
 				$reviewed = true;
 			} else {

@@ -31,6 +31,19 @@ class Review
 		return 0;
 	}
 	
+	public function getAllReviewsForSpeeltuin($speeltuinId) {
+		$reviews = [];
+		$res = $this->db->query(sprintf("SELECT review.*, user.naam FROM review 
+				JOIN user ON review.user_id = user.id
+				WHERE status = 1 AND speeltuin_id = %d", $speeltuinId));
+		if ($res !== false) {
+			while ($row = $res->fetch_assoc()) {
+				$reviews[] = $row;
+			}
+		}
+		return $reviews;
+	}
+	
 	// Instance functions:
 	
 	public function getStatus() {

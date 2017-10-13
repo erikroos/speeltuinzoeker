@@ -255,8 +255,12 @@ th {
 }
 
 .request {
-	font-size: 80%;
+	font-size: 90%;
 	font-style: italic;
+	background-color: rgba(138, 197, 63, 0.5);
+	border-radius: 4px;
+	padding: 5px;
+	width: auto;
 }
 #requestChangeFormDiv {
 	margin-bottom: 10px;
@@ -371,4 +375,32 @@ span.stars span {
 #payoff {
 	clear: left;
 	margin-bottom: 20px;
+}
+
+#reviews {
+	clear: left;
+	display: none;
+	border-bottom: solid 2px #88CE00;
+	margin-bottom: 20px;
+}
+#toggleReviewsDiv {
+	float: left;
+	position: relative;
+	top: -4px;
+	margin-left: 10px;
+	padding: 2px 6px;
+}
+#times_rated {
+	float: left;
+}
+.reviewRow {
+	clear: left;
+}
+.ratingLabel {
+	float: left;
+	margin-right: 10px;
+}
+
+#speeltuinProperties {
+	clear: left;
 }

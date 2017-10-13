@@ -28,21 +28,6 @@
 <div id="details">
 	<h3><?php echo $speeltuin->getName(); ?></h3>
 	<p>Aangemaakt door <?php echo $speeltuin->getAuthorName(); ?>, laatst bewerkt: <?php echo $speeltuin->getLastModified(); ?></p>
-	<?php if ($rating != null): ?>
-        <span class="stars"><?php echo $rating["avg_rating"]; ?></span>
-        <p>(<?php echo $rating["times_rated"]; ?> x beoordeeld)</p>
-        <p>Laatste beoordeling: TODO</p>
-	<?php endif; ?>
-	<ul>
-        <li><?php echo $speeltuin->getPublic(); ?></li>
-        <li><?php echo $speeltuin->getType(); ?></li>
-        <li><?php echo $speeltuin->getAgecatString(); ?></li>
-	</ul>
-	<p><?php echo $speeltuin->getDescription(); ?></p>
-	<?php $link = $speeltuin->getLink(); ?>
-	<?php if ($link != null): ?>
-        <p><a href="<?php echo $link; ?>"><?php echo $link; ?></a></p>
-	<?php endif; ?>
 	
 	<?php if (isset($_SESSION["user_id"])): ?>
 	    <?php if (!isset($reviewed)): ?>
@@ -53,6 +38,39 @@
 		<?php endif; ?>
 	<?php else: ?>
 		<p class="request">Wil je een beoordeling achterlaten of een wijziging aanvragen? <a href="<?php echo BASE_URL; ?>admin/login.php">Log dan eerst in</a>.</p>
+	<?php endif; ?>
+	<div class="betweenbar"></div>
+	
+	<?php if ($rating != null): ?>
+        <span class="ratingLabel"><strong>Beoordeling</strong></span><span class="stars"><?php echo $rating["avg_rating"]; ?></span>
+        <p id="times_rated">(<?php echo $rating["times_rated"]; ?> x)</p>
+        <?php if ($rating["times_rated"] > 0): ?>
+        	<?php setlocale(LC_TIME, "nl_NL"); ?>
+	        <button id="toggleReviewsDiv" class="btn btn-default"><i id="reviewsToggleIcon" class="fa fa-caret-square-o-down" aria-hidden="true"></i>&nbsp;Lees</button>
+	        <div id="reviews">
+	        	<?php foreach ($reviews as $reviewRow): ?>
+	        		<span class="stars"><?php echo $reviewRow["rating"]; ?></span>
+	        		<p class="reviewRow"><?php echo $reviewRow["naam"]; ?> op <?php echo strftime("%A %#d %B %Y om %H:%M", strtotime($reviewRow["rated_on"])); ?><br>
+	        		"<?php echo $reviewRow["comment"]; ?>"</p>
+	        	<?php endforeach; ?>
+	        </div>
+        <?php endif; ?>
+	<?php endif; ?>
+	
+	<p id="speeltuinProperties"><strong>Wat voor soort speeltuin is het?</strong></p>
+	<ul>
+        <li><?php echo $speeltuin->getPublic(); ?></li>
+        <li><?php echo $speeltuin->getType(); ?></li>
+        <li><?php echo $speeltuin->getAgecatString(); ?></li>
+	</ul>
+	
+	<?php $description = $speeltuin->getDescription(); ?>
+	<?php if (!empty($description)): ?>
+		<p><strong>Beschrijving</strong><br><?php echo $speeltuin->getDescription(); ?></p>
+	<?php endif; ?>
+	<?php $link = $speeltuin->getLink(); ?>
+	<?php if ($link != null): ?>
+        <p><strong>Link</strong><br><a href="<?php echo $link; ?>"><?php echo $link; ?></a></p>
 	<?php endif; ?>
 </div>
 
@@ -163,6 +181,12 @@
   			$("#reviewForm").show();
   			$('#reviewFormDiv').scrollView();
 	  	});
+
+  		$('#toggleReviewsDiv').click(function(event) {
+  	    	event.preventDefault();
+  	    	$('#reviews').toggle("slow");
+  	    	$('#reviewsToggleIcon').toggleClass('fa-caret-square-o-down fa-caret-square-o-up');
+  	    });
 
   		$.fn.stars = function() {
   		    return $(this).each(function() {
