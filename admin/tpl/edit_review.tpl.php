@@ -24,16 +24,14 @@ include_once "./inc/header.php";
 	</div>
 	
 	<div class="form-group">
-		<label for="rating">Beoordeling</label>
-		<input type="text" id="rating" name="rating" value="<?php echo $rating; ?>" class="form-control" />
+		<label for="rating">Beoordeling (kies 0-5 sterren)</label>
+        <input type="number" name="rating" value="<?php echo $rating; ?>" class="rating" />
 	</div>
-	
 
 	<div class="form-group">
 		<label for="comment">Toelichting (max. 1000 tekens)</label>
 		<textarea id="comment" name="comment" rows="3" maxlength="1000" class="form-control"><?php echo $comment; ?></textarea>
 	</div>
-	
 	<hr>
 	<div class="buttonbar">
 		<?php if ($isUser): ?>
@@ -56,8 +54,14 @@ include_once "./inc/header.php";
 			<?php endif; ?>
 		<?php endif; ?>
 	</div>
-
 </form>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="<?php echo BASE_URL; ?>js/jquery.min.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="<?php echo BASE_URL; ?>js/bootstrap.min.js"></script>
+<script src="<?php echo BASE_URL; ?>js/bootstrap-rating-input.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 $(document).on('ready', function() {

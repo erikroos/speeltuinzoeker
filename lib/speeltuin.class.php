@@ -87,22 +87,24 @@ class Speeltuin
     		AND avg_rating >= %f",
     		$neLat, $swLat, $swLon, $neLon, $typeClause, $ageClause, $accessClause, $minRating);
     	$res = $this->db->query($query);
-    	while ($row = $res->fetch_assoc()) {
-    		// Na-filtering op voorziening
-    		if ($voorziening != null) {
-    			foreach ($voorziening as $voorzieningId) {
-    				$res2 = $this->db->query(sprintf("SELECT * FROM speeltuin_voorziening WHERE speeltuin_id = %d AND voorziening_id = %d", $row["id"], $voorzieningId));
-    				if ($res2 === false || $res2->num_rows == 0) {
-    					continue 2; // while
-    				}
-    			}
-    		}
-    		
-    		if (strlen($row["omschrijving"]) > 100) {
-    			$row["omschrijving"] = substr($row["omschrijving"], 0, 100) . "...";
-    		}
-    		$allSpeeltuinen[] = $row;
-    	}
+    	if ($res !== false) {
+            while ($row = $res->fetch_assoc()) {
+                // Na-filtering op voorziening
+                if ($voorziening != null) {
+                    foreach ($voorziening as $voorzieningId) {
+                        $res2 = $this->db->query(sprintf("SELECT * FROM speeltuin_voorziening WHERE speeltuin_id = %d AND voorziening_id = %d", $row["id"], $voorzieningId));
+                        if ($res2 === false || $res2->num_rows == 0) {
+                            continue 2; // while
+                        }
+                    }
+                }
+
+                if (strlen($row["omschrijving"]) > 100) {
+                    $row["omschrijving"] = substr($row["omschrijving"], 0, 100) . "...";
+                }
+                $allSpeeltuinen[] = $row;
+            }
+        }
     	return $allSpeeltuinen;
     }
 

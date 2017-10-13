@@ -6,7 +6,7 @@
 /* Kaart op home */
 #map-div {
 	clear: both;
-	height: 600px;
+	height: 650px;
 }
 
 .btn-default {
@@ -323,7 +323,7 @@ th {
 }
 #map-filter-div {
 	display: none;
-	height: 600px;
+	height: 650px;
 	position: absolute;
 	z-index: 1000;
 	background-color: white;
@@ -366,4 +366,9 @@ span.stars span {
 }
 .morelink {
 	clear: left;
+}
+
+#payoff {
+	clear: left;
+	margin-bottom: 20px;
 }

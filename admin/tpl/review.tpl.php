@@ -62,7 +62,7 @@ include_once "./inc/header.php";
 		<?php foreach ($rows as $row): ?>
 			<tr>
 				<td><?php echo $row["speeltuinNaam"]; ?></td>
-				<td><?php echo $row["rating"]; ?></td>
+				<td><?php echo $row["rating"]; ?>/5</td>
 				<td><?php echo $row["comment"]; ?></td>
 				<td><?php echo $row["userNaam"]; ?></td>
 				<td class="<?php echo strtolower($row["status"]); ?>"><?php echo $row["status"]; ?></td>

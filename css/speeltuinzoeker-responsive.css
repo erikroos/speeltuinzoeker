@@ -50,6 +50,11 @@
     	height: auto;
     	border-right: none;
     }
+
+    h1 {
+        font-size: 110%;
+        font-weight: bold;
+    }
 }
 
 @media (min-width: 601px) {

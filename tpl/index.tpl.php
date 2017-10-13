@@ -1,105 +1,98 @@
 <?php $indexTitle = "Speeltuinzoeker.nl - Laat ze spelen!"; ?>
 <?php include "header.tpl.php"; ?>
 
-    <div id="latestbox">
-        <?php include "latestbox.tpl.php"; ?>
-    </div>
+<div id="latestbox">
+    <?php include "latestbox.tpl.php"; ?>
+</div>
 
-    <div id="searchbar">
-    	<form id="searchform">
-        	<input type="text" id="locatie_omschrijving" name="locatie_omschrijving" class="form-control" value="<?php echo $defaultLocationString; ?>" />
-        	<button id="place-marker" value="Zet marker op omschreven locatie" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i>&nbsp;Zoek</button>
-    		<input type="submit" style="display: none" />
-    	</form>
-    </div>
+<div id="payoff">
+    <h1>Makkelijk, snel en veilig speeltuinen vinden.<br>Waar je ook bent.</h1>
+</div>
 
-    <div id="map-container">
-    	<button id="toggleFilterDiv" class="btn btn-default">Filter&nbsp;<i id="filterToggleIcon" class="fa fa-toggle-right" aria-hidden="true"></i></button>
-    	<button id="toggleFilterDiv-resp" class="btn btn-default">Filter&nbsp;<i id="filterToggleIcon-resp" class="fa fa-toggle-down" aria-hidden="true"></i></button>
-    	<div id="map-filter-div">
-    		<form id="filter-form-type">
-    			<label>Type speeltuin</label><br>
-    			<?php foreach ($speeltuin->getAllTypes() as $typeOption): ?>
-    				<input type="checkbox" name="<?php echo $typeOption; ?>" value="1">&nbsp;<?php echo $typeOption; ?><br>
-    			<?php endforeach; ?>
-    		</form>
-    		<form id="filter-form-agecat">
-    			<label>Leeftijdscategorie(&euml;n)</label><br>
-    			<?php foreach ($speeltuin->getAllAgecats() as $agecatOptionColname => $agecatOptionName): ?>
-    				<input type="checkbox" name="<?php echo $agecatOptionColname; ?>" value="1">&nbsp;<?php echo $agecatOptionName; ?><br>
-    			<?php endforeach; ?>
-    		</form>
-    		<form id="filter-form-access">
-    			<label>Toegankelijkheid</label><br>
-    			<?php $paidAllowed = false; // TODO true indien er betalende klanten komen ?>
-				<?php foreach ($speeltuin->getAllAccessOptions($paidAllowed) as $accessId => $accessName): ?>
-					<input type="checkbox" name="<?php echo $accessId; ?>" value="1">&nbsp;<?php echo $accessName; ?><br>
-				<?php endforeach; ?>
-    		</form>
-    		<form id="filter-form-voorzieningen">
-    			<label>Voorzieningen</label><br>
-    			<?php foreach ($speeltuin->getAllVoorzieningen(1) as $voorzieningId => $voorzieningName): ?>
-    				<input type="checkbox" name="<?php echo $voorzieningId; ?>" value="1">&nbsp;<?php echo $voorzieningName; ?><br>
-    			<?php endforeach; ?>
-    			<a href="#" id="expand_items"><i class="fa fa-chevron-circle-down" aria-hidden="true"></i>&nbsp;Meer</a>
-				<div id="nonPopItems">
-	    			<?php foreach ($speeltuin->getAllVoorzieningen(0) as $voorzieningId => $voorzieningName): ?>
-	    				<input type="checkbox" name="<?php echo $voorzieningId; ?>" value="1">&nbsp;<?php echo $voorzieningName; ?><br>
-	    			<?php endforeach; ?>
-	    		</div>
-    		</form>
-    		<form id="filter-form-rating">
-    			<label>Minimale beoordeling</label><br>
-    			<select id="min_rating">
-    				<option value="0">0</option>
-    				<option value="0.5">0.5</option>
-    				<option value="1">1</option>
-    				<option value="1.5">1.5</option>
-    				<option value="2">2</option>
-    				<option value="2.5">2.5</option>
-    				<option value="3">3</option>
-    				<option value="3.5">3.5</option>
-    				<option value="4">4</option>
-    				<option value="4.5">4.5</option>
-    				<option value="5">5</option>
-    			</select>
-    		</form>
-    	</div>
-    	<div id="map-div"></div>
+<div id="searchbar">
+    <form id="searchform">
+        <input type="text" id="locatie_omschrijving" name="locatie_omschrijving" class="form-control" value="<?php echo $defaultLocationString; ?>" />
+        <button id="place-marker" value="Zet marker op omschreven locatie" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i>&nbsp;Zoek</button>
+        <input type="submit" style="display: none" />
+    </form>
+</div>
+
+<div id="map-container">
+    <button id="toggleFilterDiv" class="btn btn-default">Filter&nbsp;<i id="filterToggleIcon" class="fa fa-toggle-right" aria-hidden="true"></i></button>
+    <button id="toggleFilterDiv-resp" class="btn btn-default">Filter&nbsp;<i id="filterToggleIcon-resp" class="fa fa-toggle-down" aria-hidden="true"></i></button>
+    <div id="map-filter-div">
+        <form id="filter-form-type">
+            <label>Type speeltuin</label><br>
+            <?php foreach ($speeltuin->getAllTypes() as $typeOption): ?>
+                <input type="checkbox" name="<?php echo $typeOption; ?>" value="1">&nbsp;<?php echo $typeOption; ?><br>
+            <?php endforeach; ?>
+        </form>
+        <form id="filter-form-agecat">
+            <label>Leeftijdscategorie(&euml;n)</label><br>
+            <?php foreach ($speeltuin->getAllAgecats() as $agecatOptionColname => $agecatOptionName): ?>
+                <input type="checkbox" name="<?php echo $agecatOptionColname; ?>" value="1">&nbsp;<?php echo $agecatOptionName; ?><br>
+            <?php endforeach; ?>
+        </form>
+        <form id="filter-form-access">
+            <label>Toegankelijkheid</label><br>
+            <?php $paidAllowed = false; // TODO true indien er betalende klanten komen ?>
+            <?php foreach ($speeltuin->getAllAccessOptions($paidAllowed) as $accessId => $accessName): ?>
+                <input type="checkbox" name="<?php echo $accessId; ?>" value="1">&nbsp;<?php echo $accessName; ?><br>
+            <?php endforeach; ?>
+        </form>
+        <form id="filter-form-rating">
+            <label>Minimale beoordeling</label><br>
+            <input type="number" id="min_rating" name="min_rating" class="rating" />
+        </form>
+        <form id="filter-form-voorzieningen">
+            <label>Voorzieningen</label><br>
+            <?php foreach ($speeltuin->getAllVoorzieningen(1) as $voorzieningId => $voorzieningName): ?>
+                <input type="checkbox" name="<?php echo $voorzieningId; ?>" value="1">&nbsp;<?php echo $voorzieningName; ?><br>
+            <?php endforeach; ?>
+            <a href="#" id="expand_items"><i class="fa fa-chevron-circle-down" aria-hidden="true"></i>&nbsp;Meer</a>
+            <div id="nonPopItems">
+                <?php foreach ($speeltuin->getAllVoorzieningen(0) as $voorzieningId => $voorzieningName): ?>
+                    <input type="checkbox" name="<?php echo $voorzieningId; ?>" value="1">&nbsp;<?php echo $voorzieningName; ?><br>
+                <?php endforeach; ?>
+            </div>
+        </form>
     </div>
+    <div id="map-div"></div>
+</div>
     
-    <div id="latestbox-resp">
-        <?php include "latestbox.tpl.php"; ?>
-    </div>
+<div id="latestbox-resp">
+    <?php include "latestbox.tpl.php"; ?>
+</div>
     
-    <div id="footer">
-        <div class="footer-column">
-            <h4>Sitemap</h4>
-            <nav class="sitemap">
-                <a href="./index.php">Home</a>
-                <a href="./atoz.php">Alle speeltuinen</a>
-                <a href="./about.php">Info</a>
-                <a href="./join.php">Meedoen</a>
-                <a href="./contact.php">Contact</a>
-                <a href="./admin/index.php">Mijn Speeltuinzoeker</a>
-            </nav>
-        </div>
-        <div class="footer-column right">
-        	<h4>Colofon</h4>
-            <p><strong>Adverteren?</strong> Jouw (indoor) speeltuin op deze site? Neem <a href="<?php echo BASE_URL; ?>contact">contact</a> op!</p>
-            <p>Speeltuinzoeker.nl gebruikt <strong>cookies</strong> om de site goed te laten werken.</p>
-            <p>We doen ons uiterste best om deze site actueel, snel en veilig te houden. Kom je iets tegen wat niet klopt? Laat het ons weten!</p>
-            <p><strong>&copy; <?php echo date("Y"); ?></strong> RO Online Solutions<br>KvK 69736766, BTW NL102158228B01</p>
-        </div>
-        <div class="betweenbar"></div>
+<div id="footer">
+    <div class="footer-column">
+        <h4>Sitemap</h4>
+        <nav class="sitemap">
+            <a href="./index.php">Home</a>
+            <a href="./atoz.php">Alle speeltuinen</a>
+            <a href="./about.php">Info</a>
+            <a href="./join.php">Meedoen</a>
+            <a href="./contact.php">Contact</a>
+            <a href="./admin/index.php">Mijn Speeltuinzoeker</a>
+        </nav>
     </div>
+    <div class="footer-column right">
+        <h4>Colofon</h4>
+        <p><strong>Adverteren?</strong> Jouw (indoor) speeltuin op deze site? Neem <a href="<?php echo BASE_URL; ?>contact">contact</a> op!</p>
+        <p>Speeltuinzoeker.nl gebruikt <strong>cookies</strong> om de site goed te laten werken.</p>
+        <p>We doen ons uiterste best om deze site actueel, snel en veilig te houden. Kom je iets tegen wat niet klopt? Laat het ons weten!</p>
+        <p><strong>&copy; <?php echo date("Y"); ?></strong> RO Online Solutions<br>KvK 69736766, BTW NL102158228B01, <a href="http://www.ro-os.nl">www.ro-os.nl</a></p>
+    </div>
+    <div class="betweenbar"></div>
+</div>
 
 <?php include "footer.tpl.php"; ?>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="js/jquery.min.js"></script>
+<script src="<?php echo BASE_URL; ?>js/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="js/bootstrap.min.js"></script>
+<script src="<?php echo BASE_URL; ?>js/bootstrap.min.js"></script>
+<script src="<?php echo BASE_URL; ?>js/bootstrap-rating-input.js" type="text/javascript"></script>
 
 <!-- Google Analytics -->
 <script>
