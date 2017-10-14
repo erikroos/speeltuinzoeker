@@ -25,6 +25,6 @@ $latestSpeeltuin = $speeltuin->getLatestEntry();
 $user = new User($db);
 $totalNrOfUsers = $user->getTotalNr(1);
 
-$defaultLocationString = "Je locatie, bijvoorbeeld: Fazantweg, Paterswolde";
+$defaultLocationString = "Bijv.: Fazantweg, Paterswolde";
 
 include "tpl/index.tpl.php";

@@ -42,7 +42,7 @@
         </form>
         <form id="filter-form-rating">
             <label>Minimale beoordeling</label><br>
-            <input type="number" id="min_rating" name="min_rating" class="rating" />
+            <input type="number" id="min_rating" name="min_rating" data-clearable class="rating" />
         </form>
         <form id="filter-form-voorzieningen">
             <label>Voorzieningen</label><br>

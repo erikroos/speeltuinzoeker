@@ -25,7 +25,7 @@ include_once "./inc/header.php";
 	
 	<div class="form-group">
 		<label for="rating">Beoordeling (kies 0-5 sterren)</label>
-        <input type="number" name="rating" value="<?php echo $rating; ?>" class="rating" />
+        <input type="number" name="rating" data-clearable value="<?php echo $rating; ?>" class="rating" />
 	</div>
 
 	<div class="form-group">

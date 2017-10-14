@@ -67,10 +67,10 @@ input[type=checkbox].form-control {
 }
 .photobar li {
 	clear: left;
-	height: 110px;
+	height: 310px;
 }
 .photobar img {
-	height: 100px;
+	height: 300px;
 	float: left;
 	margin-right: 20px;
 	margin-bottom: 10px;

@@ -119,7 +119,7 @@
         <input type="hidden" id="userId" name="userId" value="<?php echo $_SESSION["user_id"]; ?>" />
         <div class="form-group">
 			<label for="rating">Beoordeling (kies 0-5 sterren)</label>
-			<input type="number" name="rating" class="rating" />
+			<input type="number" name="rating" data-clearable  class="rating" />
         </div>
         <div class="form-group">
 			<label for="comment">Toelichting (max. 1000 tekens)</label>
