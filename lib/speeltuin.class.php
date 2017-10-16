@@ -98,10 +98,13 @@ class Speeltuin
                         }
                     }
                 }
-
+				// Paar kolommen verbouwen
                 if (strlen($row["omschrijving"]) > 100) {
                     $row["omschrijving"] = substr($row["omschrijving"], 0, 100) . "...";
                 }
+                $accessOptions = $this->getAllAccessOptions(true);
+                $row["publicString"] = $accessOptions[$row["public"]];
+                
                 $allSpeeltuinen[] = $row;
             }
         }
@@ -166,9 +169,9 @@ class Speeltuin
     
     public function getAllAccessOptions($paidAllowed = false) {
     	if ($paidAllowed) {
-    		return [0 => "Betaald", 1 => "Gratis en altijd toegankelijk", 2 => "Gratis maar beperkt toegankelijk"];
+    		return [0 => "Betaald", 1 => "Gratis en altijd toegankelijk", 2 => "Beperkt toegankelijk"];
     	} else {
-    		return [1 => "Gratis en altijd toegankelijk", 2 => "Gratis maar beperkt toegankelijk"];
+    		return [1 => "Gratis en altijd toegankelijk", 2 => "Beperkt toegankelijk"];
     	}
     }
     
@@ -307,15 +310,11 @@ class Speeltuin
 		$res = $this->db->query(sprintf("SELECT public FROM speeltuin WHERE id = %d", $this->id));
 		if ($res !== false) {
 			if ($row = $res->fetch_assoc()) {
-				switch ($row["public"]) {
-					case 0:
-						return "Betaald";
-					case 1:
-						return "Gratis en altijd toegankelijk";
-					case 2:
-						return "Gratis maar beperkt toegankelijk";
-					default:
-						return "Onbekend";
+				$accessOptions = $this->getAllAccessOptions(true);
+				if ($row["public"] >= 0 && $row["public"] <= 2) {
+					return $accessOptions[$row["public"]];
+				} else {
+					return "Onbekend";
 				}
 			}
 		}

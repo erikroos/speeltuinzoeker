@@ -49,6 +49,17 @@ include_once "./inc/header.php";
 		</select>
 	</div>
 	
+	<div id="public2div">
+		<div class="form-group">
+			<label for="omschrijving">Openingstijden (optioneel, max. 1000 tekens)</label>
+			<textarea id="openingstijden" name="openingstijden" rows="3" maxlength="1000" class="form-control"><?php echo $openingstijden; ?></textarea>
+		</div>
+		<div class="form-group">
+			<label for="omschrijving">Kleine (vrijwillige) vergoeding (optioneel, max. 1000 tekens, bijv. "De speeltuinvereniging stelt het op prijs als je 50 cent per kind doneert.")</label>
+			<textarea id="vergoeding" name="vergoeding" rows="3" maxlength="1000" class="form-control"><?php echo $vergoeding; ?></textarea>
+		</div>
+	</div>
+	
 	<div class="form-group">
 		<label>Leeftijdscategorie(&euml;n)</label>
 		<?php foreach ($speeltuin->getAllAgecats() as $agecatOptionColname => $agecatOptionName): ?>
@@ -343,6 +354,18 @@ include_once "./inc/header.php";
 				}
 			);
 		});
+
+		$("#public").change(function(event) {
+			if ($("#public").val() == 0 || $("#public").val() == 1) {
+				$("#public2div").hide();
+			} else if ($("#public").val() == 2) {
+				$("#public2div").show();
+			}
+		});
+
+		<?php if ($public == 2): ?>
+			$("#public2div").show();
+		<?php endif; ?>
 	});
     
 </script>

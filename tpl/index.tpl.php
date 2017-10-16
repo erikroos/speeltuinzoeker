@@ -81,7 +81,7 @@
         <p><strong>Adverteren?</strong> Jouw (indoor) speeltuin op deze site? Neem <a href="<?php echo BASE_URL; ?>contact">contact</a> op!</p>
         <p>Speeltuinzoeker.nl gebruikt <strong>cookies</strong> om de site goed te laten werken.</p>
         <p>We doen ons uiterste best om deze site actueel, snel en veilig te houden. Kom je iets tegen wat niet klopt? Laat het ons weten!</p>
-        <p><strong>&copy; <?php echo date("Y"); ?></strong> RO Online Solutions<br>KvK 69736766, BTW NL102158228B01, <a href="http://www.ro-os.nl">www.ro-os.nl</a></p>
+        <p><strong>&copy; <?php echo date("Y"); ?></strong> RO Online Solutions <a href="http://www.ro-os.nl">www.ro-os.nl</a><br>KvK 69736766, BTW NL102158228B01</p>
     </div>
     <div class="betweenbar"></div>
 </div>
@@ -207,7 +207,7 @@
 		            animation: google.maps.Animation.DROP,
 		            html:	"<h4>" + speeltuin.naam + "</h4>" +
 		            		"<p>" + speeltuin.speeltuintype + "</p>" +
-		            		"<p>" + (speeltuin.public == 0 ? "Betaald" : (speeltuin.public == 1 ? "Gratis en altijd toegankelijk" : "Gratis maar beperkt toegankelijk")) + "</p>" +
+		            		"<p>" + speeltuin.publicString + "</p>" +
 							"<span class=\"stars\"><span style=\"width: " + (speeltuin.avg_rating * 16) + "px\"></span></span>" +
 							"<p class=\"morelink\"><br><a href='speeltuinen/" + speeltuin.seo_url + "'>Meer</a></p>"
 			    });

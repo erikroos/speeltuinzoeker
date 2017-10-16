@@ -404,3 +404,7 @@ span.stars span {
 #speeltuinProperties {
 	clear: left;
 }
+
+#public2div {
+	display: none;	
+}

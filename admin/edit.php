@@ -75,6 +75,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		
 		$name = sanitizeInput(get_request_value("naam", ""));
 		$link = sanitizeInput(get_request_value("link", "")); // TODO check validiteit
+		$openingstijden = sanitizeInput(get_request_value("openingstijden", ""));
+		$vergoeding = sanitizeInput(get_request_value("vergoeding", ""));
 		$omschrijving = sanitizeInput(get_request_value("omschrijving", ""));
 		$locatieOmschrijving = sanitizeInput(get_request_value("locatie_omschrijving", ""));
 		$lat = get_request_value("lat", 0.0);
@@ -85,6 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$agecat2 = (isset($_POST["agecat_2"]) ? true : false);
 		$agecat3 = (isset($_POST["agecat_3"]) ? true : false);
 		
+		// TODO openingstijden + vergoeding
 		$speeltuin->insertOrUpdate($name, $link, $omschrijving, $locatieOmschrijving, $lat, $lon, $public, $type, $agecat1, $agecat2, $agecat3);
 		
 		if ($id == 0) {
@@ -117,6 +120,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	
 	$name = "";
 	$link = "";
+	$openingstijden = "";
+	$vergoeding = "";
 	$omschrijving = "";
 	$locatieOmschrijving = "";
 	$lat = 0.0;
@@ -134,6 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$photos = [];
 	
 	if ($id > 0) { // bestaand
+		// TODO openingstijden + vergoeding
 		list($name, $link, $omschrijving, $locatieOmschrijving, $lat, $lon, $status_id, $public, $type, $agecat1, $agecat2, $agecat3) = $speeltuin->getFields();
 		
 		$selectedVoorzieningen = $speeltuin->getVoorzieningen();
