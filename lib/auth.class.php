@@ -7,17 +7,17 @@ class Auth {
 	}
 	
 	public function login($user_unesc, $pass_unesc) {
-		$login = $this->db->realEscapeString($user_unesc);
+		$login = strtolower($this->db->realEscapeString($user_unesc));
 		$password = $this->hashPassword($pass_unesc);
 		
-		$res = $this->db->query(sprintf("SELECT * FROM user WHERE active = 1 AND email = \"%s\" AND password=\"%s\"", $login, $password));
+		$res = $this->db->query(sprintf("SELECT * FROM `user` WHERE active = 1 AND LOWER(email) = \"%s\" AND `password`=\"%s\"", $login, $password));
 		if ($row = $res->fetch_assoc()) {
 			$_SESSION["user_id"] = $row["id"];
 			$_SESSION["user_name"] = $row["naam"];
 			$_SESSION["admin"] = $row["admin"];
 			$_SESSION["password_generated"] = $row["password_generated"];
 			
-			$this->db->query(sprintf("UPDATE user SET last_login = NOW(), nr_of_logins = nr_of_logins + 1 WHERE id = %d", $row["id"]));
+			$this->db->query(sprintf("UPDATE `user` SET last_login = NOW(), nr_of_logins = nr_of_logins + 1 WHERE id = %d", $row["id"]));
 			
 			return true;
 		}
@@ -26,7 +26,7 @@ class Auth {
 	}
 	
 	public function userExists($email) {
-		$res = $this->db->query(sprintf("SELECT * FROM user WHERE email = \"%s\"", $email));
+		$res = $this->db->query(sprintf("SELECT * FROM `user` WHERE email = \"%s\"", $email));
 		if ($row = $res->fetch_assoc()) {
 			return true;
 		}

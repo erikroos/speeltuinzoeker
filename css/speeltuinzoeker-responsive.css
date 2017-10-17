@@ -55,6 +55,12 @@
         font-size: 110%;
         font-weight: bold;
     }
+
+    .open {
+        border-bottom: solid 2px #88CE00;
+        padding-bottom: 0px;
+        margin-bottom: 10px;
+    }
 }
 
 @media (min-width: 601px) {

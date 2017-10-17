@@ -27,7 +27,7 @@
 <body>
 	<div class="container">
 	
-		<nav>
+		<nav id="mainMenu">
 		  <div class="navWide">
 		  	<div class="wideDiv">
 			  	<a href="index.php"><i class="fa fa-home" aria-hidden="true"></i>&nbsp;Home</a>
@@ -51,10 +51,12 @@
 		  </div>
 		</nav>
 		<script type="text/javascript">
-			navLinks = document.querySelector('.navNarrow');
-			narrowLinks = document.querySelector('.narrowLinks');
-			navLinks.addEventListener('click', toggle);
-			function toggle() {
-			    narrowLinks.classList.toggle('hidden');
-			};
+            navLinks = document.querySelector('.navNarrow');
+            narrowLinks = document.querySelector('.narrowLinks');
+            mainMenu = document.querySelector('#mainMenu');
+            navLinks.addEventListener('click', toggle);
+            function toggle() {
+                narrowLinks.classList.toggle('hidden');
+                mainMenu.classList.toggle('open');
+            };
 		</script>

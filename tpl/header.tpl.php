@@ -61,7 +61,7 @@ if (!isset($indexDescription)) {
 
 <div class="container">
 
-	<nav>
+	<nav id="mainMenu">
 	  <div class="navWide">
 	  	<div class="wideDiv">
 		  	<a href="<?php echo BASE_URL; ?>"><i class="fa fa-globe" aria-hidden="true"></i>&nbsp;Home</a>
@@ -87,9 +87,11 @@ if (!isset($indexDescription)) {
 	<script type="text/javascript">
 		navLinks = document.querySelector('.navNarrow');
 		narrowLinks = document.querySelector('.narrowLinks');
+        mainMenu = document.querySelector('#mainMenu');
 		navLinks.addEventListener('click', toggle);
 		function toggle() {
 		    narrowLinks.classList.toggle('hidden');
+            mainMenu.classList.toggle('open');
 		};
 	</script>
 
