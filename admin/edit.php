@@ -86,9 +86,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$agecat1 = (isset($_POST["agecat_1"]) ? true : false);
 		$agecat2 = (isset($_POST["agecat_2"]) ? true : false);
 		$agecat3 = (isset($_POST["agecat_3"]) ? true : false);
-		
-		// TODO openingstijden + vergoeding
-		$speeltuin->insertOrUpdate($name, $link, $omschrijving, $locatieOmschrijving, $lat, $lon, $public, $type, $agecat1, $agecat2, $agecat3);
+
+		$speeltuin->insertOrUpdate($name, $link, $omschrijving, $locatieOmschrijving, $lat, $lon, $public, $type,
+            $agecat1, $agecat2, $agecat3, $openingstijden, $vergoeding);
 		
 		if ($id == 0) {
 			$id = $speeltuin->getId();
@@ -139,8 +139,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$photos = [];
 	
 	if ($id > 0) { // bestaand
-		// TODO openingstijden + vergoeding
-		list($name, $link, $omschrijving, $locatieOmschrijving, $lat, $lon, $status_id, $public, $type, $agecat1, $agecat2, $agecat3) = $speeltuin->getFields();
+		list($name, $link, $omschrijving, $locatieOmschrijving, $lat, $lon, $status_id, $public, $type,
+            $agecat1, $agecat2, $agecat3, $openingstijden, $vergoeding) = $speeltuin->getFields();
 		
 		$selectedVoorzieningen = $speeltuin->getVoorzieningen();
 		$selectedVoorzieningIds = array_keys($selectedVoorzieningen);

@@ -63,11 +63,23 @@
         <li><?php echo $speeltuin->getType(); ?></li>
         <li><?php echo $speeltuin->getAgecatString(); ?></li>
 	</ul>
+
+    <?php if ($speeltuin->getPublic() == "Beperkt toegankelijk"): ?>
+        <?php $openingstijden = $speeltuin->getOpeningstijden(); ?>
+        <?php if (!empty($openingstijden)): ?>
+            <p><strong>Openingstijden</strong><br><?php echo $openingstijden; ?></p>
+        <?php endif; ?>
+        <?php $vergoeding = $speeltuin->getVergoeding(); ?>
+        <?php if (!empty($vergoeding)): ?>
+            <p><strong>Kleine (vrijwillige) vergoeding</strong><br><?php echo $vergoeding; ?></p>
+        <?php endif; ?>
+    <?php endif; ?>
 	
 	<?php $description = $speeltuin->getDescription(); ?>
 	<?php if (!empty($description)): ?>
-		<p><strong>Beschrijving</strong><br><?php echo $speeltuin->getDescription(); ?></p>
+		<p><strong>Beschrijving</strong><br><?php echo $description; ?></p>
 	<?php endif; ?>
+
 	<?php $link = $speeltuin->getLink(); ?>
 	<?php if ($link != null): ?>
         <p><strong>Link</strong><br><a href="<?php echo $link; ?>"><?php echo $link; ?></a></p>

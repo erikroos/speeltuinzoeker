@@ -329,20 +329,23 @@ class Speeltuin
 		$this->db->query(sprintf("UPDATE speeltuin SET status_id = 2 WHERE id = %d", $this->id));
 	}
 
-	public function insertOrUpdate($name, $link, $omschrijving, $locatieOmschrijving, $lat, $lon, $public, $type, $agecat1, $agecat2, $agecat3) {
+	public function insertOrUpdate($name, $link, $omschrijving, $locatieOmschrijving, $lat, $lon, $public, $type,
+                                   $agecat1, $agecat2, $agecat3, $openingstijden, $vergoeding) {
 		if ($this->id == 0) {
 			$this->db->query(sprintf("INSERT INTO speeltuin 
-					(naam, link, omschrijving, locatie_omschrijving, lat, lon, status_id, author_id, public, speeltuintype, agecat_1, agecat_2, agecat_3, seo_url, modified_on)
-					VALUES (\"%s\", \"%s\", \"%s\", \"%s\", %f, %f, 0, %d, %d, \"%s\", %d, %d, %d, \"%s\", NOW())", 
+					(naam, link, omschrijving, locatie_omschrijving, lat, lon, status_id, author_id, `public`, 
+					speeltuintype, agecat_1, agecat_2, agecat_3, seo_url, modified_on, openingstijden, vergoeding)
+					VALUES (\"%s\", \"%s\", \"%s\", \"%s\", %f, %f, 0, %d, %d, \"%s\", %d, %d, %d, \"%s\", NOW(), \"%s\", \"%s\")",
 					$name, $link, $omschrijving, $locatieOmschrijving, $lat, $lon, $_SESSION["user_id"], $public, 
-					$type, $agecat1 ? 1 : 0, $agecat2 ? 1 : 0, $agecat3 ? 1 : 0, $this->toSeoUrl($name)));
+					$type, $agecat1 ? 1 : 0, $agecat2 ? 1 : 0, $agecat3 ? 1 : 0, $this->toSeoUrl($name), $openingstijden, $vergoeding));
 			$this->id = $this->db->getLatestId();
 		} else {
 			$this->db->query(sprintf("UPDATE speeltuin
 				SET naam = \"%s\", link = \"%s\", omschrijving = \"%s\", locatie_omschrijving = \"%s\", lat = %f, lon = %f, status_id = 0, 
-					public = %d, speeltuintype = \"%s\", agecat_1 = %d, agecat_2 = %d, agecat_3 = %d, seo_url = \"%s\", modified_on = NOW()
+					`public` = %d, speeltuintype = \"%s\", agecat_1 = %d, agecat_2 = %d, agecat_3 = %d, seo_url = \"%s\", modified_on = NOW(),
+					openingstijden = \"%s\", vergoeding = \"%s\"
 				WHERE id = %d", $name, $link, $omschrijving, $locatieOmschrijving, $lat, $lon, $public, $type, 
-					$agecat1 ? 1 : 0, $agecat2 ? 1 : 0, $agecat3 ? 1 : 0, $this->toSeoUrl($name), $this->id));
+					$agecat1 ? 1 : 0, $agecat2 ? 1 : 0, $agecat3 ? 1 : 0, $this->toSeoUrl($name), $openingstijden, $vergoeding, $this->id));
 		}
 		return $this->id;
 	}
@@ -387,7 +390,9 @@ class Speeltuin
 						$row["speeltuintype"],
 						$row["agecat_1"],
 						$row["agecat_2"],
-						$row["agecat_3"]
+						$row["agecat_3"],
+                        $row["openingstijden"],
+                        $row["vergoeding"]
 				);
 			}
 		}
@@ -402,7 +407,9 @@ class Speeltuin
 				"Toestelspeeltuin",
 				false,
 				true,
-				true
+				true,
+                "",
+                ""
 		);
 	}
 
@@ -466,4 +473,20 @@ class Speeltuin
         }
 		return null;
 	}
+
+    public function getOpeningstijden() {
+        $res = $this->db->query(sprintf("SELECT openingstijden FROM speeltuin WHERE id = %d", $this->id));
+        if ($row = $res->fetch_assoc()) {
+            return $row["openingstijden"];
+        }
+        return "";
+    }
+
+    public function getVergoeding() {
+        $res = $this->db->query(sprintf("SELECT vergoeding FROM speeltuin WHERE id = %d", $this->id));
+        if ($row = $res->fetch_assoc()) {
+            return $row["vergoeding"];
+        }
+        return "";
+    }
 }
