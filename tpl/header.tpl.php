@@ -18,8 +18,13 @@ if (!isset($indexDescription)) {
 	
 	<meta property="og:title" content="<?php echo $indexTitle; ?>">
 	<meta property="og:description" content="<?php echo $indexDescription; ?>">
+    <?php if (isset($indexImage)): ?>
+    <meta property="og:image" content="<?php echo $indexImage; ?>">
+    <meta property="og:image:alt" content="<?php echo $indexImageAlt; ?>">
+    <?php else: ?>
 	<meta property="og:image" content="<?php echo BASE_URL; ?>img/logo_groot.png">
     <meta property="og:image:alt" content="Logo van Speeltuinzoeker">
+    <?php endif; ?>
     <meta property="og:type" content="website">
     <meta property="og:url" content="<?php echo substr(BASE_URL, 0, -1); ?><?php echo parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH); ?>">
     <meta property="fb:app_id" content="1959895767582132">

@@ -149,11 +149,11 @@ include_once "./inc/header.php";
 
 	<h2>Foto's</h2>
 	<?php if (isset($photos) && sizeof($photos) > 0): ?>
-		<div class="photobar">
-			<?php foreach ($photos as $photo): ?>
-				<img src="<?php echo $photo; ?>" alt="Foto van deze speeltuin" title="Foto van deze speeltuin" />
-			<?php endforeach; ?>
-		</div>
+        <div class="detail-photobar">
+            <?php foreach ($photos as $photo): ?>
+                <div><img src="<?php echo $photo; ?>" alt="Foto van deze speeltuin" title="Foto van deze speeltuin" /></div>
+            <?php endforeach; ?>
+        </div>
 		<p id="photo-info">Je kunt foto's toevoegen en verwijderen vanuit het overzicht van je speeltuinen (klik op de link "Foto's" in de meest rechtse kolom).</p>
 	<?php else: ?>
 		<p id="photo-info">Er zijn nog geen foto's.
@@ -187,8 +187,13 @@ include_once "./inc/header.php";
 
 </form>
 
-<script>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="<?php echo BASE_URL; ?>js/jquery.min.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="<?php echo BASE_URL; ?>slick/slick.min.js"></script>
 
+<script type="text/javascript">
 	var map;
 	var marker;
 	var existingMarkers = [];
@@ -315,6 +320,31 @@ include_once "./inc/header.php";
     }
 
 	$(document).on('ready', function() {
+
+        $('.detail-photobar').slick({
+            centerMode: true,
+            centerPadding: '60px',
+            variableWidth: true,
+            dots: true,
+            arrows: true,
+            infinite: true,
+            slidesToShow: 1<?php //echo sizeof($photos); ?>,
+            slidesToScroll: 1<?php //echo sizeof($photos); ?>,
+            responsive: [
+                {
+                    breakpoint: 800,
+                    settings: {
+                        centerMode: false,
+                        arrows: false,
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                }
+                // You can unslick at a given breakpoint now by adding:
+                // settings: "unslick"
+                // instead of a settings object
+            ]
+        });
 
 	    $("#cancel").click(function(event) {
 	    	event.preventDefault();

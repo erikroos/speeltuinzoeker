@@ -34,13 +34,30 @@ if (isset($_GET["user"])) {
 	exit();
 }
 
-if ($isAdmin && isset($_GET["del"])) {
-	if (is_numeric($_GET["del"]) && $_GET["del"] > 0) {
-		$speeltuin = new Speeltuin($db, $_GET["del"]);
-		$speeltuin->delete();
-	}
-	header("Location: view.php?status=" . $status . "&start=" . $start);
-	exit();
+if ($isAdmin) {
+	if (isset($_GET["del"])) {
+        if (is_numeric($_GET["del"]) && $_GET["del"] > 0) {
+            $speeltuin = new Speeltuin($db, $_GET["del"]);
+            $speeltuin->delete();
+        }
+        header("Location: view.php?status=" . $status . "&start=" . $start);
+        exit();
+    } else if (isset($_GET["deact"])) {
+        if (is_numeric($_GET["deact"]) && $_GET["deact"] > 0) {
+            $speeltuin = new Speeltuin($db, $_GET["deact"]);
+            $speeltuin->deactivate();
+            // TODO mail aan auteur?
+        }
+        // redirect to last page of inactives
+        $speeltuin = new Speeltuin($db);
+        $totalSize = $speeltuin->getTotalNr(2);
+        $newStart = $totalSize - ($totalSize % 10);
+        if ($newStart >= 10 && $totalSize % 10 == 0) { // correct for start at 0 instead of 1
+            $newStart -= 10;
+        }
+        header("Location: view.php?status=2&start=" . $newStart);
+        exit();
+    }
 }
 
 $totalSize = 0;

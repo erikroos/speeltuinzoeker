@@ -60,11 +60,14 @@ include_once "./inc/header.php";
 				<th>Auteur</th>
 				<th>Status</th>
 				<th></th>
+                <?php if ($isAdmin && $status == 1): ?>
+                    <th></th>
+                <?php endif; ?>
 				<?php if ($isAdmin && $status == 2): ?>
-				<th></th>
+				    <th></th>
 				<?php endif; ?>
 				<?php if ($isUser): ?>
-				<th></th>
+				    <th></th>
 				<?php endif; ?>
 			</tr>
 		</thead>
@@ -92,11 +95,14 @@ include_once "./inc/header.php";
 					<?php endif; ?>
 					</a>
 				</td>
+                <?php if ($isAdmin && $status == 1): ?>
+                    <td><a href="view.php?deact=<?php echo $row["id"]; ?>&status=1&start=<?php echo $start; ?>" onclick="return confirm('Weet je het zeker?')">Deactiveer</a></td>
+                <?php endif; ?>
 				<?php if ($isAdmin && $status == 2): ?>
-				<td><a href="view.php?del=<?php echo $row["id"]; ?>&status=2&start=<?php echo $start; ?>" onclick="return confirm('Weet je het zeker?')">Verwijder</a></td>
+				    <td><a href="view.php?del=<?php echo $row["id"]; ?>&status=2&start=<?php echo $start; ?>" onclick="return confirm('Weet je het zeker?')">Verwijder</a></td>
 				<?php endif; ?>
 				<?php if ($isUser): ?>
-				<td><a href="photo.php?id=<?php echo $row["id"]; ?>&start=<?php echo $start; ?>">Foto's</a></td>
+				    <td><a href="photo.php?id=<?php echo $row["id"]; ?>&start=<?php echo $start; ?>">Foto's</a></td>
 				<?php endif; ?>
 			</tr>
 		<?php endforeach; ?>

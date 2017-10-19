@@ -1,6 +1,10 @@
 <?php $indexTitle = $speeltuin->getName() . " - Speeltuinzoeker.nl"; ?>
 <?php $indexDescription = $speeltuin->getDescription(); ?>
 <?php $indexDescription = empty($indexDescription) ? $indexTitle : $indexDescription; ?>
+<?php if (sizeof($photos) > 0): ?>
+    <?php $indexImage = $photos[0]; ?>
+    <?php $indexImageAlt = "Foto van " . $speeltuin->getName(); ?>
+<?php endif; ?>
 <?php include "header.tpl.php"; ?>
 
 <div class="morelink">
@@ -103,13 +107,13 @@
 </div>
     
 <?php if (sizeof($photos) > 0): ?>
-    	<div class="betweenbar"></div>
-    	<h4>Kijk eens rond</h4>
-	    <div class="detail-photobar">
-	        <?php foreach ($photos as $photo): ?>
-            	<div><img src="<?php echo $photo; ?>" alt="Foto van deze speeltuin" /></div>
-        	<?php endforeach; ?>
-	    </div>
+    <div class="betweenbar"></div>
+    <h4>Kijk eens rond</h4>
+    <div class="detail-photobar">
+        <?php foreach ($photos as $photo): ?>
+            <div><img src="<?php echo $photo; ?>" alt="Foto van deze speeltuin" title="Foto van deze speeltuin" /></div>
+        <?php endforeach; ?>
+    </div>
 <?php endif; ?>
     
 <div id="requestChangeFormDiv">
@@ -147,8 +151,8 @@
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="<?php echo BASE_URL; ?>js/bootstrap.min.js"></script>
 <script src="<?php echo BASE_URL; ?>js/bootstrap-rating-input.js" type="text/javascript"></script>
-	
-<script type="text/javascript" src="<?php echo BASE_URL; ?>slick/slick.min.js"></script>
+<script src="<?php echo BASE_URL; ?>slick/slick.min.js"></script>
+
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('.detail-photobar').slick({
