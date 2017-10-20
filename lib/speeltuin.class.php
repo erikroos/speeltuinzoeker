@@ -37,11 +37,21 @@ class Speeltuin
     
     public function getAllSpeeltuinenAtoZ() {
     	$allSpeeltuinen = [];
-    	$res = $this->db->query("SELECT LEFT(LOWER(naam), 1) AS first_letter, speeltuin.* FROM speeltuin WHERE status_id = 1 ORDER BY naam");
+    	$res = $this->db->query("SELECT LEFT(LOWER(REPLACE(naam, \"'\", \"\")), 1) AS first_letter, speeltuin.* FROM speeltuin WHERE status_id = 1 ORDER BY first_letter");
     	while ($row = $res->fetch_assoc()) {
     		$allSpeeltuinen[$row["first_letter"]][] = $row;
     	}
     	return $allSpeeltuinen;
+    }
+
+    public function search($q) {
+        $allSpeeltuinen = [];
+        $q = strtolower($q);
+        $res = $this->db->query("SELECT * FROM speeltuin WHERE status_id = 1 AND (LOWER(naam) LIKE \"%" . $q . "%\" OR LOWER(omschrijving) LIKE \"%" . $q . "%\" OR LOWER(locatie_omschrijving) LIKE \"%" . $q . "%\") ORDER BY naam");
+        while ($row = $res->fetch_assoc()) {
+            $allSpeeltuinen[] = $row;
+        }
+        return $allSpeeltuinen;
     }
     
     public function getAllSpeeltuinenInBoundingBox($neLat, $neLon, $swLat, $swLon, $type = null, $agecat = null, $access = null, $voorziening = null, $minRating = 0) {

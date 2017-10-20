@@ -206,10 +206,9 @@
 		            icon: "<?php echo BASE_URL; ?>img/marker_" + (speeltuin.public == 0 ? "blue" : (speeltuin.public == 1 ? "red" : "yellow")) + ".png",
 		            animation: google.maps.Animation.DROP,
 		            html:	"<h4>" + speeltuin.naam + "</h4>" +
-		            		"<p>" + speeltuin.speeltuintype + "</p>" +
-		            		"<p>" + speeltuin.publicString + "</p>" +
-							"<span class=\"stars\"><span style=\"width: " + (speeltuin.avg_rating * 16) + "px\"></span></span>" +
-							"<p class=\"morelink\"><br><a href='speeltuinen/" + speeltuin.seo_url + "'>Meer</a></p>"
+		            		"<p>" + speeltuin.speeltuintype + "; " + speeltuin.publicString + "</p>" +
+                            (speeltuin.avg_rating > 0 ? "<span class=\"stars\"><span style=\"width: " + (speeltuin.avg_rating * 16) + "px\"></span></span>" : "") +
+							"<p class=\"morelink" + (speeltuin.avg_rating == 0 ? " nostars" : "") + "\"><br><a href='speeltuinen/" + speeltuin.seo_url + "'>Meer</a></p>"
 			    });
 				existingMarker.setPosition({
 		            lat: parseFloat(speeltuin.lat),

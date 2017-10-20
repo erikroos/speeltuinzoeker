@@ -393,8 +393,12 @@ span.stars span {
 #times_rated {
 	float: left;
 }
-.reviewRow {
+.reviewRowTop {
+	margin-bottom: 0px;
+}
+.reviewRowBottom {
 	clear: left;
+	margin-top: 20px;
 }
 .ratingLabel {
 	float: left;
@@ -407,4 +411,8 @@ span.stars span {
 
 #public2div {
 	display: none;	
+}
+
+.nostars {
+	margin-top: -15px;
 }

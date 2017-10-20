@@ -53,9 +53,9 @@
 	        <button id="toggleReviewsDiv" class="btn btn-default"><i id="reviewsToggleIcon" class="fa fa-caret-square-o-down" aria-hidden="true"></i>&nbsp;Lees</button>
 	        <div id="reviews">
 	        	<?php foreach ($reviews as $reviewRow): ?>
-	        		<span class="stars"><?php echo $reviewRow["rating"]; ?></span>
-	        		<p class="reviewRow"><?php echo $reviewRow["naam"]; ?> op <?php echo strftime("%A %#d %B %Y om %H:%M", strtotime($reviewRow["rated_on"])); ?><br>
-	        		"<?php echo $reviewRow["comment"]; ?>"</p>
+                    <p class="reviewRowTop"><?php echo $reviewRow["naam"]; ?> op <?php echo strftime("%A %#d %B %Y om %H:%M", strtotime($reviewRow["rated_on"])); ?></p>
+                    <span class="stars"><?php echo $reviewRow["rating"]; ?></span>
+                    <p class="reviewRowBottom">"<?php echo $reviewRow["comment"]; ?>"</p>
 	        	<?php endforeach; ?>
 	        </div>
         <?php endif; ?>
@@ -105,9 +105,10 @@
     <p>Geef me een <a href="https://www.google.com/maps/dir/?api=1&destination=<?php echo $speeltuin->getLatitude(); ?>,<?php echo $speeltuin->getLongitude(); ?>">routebeschrijving</a></p>
     <div id="mini-map"></div>
 </div>
+
+<div class="betweenbar"></div>
     
 <?php if (sizeof($photos) > 0): ?>
-    <div class="betweenbar"></div>
     <h4>Kijk eens rond</h4>
     <div class="detail-photobar">
         <?php foreach ($photos as $photo): ?>
