@@ -9,6 +9,7 @@ $speeltuin = new Speeltuin($db);
 $user = new User($db);
 $item = new Item($db);
 $review = new Review($db);
+$message = new Message($db);
 
 $nrActive = $speeltuin->getTotalNr(1);
 $nrProposed = $speeltuin->getTotalNr(0);
@@ -20,6 +21,7 @@ $nrRejectedReviews = $review->getTotalNr(2);
 
 $nrOfUsers = $user->getTotalNr(1);
 $nrOfItems = $item->getTotalNr();
+$nrOfMessages = $message->getTotalNr();
 
 // most recent message
 $msgBody = null;

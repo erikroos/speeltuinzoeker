@@ -17,10 +17,29 @@ class Message
 			if ($row = $res->fetch_assoc()) {
 				return $row["body"];
 			}
-		} else {
-			echo $this->db->getError();die;
 		}
 		return null;
+	}
+	
+	public function getMessages($start = 0, $size = 10) {
+		$messages = [];
+		$res = $this->db->query(sprintf("SELECT * FROM bericht ORDER BY created_on DESC LIMIT %d, %d", $start, $size));
+		if ($res !== false) {
+			while ($row = $res->fetch_assoc()) {
+				$messages[] = $row;
+			}
+		}
+		return $messages;
+	}
+	
+	public function getTotalNr() {
+		$res = $this->db->query("SELECT COUNT(*) AS totNr FROM bericht");
+		if ($res !== false) {
+			if ($row = $res->fetch_assoc()) {
+				return $row["totNr"];
+			}
+		}
+		return 0;
 	}
 	
 	// Instance functions:

@@ -27,6 +27,7 @@ We raden je aan (weer) een <a href="account.php">eigen wachtwoord in te stellen<
 <p>
 	<a href="users.php">Gebruikers (<?php echo $nrOfUsers; ?>)</a><br>
 	<a href="items.php">Voorzieningen (<?php echo $nrOfItems; ?>)</a><br>
+	<a href="messages.php">Notificaties (<?php echo $nrOfMessages; ?>)</a><br>
 </p>
 <?php else: ?>
 <h1>Welkom <?php echo $_SESSION["user_name"]; ?></h1>
