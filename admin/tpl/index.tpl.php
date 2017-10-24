@@ -9,7 +9,12 @@ We raden je aan (weer) een <a href="account.php">eigen wachtwoord in te stellen<
 <?php endif; ?>
 
 <?php if ($msgBody != null): ?>
-<p class="notice"><?php echo $msgBody; ?></p>
+<div class="message">
+	<button id="closebtn" type="button" class="close" aria-label="Close">
+	  <span aria-hidden="true">&times;</span>
+	</button>
+	<p class="notice"><?php echo $msgBody; ?></p>
+</div>
 <?php endif; ?>
 
 <?php if (isset($_SESSION["admin"]) && $_SESSION["admin"] == 1): ?>
@@ -37,6 +42,20 @@ We raden je aan (weer) een <a href="account.php">eigen wachtwoord in te stellen<
 	<a href="review.php?user"><i class="fa fa-comments" aria-hidden="true"></i>&nbsp;Bekijk mijn beoordelingen</a><br>
 </p>
 <?php endif; ?>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="<?php echo BASE_URL; ?>js/jquery.min.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+
+<script type="text/javascript">
+	$(document).on('ready', function() {
+		$("#closebtn").click(function(event) {
+			event.preventDefault();
+			alert("TODO!");
+		});
+	});
+</script>
 
 <?php
 include_once "./inc/footer.php";

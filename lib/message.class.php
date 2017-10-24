@@ -44,4 +44,29 @@ class Message
 	
 	// Instance functions:
 	
+	public function getBody() {
+		$res = $this->db->query(sprintf("SELECT body FROM bericht WHERE id = %d", $this->id));
+		if ($res !== false) {
+			if ($row = $res->fetch_assoc()) {
+				return $row["body"];
+			}
+		}
+		return 0;
+	}
+	
+	public function insertOrUpdate($body) {
+		if ($this->id == 0) {
+			$this->db->query(sprintf("INSERT INTO bericht (body, created_on) VALUES (\"%s\", NOW())",
+					$body));
+			$this->id = $this->db->getLatestId();
+		} else {
+			$this->db->query(sprintf("UPDATE bericht SET body = \"%s\", created_on = NOW() WHERE id = %d",
+					$body, $this->id));
+		}
+		return $this->id;
+	}
+	
+	public function delete() {
+		$this->db->query(sprintf("DELETE FROM bericht WHERE id = %d", $this->id));
+	}
 }

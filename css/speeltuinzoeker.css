@@ -416,3 +416,7 @@ span.stars span {
 .nostars {
 	margin-top: -15px;
 }
+
+.message button.close {
+	margin-right: 5px;
+}
