@@ -11,11 +11,14 @@ class Message
 
 	// Functions that don't need ID:
 	
-	public function getMostRecentMessage() {
-		$res = $this->db->query("SELECT body FROM bericht ORDER BY created_on DESC LIMIT 1");
+	public function getMostRecentMessage($userId) {
+		$res = $this->db->query("SELECT id, body FROM bericht ORDER BY created_on DESC LIMIT 1");
 		if ($res !== false) {
 			if ($row = $res->fetch_assoc()) {
-				return $row["body"];
+				$res2 = $this->db->query(sprintf("SELECT * FROM bericht_gelezen WHERE bericht_id = %d AND user_id = %d", $row["id"], $userId));
+				if (!$res2 || !$res2->fetch_assoc()) {
+					return array($row["id"], $row["body"]);
+				}
 			}
 		}
 		return null;
@@ -68,5 +71,9 @@ class Message
 	
 	public function delete() {
 		$this->db->query(sprintf("DELETE FROM bericht WHERE id = %d", $this->id));
+	}
+	
+	public function markAsRead($userId) {
+		$this->db->query(sprintf("INSERT INTO bericht_gelezen (bericht_id, user_id) VALUES (%d, %d)", $this->id, $userId));
 	}
 }

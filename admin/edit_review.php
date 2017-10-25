@@ -34,15 +34,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		
 		$review->activate();
 		
-		$userEmail = $review->getAuthorEmail();
-		if ($userEmail != null) {
-			$message = "<p>Beste " . $review->getAuthorName() . ",</p>" . 
-				"<p>Je beoordeling van speeltuin \"" . $review->getSpeeltuinName() . "\" is goedgekeurd!</p>" . 
-				"<p>Hij is nu <a href='" . BASE_URL . "speeltuinen/" . $review->getSpeeltuinSeoUrl() . "'>zichtbaar</a> op de site.</p>" . 
-				"<p>Met vriendelijke groeten,<br>" . 
-				"Het team van Speeltuinzoeker.nl</p>";
-			Mail::sendMail($userEmail, "Beoordeling van speeltuin " . $review->getSpeeltuinName() . " goedgekeurd", $message);
-		}
+		// 1. mail aan auteur van de beoordeling
+		Mail::sendReviewAcceptedToAuthor($review);
+		
+		// 2. mail aan auteur van de speeltuin
+		Mail::sendReviewAcceptedToSpeeltuinAuthor($review);
 		
 		$_SESSION["feedback"] = "Beoordeling goedgekeurd.";
 		
@@ -58,17 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		
 		$review->deactivate(false);
 		
-		$userEmail = $speeltuin->getAuthorEmail();
-		if ($userEmail != null) {
-			$message = "<p>Beste " . $review->getAuthorName() . ",</p>" .
-					"<p>Je beoordeling van speeltuin \"" . $review->getSpeeltuinName() . "\" is helaas afgekeurd.</p>" .
-					"<p>De reden hiervan is: " . $_POST["afkeur_reden"] . "</p>" .
-                    "<p>De beoordeling staat nog steeds in je <a href='" . BASE_URL . "admin/review.php?user'>overzicht</a>." .
-                    "Je kunt hem eventueel bewerken en opslaan, zodat we hem opnieuw kunnen beoordelen.</p>" .
-					"<p>Met vriendelijke groeten,<br>" .
-					"Het team van Speeltuinzoeker.nl</p>";
-			Mail::sendMail($userEmail, "Beoordeling van speeltuin " . $review->getSpeeltuinName() . " afgekeurd", $message);
-		}
+		Mail::sendReviewRejectedToAuthor($review, $_POST["afkeur_reden"]);
 		
 		$_SESSION["feedback"] = "Beoordeling afgekeurd.";
 		header("Location: review.php?status=2&start=" . $start);
@@ -82,8 +68,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$_SESSION["feedback"] = "Beoordeling aanpassen gelukt!<br>
 				De beoordeling staat nu tijdelijk op inactief en is niet zichtbaar tot deze gecontroleerd is. 
 				We streven ernaar dit binnen 24 uur te doen.";
-		$message = "<p>Gebruiker " . $_SESSION["user_name"] . " heeft zijn/haar beoordeling van speeltuin \"" . $review->getSpeeltuinName() . "\" bewerkt.</p>" . "<p><a href='" . BASE_URL . "admin/edit_review.php?id=" . $id . "'>Controleer deze beoordeling</a></p>";
-		Mail::sendMail(ADMIN_MAIL, "Beoordeling van speeltuin " . $review->getSpeeltuinName() . " bewerkt", $message);
+		
+		Mail::sendUpdatedReviewToAdmin($review);
 		
 		// redirect to last page of actives for this user
 		$totalSize = $review->getTotalNrForUser($_SESSION["user_id"]);

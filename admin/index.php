@@ -25,9 +25,10 @@ $nrOfMessages = $message->getTotalNr();
 
 // most recent message
 $msgBody = null;
+$msgId = 0;
 if (!isset($_SESSION["admin"]) || $_SESSION["admin"] == 0) {
 	$msg = new Message($db);
-	$msgBody = $msg->getMostRecentMessage();
+	list($msgId, $msgBody) = $msg->getMostRecentMessage($_SESSION["user_id"]);
 }
 
 include "tpl/index.tpl.php";

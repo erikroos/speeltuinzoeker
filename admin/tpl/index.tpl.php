@@ -52,7 +52,9 @@ We raden je aan (weer) een <a href="account.php">eigen wachtwoord in te stellen<
 	$(document).on('ready', function() {
 		$("#closebtn").click(function(event) {
 			event.preventDefault();
-			alert("TODO!");
+			$.get("_mark_read.php?id=<?php echo $msgId; ?>", function(data) {
+				$(".message").hide();
+			});
 		});
 	});
 </script>

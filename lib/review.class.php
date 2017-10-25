@@ -46,6 +46,10 @@ class Review
 	
 	// Instance functions:
 	
+	public function getId() {
+		return $this->id;
+	}
+	
 	public function getStatus() {
 		$status = 0;
 		$res = $this->db->query(sprintf("SELECT status FROM review WHERE id = %d", $this->id));
@@ -181,6 +185,34 @@ class Review
 		if ($res !== false) {
 			if ($row = $res->fetch_assoc()) {
 				return $row["seo_url"];
+			}
+		}
+		return "";
+	}
+	
+	public function getSpeeltuinAuthorEmail() {
+		$speeltuinId = $this->getSpeeltuin();
+		$res = $this->db->query(sprintf("SELECT user.email 
+				FROM speeltuin 
+				JOIN user ON speeltuin.author_id = user.id
+				WHERE speeltuin.id = %d", $speeltuinId));
+		if ($res !== false) {
+			if ($row = $res->fetch_assoc()) {
+				return $row["email"];
+			}
+		}
+		return null;
+	}
+	
+	public function getSpeeltuinAuthorName() {
+		$speeltuinId = $this->getSpeeltuin();
+		$res = $this->db->query(sprintf("SELECT user.naam
+				FROM speeltuin
+				JOIN user ON speeltuin.author_id = user.id
+				WHERE speeltuin.id = %d", $speeltuinId));
+		if ($res !== false) {
+			if ($row = $res->fetch_assoc()) {
+				return $row["naam"];
 			}
 		}
 		return "";
