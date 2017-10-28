@@ -420,3 +420,10 @@ span.stars span {
 .message button.close {
 	margin-right: 5px;
 }
+
+#quickform {
+	display: none;
+	background-color: rgba(138, 197, 63, 0.5);
+	border-radius: 4px;
+	padding: 10px;
+}
