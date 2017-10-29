@@ -62,5 +62,10 @@ class Mail {
 		
 	}
 	
+	public static function sendNewProposal($speeltuin) {
+		$message = "<p>Beste Erik,</p><p>Een bezoeker heeft een nieuwe speeltuin \"" . $speeltuin->getName() . "\" voorgesteld.</p>" . "<p><a href='" . BASE_URL . "admin/edit.php?id=" . $speeltuin->getId() . "'>Bewerk deze speeltuin</a></p>";
+		Mail::sendMail("tom.erik.roos@gmail.com", "Nieuwe voorgestelde speeltuin " . $speeltuin->getName(), $message);
+	}
+	
 	// TODO rest van de mails ook hier
 }

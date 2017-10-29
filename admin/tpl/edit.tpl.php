@@ -5,6 +5,7 @@ include_once "./inc/header.php";
 
 <h1><?php echo $pageTitle; ?></h1>
 
+<?php if ($isUser): ?>
 <label>Spelregels</label>
 <ul>
 	<li>Vul de velden zo volledig en correct mogelijk in.</li>
@@ -13,6 +14,7 @@ include_once "./inc/header.php";
 	<li>Beledigende teksten of andere uitingen die in strijd zijn met waar deze website voor staat (een veilige omgeving voor en door ouders) zijn niet toegestaan.</li>
 	<li>Speeltuinzoeker.nl behoudt zich het recht voor om speeltuinen die niet voldoen aan bovenstaande, te weigeren.</li>
 </ul>
+<?php endif; ?>
 		
 <form method="post" action="edit.php">
 

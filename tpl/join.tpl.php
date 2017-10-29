@@ -1,6 +1,11 @@
 <?php $indexTitle = "Speeltuinzoeker.nl - Meedoen"; ?>
 <?php include "header.tpl.php"; ?>
 
+<?php if (isset($feedback)): ?>
+	<div id="suggestionFeedback" class="notice"><?php echo $feedback; ?></div>
+	<div class="betweenbar"></div>
+<?php endif; ?>
+
 <div id="details">
 	<p>
 		<strong>Doe mee(r) met Speeltuinzoeker!</strong><br>
@@ -19,7 +24,16 @@
 </div>
 
 <div id="quickform">
-	<form method="post" action="edit.php">
+
+	<label>Spelregels</label>
+	<ul>
+		<li>Vul de velden zo volledig en correct mogelijk in.</li>
+		<li>Na opslaan staat de speeltuin op inactief totdat deze door de beheerder gecontroleerd en waar nodig aangevuld is.</li>
+		<li>Beledigende teksten of andere uitingen die in strijd zijn met waar deze website voor staat (een veilige omgeving voor en door ouders) zijn niet toegestaan.</li>
+		<li>Speeltuinzoeker.nl behoudt zich het recht voor om speeltuinen die niet voldoen aan bovenstaande, te weigeren.</li>
+	</ul>
+
+	<form method="post" action="join.php" enctype="multipart/form-data">
 		<div class="form-group">
 			<label for="name">Naam van de speeltuin (bijv. Buurtspeeltuin het Haventje)</label>
 			<input type="text" id="naam" name="naam" value="" class="form-control" />

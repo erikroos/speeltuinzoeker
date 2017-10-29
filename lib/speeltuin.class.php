@@ -340,13 +340,13 @@ class Speeltuin
 	}
 
 	public function insertOrUpdate($name, $link, $omschrijving, $locatieOmschrijving, $lat, $lon, $public, $type,
-                                   $agecat1, $agecat2, $agecat3, $openingstijden, $vergoeding) {
+                                   $agecat1, $agecat2, $agecat3, $openingstijden, $vergoeding, $userId) {
 		if ($this->id == 0) {
 			$this->db->query(sprintf("INSERT INTO speeltuin 
 					(naam, link, omschrijving, locatie_omschrijving, lat, lon, status_id, author_id, `public`, 
 					speeltuintype, agecat_1, agecat_2, agecat_3, seo_url, modified_on, openingstijden, vergoeding)
 					VALUES (\"%s\", \"%s\", \"%s\", \"%s\", %f, %f, 0, %d, %d, \"%s\", %d, %d, %d, \"%s\", NOW(), \"%s\", \"%s\")",
-					$name, $link, $omschrijving, $locatieOmschrijving, $lat, $lon, $_SESSION["user_id"], $public, 
+					$name, $link, $omschrijving, $locatieOmschrijving, $lat, $lon, $userId, $public, 
 					$type, $agecat1 ? 1 : 0, $agecat2 ? 1 : 0, $agecat3 ? 1 : 0, $this->toSeoUrl($name), $openingstijden, $vergoeding));
 			$this->id = $this->db->getLatestId();
 		} else {

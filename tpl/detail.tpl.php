@@ -242,7 +242,7 @@
             icon: "<?php echo BASE_URL; ?>img/marker_green.png"
         });
         marker.setPosition(pos);
-    }
+    };
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=<?php echo MAPS_API_KEY; ?>&callback=initMap"></script>
 

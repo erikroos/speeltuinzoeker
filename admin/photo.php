@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$uploadErrors = array ();
 		foreach ($_FILES["fotos"]["name"] as $i => $fileName) {
 			
-			if (empty($fileName)) { // ook al upload je niets, er zit altijd Ã©Ã©n, leeg, element in de array
+			if (empty($fileName)) { // ook al upload je niets, er zit altijd één, leeg, element in de array
 				continue;
 			}
 			

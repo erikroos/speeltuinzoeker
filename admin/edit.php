@@ -88,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$agecat3 = (isset($_POST["agecat_3"]) ? true : false);
 
 		$speeltuin->insertOrUpdate($name, $link, $omschrijving, $locatieOmschrijving, $lat, $lon, $public, $type,
-            $agecat1, $agecat2, $agecat3, $openingstijden, $vergoeding);
+            $agecat1, $agecat2, $agecat3, $openingstijden, $vergoeding, $_SESSION["user_id"]);
 		
 		if ($id == 0) {
 			$id = $speeltuin->getId();
