@@ -25,7 +25,8 @@
             <li>staat <strong>veiligheid</strong> voorop: alle speeltuinen en foto's worden grondig gecontroleerd voordat ze geplaatst worden</li>
         </ul>
 
-        <p>Kijk ook eens even bij onze vrienden van <a href="https://wemagine.nl/">Wemagine</a>, die ons mooie logo hebben gemaakt.</p>
+        <p>Kijk ook even bij onze vrienden van <a href="https://wemagine.nl/">Wemagine</a>, die ons mooie logo hebben gemaakt.</p>
+    	<p><a href="https://www.ouders.nl/tips/speeltuinen-speeltuinzoekernl">Ouders Online</a> heeft ons als tip opgenomen op hun site.</p>
     </div>
 
 <?php include "footer.tpl.php"; ?>
