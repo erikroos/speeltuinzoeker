@@ -154,7 +154,7 @@
         }
 
 		// markers for existing speeltuinen
-        var lastEvent;
+        var lastEvent = new Date();
 		function fireIfLastEvent() { 
 			// always remove existing markers
 			for (var i = 0; i < existingMarkers.length; i++) {
@@ -221,6 +221,8 @@
 		        
 				existingMarkers.push(existingMarker);
 			}
+
+			var markerCluster = new MarkerClusterer(map, existingMarkers, {imagePath: '<?php echo BASE_URL; ?>img/markerclusterer/m'});
 		}
 		function scheduleDelayedCallback() { 
 		    lastEvent = new Date(); 
@@ -305,6 +307,7 @@
 		$("#expand_items").hide();
 	});
 </script>
+<script src="<?php echo BASE_URL; ?>js/markerclusterer.js"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=<?php echo MAPS_API_KEY; ?>&callback=initMap"></script>
 
 </html>
