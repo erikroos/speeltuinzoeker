@@ -352,6 +352,8 @@ td.afgewezen {
 
 #locationTip {
 	display: none;
+}
+.tip {
 	width: 100%;
 	background-color: #FAA21C;
 	padding: 4px;

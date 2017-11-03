@@ -61,7 +61,8 @@ if (!isset($indexDescription)) {
 <body>
 
 <?php if ($indexTitle == "Speeltuinzoeker.nl - Laat ze spelen!"): // home ?>
-    <div id="locationTip"><strong>Tip</strong> voor een optimale werking: zet de Locatie (GPS) van je device aan en sta deze website toe deze uit te lezen.</div>
+    <div id="locationTip" class="tip"><strong>Tip</strong> voor een optimale werking: zet de Locatie (GPS) van je device aan en sta deze website toe deze uit te lezen.</div>
+	<div id="jsTip" class="tip">Zet <strong>JavaScript</strong> aan in je browser om deze website te laten werken.</div>
 <?php endif; ?>
 
 <div class="container">

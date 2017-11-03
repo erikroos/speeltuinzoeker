@@ -94,6 +94,10 @@
 <script src="<?php echo BASE_URL; ?>js/bootstrap.min.js"></script>
 <script src="<?php echo BASE_URL; ?>js/bootstrap-rating-input.js" type="text/javascript"></script>
 
+<script type="text/javascript">
+	$("#jsTip").hide();
+</script>
+
 <!-- Google Analytics -->
 <script>
     (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
@@ -104,7 +108,7 @@
     ga('create','UA-102474826-1','auto');ga('send','pageview');
 </script>
 
-<!-- Map -->
+<!-- Map + handlers -->
 <script>
     var map;
     var existingMarkers = [];
@@ -154,44 +158,47 @@
         }
 
 		// markers for existing speeltuinen
-        var lastEvent = new Date();
+        var lastEvent;
+        var delay = 500;
 		function fireIfLastEvent() { 
-			// always remove existing markers
+		    if (lastEvent.getTime() + delay > new Date().getTime()) {
+				return;
+		    }
+		    
+	    	var newBounds = map.getBounds();
+			var NE = newBounds.getNorthEast();
+			NE = NE.toString().replace(" ", "").replace("(", "").replace(")", "");
+			var SW = newBounds.getSouthWest();
+			SW = SW.toString().replace(" ", "").replace("(", "").replace(")", "");
+			var url = "_markers.php?ne=" + NE + "&sw=" + SW;
+			$("form#filter-form-type :checkbox:checked").each(function() {
+				var input = $(this);
+				url += "&type[]=" + input.attr("name");
+			});
+			$("form#filter-form-agecat :checkbox:checked").each(function() {
+				var input = $(this);
+				url += "&agecat[]=" + input.attr("name");
+			});
+			$("form#filter-form-access :checkbox:checked").each(function() {
+				var input = $(this);
+				url += "&access[]=" + input.attr("name");
+			});
+			$("form#filter-form-voorzieningen :checkbox:checked").each(function() {
+				var input = $(this);
+				url += "&voorziening[]=" + input.attr("name");
+			});
+			url += "&min_rating=" + $("#min_rating").val();
+			$.get(url, function(data) {
+				placeMarkers(data);
+		    });
+		}
+		function placeMarkers(data) {
+			// first remove existing markers
 			for (var i = 0; i < existingMarkers.length; i++) {
 				existingMarkers[i].setMap(null);
 			}
 			existingMarkers = [];
 			
-		    if (lastEvent.getTime() + 100 <= new Date().getTime()) { 
-		    	var newBounds = map.getBounds();
-				var NE = newBounds.getNorthEast();
-				NE = NE.toString().replace(" ", "").replace("(", "").replace(")", "");
-				var SW = newBounds.getSouthWest();
-				SW = SW.toString().replace(" ", "").replace("(", "").replace(")", "");
-				var url = "_markers.php?ne=" + NE + "&sw=" + SW;
-				$("form#filter-form-type :checkbox:checked").each(function() {
-					var input = $(this);
-					url += "&type[]=" + input.attr("name");
-				});
-				$("form#filter-form-agecat :checkbox:checked").each(function() {
-					var input = $(this);
-					url += "&agecat[]=" + input.attr("name");
-				});
-				$("form#filter-form-access :checkbox:checked").each(function() {
-					var input = $(this);
-					url += "&access[]=" + input.attr("name");
-				});
-				$("form#filter-form-voorzieningen :checkbox:checked").each(function() {
-					var input = $(this);
-					url += "&voorziening[]=" + input.attr("name");
-				});
-				url += "&min_rating=" + $("#min_rating").val();
-				$.get(url, function(data) {
-					placeMarkers(data);
-			    });
-		    } 
-		}
-		function placeMarkers(data) {
 			var speeltuinen = JSON.parse(data);
 			
 			infowindow = new google.maps.InfoWindow({
@@ -224,9 +231,9 @@
 
 			var markerCluster = new MarkerClusterer(map, existingMarkers, {imagePath: '<?php echo BASE_URL; ?>img/markerclusterer/m'});
 		}
-		function scheduleDelayedCallback() { 
-		    lastEvent = new Date(); 
-		    setTimeout(fireIfLastEvent, 100); 
+		function scheduleDelayedCallback() {
+			lastEvent = new Date(); 
+		    setTimeout(fireIfLastEvent, delay); 
 		} 
 		map.addListener("bounds_changed", scheduleDelayedCallback);
     }
