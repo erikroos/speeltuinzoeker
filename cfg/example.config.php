@@ -41,3 +41,9 @@ define("MAX_PHOTO_DIM", 600);
 define("MAPS_API_KEY", "MyKey");
 
 define("AUTHOR", "RO Online Solutions");
+
+// Twitter
+define('OAUTH_ACCESS_TOKEN', "");
+define('OAUTH_ACCESS_TOKEN_SECRET', "");
+define('CONSUMER_KEY', "");
+define('CONSUMER_SECRET' , "");
