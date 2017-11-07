@@ -31,16 +31,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	if ($_POST["Submit"] == "Keur goed") {
 		
 		$speeltuin->activate();
+			
+		Mail::sendSpeeltuinAcceptedToAuthor($speeltuin);
 		
-		$userEmail = $speeltuin->getAuthorEmail();
-		if ($userEmail != null) {
-			$message = "<p>Beste " . $speeltuin->getAuthorName() . ",</p>" . 
-				"<p>Je speeltuin \"" . $speeltuin->getName() . "\" is goedgekeurd!</p>" . 
-				"<p>Hij is nu <a href='" . BASE_URL . "?speeltuin=" . $speeltuin->getId() . "'>zichtbaar</a> op de site.</p>" . 
-				"<p>Met vriendelijke groeten,<br>" . 
-				"Het team van Speeltuinzoeker.nl</p>";
-			Mail::sendMail($userEmail, "Speeltuin " . $speeltuin->getName() . " goedgekeurd", $message);
-		}
+		Twitter::tweet("Nieuwe #speeltuin " . $speeltuin->getName() . ": " . $speeltuin->getSeoUrl());
 		
 		$_SESSION["feedback"] = "Speeltuin goedgekeurd.";
 		
@@ -56,17 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		
 		$speeltuin->deactivate();
 		
-		$userEmail = $speeltuin->getAuthorEmail();
-		if ($userEmail != null) {
-			$message = "<p>Beste " . $speeltuin->getAuthorName() . ",</p>" .
-					"<p>Je speeltuin \"" . $speeltuin->getName() . "\" is helaas afgekeurd.</p>" .
-					"<p>De reden hiervan is: " . $_POST["afkeur_reden"] . "</p>" .
-                    "<p>De speeltuin staat nog steeds in je <a href='" . BASE_URL . "admin/view.php?user'>overzicht</a>." .
-                    "Je kunt hem eventueel bewerken en opslaan, zodat we hem opnieuw kunnen beoordelen.</p>" .
-					"<p>Met vriendelijke groeten,<br>" .
-					"Het team van Speeltuinzoeker.nl</p>";
-			Mail::sendMail($userEmail, "Speeltuin " . $speeltuin->getName() . " afgekeurd", $message);
-		}
+		Mail::sendSpeeltuinRejectedToAuthor($speeltuin);
 		
 		$_SESSION["feedback"] = "Speeltuin afgekeurd.";
 		header("Location: view.php?status=2&start=" . $start);
@@ -95,14 +79,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			$_SESSION["feedback"] = "Speeltuin toegevoegd!<br>
 					De speeltuin staat op inactief en is nog niet zichtbaar tot deze gecontroleerd is. 
 					We streven ernaar dit binnen 24 uur te doen.";
-			$message = "<p>Gebruiker " . $_SESSION["user_name"] . " heeft een nieuwe speeltuin toegevoegd.</p>" . "<p><a href='" . BASE_URL . "admin/edit.php?id=" . $id . "'>Controleer deze speeltuin</a></p>";
-			Mail::sendMail(ADMIN_MAIL, "Nieuwe speeltuin " . (empty($name) ? "zonder naam" : $name), $message);
+			Mail::sendSpeeltuinAddedToAdmin($_SESSION["user_name"], $id, (empty($name) ? "zonder naam" : $name));
 		} else {
 			$_SESSION["feedback"] = "Speeltuin aanpassen gelukt!<br>
 					De speeltuin staat nu tijdelijk op inactief en is niet zichtbaar tot deze gecontroleerd is. 
 					We streven ernaar dit binnen 24 uur te doen.";
-			$message = "<p>Gebruiker " . $_SESSION["user_name"] . " heeft de speeltuin \"" . $name . "\" bewerkt.</p>" . "<p><a href='" . BASE_URL . "admin/edit.php?id=" . $id . "'>Controleer deze speeltuin</a></p>";
-			Mail::sendMail(ADMIN_MAIL, "Speeltuin " . (empty($name) ? "zonder naam" : $name) . " bewerkt", $message);
+			Mail::sendSpeeltuinUpdatedToAdmin($_SESSION["user_name"], $id, (empty($name) ? "zonder naam" : $name));
 		}
 		
 		$speeltuin->setVoorzieningen($_POST);

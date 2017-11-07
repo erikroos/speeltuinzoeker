@@ -15,14 +15,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	
 	$email = $user->getEmail();
 	if ($email != null) {
-		
 		$reason = get_request_value("reason", "");
-		
-		$message = "<p>Beste " . $user->getName() . ",</p>" .
-				"<p>Je account bij Speeltuinzoeker.nl is op non-actief gezet, met als reden: " . $reason . "</p>" .
-				"<p>Met vriendelijke groeten,<br>" .
-				"Het team van Speeltuinzoeker.nl</p>";
-		Mail::sendMail($email, "Je account bij Speeltuinzoeker.nl", $message);
+		Mail::sendAccountDeactivated($user->getName(), $reason, $email);
 	}
 	
 	header("users.php?active=0");

@@ -99,8 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 				$_SESSION["feedback"] .= "Er hebben zich wel &eacute;&eacute;n of meer problemen voorgedaan:<br>" . implode("<br>", $uploadErrors);
 			}
 			
-			$message = "<p>Gebruiker " . $_SESSION["user_name"] . " heeft de foto's van de speeltuin \"" . $name . "\" aangepast.</p>" . "<p><a href='" . BASE_URL . "admin/edit.php?id=" . $id . "'>Controleer deze speeltuin</a></p>";
-			Mail::sendMail(ADMIN_MAIL, "Foto's speeltuin " . $name . " bewerkt", $message);
+			Mail::sendPhotosUpdatedToAdmin($_SESSION["user_name"], $name, $id);
 		}
 	}
 	

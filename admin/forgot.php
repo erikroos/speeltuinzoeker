@@ -22,12 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$user->setPassword($auth, $newPass);
 		$user->setPasswordGenerated(1);
 		
-		$message = "<p>Beste " . $user->getName() . ",</p>" . 
-				"<p>Je hebt een nieuw wachtwoord aangevraagd voor Speeltuinzoeker.nl.</p>" .
-				"<p>Je kunt nu inloggen met het wachtwoord: " . $newPass . "</p>" . 
-				"<p>Met vriendelijke groeten,<br>" . 
-				"Het team van Speeltuinzoeker.nl</p>";
-		Mail::sendMail($email, "Wachtwoord Speeltuinzoeker.nl", $message);
+		Mail::sendNewPassword($user->getName(), $newPass, $email);
 	}
 	
 	$feedback = "Als je het juiste e-mailadres hebt opgegeven, dan ontvang je nu een e-mail met een nieuw (tijdelijk) wachtwoord.";

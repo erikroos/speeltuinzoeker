@@ -207,6 +207,14 @@ class Speeltuin
 		return "";
 	}
 	
+	public function getSeoUrl() {
+		$res = $this->db->query(sprintf("SELECT seo_url FROM speeltuin WHERE id = %d", $this->id));
+		if ($row = $res->fetch_assoc()) {
+			return $row["seo_url"];
+		}
+		return null;
+	}
+	
 	public function getLink() {
 		$res = $this->db->query(sprintf("SELECT link FROM speeltuin WHERE id = %d", $this->id));
 		if ($row = $res->fetch_assoc()) {

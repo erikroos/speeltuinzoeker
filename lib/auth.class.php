@@ -41,16 +41,7 @@ class Auth {
 				VALUES (\"%s\", \"%s\", \"%s\", 0, 0, \"%s\");", $this->db->realEscapeString($name), $this->db->realEscapeString($email), $this->hashPassword($password), $activationCode));
 		
 		if ($res == true) {
-			$message = "<p>Beste " . $name . ",</p>" . 
-				"<p>Je hebt je aangemeld voor een account bij Speeltuinzoeker.nl. Welkom!<br>" . 
-				"Je hoeft alleen nog even op " . 
-				"<a href='" . BASE_URL . "admin/activate.php?code=" . $activationCode . "'>deze link</a>" . 
-				" te klikken om je account te activeren." . 
-				"Daarna kun je direct inloggen en beginnen met het invoeren en beoordelen van speeltuinen!</p>" . 
-				"<p>Met vriendelijke groeten,<br>" . 
-				"Het team van Speeltuinzoeker.nl</p>" . 
-				"<p>PS: werkt de link niet? Voer dan dit webadres in in de adresbalk van je browser:<br>" . BASE_URL . "admin/activate.php?code=" . $activationCode . "</p>";
-			Mail::sendMail($email, "Activeer je aanmelding bij Speeltuinzoeker.nl", $message);
+			Mail::sendActivationInstructions($name, $activationCode, $email);
 		}
 		
 		return $res;
@@ -61,8 +52,7 @@ class Auth {
 		if ($row = $res->fetch_assoc()) {
 			$this->db->query(sprintf("UPDATE user SET active = 1, activation_code = \"\" WHERE id = %d", $row["id"]));
 			
-			$message = "<p>Gebruiker " . $row["naam"] . " (e-mail: " . $row["email"] . ") heeft zijn/haar account geactiveerd.</p>";
-			Mail::sendMail(ADMIN_MAIL, "Gebruiker " . $row["naam"] . " geactiveerd", $message);
+			Mail::sendUserActivatedToAdmin($row["naam"], $row["email"]);
 			
 			return true;
 		}
