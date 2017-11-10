@@ -10,11 +10,20 @@ $db->connect();
 
 $speeltuin = new Speeltuin($db, $id);
 
-// Stap 1: check of auteur van deze speeltuin, anders heb je hier niets te zoeken
-if ($speeltuin->getAuthor() != $_SESSION ["user_id"]) {
-	$_SESSION ["feedback"] = "Bekijken van (de foto's van) deze speeltuin niet toegestaan.";
-	header("Location: view.php?user&start=" . $start);
-	exit();
+// Stap 1: check of admin of auteur van deze speeltuin, anders heb je hier niets te zoeken
+$isUser = false;
+$isAdmin = false;
+if ($_SESSION["admin"] == 1) {
+    $isAdmin = true;
+} else {
+    if ($id > 0) {
+        if ($speeltuin->getAuthor() != $_SESSION["user_id"]) {
+            $_SESSION ["feedback"] = "Bekijken van de foto's van deze speeltuin niet toegestaan.";
+            header("Location: index.php");
+            exit();
+        }
+    }
+    $isUser = true;
 }
 
 $name = $speeltuin->getName();
@@ -47,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$uploadErrors = array ();
 		foreach ($_FILES["fotos"]["name"] as $i => $fileName) {
 			
-			if (empty($fileName)) { // ook al upload je niets, er zit altijd één, leeg, element in de array
+			if (empty($fileName)) { // ook al upload je niets, er zit altijd Ã©Ã©n, leeg, element in de array
 				continue;
 			}
 			
@@ -88,22 +97,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 				$_SESSION["feedback"] .= "Er hebben zich &eacute;&eacute;n of meer problemen voorgedaan:<br>" . implode ( "<br>", $uploadErrors );
 			}
 		} else {
-			
-			// status op 0 zetten (opnieuw beoordelen)
-			$speeltuin->setStatus(0);
-			
-			$_SESSION["feedback"] = "Foto's bewerken gelukt! 
+
+		    if ($isUser) {
+                // status op 0 zetten (opnieuw beoordelen)
+                $speeltuin->setStatus(0);
+
+                $_SESSION["feedback"] = "Foto's bewerken gelukt! 
 					De speeltuin staat nu tijdelijk op inactief en is niet zichtbaar tot de foto's zijn gecontroleerd. 
 					We streven ernaar dit binnen 24 uur te doen.<br>";
-			if (sizeof($uploadErrors) > 0) {
-				$_SESSION["feedback"] .= "Er hebben zich wel &eacute;&eacute;n of meer problemen voorgedaan:<br>" . implode("<br>", $uploadErrors);
-			}
-			
-			Mail::sendPhotosUpdatedToAdmin($_SESSION["user_name"], $name, $id);
+                if (sizeof($uploadErrors) > 0) {
+                    $_SESSION["feedback"] .= "Er hebben zich wel &eacute;&eacute;n of meer problemen voorgedaan:<br>" . implode("<br>", $uploadErrors);
+                }
+
+                Mail::sendPhotosUpdatedToAdmin($_SESSION["user_name"], $name, $id);
+            } else { // admin
+                $_SESSION["feedback"] = "Foto's bewerken gelukt!";
+            }
 		}
 	}
-	
-	header("Location: view.php?user&start=" . $start);
+
+    if ($isUser) {
+        header("Location: view.php?user&start=" . $start);
+    } else {
+        header("Location: view.php?status=" . $speeltuin->getStatusId() . "&start=" . $start);
+    }
 	exit();
 }
 

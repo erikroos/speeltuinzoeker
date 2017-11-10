@@ -348,7 +348,7 @@ class Speeltuin
 	}
 
 	public function insertOrUpdate($name, $link, $omschrijving, $locatieOmschrijving, $lat, $lon, $public, $type,
-                                   $agecat1, $agecat2, $agecat3, $openingstijden, $vergoeding, $userId) {
+                                   $agecat1, $agecat2, $agecat3, $openingstijden, $vergoeding, $userId, $isUser) {
 		if ($this->id == 0) {
 			$this->db->query(sprintf("INSERT INTO speeltuin 
 					(naam, link, omschrijving, locatie_omschrijving, lat, lon, status_id, author_id, `public`, 
@@ -359,11 +359,14 @@ class Speeltuin
 			$this->id = $this->db->getLatestId();
 		} else {
 			$this->db->query(sprintf("UPDATE speeltuin
-				SET naam = \"%s\", link = \"%s\", omschrijving = \"%s\", locatie_omschrijving = \"%s\", lat = %f, lon = %f, status_id = 0, 
-					`public` = %d, speeltuintype = \"%s\", agecat_1 = %d, agecat_2 = %d, agecat_3 = %d, seo_url = \"%s\", modified_on = NOW(),
-					openingstijden = \"%s\", vergoeding = \"%s\"
+				SET naam = \"%s\", link = \"%s\", omschrijving = \"%s\", locatie_omschrijving = \"%s\", lat = %f, lon = %f, 
+					`public` = %d, speeltuintype = \"%s\", agecat_1 = %d, agecat_2 = %d, agecat_3 = %d, seo_url = \"%s\", 
+					modified_on = NOW(), openingstijden = \"%s\", vergoeding = \"%s\"
 				WHERE id = %d", $name, $link, $omschrijving, $locatieOmschrijving, $lat, $lon, $public, $type, 
 					$agecat1 ? 1 : 0, $agecat2 ? 1 : 0, $agecat3 ? 1 : 0, $this->toSeoUrl($name), $openingstijden, $vergoeding, $this->id));
+			if ($isUser) { // user -> op inactief, admin -> laat zoals het was
+                $this->db->query(sprintf("UPDATE speeltuin SET status_id = 0 WHERE id = %d", $this->id));
+            }
 		}
 		return $this->id;
 	}
@@ -463,6 +466,16 @@ class Speeltuin
 	public function setStatus($statusId) {
 		$this->db->query(sprintf("UPDATE speeltuin SET status_id = %d WHERE id = %d", $statusId, $this->id));
 	}
+
+	public function getStatusId() {
+        $res = $this->db->query(sprintf("SELECT status_id FROM speeltuin WHERE id = %d", $this->id));
+        if ($res !== false) {
+            if ($row = $res->fetch_assoc()) {
+                return $row["status_id"];
+            }
+        }
+        return 0;
+    }
 	
 	public function delete() {
 		$this->db->query(sprintf("DELETE FROM speeltuin WHERE id = %d", $this->id));

@@ -24,7 +24,7 @@ EOH;
 include_once "./inc/header.php";
 ?>
 
-<h1>Voeg foto's toe aan speeltuin <?php echo $name; ?></h1>
+<h1>Foto's van speeltuin <?php echo $name; ?></h1>
 
 <form method="post" action="photo.php" enctype="multipart/form-data">
 
@@ -40,7 +40,8 @@ include_once "./inc/header.php";
 		<label for="fotos">Upload foto('s)</label> <input id="fotos" name="fotos[]" type="file" multiple class="file-loading" />
 		<p>Foto's kunnen in de preview gekanteld lijken. Dit wordt tijdens het uploaden gecorrigeerd.</p>
 	</div>
-	
+
+    <?php if ($isUser): ?>
 	<label>Spelregels</label>
 	<ul>
 		<li>Bestandsformaat JP(E)G of PNG.</li>
@@ -49,6 +50,7 @@ include_once "./inc/header.php";
 		<li>Maximaal <?php echo MAX_NR_OF_PHOTOS; ?> foto's per speeltuin.</li>
 		<li>Er mogen g&eacute;&eacute;n personen op de foto staan!</li>
 	</ul>
+    <?php endif; ?>
 
 	<hr>
 	<div class="buttonbar">
@@ -75,7 +77,11 @@ $(document).on('ready', function() {
 
 	$("#cancel").click(function() {
 		event.preventDefault();
-    	window.location = './view.php?user';
+		<?php if ($isUser): ?>
+    	    window.location = './view.php?user?start=<?php echo $start; ?>';
+    	<?php else: ?>
+            window.location = './view.php?status=<?php echo $speeltuin->getStatusId(); ?>&start=<?php echo $start; ?>';
+        <?php endif; ?>
 	});
 
 });
@@ -90,4 +96,4 @@ var deletePhoto = function(photoNr) {
 </script>
 
 <?php
-//include_once "./inc/footer.php";
+include_once "./inc/footer.php";

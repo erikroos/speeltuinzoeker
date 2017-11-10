@@ -10,8 +10,8 @@ $db->connect();
 
 $speeltuin = new Speeltuin($db, $id);
 
-// Stap 1: check of auteur van deze speeltuin, anders heb je hier niets te zoeken
-if ($speeltuin->getAuthor() != $_SESSION["user_id"]) {
+// Stap 1: check of admin / auteur van deze speeltuin, anders heb je hier niets te zoeken
+if ($_SESSION["admin"] == 0 && $speeltuin->getAuthor() != $_SESSION["user_id"]) {
 	exit();
 }
 

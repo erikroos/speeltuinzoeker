@@ -22,9 +22,10 @@ include_once "./inc/header.php";
 	<input type="hidden" id="start" name="start" value="<?php echo $start; ?>" />
 	
 	<?php if ($id > 0): ?>
-		<p>
-			<strong>Status</strong>: <?php if ($status_id == 0) echo "voorgesteld"; elseif ($status_id == 1) echo "actief"; elseif ($status_id == 2) echo "afgewezen"; ?>
-		</p>
+		<p><strong>Status</strong>: <?php if ($status_id == 0) echo "voorgesteld"; elseif ($status_id == 1) echo "actief"; elseif ($status_id == 2) echo "afgewezen"; ?></p>
+        <?php if ($isAdmin): ?>
+            <p><strong>Auteur:</strong> <?php echo $speeltuin->getAuthorName(); ?></p>
+        <?php endif; ?>
 	<?php endif; ?>
 
 	<div class="form-group">
@@ -179,9 +180,11 @@ include_once "./inc/header.php";
 					<textarea id="afkeur_reden" name="afkeur_reden" rows="1" maxlength="1000" class="form-control"></textarea>
 				</div>
 				<div class="form-group">
+                    <input type="submit" name="Submit" value="Opslaan" class="btn btn-default" />
 					<input id="cancel" type="button" value="Terug" class="btn btn-default" />
 				</div>
 			<?php else: ?>
+                <input type="submit" name="Submit" value="Opslaan" class="btn btn-default" />
 				<input id="cancel" type="button" value="Terug" class="btn btn-default" />
 			<?php endif; ?>
 		<?php endif; ?>
@@ -350,11 +353,11 @@ include_once "./inc/header.php";
 
 	    $("#cancel").click(function(event) {
 	    	event.preventDefault();
-	    	<?php if ($isUser): ?>
-				window.location = './view.php?user';
-			<?php else: // admin ?>
-				window.location = './view.php?status=<?php echo $status_id; ?>';
-			<?php endif; ?>
+            <?php if ($isUser): ?>
+                window.location = './view.php?user?start=<?php echo $start; ?>';
+            <?php else: ?>
+                window.location = './view.php?status=<?php echo $speeltuin->getStatusId(); ?>&start=<?php echo $start; ?>';
+            <?php endif; ?>
 		});
 
 		$("#expand_items").click(function(event) {

@@ -18,7 +18,7 @@ if ($_SESSION["admin"] == 1) {
 } else {
 	if ($id > 0) {
 		if ($speeltuin->getAuthor() != $_SESSION["user_id"]) {
-			$_SESSION["feedback"] = "Bekijken van deze speeltuin niet toegestaan.";
+			$_SESSION["feedback"] = "Bekijken/bewerken van deze speeltuin niet toegestaan.";
 			header("Location: index.php");
 			exit();
 		}
@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 			
 		Mail::sendSpeeltuinAcceptedToAuthor($speeltuin);
 		
-		Twitter::tweet("Nieuwe #speeltuin " . $speeltuin->getName() . ": " . $speeltuin->getSeoUrl());
+		Twitter::tweet("Nieuwe #speeltuin " . $speeltuin->getName() . ": " . BASE_URL . "speeltuinen/" . $speeltuin->getSeoUrl());
 		
 		$_SESSION["feedback"] = "Speeltuin goedgekeurd.";
 		
@@ -72,31 +72,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 		$agecat3 = (isset($_POST["agecat_3"]) ? true : false);
 
 		$speeltuin->insertOrUpdate($name, $link, $omschrijving, $locatieOmschrijving, $lat, $lon, $public, $type,
-            $agecat1, $agecat2, $agecat3, $openingstijden, $vergoeding, $_SESSION["user_id"]);
+            $agecat1, $agecat2, $agecat3, $openingstijden, $vergoeding, $_SESSION["user_id"], $isUser);
 		
-		if ($id == 0) {
+		if ($id == 0) { // nieuwe, kan alleen door user gebeuren
 			$id = $speeltuin->getId();
 			$_SESSION["feedback"] = "Speeltuin toegevoegd!<br>
 					De speeltuin staat op inactief en is nog niet zichtbaar tot deze gecontroleerd is. 
 					We streven ernaar dit binnen 24 uur te doen.";
 			Mail::sendSpeeltuinAddedToAdmin($_SESSION["user_name"], $id, (empty($name) ? "zonder naam" : $name));
 		} else {
-			$_SESSION["feedback"] = "Speeltuin aanpassen gelukt!<br>
+			if ($isUser) {
+                $_SESSION["feedback"] = "Speeltuin aanpassen gelukt!<br>
 					De speeltuin staat nu tijdelijk op inactief en is niet zichtbaar tot deze gecontroleerd is. 
 					We streven ernaar dit binnen 24 uur te doen.";
-			Mail::sendSpeeltuinUpdatedToAdmin($_SESSION["user_name"], $id, (empty($name) ? "zonder naam" : $name));
+                Mail::sendSpeeltuinUpdatedToAdmin($_SESSION["user_name"], $id, (empty($name) ? "zonder naam" : $name));
+            } else { // admin
+                $_SESSION["feedback"] = "Speeltuin aanpassen gelukt!";
+            }
 		}
 		
 		$speeltuin->setVoorzieningen($_POST);
-		
-		// redirect to last page of actives for this user
-		$totalSize = $speeltuin->getTotalNrForUser($_SESSION["user_id"]);
-		$newStart = $totalSize - ($totalSize % 10);
-		if ($newStart >= 10 && $totalSize % 10 == 0) { // correct for start at 0 instead of 1
-			$newStart -= 10;
-		}
-		header("Location: view.php?user&start=" . $newStart);
-		exit();
+
+		if ($isUser) {
+            // redirect to last page of actives for this user
+            $totalSize = $speeltuin->getTotalNrForUser($_SESSION["user_id"]);
+            $newStart = $totalSize - ($totalSize % 10);
+            if ($newStart >= 10 && $totalSize % 10 == 0) { // correct for start at 0 instead of 1
+                $newStart -= 10;
+            }
+            header("Location: view.php?user&start=" . $newStart);
+            exit();
+        } else {
+		    header("Location: view.php?status=" . $speeltuin->getStatusId() . "&start=" . $start);
+        }
 	}
 } else {
 	
@@ -142,15 +150,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 if ($id == 0) {
-	$pageTitle = "Voeg een speeltuin toe";
+	$pageTitle = "Voeg speeltuin toe";
 } else {
 	if ($isUser) {
-		$pageTitle = "Bewerk speeltuin " . $name;
+		$pageTitle = "Bekijk/bewerk speeltuin " . $name;
 	} else { // admin
 		if ($status_id == 0) {
 			$pageTitle = "Keur speeltuin " . $name . " goed of af";
 		} else if ($status_id == 1 || $status_id == 2) {
-			$pageTitle = "Bekijk speeltuin " . $name;
+			$pageTitle = "Bekijk/bewerk speeltuin " . $name;
 		}
 	}
 }

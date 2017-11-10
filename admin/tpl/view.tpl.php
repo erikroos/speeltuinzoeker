@@ -66,9 +66,7 @@ include_once "./inc/header.php";
 				<?php if ($isAdmin && $status == 2): ?>
 				    <th></th>
 				<?php endif; ?>
-				<?php if ($isUser): ?>
-				    <th></th>
-				<?php endif; ?>
+                <th></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -85,12 +83,12 @@ include_once "./inc/header.php";
 				<td>
 					<a href="./edit.php?id=<?php echo $row["id"]; ?>&start=<?php echo $start; ?>">
 					<?php if ($isUser): ?>
-						Bewerk
+                        Bekijk / bewerk
 					<?php elseif ($isAdmin): ?>
 						<?php if ($status == 0): // nieuw ?>
-							Keur goed of af
+							Keur goed of af / bewerk
 						<?php else: // goed- of afgekeurd ?>
-							Bekijk
+							Bekijk / bewerk
 						<?php endif; ?>
 					<?php endif; ?>
 					</a>
@@ -101,9 +99,7 @@ include_once "./inc/header.php";
 				<?php if ($isAdmin && $status == 2): ?>
 				    <td><a href="view.php?del=<?php echo $row["id"]; ?>&status=2&start=<?php echo $start; ?>" onclick="return confirm('Weet je het zeker?')">Verwijder</a></td>
 				<?php endif; ?>
-				<?php if ($isUser): ?>
-				    <td><a href="photo.php?id=<?php echo $row["id"]; ?>&start=<?php echo $start; ?>">Foto's</a></td>
-				<?php endif; ?>
+                <td><a href="photo.php?id=<?php echo $row["id"]; ?>&start=<?php echo $start; ?>">Foto's</a></td>
 			</tr>
 		<?php endforeach; ?>
 		</tbody>
