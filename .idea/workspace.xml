@@ -3,13 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="4dd4a811-c57e-424e-a1cf-22e518d7a993" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/_del_photo.php" afterPath="$PROJECT_DIR$/admin/_del_photo.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/edit.php" afterPath="$PROJECT_DIR$/admin/edit.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/photo.php" afterPath="$PROJECT_DIR$/admin/photo.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/tpl/edit.tpl.php" afterPath="$PROJECT_DIR$/admin/tpl/edit.tpl.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/tpl/photo.tpl.php" afterPath="$PROJECT_DIR$/admin/tpl/photo.tpl.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/tpl/view.tpl.php" afterPath="$PROJECT_DIR$/admin/tpl/view.tpl.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/speeltuin.class.php" afterPath="$PROJECT_DIR$/lib/speeltuin.class.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/speeltuinzoeker-responsive.css" afterPath="$PROJECT_DIR$/css/speeltuinzoeker-responsive.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/speeltuinzoeker.css" afterPath="$PROJECT_DIR$/css/speeltuinzoeker.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tpl/index.tpl.php" afterPath="$PROJECT_DIR$/tpl/index.tpl.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -20,136 +16,34 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="edit.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/edit.php">
+      <file leaf-file-name="index.tpl.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tpl/index.tpl.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="26" column="1" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="26" selection-end-column="1" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="speeltuin.class.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/speeltuin.class.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="343">
-              <caret line="473" column="38" lean-forward="false" selection-start-line="473" selection-start-column="38" selection-end-line="473" selection-end-column="38" />
+            <state relative-caret-position="243">
+              <caret line="285" column="28" lean-forward="false" selection-start-line="285" selection-start-column="28" selection-end-line="285" selection-end-column="28" />
               <folding>
-                <marker date="1510308218728" expanded="true" signature="501:538" ph="SELECT * FRO... speeltuin" />
-                <marker date="1510308218728" expanded="true" signature="767:810" ph="SELECT * FRO... speeltuin" />
-                <marker date="1510308218728" expanded="true" signature="1053:1188" ph="SELECT LEFT(... speeltuin" />
-                <marker date="1510308218728" expanded="true" signature="1456:1651" ph="SELECT * FRO... speeltuin" />
-                <marker date="1510308218728" expanded="true" signature="2938:3173" ph="SELECT id, n... speeltuin" />
-                <marker date="1510308218728" expanded="true" signature="3593:3676" ph="SELECT * FRO... speeltuin_voorziening" />
-                <marker date="1510308218728" expanded="true" signature="4650:4698" ph="SELECT id, n... voorziening" />
-                <marker date="1510308218728" expanded="true" signature="5007:5067" ph="SELECT COUNT... speeltuin" />
-                <marker date="1510308218728" expanded="true" signature="5332:5392" ph="SELECT COUNT... speeltuin" />
-                <marker date="1510308218728" expanded="true" signature="5611:5679" ph="SELECT * FRO... speeltuin" />
-                <marker date="1510308218728" expanded="true" signature="6634:6681" ph="SELECT id FR... speeltuin" />
-                <marker date="1510308218728" expanded="true" signature="6933:6973" ph="SELECT naam speeltuin" />
-                <marker date="1510308218728" expanded="true" signature="7137:7180" ph="SELECT seo_u... speeltuin" />
-                <marker date="1510308218728" expanded="true" signature="7347:7387" ph="SELECT link speeltuin" />
-                <marker date="1510308218728" expanded="true" signature="7562:7610" ph="SELECT omsch... speeltuin" />
-                <marker date="1510308218728" expanded="true" signature="7791:7830" ph="SELECT lat F... speeltuin" />
-                <marker date="1510308218728" expanded="true" signature="8003:8042" ph="SELECT lon F... speeltuin" />
-                <marker date="1510308218728" expanded="true" signature="8221:8277" ph="SELECT locat... speeltuin" />
-                <marker date="1510308218728" expanded="true" signature="8455:8504" ph="SELECT speel... speeltuin" />
-                <marker date="1510308218728" expanded="true" signature="8683:8747" ph="SELECT ageca... speeltuin" />
-                <marker date="1510308218728" expanded="true" signature="9163:9208" ph="SELECT autho... speeltuin" />
-                <marker date="1510308218728" expanded="true" signature="9445:9480" ph="SELECT naam user" />
-                <marker date="1510308218728" expanded="true" signature="9722:9758" ph="SELECT email... user" />
-                <marker date="1510308218728" expanded="true" signature="9962:10009" ph="SELECT modif... speeltuin" />
-                <marker date="1510308218728" expanded="true" signature="10291:10333" ph="SELECT publi... speeltuin" />
-                <marker date="1510308218728" expanded="true" signature="10698:10746" ph="UPDATE speel... " />
-                <marker date="1510308218728" expanded="true" signature="10826:10874" ph="UPDATE speel... " />
-                <marker date="1510308218728" expanded="true" signature="11173:11507" ph="INSERT INTO speeltuin... " />
-                <marker date="1510308218728" expanded="true" signature="11800:12126" ph="UPDATE speel... " />
-                <marker date="1510308218728" expanded="true" signature="12447:12495" ph="UPDATE speel... " />
-                <marker date="1510308218728" expanded="true" signature="12447:12538" ph="UPDATE speel... " />
-                <marker date="1510308218728" expanded="true" signature="12657:12833" ph="SELECT voorz... speeltuin_voorziening" />
-                <marker date="1510308218728" expanded="true" signature="13101:13158" ph="DELETE FROM " />
-                <marker date="1510308218728" expanded="true" signature="13335:13422" ph="INSERT INTO speeltuin_voorziening... " />
-                <marker date="1510308218728" expanded="true" signature="13533:13570" ph="SELECT * FRO... speeltuin" />
-                <marker date="1510308218728" expanded="true" signature="14317:14458" ph="SELECT url F... bestand" />
-                <marker date="1510308218728" expanded="true" signature="14635:14737" ph="INSERT INTO bestand... " />
-                <marker date="1510308218728" expanded="true" signature="14872:14953" ph="INSERT INTO speeltuin_bestand... " />
-                <marker date="1510308218728" expanded="true" signature="15063:15105" ph="SELECT id FR... bestand" />
-                <marker date="1510308218728" expanded="true" signature="15213:15246" ph="DELETE FROM " />
-                <marker date="1510308218728" expanded="true" signature="15293:15344" ph="DELETE FROM " />
-                <marker date="1510308218728" expanded="true" signature="15442:15491" ph="UPDATE speel... " />
-                <marker date="1510308218728" expanded="true" signature="15596:15641" ph="SELECT statu... speeltuin" />
-                <marker date="1510308218728" expanded="true" signature="15881:15916" ph="DELETE FROM " />
-                <marker date="1510308218728" expanded="true" signature="15960:16017" ph="DELETE FROM " />
-                <marker date="1510308218728" expanded="true" signature="16094:16158" ph="SELECT besta... speeltuin_bestand" />
-                <marker date="1510308218728" expanded="true" signature="16313:16356" ph="SELECT full_... bestand" />
-                <marker date="1510308218728" expanded="true" signature="16482:16515" ph="DELETE FROM " />
-                <marker date="1510308218728" expanded="true" signature="16562:16613" ph="DELETE FROM " />
-                <marker date="1510308218728" expanded="true" signature="16710:16769" ph="SELECT times... speeltuin" />
-                <marker date="1510308218728" expanded="true" signature="17016:17066" ph="SELECT openi... speeltuin" />
-                <marker date="1510308218728" expanded="true" signature="17282:17328" ph="SELECT vergo... speeltuin" />
+                <marker date="1510310519660" expanded="true" signature="8977:9021" ph="..." />
+                <marker date="1510310519660" expanded="true" signature="9068:9112" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="view.tpl.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/tpl/view.tpl.php">
+      <file leaf-file-name="speeltuinzoeker.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/css/speeltuinzoeker.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
-              <caret line="68" column="25" lean-forward="false" selection-start-line="68" selection-start-column="25" selection-end-line="68" selection-end-column="25" />
+            <state relative-caret-position="209">
+              <caret line="323" column="23" lean-forward="true" selection-start-line="323" selection-start-column="23" selection-end-line="323" selection-end-column="23" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="edit.tpl.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/admin/tpl/edit.tpl.php">
+      <file leaf-file-name="speeltuinzoeker-responsive.css" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/css/speeltuinzoeker-responsive.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="358" column="16" lean-forward="false" selection-start-line="358" selection-start-column="16" selection-end-line="358" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="photo.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/photo.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="406">
-              <caret line="121" column="92" lean-forward="true" selection-start-line="121" selection-start-column="26" selection-end-line="121" selection-end-column="92" />
-              <folding>
-                <marker date="1510308828328" expanded="true" signature="2746:2754" ph="é" />
-                <marker date="1510308828328" expanded="true" signature="2754:2762" ph="é" />
-                <marker date="1510308828328" expanded="true" signature="3317:3325" ph="é" />
-                <marker date="1510308828328" expanded="true" signature="3325:3333" ph="é" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="photo.tpl.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/tpl/photo.tpl.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="83" column="23" lean-forward="true" selection-start-line="79" selection-start-column="8" selection-end-line="83" selection-end-column="23" />
-              <folding>
-                <element signature="e#2487#2495#0#HTML" expanded="true" />
-                <element signature="e#2495#2503#0#HTML" expanded="true" />
-                <marker date="1510309204201" expanded="true" signature="454:628" ph="..." />
-                <marker date="1510309204201" expanded="true" signature="713:853" ph="..." />
-                <marker date="1510309204201" expanded="true" signature="940:1087" ph="..." />
-                <marker date="1510309204201" expanded="true" signature="1261:1365" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_del_photo.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/_del_photo.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-172">
-              <caret line="12" column="28" lean-forward="false" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
+            <state relative-caret-position="392">
+              <caret line="49" column="28" lean-forward="false" selection-start-line="49" selection-start-column="28" selection-end-line="49" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -175,6 +69,8 @@
       <find>search-</find>
       <find>BASE_URL</find>
       <find>Bekijk</find>
+      <find>toggleFilterDiv</find>
+      <find>toggleFilter</find>
     </findStrings>
     <dirStrings>
       <dir>C:\xampp\htdocs\speeltuinzoeker-git</dir>
@@ -214,13 +110,10 @@
         <option value="$PROJECT_DIR$/admin/tpl/review.tpl.php" />
         <option value="$PROJECT_DIR$/datamodel/changes.sql" />
         <option value="$PROJECT_DIR$/lib/auth.class.php" />
-        <option value="$PROJECT_DIR$/css/speeltuinzoeker-responsive.css" />
         <option value="$PROJECT_DIR$/admin/view.php" />
         <option value="$PROJECT_DIR$/admin/inc/header.php" />
         <option value="$PROJECT_DIR$/tpl/header.tpl.php" />
-        <option value="$PROJECT_DIR$/tpl/index.tpl.php" />
         <option value="$PROJECT_DIR$/tpl/detail.tpl.php" />
-        <option value="$PROJECT_DIR$/css/speeltuinzoeker.css" />
         <option value="$PROJECT_DIR$/atoz.php" />
         <option value="$PROJECT_DIR$/tpl/atoz.tpl.php" />
         <option value="$PROJECT_DIR$/cfg/example.config.php" />
@@ -234,6 +127,9 @@
         <option value="$PROJECT_DIR$/admin/_del_photo.php" />
         <option value="$PROJECT_DIR$/admin/tpl/photo.tpl.php" />
         <option value="$PROJECT_DIR$/admin/tpl/edit.tpl.php" />
+        <option value="$PROJECT_DIR$/css/speeltuinzoeker.css" />
+        <option value="$PROJECT_DIR$/tpl/index.tpl.php" />
+        <option value="$PROJECT_DIR$/css/speeltuinzoeker-responsive.css" />
       </list>
     </option>
   </component>
@@ -312,18 +208,12 @@
             <path>
               <item name="speeltuinzoeker-git" type="b2602c69:ProjectViewProjectNode" />
               <item name="speeltuinzoeker-git" type="462c0819:PsiDirectoryNode" />
-              <item name="cfg" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="speeltuinzoeker-git" type="b2602c69:ProjectViewProjectNode" />
               <item name="speeltuinzoeker-git" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="speeltuinzoeker-git" type="b2602c69:ProjectViewProjectNode" />
-              <item name="speeltuinzoeker-git" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-              <item name="third_party" type="462c0819:PsiDirectoryNode" />
+              <item name="tpl" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -494,7 +384,7 @@
       <workItem from="1508500674832" duration="612000" />
       <workItem from="1510043776777" duration="3076000" />
       <workItem from="1510047339857" duration="72000" />
-      <workItem from="1510305531825" duration="2768000" />
+      <workItem from="1510305531825" duration="4405000" />
     </task>
     <task id="LOCAL-00001" summary="Show map on home screen, first steps">
       <created>1501840612407</created>
@@ -657,11 +547,18 @@
       <option name="project" value="LOCAL" />
       <updated>1510047394103</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Admin may now edit (photos)">
+      <created>1510309328166</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1510309328166</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="47792000" />
+    <option name="totallyTimeSpent" value="49429000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
@@ -678,7 +575,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23880596" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23880596" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26978818" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1391258" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -727,7 +624,8 @@
     <MESSAGE value="og:image + option to deactivate active speeltuinen" />
     <MESSAGE value="Pimped the A-Z page!" />
     <MESSAGE value="Twitter-lib" />
-    <option name="LAST_COMMIT_MESSAGE" value="Twitter-lib" />
+    <MESSAGE value="Admin may now edit (photos)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Admin may now edit (photos)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -914,13 +812,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/css/speeltuinzoeker-responsive.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="782">
-          <caret line="61" column="28" lean-forward="false" selection-start-line="61" selection-start-column="28" selection-end-line="61" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/admin/inc/header.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
@@ -939,13 +830,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2669">
           <caret line="157" column="34" lean-forward="false" selection-start-line="156" selection-start-column="0" selection-end-line="157" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/speeltuinzoeker.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7089">
-          <caret line="417" column="1" lean-forward="false" selection-start-line="417" selection-start-column="1" selection-end-line="417" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -968,16 +852,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="493">
           <caret line="29" column="53" lean-forward="false" selection-start-line="29" selection-start-column="53" selection-end-line="29" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tpl/index.tpl.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="815">
-          <caret line="210" column="96" lean-forward="false" selection-start-line="210" selection-start-column="96" selection-end-line="210" selection-end-column="96" />
-          <folding>
-            <marker date="1510043792631" expanded="true" signature="9141:9185" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1099,14 +973,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/edit.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="26" column="1" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="26" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/admin/_del_photo.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-172">
@@ -1147,6 +1013,41 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="250">
           <caret line="358" column="16" lean-forward="false" selection-start-line="358" selection-start-column="16" selection-end-line="358" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/edit.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="26" column="1" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="26" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tpl/index.tpl.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="285" column="28" lean-forward="false" selection-start-line="285" selection-start-column="28" selection-end-line="285" selection-end-column="28" />
+          <folding>
+            <marker date="1510310519660" expanded="true" signature="8977:9021" ph="..." />
+            <marker date="1510310519660" expanded="true" signature="9068:9112" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/speeltuinzoeker.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="323" column="23" lean-forward="true" selection-start-line="323" selection-start-column="23" selection-end-line="323" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/speeltuinzoeker-responsive.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="392">
+          <caret line="49" column="28" lean-forward="false" selection-start-line="49" selection-start-column="28" selection-end-line="49" selection-end-column="28" />
           <folding />
         </state>
       </provider>

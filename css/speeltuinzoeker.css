@@ -323,13 +323,7 @@ th {
 #toggleFilterDiv {
 	position: relative;
 	top: 94px;
-	left: -80px;
-}
-#toggleFilterDiv-resp {
-	display: none;
-	position: relative;
-	top: 94px;
-	left: 150px;
+	left: 250px;
 	z-index: 1000;
 }
 #map-filter-div {

@@ -18,8 +18,7 @@
 </div>
 
 <div id="map-container">
-    <button id="toggleFilterDiv" class="btn btn-default">Filter&nbsp;<i id="filterToggleIcon" class="fa fa-toggle-right" aria-hidden="true"></i></button>
-    <button id="toggleFilterDiv-resp" class="btn btn-default">Filter&nbsp;<i id="filterToggleIcon-resp" class="fa fa-toggle-down" aria-hidden="true"></i></button>
+    <button id="toggleFilterDiv" class="btn btn-default">Filter&nbsp;<i id="filterToggleIcon" class="fa fa-toggle-down" aria-hidden="true"></i></button>
     <div id="map-filter-div">
         <form id="filter-form-type">
             <label>Type speeltuin</label><br>
@@ -284,12 +283,7 @@
     $('#toggleFilterDiv').click(function(event) {
     	event.preventDefault();
     	$('#map-filter-div').toggle("slow");
-    	$('#filterToggleIcon').toggleClass('fa-toggle-right fa-toggle-left');
-    });
-    $('#toggleFilterDiv-resp').click(function(event) {
-    	event.preventDefault();
-    	$('#map-filter-div').toggle("slow");
-    	$('#filterToggleIcon-resp').toggleClass('fa-toggle-down fa-toggle-up');
+    	$('#filterToggleIcon').toggleClass('fa-toggle-down fa-toggle-up');
     });
 
     $('#filter-form-type input').click(function(event) {
