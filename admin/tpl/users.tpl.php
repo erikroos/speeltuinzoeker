@@ -49,7 +49,7 @@ include_once "./inc/header.php";
 				<th>E-mail</th>
 				<th>Aantal logins</th>
 				<th>Laatste login</th>
-				<?php if ($active == 1): ?><th></th><?php endif; ?>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -59,7 +59,11 @@ include_once "./inc/header.php";
 				<td><?php echo $row["email"]; ?></td>
 				<td><?php echo $row["nr_of_logins"]; ?></td>
 				<td><?php echo $row["last_login"]; ?></td>
-				<?php if ($active == 1): ?><td><a href="deactivate.php?id=<?php echo $row["id"]; ?>">Deactiveer</a></td><?php endif; ?>
+				<?php if ($active == 0): ?>
+					<td><a href="users.php?del=<?php echo $row["id"]; ?>&start=<?php echo $start; ?>&active=<?php echo $active;?>">Verwijder</a></td>
+				<?php else: ?>
+					<td><a href="deactivate.php?id=<?php echo $row["id"]; ?>&start=<?php echo $start; ?>&active=<?php echo $active;?>">Deactiveer</a></td>
+				<?php endif; ?>
 			</tr>
 		<?php endforeach; ?>
 		</tbody>

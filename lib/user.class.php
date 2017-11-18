@@ -93,4 +93,8 @@ class User
 	public function deactivate() {
 		$this->db->query(sprintf("UPDATE user SET active = 0 WHERE id = %d", $this->id));
 	}
+	
+	public function delete() {
+		$this->db->query(sprintf("DELETE FROM user WHERE id = %d", $this->id));
+	}
 }

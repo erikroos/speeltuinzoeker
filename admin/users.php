@@ -2,6 +2,17 @@
 require_once "../cfg/config.php";
 require_once "./inc/functions.php";
 
+$db = new Db();
+$db->connect();
+
+if (isset($_GET["del"])) {
+	$delId = get_request_value("del", 0);
+	if ($delId > 0) {
+		$user = new User($db, $delId);
+		$user->delete();
+	}
+}
+
 $start = get_request_value("start", 0);
 $size = get_request_value("size", 10);
 $active = get_request_value("active", 1);
@@ -12,9 +23,6 @@ if ($active == 0) {
 } else {
 	$pageTitle = "Actieve gebruikers";
 }
-
-$db = new Db();
-$db->connect();
 
 $user = new User($db);
 
