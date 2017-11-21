@@ -348,7 +348,7 @@ class Speeltuin
 	}
 
 	public function insertOrUpdate($name, $link, $omschrijving, $locatieOmschrijving, $lat, $lon, $public, $type,
-                                   $agecat1, $agecat2, $agecat3, $openingstijden, $vergoeding, $userId, $isUser) {
+                                   $agecat1, $agecat2, $agecat3, $openingstijden, $vergoeding, $userId, $isUser = true) {
 		if ($this->id == 0) {
 			$this->db->query(sprintf("INSERT INTO speeltuin 
 					(naam, link, omschrijving, locatie_omschrijving, lat, lon, status_id, author_id, `public`, 

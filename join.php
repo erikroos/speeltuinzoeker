@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$agecat3 = true;
 	
 	$speeltuin->insertOrUpdate($name, $link, $omschrijving, $locatieOmschrijving, $lat, $lon, $public, $type,
-			$agecat1, $agecat2, $agecat3, $openingstijden, $vergoeding, 2);
+			$agecat1, $agecat2, $agecat3, $openingstijden, $vergoeding, 2, true);
 	
 	// Photo
 	$uploadErrors = [];
@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			} else {
 				$uploadErrors[] = $detailError;
 			}
-		} else {
+		} else if ($_FILES["photo"]["error"] != 4) {
 			$uploadErrors[] = "Fout bij uploaden bestand " . $fileName . " (code: " . $_FILES["photo"]["error"] . ")";
 		}
 	}
