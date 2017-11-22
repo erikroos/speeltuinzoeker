@@ -156,7 +156,7 @@ if ($id == 0) {
 		$pageTitle = "Bekijk/bewerk speeltuin " . $name;
 	} else { // admin
 		if ($status_id == 0) {
-			$pageTitle = "Keur speeltuin " . $name . " goed of af";
+			$pageTitle = "Bekijk/bewerk of keur speeltuin " . $name . " goed of af";
 		} else if ($status_id == 1 || $status_id == 2) {
 			$pageTitle = "Bekijk/bewerk speeltuin " . $name;
 		}

@@ -14,12 +14,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$user->deactivate();
 	
 	$email = $user->getEmail();
-	if ($email != null) {
-		$reason = get_request_value("reason", "");
+	$reason = get_request_value("reason", "");
+	
+	if ($email != null && !empty($reason)) {
 		Mail::sendAccountDeactivated($user->getName(), $reason, $email);
 	}
 	
-	header("users.php?active=0");
+	header("Location: users.php?active=0");
+	exit;
 }
 
 include "tpl/deactivate.tpl.php";

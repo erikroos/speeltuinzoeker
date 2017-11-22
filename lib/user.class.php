@@ -57,6 +57,10 @@ class User
 	
 	// Instance functions:
 	
+	public function getId() {
+		return $this->id;
+	}
+	
 	public function getName() {
 		$res = $this->db->query(sprintf("SELECT naam FROM user WHERE id = %d", $this->id));
 		if ($res !== false) {

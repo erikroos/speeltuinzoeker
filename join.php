@@ -9,6 +9,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	
 	$speeltuin = new Speeltuin($db, 0);
 	
+	// Defaultgebruiker
+	$user = new User($db);
+	$user->getByEmail("tom.erik.roos@gmail.com");
+	
 	$name = sanitizeInput(get_request_value("naam", ""));
 	$link = "";
 	$openingstijden = "";
@@ -24,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$agecat3 = true;
 	
 	$speeltuin->insertOrUpdate($name, $link, $omschrijving, $locatieOmschrijving, $lat, $lon, $public, $type,
-			$agecat1, $agecat2, $agecat3, $openingstijden, $vergoeding, 2, true);
+			$agecat1, $agecat2, $agecat3, $openingstijden, $vergoeding, $user->getId(), true);
 	
 	// Photo
 	$uploadErrors = [];
@@ -58,8 +62,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		}
 	}
 	
-	// Mail aan gebruiker Erik Roos (ID 2)
-	Mail::sendNewProposal($speeltuin);
+	// Mail aan defaultgebruiker
+	Mail::sendNewProposal($speeltuin, $user->getEmail());
 	
 	$feedback = "Bedankt voor je aanmelding! " . 
 		"Deze wordt gecontroleerd, waar nodig aangevuld, " .

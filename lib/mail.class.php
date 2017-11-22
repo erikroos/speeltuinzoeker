@@ -62,9 +62,9 @@ class Mail {
 		
 	}
 	
-	public static function sendNewProposal($speeltuin) {
+	public static function sendNewProposal($speeltuin, $defaultUserEmail) {
 		$message = "<p>Beste Erik,</p><p>Een bezoeker heeft een nieuwe speeltuin \"" . $speeltuin->getName() . "\" voorgesteld.</p>" . "<p><a href='" . BASE_URL . "admin/edit.php?id=" . $speeltuin->getId() . "'>Bewerk deze speeltuin</a></p>";
-		self::sendMail("tom.erik.roos@gmail.com", "Nieuwe voorgestelde speeltuin " . $speeltuin->getName(), $message);
+		self::sendMail($defaultUserEmail, "Nieuwe voorgestelde speeltuin " . $speeltuin->getName(), $message);
 	}
 	
 	public static function sendAccountDeactivated($userName, $reason, $email) {
@@ -93,7 +93,7 @@ class Mail {
 			$message = "<p>Beste " . $speeltuin->getAuthorName() . ",</p>" .
 					"<p>Je speeltuin \"" . $speeltuin->getName() . "\" is helaas afgekeurd.</p>" .
 					"<p>De reden hiervan is: " . $_POST["afkeur_reden"] . "</p>" .
-					"<p>De speeltuin staat nog steeds in je <a href='" . BASE_URL . "admin/view.php?user'>overzicht</a>." .
+					"<p>De speeltuin staat nog steeds in je <a href='" . BASE_URL . "admin/view.php?user'>overzicht</a>. " .
 					"Je kunt hem eventueel bewerken en opslaan, zodat we hem opnieuw kunnen beoordelen.</p>" .
 					"<p>Met vriendelijke groeten,<br>" .
 					"Het team van Speeltuinzoeker.nl</p>";
