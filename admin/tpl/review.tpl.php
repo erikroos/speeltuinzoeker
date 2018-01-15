@@ -80,7 +80,7 @@ include_once "./inc/header.php";
 					</a>
 				</td>
 				<?php if ($isAdmin && $status == 2): ?>
-				<td><a href="review.php?del=<?php echo $row["id"]; ?>&status=2&start=<?php echo $start; ?>" onclick="return confirm('Weet je het zeker?')">Verwijder</a></td>
+				<td><a href="review.php?del=<?php echo $row["id"]; ?>&status=2&start=<?php echo $start; ?>" onclick="return confirm('Weet je het zeker?');">Verwijder</a></td>
 				<?php endif; ?>
 			</tr>
 		<?php endforeach; ?>

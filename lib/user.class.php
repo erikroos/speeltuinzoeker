@@ -81,6 +81,26 @@ class User
 		return null;
 	}
 	
+	public function getNrOfLogins() {
+		$res = $this->db->query(sprintf("SELECT nr_of_logins FROM user WHERE id = %d", $this->id));
+		if ($res !== false) {
+			if ($row = $res->fetch_assoc()) {
+				return $row["nr_of_logins"];
+			}
+		}
+		return "Onbekend";
+	}
+	
+	public function getLastLogin() {
+		$res = $this->db->query(sprintf("SELECT last_login FROM user WHERE id = %d", $this->id));
+		if ($res !== false) {
+			if ($row = $res->fetch_assoc()) {
+				return $row["last_login"];
+			}
+		}
+		return "Onbekend";
+	}
+	
 	public function setName($name) {
 		$this->db->query(sprintf("UPDATE user SET naam = \"%s\" WHERE id = %d", $name, $this->id));
 	}
@@ -99,6 +119,16 @@ class User
 	}
 	
 	public function delete() {
+		
+		$defaultUser = new User($this->db);
+		$defaultUser->getByEmail("tom.erik.roos@gmail.com");
+		
+		// Zet speeltuinen over naar default-user
+		$this->db->query(sprintf("UPDATE speeltuin SET author_id = %d WHERE author_id = %d", $this->id, $defaultUser->getId()));
+		
+		// Reviews ook over naar default-user (TODO is dit wenselijk?)
+		$this->db->query(sprintf("UPDATE review SET user_id = %d WHERE user_id = %d", $this->id, $defaultUser->getId()));
+		
 		$this->db->query(sprintf("DELETE FROM user WHERE id = %d", $this->id));
 	}
 }

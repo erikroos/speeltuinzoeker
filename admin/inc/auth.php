@@ -7,7 +7,8 @@ $pagesWithoutAuth = [
 		"logout.php",
 		"register.php",
 		"activate.php",
-		"forgot.php"
+		"forgot.php",
+		"deleted.php"
 ];
 
 $uriParts = explode("/", $_SERVER["SCRIPT_NAME"]);

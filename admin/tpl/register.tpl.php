@@ -5,6 +5,11 @@ include_once "./inc/header.php";
 
 <h1>Maak een account aan</h1>
 
+<p><em>We hoeven niet veel van je te weten en we gaan zorgvuldig om met de gegevens die we wel nodig hebben.<br>
+Het enige wat we van je opslaan is een zelfgekozen naam, je e-mailadres, het aantal keer en de laatste keer dat je was ingelogd.<br>
+Deze gegevens delen we met niemand. Je mag ze altijd inzien en je kunt op elk moment je account weer verwijderen.<br>
+En wees niet bang: we gaan je nooit spammen met nieuwsbrieven, tevredenheidsonderzoeken en andere ellende :)</em></p>
+
 <?php if (isset($feedback)): ?>
 <p class="notice"><?php echo $feedback; ?></p>
 <?php endif; ?>
@@ -13,7 +18,7 @@ include_once "./inc/header.php";
 <form method="post" action="register.php">
 
 	<div class="form-group">
-		<label for="naam">Naam</label>
+		<label for="naam">Zelfgekozen naam</label>
 		<input type="text" id="naam" name="naam" value="<?php echo $name; ?>" class="form-control" />
 	</div>
 

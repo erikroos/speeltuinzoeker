@@ -13,7 +13,7 @@ class Mail {
 		mail($to, $subject, $message, $headers);
 		
 		// test:
-		//echo $message;die;
+		echo $message;die;
 	}
 	
 	// Mail templates:
@@ -160,5 +160,11 @@ class Mail {
 			"Verzoek tot wijziging speeltuin " . $speeltuin->getName(),
 			$message, "info@speeltuinzoeker.nl," . $poster->getEmail(), $poster->getEmail());
 		
+	}
+	
+	public static function sendAccountDeletedToAdmin($naam, $email) {
+		$message = "<p>Gebruiker " . $naam . " (e-mail: " . $email . ") heeft zijn/haar account opgeheven.</p>" . 
+				"<p>Speeltuinen en beoordelingen zijn overgezet naar de standaardgebruiker tom.erik.roos@gmail.com.</p>";
+		self::sendMail(ADMIN_MAIL, "Account " . $naam . " opgeheven", $message);
 	}
 }
