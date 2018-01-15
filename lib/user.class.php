@@ -124,10 +124,10 @@ class User
 		$defaultUser->getByEmail("tom.erik.roos@gmail.com");
 		
 		// Zet speeltuinen over naar default-user
-		$this->db->query(sprintf("UPDATE speeltuin SET author_id = %d WHERE author_id = %d", $this->id, $defaultUser->getId()));
+		$this->db->query(sprintf("UPDATE speeltuin SET author_id = %d WHERE author_id = %d", $defaultUser->getId(), $this->id));
 		
 		// Reviews ook over naar default-user (TODO is dit wenselijk?)
-		$this->db->query(sprintf("UPDATE review SET user_id = %d WHERE user_id = %d", $this->id, $defaultUser->getId()));
+		$this->db->query(sprintf("UPDATE review SET user_id = %d WHERE user_id = %d", $defaultUser->getId(), $this->id));
 		
 		$this->db->query(sprintf("DELETE FROM user WHERE id = %d", $this->id));
 	}
