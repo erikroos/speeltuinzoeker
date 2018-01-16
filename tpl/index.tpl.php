@@ -11,7 +11,7 @@
 
 <div id="searchbar">
     <form id="searchform">
-        <input type="text" id="locatie_omschrijving" name="locatie_omschrijving" class="form-control" value="<?php echo $defaultLocationString; ?>" />
+        <input type="text" id="locatie_omschrijving" name="locatie_omschrijving" class="form-control" placeholder="<?php echo $defaultLocationString; ?>" value="" />
         <button id="place-marker" value="Zet marker op omschreven locatie" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i>&nbsp;Zoek</button>
         <input type="submit" style="display: none" />
     </form>
@@ -273,12 +273,6 @@
         event.preventDefault();
         searchForPlace();
         $('#locatie_omschrijving').blur();
-    });
-
-    $('#locatie_omschrijving').click(function(event) {
-        if ($('#locatie_omschrijving').val() == "<?php echo $defaultLocationString; ?>") {
-    		$('#locatie_omschrijving').val("");
-        }
     });
 
     $('#toggleFilterDiv').click(function(event) {
