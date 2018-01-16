@@ -14,18 +14,12 @@
 		Daar kun je zelf speeltuinen aanmaken, bewerken en foto's toevoegen.
 		Ook kun je, als ingelogde gebruiker, andere speeltuinen beoordelen.<br>
 		Maak vandaag nog snel en eenvoudig je <a href="<?php echo BASE_URL; ?>admin/register.php">account</a> aan!<br>
+        Je kunt eerst nog even <a href="<?php echo BASE_URL; ?>privacy">lezen hoe we met je gegevens omgaan</a>.
 	</p>
 	<p>
-		<strong>Privacy</strong><br>
-		We hoeven niet veel van je te weten en we gaan zorgvuldig om met de gegevens die we wel nodig hebben.<br>
-		Het enige wat we van je opslaan is een zelfgekozen naam, je e-mailadres, het aantal keer en de laatste keer dat je was ingelogd.<br>
-		Deze gegevens delen we met niemand. Je mag ze altijd inzien en je kunt op elk moment je account weer verwijderen.<br>
-		En wees niet bang: we gaan je nooit spammen met nieuwsbrieven, tevredenheidsonderzoeken en andere ellende :)
-	</p>
-	<p>
-		<strong>Toch liever geen account aanmaken?</strong><br>
+		<strong>Liever geen account aanmaken?</strong><br>
 		Heb je geen zin om een account aan te maken maar wil je wel een speeltuin voorstellen?<br>
-		Dat kan natuurlijk ook! <a id="quickformOpenLink" href="#">Open het snelle formulier.</a>
+		Dat kan natuurlijk ook! <a id="quickformOpenLink" href="#">Open het snelle, anonieme formulier.</a>
 	</p>
 </div>
 
