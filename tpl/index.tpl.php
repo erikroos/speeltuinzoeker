@@ -5,8 +5,18 @@
     <?php include "latestbox.tpl.php"; ?>
 </div>
 
+<div id="home-about">
+    <h1>Makkelijk, snel en veilig speeltuinen vinden. Waar je ook bent.</h1>
+    <p>
+        Speeltuinzoeker.nl is d&eacute; (mobiele) website om snel en makkelijk een (gratis) speeltuin in de buurt te kunnen vinden.<br>
+        Speeltuinen zijn vaak goed verstopt, je moet ze maar net weten te vinden.
+        Op deze website voegen ouders z&eacute;lf speeltuinen toe die ze goed kennen.<br>
+        Zo vullen we samen de website en kan je hier altijd een speeltuin in de buurt vinden, ook als je bijvoorbeeld op vakantie bent.<br>
+        Gebruik de zoekbalk en de kaart hieronder om direct te beginnen!
+    </p>
+</div>
 <div id="payoff">
-    <h1>Makkelijk, snel en veilig speeltuinen vinden.<br>Waar je ook bent.</h1>
+    <h1>Makkelijk, snel en veilig speeltuinen vinden. Waar je ook bent.</h1>
 </div>
 
 <div id="searchbar">
