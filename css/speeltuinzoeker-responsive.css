@@ -60,6 +60,10 @@
         padding-bottom: 0px;
         margin-bottom: 10px;
     }
+    
+    #affiliate-bol {
+    	display: none; /* TODO: schalen */
+    }
 }
 
 @media (min-width: 601px) {

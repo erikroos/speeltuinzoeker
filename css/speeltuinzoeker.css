@@ -432,3 +432,7 @@ span.stars span {
 	padding: 10px;
 	margin-bottom: 10px;
 }
+
+#affiliate-bol {
+	clear: left;
+}

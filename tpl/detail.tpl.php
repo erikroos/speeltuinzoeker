@@ -11,6 +11,13 @@
 	<p><a href="<?php echo BASE_URL; ?>?speeltuin=<?php echo $id; ?>"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i>&nbsp;Startscherm</a></p>
 </div>
 
+<div id="affiliate-bol">
+	<a href="https://partnerprogramma.bol.com/click/click?p=1&t=url&s=53838&url=https%3A//www.bol.com/nl/m/sport-vrije-tijd/outdoor/index.html&f=BAN&name=Sport algemeen" target="_blank">
+		<img src="https://www.bol.com/nl/upload/banners/sport_141108_728x90.jpg" width="728" height="90" alt="Sport algemeen"  />
+	</a>
+	<img src="https://partnerprogramma.bol.com/click/impression?p=1&s=53838&t=url&f=BAN&name=Sport algemeen" width="1" height="1" />
+</div>
+
 <div id="postFeedback">
 	<?php if (isset($reviewed)): ?>
         <?php if ($reviewed): ?>
@@ -30,7 +37,7 @@
 </div>
 
 <div id="details">
-	<h3><?php echo $speeltuin->getName(); ?></h3>
+	<h1><?php echo $speeltuin->getName(); ?></h1>
 	<p>Aangemaakt door <?php echo $speeltuin->getAuthorName(); ?>, laatst bewerkt: <?php echo $speeltuin->getLastModified(); ?></p>
 	
 	<?php if (isset($_SESSION["user_id"])): ?>

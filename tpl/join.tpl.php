@@ -1,14 +1,22 @@
 <?php $indexTitle = "Speeltuinzoeker.nl - Meedoen"; ?>
 <?php include "header.tpl.php"; ?>
 
+<div id="affiliate-bol">
+	<a href="https://partnerprogramma.bol.com/click/click?p=1&t=url&s=53838&url=https%3A//www.bol.com/nl/m/baby/babykleding/index.html&f=BAN&name=Baby &amp; peuterkleding algemeen" target="_blank">
+		<img src="https://www.bol.com/nl/upload/banners/babykinderkleding_141126_468x60.jpg" width="468" height="60" alt="Baby &amp; peuterkleding algemeen"  />
+	</a>
+	<img src="https://partnerprogramma.bol.com/click/impression?p=1&s=53838&t=url&f=BAN&name=Baby &amp; peuterkleding algemeen" width="1" height="1" />
+	<div class="betweenbar"></div>
+</div>
+
 <?php if (isset($feedback)): ?>
 	<div id="suggestionFeedback" class="notice"><?php echo $feedback; ?></div>
 	<div class="betweenbar"></div>
 <?php endif; ?>
 
 <div id="details">
+	<h1>Doe mee(r) met Speeltuinzoeker!</h1>
 	<p>
-		<strong>Doe mee(r) met Speeltuinzoeker!</strong><br>
 		Deze website is voor en door de gebruikers zelf. We helpen elkaar door speeltuinen aan te maken, zodat de site altijd zo volledig en actueel mogelijk is.<br>
 		Maak een <a href="<?php echo BASE_URL; ?>admin/register.php">account</a> aan en krijg toegang tot Mijn Speeltuinzoeker.<br>
 		Daar kun je zelf speeltuinen aanmaken, bewerken en foto's toevoegen.
