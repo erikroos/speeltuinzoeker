@@ -91,16 +91,12 @@ include_once "./inc/header.php";
 		<label for="omschrijving">Omschrijving van de locatie (bijv. Fazantweg, Paterswolde)</label>
 		<textarea id="locatie_omschrijving" name="locatie_omschrijving" rows="1" maxlength="1000" class="form-control"><?php echo $locatieOmschrijving; ?></textarea>
 	</div>
-	
-	<?php if ($isUser): ?>
-		<button id="place-marker" value="Zet marker op hierboven omschreven locatie" class="btn btn-default">Zet marker op hierboven omschreven locatie</button>
-	<?php endif; ?>
+
+    <button id="place-marker" value="Zet marker op hierboven omschreven locatie" class="btn btn-default">Zet marker op hierboven omschreven locatie</button>
 	
 	<div id="map-div-edit"></div>
 	
-	<?php if ($isUser): ?>
-		<p><em>Staat de groene marker nog niet op de goede plaats?</em> Sleep hem er dan heen.</p>
-	<?php endif; ?>
+	<p><em>Staat de groene marker nog niet op de goede plaats?</em> Sleep hem er dan heen.</p>
 	
 	<div class="form-group">
 		<label for="lat">Breedtegraad</label>

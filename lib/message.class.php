@@ -60,11 +60,11 @@ class Message
 	public function insertOrUpdate($body) {
 		if ($this->id == 0) {
 			$this->db->query(sprintf("INSERT INTO bericht (body, created_on) VALUES (\"%s\", NOW())",
-					$body));
+                $this->db->realEscapeString($body)));
 			$this->id = $this->db->getLatestId();
 		} else {
 			$this->db->query(sprintf("UPDATE bericht SET body = \"%s\", created_on = NOW() WHERE id = %d",
-					$body, $this->id));
+                $this->db->realEscapeString($body), $this->id));
 		}
 		return $this->id;
 	}

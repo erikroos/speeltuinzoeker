@@ -1,4 +1,11 @@
 @media (min-width: 1px) and (max-width: 600px) {
+    #payoff {
+        display: block;
+    }
+    #home-about {
+        display: none;
+    }
+
     #latestbox {
         display: none;
     }

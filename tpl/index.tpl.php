@@ -5,13 +5,23 @@
     <?php include "latestbox.tpl.php"; ?>
 </div>
 
+<div id="home-about">
+    <h1>Makkelijk, snel en veilig speeltuinen vinden. Waar je ook bent.</h1>
+    <p>
+        Speeltuinzoeker.nl is d&eacute; (mobiele) website om snel en makkelijk een (gratis) speeltuin in de buurt te kunnen vinden.<br>
+        Speeltuinen zijn vaak goed verstopt, je moet ze maar net weten te vinden.
+        Op deze website voegen ouders z&eacute;lf speeltuinen toe die ze goed kennen.<br>
+        Zo vullen we samen de website en kan je hier altijd een speeltuin in de buurt vinden, ook als je bijvoorbeeld op vakantie bent.<br>
+        Gebruik de zoekbalk en de kaart hieronder om direct te beginnen!
+    </p>
+</div>
 <div id="payoff">
-    <h1>Makkelijk, snel en veilig speeltuinen vinden.<br>Waar je ook bent.</h1>
+    <h1>Makkelijk, snel en veilig speeltuinen vinden. Waar je ook bent.</h1>
 </div>
 
 <div id="searchbar">
     <form id="searchform">
-        <input type="text" id="locatie_omschrijving" name="locatie_omschrijving" class="form-control" value="<?php echo $defaultLocationString; ?>" />
+        <input type="text" id="locatie_omschrijving" name="locatie_omschrijving" class="form-control" placeholder="<?php echo $defaultLocationString; ?>" value="" />
         <button id="place-marker" value="Zet marker op omschreven locatie" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i>&nbsp;Zoek</button>
         <input type="submit" style="display: none" />
     </form>
@@ -67,18 +77,19 @@
     <div class="footer-column">
         <h4>Sitemap</h4>
         <nav class="sitemap">
-            <a href="./index.php">Home</a>
-            <a href="./atoz.php">Alle speeltuinen</a>
-            <a href="./about.php">Info</a>
-            <a href="./join.php">Meedoen</a>
-            <a href="./contact.php">Contact</a>
-            <a href="./admin/index.php">Mijn Speeltuinzoeker</a>
+            <a href="<?php echo BASE_URL; ?>">Home</a>
+            <a href="<?php echo BASE_URL; ?>atoz">Alle speeltuinen</a>
+            <a href="<?php echo BASE_URL; ?>over">Info</a>
+            <a href="<?php echo BASE_URL; ?>meedoen">Meedoen</a>
+            <a href="<?php echo BASE_URL; ?>privacy">Privacy</a>
+            <a href="<?php echo BASE_URL; ?>contact">Contact</a>
+            <a href="<?php echo BASE_URL; ?>admin/index.php">Mijn Speeltuinzoeker</a>
         </nav>
     </div>
     <div class="footer-column right">
         <h4>Colofon</h4>
         <p><strong>Adverteren?</strong> Jouw (indoor) speeltuin op deze site? Neem <a href="<?php echo BASE_URL; ?>contact">contact</a> op!</p>
-        <p>Speeltuinzoeker.nl gebruikt <strong>cookies</strong> om de site goed te laten werken.</p>
+        <p>Lees hoe we zorgvuldig omgaan met <a href="<?php echo BASE_URL; ?>privacy">privacy</a>.</p>
         <p>We doen ons uiterste best om deze site actueel, snel en veilig te houden. Kom je iets tegen wat niet klopt? Laat het ons weten!</p>
         <p><strong>&copy; <?php echo date("Y"); ?></strong> RO Online Solutions <a href="http://www.ro-os.nl">www.ro-os.nl</a><br>KvK 69736766, BTW NL102158228B01</p>
     </div>
@@ -272,12 +283,6 @@
         event.preventDefault();
         searchForPlace();
         $('#locatie_omschrijving').blur();
-    });
-
-    $('#locatie_omschrijving').click(function(event) {
-        if ($('#locatie_omschrijving').val() == "<?php echo $defaultLocationString; ?>") {
-    		$('#locatie_omschrijving').val("");
-        }
     });
 
     $('#toggleFilterDiv').click(function(event) {

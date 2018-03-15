@@ -74,6 +74,7 @@ if (!isset($indexDescription)) {
 		  	<a href="<?php echo BASE_URL; ?>atoz"><i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>&nbsp;Alle speeltuinen</a>
 		    <a href="<?php echo BASE_URL; ?>over"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;Info</a>
 		    <a href="<?php echo BASE_URL; ?>meedoen"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;Meedoen</a>
+            <a href="<?php echo BASE_URL; ?>privacy"><i class="fa fa-user-secret" aria-hidden="true"></i>&nbsp;Privacy</a>
 		    <a href="<?php echo BASE_URL; ?>contact"><i class="fa fa-comments" aria-hidden="true"></i>&nbsp;Contact</a>
 		    <a href="<?php echo BASE_URL; ?>admin/index.php" class="admin"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;Mijn Speeltuinzoeker</a>
 		  </div>
@@ -85,6 +86,7 @@ if (!isset($indexDescription)) {
 		    <a href="<?php echo BASE_URL; ?>atoz"><i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>&nbsp;Alle speeltuinen</a>
 		    <a href="<?php echo BASE_URL; ?>over"><i class="fa fa-info-circle" aria-hidden="true"></i>&nbsp;Info</a>
 		    <a href="<?php echo BASE_URL; ?>meedoen"><i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp;Meedoen</a>
+            <a href="<?php echo BASE_URL; ?>privacy"><i class="fa fa-user-secret" aria-hidden="true"></i>&nbsp;Privacy</a>
 		    <a href="<?php echo BASE_URL; ?>contact"><i class="fa fa-comments" aria-hidden="true"></i>&nbsp;Contact</a>
 		    <a href="<?php echo BASE_URL; ?>admin/index.php" class="admin"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;Mijn Speeltuinzoeker</a>
 	    </div>

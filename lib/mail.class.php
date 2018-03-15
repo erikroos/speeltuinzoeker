@@ -13,7 +13,7 @@ class Mail {
 		mail($to, $subject, $message, $headers);
 		
 		// test:
-		echo $message;die;
+		//echo $message;die;
 	}
 	
 	// Mail templates:
