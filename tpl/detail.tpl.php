@@ -95,15 +95,24 @@
 	<?php if ($link != null): ?>
         <p><strong>Link</strong><br><a href="<?php echo $link; ?>"><?php echo $link; ?></a></p>
 	<?php endif; ?>
+	
+	<p><strong>(Adv.)</strong> Buitenspelen is nog leuker met het juiste <a href="https://partnerprogramma.bol.com/click/click?p=1&t=url&s=53838&f=TXL&url=https%3A%2F%2Fwww.bol.com%2Fnl%2Fm%2Fspeelgoed%2Fbuitenspeelgoed%2FsuggestionType%2Fcategory%2FsuggestedFor%2Fbuiten%2ForiginalSearchContext%2Fmedia_all%2ForiginalSection%2Fmain%2Findex.html%3F_requestid%3D1994306&name=buitenspeelgoed">buitenspeelgoed</a>!</p>
 </div>
 
 <div class="voorzieningen">
 	<h4>Wat is hier te doen?</h4>
-	<ul>
-        <?php foreach ($speeltuin->getVoorzieningen() as $voorziening): ?>
-            <li><?php echo $voorziening; ?></li>
-        <?php endforeach; ?>
-	</ul>
+	<?php $voorzieningen = $speeltuin->getVoorzieningen(); ?>
+	<?php if (sizeof($voorzieningen) > 0): ?>
+		<ul>
+	        <?php foreach ($voorzieningen as $voorziening): ?>
+	            <li><?php echo $voorziening; ?></li>
+	        <?php endforeach; ?>
+		</ul>
+	<?php else: ?>
+		<p>Het lijkt erop dat er nog geen voorzieningen bekend zijn bij deze speeltuin!
+		Ken je deze speeltuin en weet je wat er te doen is?
+		Vraag een <a id="requestChange2" href="#">wijziging</a> aan bij de aanmaker van deze speeltuin.</p>
+	<?php endif; ?>
 </div>
 
 <div class="locatie">
@@ -197,6 +206,11 @@
 		}
 
   		$("#requestChange").click(function(){
+  			$("#requestChangeForm").show();
+  			$('#requestChangeFormDiv').scrollView();
+	  	});
+
+  		$("#requestChange2").click(function(){
   			$("#requestChangeForm").show();
   			$('#requestChangeFormDiv').scrollView();
 	  	});
