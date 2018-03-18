@@ -17,7 +17,7 @@ if (is_numeric($id)) {
 } else if (is_string($id)) {
     $id = $speeltuin->getIdBySeoUrl($id);
     if ($id == 0) {
-    	die("Ongeldige naam!");
+    	die("Ongeldige naam / inactieve speeltuin!");
     }
 } else {
     die("Ongeldig(e) ID/naam!");

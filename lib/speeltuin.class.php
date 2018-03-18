@@ -15,6 +15,23 @@ class Speeltuin
     	$seoUrl = strtolower($name);
     	$seoUrl = str_replace(" ", "-", $seoUrl);
     	$seoUrl = preg_replace("/[^a-z0-9\-]/", "", $seoUrl);
+    	
+    	// force unique
+    	$addition = 0;
+    	$exit = false;
+    	do {
+	    	$res = $this->db->query(sprintf("SELECT id FROM speeltuin WHERE seo_url = \"%s\" AND id <> %d", $seoUrl . ($addition > 0 ? "-" . $addition : ""), $this->id));
+	    	if ($row = $res->fetch_assoc()) {
+	    		$addition++;
+	    	} else {
+	    		// unique!
+	    		if ($addition > 0) {
+	    			$seoUrl .= "-" . $addition;
+	    		}
+	    		$exit = true;
+	    	}
+    	} while ($exit == false);
+    	
     	return $seoUrl;
     }
     
@@ -186,7 +203,7 @@ class Speeltuin
     }
     
     public function getIdBySeoUrl($seoUrl) {
-    	$res = $this->db->query(sprintf("SELECT id FROM speeltuin WHERE seo_url = \"%s\"", $seoUrl));
+    	$res = $this->db->query(sprintf("SELECT id FROM speeltuin WHERE seo_url = \"%s\" AND status_id = 1", $seoUrl));
     	if ($row = $res->fetch_assoc()) {
     		return $row["id"];
     	}
