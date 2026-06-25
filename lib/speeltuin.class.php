@@ -334,8 +334,15 @@ class Speeltuin
 		$res = $this->db->query(sprintf("SELECT modified_on FROM speeltuin WHERE id = %d", $this->id));
 		if ($res !== false) {
 			if ($row = $res->fetch_assoc()) {
-				setlocale(LC_TIME, "nl_NL");
-				return strftime("%A %#d %B %Y om %H:%M", strtotime($row["modified_on"]));
+				$formatter = new IntlDateFormatter(
+					"nl_NL",
+					IntlDateFormatter::FULL,
+					IntlDateFormatter::NONE,
+					null,
+					IntlDateFormatter::GREGORIAN,
+					"EEEE d MMMM y 'om' HH:mm"
+				);
+				return $formatter->format(strtotime($row["modified_on"]));
 			}
 		}
 		return "-";

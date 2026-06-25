@@ -136,7 +136,7 @@
 <div id="requestChangeFormDiv">
     <form id="requestChangeForm" method="post" action="detail.php">
         <input type="hidden" id="speeltuin" name="speeltuin" value="<?php echo $id; ?>" />
-        <input type="hidden" id="userId" name="userId" value="<?php echo $_SESSION["user_id"]; ?>" />
+        <input type="hidden" id="userId" name="userId" value="<?php echo $_SESSION["user_id"] ?? ""; ?>" />
         <div class="form-group">
 			<label for="comment">Opmerking(en) (max. 1000 tekens)</label>
         	<textarea id="comment" name="comment" class="form-control" maxlength="1000" rows="4"></textarea>
@@ -149,7 +149,7 @@
 <div id="reviewFormDiv">
     <form id="reviewForm" method="post" action="detail.php">
         <input type="hidden" id="speeltuin" name="speeltuin" value="<?php echo $id; ?>" />
-        <input type="hidden" id="userId" name="userId" value="<?php echo $_SESSION["user_id"]; ?>" />
+        <input type="hidden" id="userId" name="userId" value="<?php echo $_SESSION["user_id"] ?? ""; ?>" />
         <div class="form-group">
 			<label for="rating">Beoordeling (kies 0-5 sterren)</label>
 			<input type="number" name="rating" data-clearable  class="rating" />
