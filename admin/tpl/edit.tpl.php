@@ -111,7 +111,7 @@ include_once "./inc/header.php";
 	<h2>Voorzieningen</h2>
 	
 	<p id="missing-item"><em>Mist er een voorziening?</em>
-	Stuur een mailtje met uitleg aan <a href="mailto:info@speeltuinzoeker.nl">info@speeltuinzoeker.nl</a>
+	Stuur een mailtje met uitleg aan <a href="mailto:speeltuinzoeker@erikroos.org">speeltuinzoeker@erikroos.org</a>
 	om een voorziening toe te laten voegen.</p>
 
 	<div class="form-group">

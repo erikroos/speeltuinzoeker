@@ -3,37 +3,37 @@
     <!-- Created by phpSitemapNG version 1.5.3 -->
     <!-- Last update of sitemap 2017-09-14T12:24:48+02:00 -->
     <url>
-        <loc>http://www.speeltuinzoeker.nl/over</loc>
+        <loc>https://speeltuinzoeker.erikroos.org/over</loc>
         <lastmod>2018-01-16T10:00:00+02:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
-        <loc>http://www.speeltuinzoeker.nl/contact</loc>
+        <loc>https://speeltuinzoeker.erikroos.org/contact</loc>
         <lastmod>2018-01-16T10:00:00+02:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
-        <loc>http://www.speeltuinzoeker.nl/atoz</loc>
+        <loc>https://speeltuinzoeker.erikroos.org/atoz</loc>
         <lastmod>2018-01-16T10:00:00+02:00</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
-        <loc>http://www.speeltuinzoeker.nl/meedoen</loc>
+        <loc>https://speeltuinzoeker.erikroos.org/meedoen</loc>
         <lastmod>2018-01-16T10:00:00+02:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
-        <loc>http://www.speeltuinzoeker.nl/privacy</loc>
+        <loc>https://speeltuinzoeker.erikroos.org/privacy</loc>
         <lastmod>2018-01-16T10:00:00+02:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
-        <loc>http://www.speeltuinzoeker.nl/</loc>
+        <loc>https://speeltuinzoeker.erikroos.org/</loc>
         <lastmod>2018-01-16T10:00:00+02:00</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>

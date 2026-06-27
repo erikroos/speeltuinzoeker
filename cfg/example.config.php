@@ -10,8 +10,9 @@ if (gethostname() == 'MyPC') {
 	define('DB_PASS', '');
 	define('DB_NAME', 'speeltuinzoeker');
 } else {
+	// LET OP: pas BASE_PATH aan naar het absolute pad op de nieuwe hosting.
 	define('BASE_PATH', "/home/deb56875n2/domains/speeltuinzoeker.nl/public_html/");
-	define('BASE_URL', "http://www.speeltuinzoeker.nl/");
+	define('BASE_URL', "https://speeltuinzoeker.erikroos.org/");
 	// DB
 	define('DB_HOST', 'localhost');
 	define('DB_USER', 'user');

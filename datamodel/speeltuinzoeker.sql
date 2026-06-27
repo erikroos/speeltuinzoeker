@@ -3286,7 +3286,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `naam`, `email`, `password`, `admin`, `active`, `activation_code`, `last_login`, `nr_of_logins`, `password_generated`) VALUES
-(1, 'Beheerder', 'info@speeltuinzoeker.nl', 'ccf849a2d87bb50a69752c053589d55d', 1, 1, '', '2020-07-22 21:02:34', 180, 0);
+(1, 'Beheerder', 'speeltuinzoeker@erikroos.org', 'ccf849a2d87bb50a69752c053589d55d', 1, 1, '', '2020-07-22 21:02:34', 180, 0);
 
 -- --------------------------------------------------------
 
