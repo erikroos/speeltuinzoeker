@@ -370,7 +370,7 @@ include_once "./inc/header.php";
 	        }
 			
 			$.get(
-				"https://maps.googleapis.com/maps/api/geocode/json?address=" + $('#locatie_omschrijving').val() + "&key=AIzaSyCXVNGEew5BT-iv9th2jqc4-QejCJxhoRk",
+				"https://maps.googleapis.com/maps/api/geocode/json?address=" + $('#locatie_omschrijving').val() + "&key=<?php echo MAPS_API_KEY; ?>",
 				function(data) {
 					var lat = data.results[0].geometry.location.lat;
 					var lng = data.results[0].geometry.location.lng;
