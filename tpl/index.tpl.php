@@ -33,20 +33,20 @@
         <form id="filter-form-type">
             <label>Type speeltuin</label><br>
             <?php foreach ($speeltuin->getAllTypes() as $typeOption): ?>
-                <input type="checkbox" name="<?php echo $typeOption; ?>" value="1">&nbsp;<?php echo $typeOption; ?><br>
+                <input type="checkbox" name="<?php echo e($typeOption); ?>" value="1">&nbsp;<?php echo e($typeOption); ?><br>
             <?php endforeach; ?>
         </form>
         <form id="filter-form-agecat">
             <label>Leeftijdscategorie(&euml;n)</label><br>
             <?php foreach ($speeltuin->getAllAgecats() as $agecatOptionColname => $agecatOptionName): ?>
-                <input type="checkbox" name="<?php echo $agecatOptionColname; ?>" value="1">&nbsp;<?php echo $agecatOptionName; ?><br>
+                <input type="checkbox" name="<?php echo $agecatOptionColname; ?>" value="1">&nbsp;<?php echo e($agecatOptionName); ?><br>
             <?php endforeach; ?>
         </form>
         <form id="filter-form-access">
             <label>Toegankelijkheid</label><br>
             <?php $paidAllowed = false; // TODO true indien er betalende klanten komen ?>
             <?php foreach ($speeltuin->getAllAccessOptions($paidAllowed) as $accessId => $accessName): ?>
-                <input type="checkbox" name="<?php echo $accessId; ?>" value="1">&nbsp;<?php echo $accessName; ?><br>
+                <input type="checkbox" name="<?php echo $accessId; ?>" value="1">&nbsp;<?php echo e($accessName); ?><br>
             <?php endforeach; ?>
         </form>
         <form id="filter-form-rating">
@@ -56,12 +56,12 @@
         <form id="filter-form-voorzieningen">
             <label>Voorzieningen</label><br>
             <?php foreach ($speeltuin->getAllVoorzieningen(1) as $voorzieningId => $voorzieningName): ?>
-                <input type="checkbox" name="<?php echo $voorzieningId; ?>" value="1">&nbsp;<?php echo $voorzieningName; ?><br>
+                <input type="checkbox" name="<?php echo $voorzieningId; ?>" value="1">&nbsp;<?php echo e($voorzieningName); ?><br>
             <?php endforeach; ?>
             <a href="#" id="expand_items"><i class="fa fa-chevron-circle-down" aria-hidden="true"></i>&nbsp;Meer</a>
             <div id="nonPopItems">
                 <?php foreach ($speeltuin->getAllVoorzieningen(0) as $voorzieningId => $voorzieningName): ?>
-                    <input type="checkbox" name="<?php echo $voorzieningId; ?>" value="1">&nbsp;<?php echo $voorzieningName; ?><br>
+                    <input type="checkbox" name="<?php echo $voorzieningId; ?>" value="1">&nbsp;<?php echo e($voorzieningName); ?><br>
                 <?php endforeach; ?>
             </div>
         </form>

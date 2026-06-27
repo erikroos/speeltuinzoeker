@@ -22,6 +22,23 @@ function humanFileSize($size, $unit = "") {
 	return number_format($size) . " B";
 }
 
+// Escape voor veilige HTML-output (tegen XSS).
+function e($value) {
+	return htmlspecialchars((string) $value, ENT_QUOTES, "UTF-8");
+}
+
+function formatDateNL($datetime) {
+	$formatter = new IntlDateFormatter(
+		"nl_NL",
+		IntlDateFormatter::FULL,
+		IntlDateFormatter::NONE,
+		null,
+		IntlDateFormatter::GREGORIAN,
+		"EEEE d MMMM y 'om' HH:mm"
+	);
+	return $formatter->format(strtotime($datetime));
+}
+
 function sanitizeInput($input) {
 	$input = strip_tags($input);
     $input = str_replace('"', '', $input);

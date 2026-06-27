@@ -10,17 +10,17 @@ if (!isset($indexDescription)) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title><?php echo $indexTitle; ?></title>
-    
-    <meta name="description" content="<?php echo $indexDescription; ?>">
+    <title><?php echo e($indexTitle); ?></title>
+
+    <meta name="description" content="<?php echo e($indexDescription); ?>">
 	<meta name="keywords" content="speeltuin,speelplein,speelplaats,gratis,zoeken,vinden,kind,kinderen,spelen">
 	<meta name="author" content="<?php echo AUTHOR; ?>">
-	
-	<meta property="og:title" content="<?php echo $indexTitle; ?>">
-	<meta property="og:description" content="<?php echo $indexDescription; ?>">
+
+	<meta property="og:title" content="<?php echo e($indexTitle); ?>">
+	<meta property="og:description" content="<?php echo e($indexDescription); ?>">
     <?php if (isset($indexImage)): ?>
-    <meta property="og:image" content="<?php echo $indexImage; ?>">
-    <meta property="og:image:alt" content="<?php echo $indexImageAlt; ?>">
+    <meta property="og:image" content="<?php echo e($indexImage); ?>">
+    <meta property="og:image:alt" content="<?php echo e($indexImageAlt); ?>">
     <?php else: ?>
 	<meta property="og:image" content="<?php echo BASE_URL; ?>img/logo_groot.png">
     <meta property="og:image:alt" content="Logo van Speeltuinzoeker">

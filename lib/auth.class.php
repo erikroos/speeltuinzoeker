@@ -2,16 +2,25 @@
 class Auth {
 	private $db;
 	
-	function __construct(Db $db = null) {
+	function __construct(?Db $db = null) {
 		$this->db = $db;
 	}
 	
 	public function login($user_unesc, $pass_unesc) {
 		$login = strtolower($this->db->realEscapeString($user_unesc));
-		$password = $this->hashPassword($pass_unesc);
-		
-		$res = $this->db->query(sprintf("SELECT * FROM `user` WHERE active = 1 AND LOWER(email) = \"%s\" AND `password`=\"%s\"", $login, $password));
+
+		$res = $this->db->query(sprintf("SELECT * FROM `user` WHERE active = 1 AND LOWER(email) = \"%s\"", $login));
 		if ($row = $res->fetch_assoc()) {
+			if (!$this->verifyPassword($pass_unesc, $row["password"])) {
+				return false;
+			}
+
+			// Oude md5-hash transparant upgraden naar het moderne formaat.
+			if (password_needs_rehash($row["password"], PASSWORD_DEFAULT)) {
+				$newHash = $this->db->realEscapeString($this->hashPassword($pass_unesc));
+				$this->db->query(sprintf("UPDATE `user` SET password = \"%s\" WHERE id = %d", $newHash, $row["id"]));
+			}
+
 			$_SESSION["user_id"] = $row["id"];
 			$_SESSION["user_name"] = $row["naam"];
 			$_SESSION["admin"] = $row["admin"];
@@ -64,7 +73,15 @@ class Auth {
 	}
 	
 	public function hashPassword($password) {
-		return md5($password . SALT);
+		return password_hash($password, PASSWORD_DEFAULT);
+	}
+
+	public function verifyPassword($password, $hash) {
+		// Oude accounts gebruiken nog een md5-hash (32 hex tekens) met statische salt.
+		if (strlen($hash) === 32 && ctype_xdigit($hash)) {
+			return hash_equals($hash, md5($password . SALT));
+		}
+		return password_verify($password, $hash);
 	}
 	
 	public function randomPassword() {

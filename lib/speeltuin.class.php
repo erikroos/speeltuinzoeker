@@ -63,7 +63,7 @@ class Speeltuin
 
     public function search($q) {
         $allSpeeltuinen = [];
-        $q = strtolower($q);
+        $q = $this->db->realEscapeString(strtolower($q));
         $res = $this->db->query("SELECT * FROM speeltuin WHERE status_id = 1 AND (LOWER(naam) LIKE \"%" . $q . "%\" OR LOWER(omschrijving) LIKE \"%" . $q . "%\" OR LOWER(locatie_omschrijving) LIKE \"%" . $q . "%\") ORDER BY naam");
         while ($row = $res->fetch_assoc()) {
             $allSpeeltuinen[] = $row;
@@ -76,14 +76,17 @@ class Speeltuin
     	
     	$typeClause = "";
     	if ($type != null) {
-    		$typeClause = "AND speeltuintype IN (\"" . implode("\",\"", $type) . "\")";
+    		$escapedTypes = array_map(fn($t) => $this->db->realEscapeString($t), $type);
+    		$typeClause = "AND speeltuintype IN (\"" . implode("\",\"", $escapedTypes) . "\")";
     	}
     	
     	$ageClause = "";
     	if ($agecat != null) {
+    		// Kolomnamen kunnen niet ge-escaped worden: alleen bekende kolommen toestaan.
+    		$agecat = array_values(array_intersect($agecat, array_keys($this->getAllAgecats())));
     		if (sizeof($agecat) == 1) {
     			$ageClause = "AND " . $agecat[0] . " = 1";
-    		} else {
+    		} else if (sizeof($agecat) > 1) {
     			$ageClause = "AND (";
 	    		foreach ($agecat as $agecatColname) {
 	    			$ageClause .= ($agecatColname . " = 1 OR ");
@@ -96,11 +99,11 @@ class Speeltuin
     	$accessClause = "";
     	if ($access != null) {
     		if (sizeof($access) == 1) {
-    			$accessClause = "AND public = " . $access[0];
+    			$accessClause = "AND public = " . (int) $access[0];
     		} else {
     			$accessClause = "AND (";
 	    		foreach ($access as $accessId) {
-	    			$accessClause .= ("public = " . $accessId . " OR ");
+	    			$accessClause .= ("public = " . (int) $accessId . " OR ");
 	    		}
 	    		$accessClause = substr($accessClause, 0, -4);
 	    		$accessClause .= ")";
@@ -109,7 +112,7 @@ class Speeltuin
     	
     	$query = sprintf("SELECT id, naam, speeltuintype, omschrijving, lat, lon, public, seo_url, avg_rating, times_rated FROM speeltuin
 			WHERE status_id = 1
-			AND lat <= %s AND lat >= %s AND lon >= %s AND lon <= %s
+			AND lat <= %f AND lat >= %f AND lon >= %f AND lon <= %f
     		%s %s %s
     		AND avg_rating >= %f",
     		$neLat, $swLat, $swLon, $neLon, $typeClause, $ageClause, $accessClause, $minRating);
@@ -203,7 +206,7 @@ class Speeltuin
     }
     
     public function getIdBySeoUrl($seoUrl) {
-    	$res = $this->db->query(sprintf("SELECT id FROM speeltuin WHERE seo_url = \"%s\" AND status_id = 1", $seoUrl));
+    	$res = $this->db->query(sprintf("SELECT id FROM speeltuin WHERE seo_url = \"%s\" AND status_id = 1", $this->db->realEscapeString($seoUrl)));
     	if ($row = $res->fetch_assoc()) {
     		return $row["id"];
     	}

@@ -44,9 +44,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		if ($_FILES["photo"]["error"] == 0) {
 	
 			$detailError = null;
-			$extension = strtolower(end(explode('.', $fileName)));
+			$extension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
 			if (!in_array($extension, $allowedExtensions)) {
-				$detailError = "Fout bij uploaden " . $fileName . ": alleen JP(E)G of PNG toegestaan";
+				$detailError = "Fout bij uploaden " . e($fileName) . ": alleen JP(E)G of PNG toegestaan";
 			}
 	
 			if ($detailError == null) {
@@ -58,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				$uploadErrors[] = $detailError;
 			}
 		} else if ($_FILES["photo"]["error"] != 4) {
-			$uploadErrors[] = "Fout bij uploaden bestand " . $fileName . " (code: " . $_FILES["photo"]["error"] . ")";
+			$uploadErrors[] = "Fout bij uploaden bestand " . e($fileName) . " (code: " . $_FILES["photo"]["error"] . ")";
 		}
 	}
 	

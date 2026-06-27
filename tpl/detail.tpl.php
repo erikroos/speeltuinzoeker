@@ -37,8 +37,8 @@
 </div>
 
 <div id="details">
-	<h1><?php echo $speeltuin->getName(); ?></h1>
-	<p>Aangemaakt door <?php echo $speeltuin->getAuthorName(); ?>, laatst bewerkt: <?php echo $speeltuin->getLastModified(); ?></p>
+	<h1><?php echo e($speeltuin->getName()); ?></h1>
+	<p>Aangemaakt door <?php echo e($speeltuin->getAuthorName()); ?>, laatst bewerkt: <?php echo $speeltuin->getLastModified(); ?></p>
 	
 	<?php if (isset($_SESSION["user_id"])): ?>
 	    <?php if (!isset($reviewed)): ?>
@@ -56,13 +56,12 @@
         <span class="ratingLabel"><strong>Beoordeling</strong></span><span class="stars"><?php echo $rating["avg_rating"]; ?></span>
         <p id="times_rated">(<?php echo $rating["times_rated"]; ?> x)</p>
         <?php if ($rating["times_rated"] > 0): ?>
-        	<?php setlocale(LC_TIME, "nl_NL"); ?>
 	        <button id="toggleReviewsDiv" class="btn btn-default"><i id="reviewsToggleIcon" class="fa fa-caret-square-o-down" aria-hidden="true"></i>&nbsp;Lees</button>
 	        <div id="reviews">
 	        	<?php foreach ($reviews as $reviewRow): ?>
-                    <p class="reviewRowTop"><?php echo $reviewRow["naam"]; ?> op <?php echo strftime("%A %#d %B %Y om %H:%M", strtotime($reviewRow["rated_on"])); ?></p>
-                    <span class="stars"><?php echo $reviewRow["rating"]; ?></span>
-                    <p class="reviewRowBottom">"<?php echo $reviewRow["comment"]; ?>"</p>
+                    <p class="reviewRowTop"><?php echo e($reviewRow["naam"]); ?> op <?php echo formatDateNL($reviewRow["rated_on"]); ?></p>
+                    <span class="stars"><?php echo e($reviewRow["rating"]); ?></span>
+                    <p class="reviewRowBottom">"<?php echo e($reviewRow["comment"]); ?>"</p>
 	        	<?php endforeach; ?>
 	        </div>
         <?php endif; ?>
@@ -71,29 +70,29 @@
 	<p id="speeltuinProperties"><strong>Wat voor soort speeltuin is het?</strong></p>
 	<ul>
         <li><?php echo $speeltuin->getPublic(); ?></li>
-        <li><?php echo $speeltuin->getType(); ?></li>
+        <li><?php echo e($speeltuin->getType()); ?></li>
         <li><?php echo $speeltuin->getAgecatString(); ?></li>
 	</ul>
 
     <?php if ($speeltuin->getPublic() == "Beperkt toegankelijk"): ?>
         <?php $openingstijden = $speeltuin->getOpeningstijden(); ?>
         <?php if (!empty($openingstijden)): ?>
-            <p><strong>Openingstijden</strong><br><?php echo $openingstijden; ?></p>
+            <p><strong>Openingstijden</strong><br><?php echo e($openingstijden); ?></p>
         <?php endif; ?>
         <?php $vergoeding = $speeltuin->getVergoeding(); ?>
         <?php if (!empty($vergoeding)): ?>
-            <p><strong>Kleine (vrijwillige) vergoeding</strong><br><?php echo $vergoeding; ?></p>
+            <p><strong>Kleine (vrijwillige) vergoeding</strong><br><?php echo e($vergoeding); ?></p>
         <?php endif; ?>
     <?php endif; ?>
 	
 	<?php $description = $speeltuin->getDescription(); ?>
 	<?php if (!empty($description)): ?>
-		<p><strong>Beschrijving</strong><br><?php echo $description; ?></p>
+		<p><strong>Beschrijving</strong><br><?php echo e($description); ?></p>
 	<?php endif; ?>
 
 	<?php $link = $speeltuin->getLink(); ?>
 	<?php if ($link != null): ?>
-        <p><strong>Link</strong><br><a href="<?php echo $link; ?>"><?php echo $link; ?></a></p>
+        <p><strong>Link</strong><br><a href="<?php echo e($link); ?>"><?php echo e($link); ?></a></p>
 	<?php endif; ?>
 	
 	<p><strong>(Adv.)</strong> Buitenspelen is nog leuker met het juiste <a href="https://partnerprogramma.bol.com/click/click?p=1&t=url&s=53838&f=TXL&url=https%3A%2F%2Fwww.bol.com%2Fnl%2Fm%2Fspeelgoed%2Fbuitenspeelgoed%2FsuggestionType%2Fcategory%2FsuggestedFor%2Fbuiten%2ForiginalSearchContext%2Fmedia_all%2ForiginalSection%2Fmain%2Findex.html%3F_requestid%3D1994306&name=buitenspeelgoed">buitenspeelgoed</a>!</p>
@@ -105,7 +104,7 @@
 	<?php if (sizeof($voorzieningen) > 0): ?>
 		<ul>
 	        <?php foreach ($voorzieningen as $voorziening): ?>
-	            <li><?php echo $voorziening; ?></li>
+	            <li><?php echo e($voorziening); ?></li>
 	        <?php endforeach; ?>
 		</ul>
 	<?php else: ?>
@@ -117,7 +116,7 @@
 
 <div class="locatie">
 	<h4>Waar is het precies?</h4>
-    <p><?php echo $speeltuin->getLocationDescription(); ?></p>
+    <p><?php echo e($speeltuin->getLocationDescription()); ?></p>
     <p>Geef me een <a href="https://www.google.com/maps/dir/?api=1&destination=<?php echo $speeltuin->getLatitude(); ?>,<?php echo $speeltuin->getLongitude(); ?>">routebeschrijving</a></p>
     <div id="mini-map"></div>
 </div>
@@ -128,7 +127,7 @@
     <h4>Kijk eens rond</h4>
     <div class="detail-photobar">
         <?php foreach ($photos as $photo): ?>
-            <div><img src="<?php echo $photo; ?>" alt="Foto van deze speeltuin" title="Foto van deze speeltuin" /></div>
+            <div><img src="<?php echo e($photo); ?>" alt="Foto van deze speeltuin" title="Foto van deze speeltuin" /></div>
         <?php endforeach; ?>
     </div>
 <?php endif; ?>

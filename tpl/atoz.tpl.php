@@ -7,7 +7,7 @@
 	<?php endforeach; ?>
     <div class="betweenbar"></div>
     <div class="search">
-        <input type="text" id="q" name="q" value="<?php echo $q; ?>" class="form-control" />
+        <input type="text" id="q" name="q" value="<?php echo e($q); ?>" class="form-control" />
         <button id="search-btn" value="Zoek" class="btn btn-default"><i class='fa fa-search' aria-hidden='true'></i>&nbsp;Zoek</button>
     </div>
 </div>
@@ -18,9 +18,9 @@
         <ul>
             <?php foreach ($speeltuinen as $speeltuin): ?>
                 <li>
-                    <a href="<?php echo BASE_URL; ?>speeltuinen/<?php echo $speeltuin["seo_url"]; ?>"><?php echo $speeltuin["naam"]; ?></a>
+                    <a href="<?php echo BASE_URL; ?>speeltuinen/<?php echo e($speeltuin["seo_url"]); ?>"><?php echo e($speeltuin["naam"]); ?></a>
                     <?php if (!empty($speeltuin["locatie_omschrijving"])): ?>
-                        <?php echo "- " . $speeltuin["locatie_omschrijving"]; ?>
+                        <?php echo "- " . e($speeltuin["locatie_omschrijving"]); ?>
                     <?php endif; ?>
                 </li>
             <?php endforeach; ?>
